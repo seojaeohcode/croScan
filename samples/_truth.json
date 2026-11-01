@@ -1,0 +1,958 @@
+{
+ "보관/위험작업신고서_양식.pdf": [
+  {
+   "permit_no": "AC00-IH-20261012-0453",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "",
+   "jsp_no": "HHIS-CN-C6B0-014",
+   "location": "UNIT2공장  유니트4팀",
+   "location_detail": "유니트4팀",
+   "job": "배관 내 사람이 들어가는 작업",
+   "job_detail": "파이프 내부 진입",
+   "department": "UNIT생산부-생산2과-UNIT4팀",
+   "supervisor": "최XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "최XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "2",
+   "hazards": "질식,소음",
+   "req_name": "최XX",
+   "req_date": "2026-10-08",
+   "req_sign": "최XX",
+   "app_name": "최XX",
+   "app_date": "2026-10-08",
+   "app_sign": "최XX",
+   "double_check": "Y",
+   "kind": "confined",
+   "days": [
+    [
+     "2026-10-12",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-13",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-14",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-15",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-16",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-17",
+     "08:00",
+     "16:59"
+    ]
+   ],
+   "checks": [
+    "argon",
+    "confined_space",
+    "day"
+   ]
+  },
+  {
+   "permit_no": "AC00-IH-20261014-0400",
+   "permit_type": "[전산허가]",
+   "hull_no": "3595-157K-COT",
+   "jsp_no": "HHIS-CW-A0000948-044-009",
+   "location": "대조립21공장 3595 157K-COT 대조립 21공장 2BAY 28-32 칼럼",
+   "location_detail": "대조립 21공장 2BAY 28-32 칼럼",
+   "job": "(준)밀폐공간 내부 작업(B11, F31, E11, E18, E21, E22, E27, E33, E52 블록)",
+   "job_detail": "혁신 3595 E170(A) / 밀폐공간 내부 작업",
+   "department": "대조립3부-(주)혁신이엔지",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "오XX",
+   "manager_phone": "010XXXXXXXX",
+   "workers": "4",
+   "hazards": "화기작업시 개인보호구 착용 , 이면부 확인 , 작업구역 통제 (병행 작업 금지) , 밀폐공간 출입 전 사전 안전조치 확인 조도 및 환기 조치 점검",
+   "req_name": "김XX",
+   "req_date": "2026-10-13",
+   "req_sign": "김XX",
+   "app_name": "오XX",
+   "app_date": "2026-10-13",
+   "app_sign": "오XX",
+   "double_check": "N",
+   "kind": "confined",
+   "days": [
+    [
+     "2026-10-14",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-15",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-16",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-17",
+     "08:00",
+     "16:59"
+    ]
+   ],
+   "checks": [
+    "confined_space",
+    "day"
+   ]
+  }
+ ],
+ "시연/0611_화기.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0611",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E41P",
+   "jsp_no": "HHIS-CW-A0001123-021-003",
+   "location": "대조립21공장 3BAY 12-16 칼럼 E41P 블록 동측 측판",
+   "location_detail": "대조립 21공장 3BAY 12-16 칼럼",
+   "job": "E41P 블록 중대 불량부 절단·가우징·재취부·재용접",
+   "job_detail": "동측 측판·보강재 불량부 절단 후 신규 부재 취부·재용접, 작업높이 3.6m",
+   "department": "대조립3부-구조보수1팀",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "5",
+   "hazards": "절단물 낙하·전도, 불티 비산(화재), 용접흄·소음, 3.6m 작업면 추락 / 같은 블록 내부 배관 진입작업 예정",
+   "concurrent": "Y",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "double_check": "Y",
+   "work_height": "3.6",
+   "kind": "hot",
+   "days": [
+    [
+     "2026-10-27",
+     "09:00",
+     "12:00"
+    ],
+    [
+     "2026-10-28",
+     "09:00",
+     "11:30"
+    ]
+   ],
+   "checks": [
+    "day",
+    "gouging",
+    "hot_at_height",
+    "weld_cut"
+   ]
+  }
+ ],
+ "시연/0612_밀폐.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0612",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E41P",
+   "jsp_no": "HHIS-CN-C6B0-021",
+   "location": "대조립21공장 3BAY 12-16 칼럼 E41P 블록 내부",
+   "location_detail": "E41P 블록 내부 배관 P-07 퍼지 구간",
+   "job": "아르곤 퍼지 배관 내부 진입 (용접부 비드 확인)",
+   "job_detail": "배관 내 사람이 들어가는 작업 / 진입 2명, 외부 감시 1명",
+   "department": "대조립3부-배관취부2팀",
+   "supervisor": "이XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "정XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "3",
+   "hazards": "질식(아르곤 산소결핍), 소음, 좁은 통로 대피 곤란 / 같은 블록 외판 절단·용접작업 있음",
+   "concurrent": "Y",
+   "req_name": "이XX",
+   "req_date": "2026-10-26",
+   "req_sign": "이XX",
+   "double_check": "Y",
+   "kind": "confined",
+   "days": [
+    [
+     "2026-10-27",
+     "09:30",
+     "11:00"
+    ]
+   ],
+   "checks": [
+    "argon",
+    "confined_space",
+    "day"
+   ]
+  }
+ ],
+ "시연/0613_고소.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0613",
+   "permit_type": "[전산허가]",
+   "hull_no": "3611-E42P",
+   "jsp_no": "HHIS-CW-A0001123-034-002",
+   "location": "대조립21공장 3BAY 17-20 칼럼 E42P 블록 상부",
+   "location_detail": "E42P 블록 상부 동측, 작업발판 WP-02",
+   "job": "E42P 블록 상부 임시 인양러그 절단·제거",
+   "job_detail": "사용 완료 러그 6EA 절단·회수 및 그라인딩",
+   "department": "대조립3부-취부3팀",
+   "supervisor": "오XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "윤XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "4",
+   "hazards": "추락(4.8m), 러그·공구 낙하, 절단 불티 / 하부 통로 통행 통제 필요",
+   "concurrent": "",
+   "req_name": "오XX",
+   "req_date": "2026-10-26",
+   "req_sign": "오XX",
+   "double_check": "N",
+   "work_height": "4.8",
+   "kind": "height",
+   "days": [
+    [
+     "2026-10-27",
+     "10:00",
+     "12:00"
+    ]
+   ],
+   "checks": [
+    "day",
+    "scaffold"
+   ]
+  }
+ ],
+ "시연/0614_중량물인양.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0614",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E41P",
+   "jsp_no": "HHIS-CW-A0001123-008-001",
+   "location": "대조립21공장 3BAY 12-16 칼럼 → 1BAY 4-6 칼럼 반출장",
+   "location_detail": "E41P 블록 반출, 3BAY 동측 통로 경유",
+   "job": "E41P 블록 반출 인양·이동·안착 (천장크레인 OH-21-03)",
+   "job_detail": "기존 받침에서 인양, 1BAY 반출장 정반에 안착 후 줄걸이 해제",
+   "department": "대조립3부-운반1팀",
+   "supervisor": "장XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "서XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "5",
+   "hazards": "인양물 낙하·전도, 협착, 크레인 간 충돌 / 블록 내부 인원·임시 지지재 확인 필요",
+   "concurrent": "",
+   "req_name": "장XX",
+   "req_date": "2026-10-26",
+   "req_sign": "장XX",
+   "double_check": "Y",
+   "load_weight": "38",
+   "crane_swl": "50",
+   "lift_height": "3",
+   "kind": "lifting",
+   "days": [
+    [
+     "2026-10-27",
+     "10:30",
+     "11:30"
+    ]
+   ],
+   "checks": [
+    "day",
+    "overhead_crane"
+   ]
+  }
+ ],
+ "시연/0615_정전LOTO.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0615",
+   "permit_type": "[전산허가]",
+   "hull_no": "",
+   "jsp_no": "HHIS-CE-B0000412-005-001",
+   "location": "대조립21공장 3BAY 천장크레인 OH-21-03 제어반",
+   "location_detail": "3BAY 크레인 거더 상부 제어반 CP-01",
+   "job": "천장크레인 OH-21-03 제어반 전기계통 고장 수리",
+   "job_detail": "주행 인버터 제어 접점·배선 점검 및 교체, 정전 후 작업",
+   "department": "설비보전부-전기2팀",
+   "supervisor": "황XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "안XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "3",
+   "hazards": "감전·아크, 재가동 시 끼임, 거더 상부 추락 / 수리 중 크레인 사용 금지 통보 필요",
+   "concurrent": "N",
+   "req_name": "황XX",
+   "req_date": "2026-10-26",
+   "req_sign": "황XX",
+   "double_check": "N",
+   "rated_voltage": "380",
+   "lock_count": "2",
+   "kind": "loto",
+   "days": [
+    [
+     "2026-10-27",
+     "08:30",
+     "11:30"
+    ]
+   ],
+   "checks": [
+    "crane_power",
+    "day",
+    "low_voltage"
+   ]
+  }
+ ],
+ "보관/합성_대조립_허가신청_5건.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0611",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E41P",
+   "jsp_no": "HHIS-CW-A0001123-021-003",
+   "location": "대조립21공장 3BAY 12-16 칼럼 E41P 블록 동측 측판",
+   "location_detail": "대조립 21공장 3BAY 12-16 칼럼",
+   "job": "E41P 블록 중대 불량부 절단·가우징·재취부·재용접",
+   "job_detail": "동측 측판·보강재 불량부 절단 후 신규 부재 취부·재용접, 작업높이 3.6m",
+   "department": "대조립3부-구조보수1팀",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "5",
+   "hazards": "절단물 낙하·전도, 불티 비산(화재), 용접흄·소음, 3.6m 작업면 추락 / 같은 블록 내부 배관 진입작업 예정",
+   "concurrent": "Y",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "double_check": "Y",
+   "work_height": "3.6",
+   "kind": "hot",
+   "days": [
+    [
+     "2026-10-27",
+     "09:00",
+     "12:00"
+    ],
+    [
+     "2026-10-28",
+     "09:00",
+     "11:30"
+    ]
+   ],
+   "checks": [
+    "day",
+    "gouging",
+    "hot_at_height",
+    "weld_cut"
+   ]
+  },
+  {
+   "permit_no": "AC00-IH-20261027-0612",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E41P",
+   "jsp_no": "HHIS-CN-C6B0-021",
+   "location": "대조립21공장 3BAY 12-16 칼럼 E41P 블록 내부",
+   "location_detail": "E41P 블록 내부 배관 P-07 퍼지 구간",
+   "job": "아르곤 퍼지 배관 내부 진입 (용접부 비드 확인)",
+   "job_detail": "배관 내 사람이 들어가는 작업 / 진입 2명, 외부 감시 1명",
+   "department": "대조립3부-배관취부2팀",
+   "supervisor": "이XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "정XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "3",
+   "hazards": "질식(아르곤 산소결핍), 소음, 좁은 통로 대피 곤란 / 같은 블록 외판 절단·용접작업 있음",
+   "concurrent": "Y",
+   "req_name": "이XX",
+   "req_date": "2026-10-26",
+   "req_sign": "이XX",
+   "double_check": "Y",
+   "kind": "confined",
+   "days": [
+    [
+     "2026-10-27",
+     "09:30",
+     "11:00"
+    ]
+   ],
+   "checks": [
+    "argon",
+    "confined_space",
+    "day"
+   ]
+  },
+  {
+   "permit_no": "AC00-IH-20261027-0613",
+   "permit_type": "[전산허가]",
+   "hull_no": "3611-E42P",
+   "jsp_no": "HHIS-CW-A0001123-034-002",
+   "location": "대조립21공장 3BAY 17-20 칼럼 E42P 블록 상부",
+   "location_detail": "E42P 블록 상부 동측, 작업발판 WP-02",
+   "job": "E42P 블록 상부 임시 인양러그 절단·제거",
+   "job_detail": "사용 완료 러그 6EA 절단·회수 및 그라인딩",
+   "department": "대조립3부-취부3팀",
+   "supervisor": "오XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "윤XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "4",
+   "hazards": "추락(4.8m), 러그·공구 낙하, 절단 불티 / 하부 통로 통행 통제 필요",
+   "concurrent": "",
+   "req_name": "오XX",
+   "req_date": "2026-10-26",
+   "req_sign": "오XX",
+   "double_check": "N",
+   "work_height": "4.8",
+   "kind": "height",
+   "days": [
+    [
+     "2026-10-27",
+     "10:00",
+     "12:00"
+    ]
+   ],
+   "checks": [
+    "day",
+    "scaffold"
+   ]
+  },
+  {
+   "permit_no": "AC00-IH-20261027-0614",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E41P",
+   "jsp_no": "HHIS-CW-A0001123-008-001",
+   "location": "대조립21공장 3BAY 12-16 칼럼 → 1BAY 4-6 칼럼 반출장",
+   "location_detail": "E41P 블록 반출, 3BAY 동측 통로 경유",
+   "job": "E41P 블록 반출 인양·이동·안착 (천장크레인 OH-21-03)",
+   "job_detail": "기존 받침에서 인양, 1BAY 반출장 정반에 안착 후 줄걸이 해제",
+   "department": "대조립3부-운반1팀",
+   "supervisor": "장XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "서XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "5",
+   "hazards": "인양물 낙하·전도, 협착, 크레인 간 충돌 / 블록 내부 인원·임시 지지재 확인 필요",
+   "concurrent": "",
+   "req_name": "장XX",
+   "req_date": "2026-10-26",
+   "req_sign": "장XX",
+   "double_check": "Y",
+   "load_weight": "38",
+   "crane_swl": "50",
+   "lift_height": "3",
+   "kind": "lifting",
+   "days": [
+    [
+     "2026-10-27",
+     "10:30",
+     "11:30"
+    ]
+   ],
+   "checks": [
+    "day",
+    "overhead_crane"
+   ]
+  },
+  {
+   "permit_no": "AC00-IH-20261027-0615",
+   "permit_type": "[전산허가]",
+   "hull_no": "",
+   "jsp_no": "HHIS-CE-B0000412-005-001",
+   "location": "대조립21공장 3BAY 천장크레인 OH-21-03 제어반",
+   "location_detail": "3BAY 크레인 거더 상부 제어반 CP-01",
+   "job": "천장크레인 OH-21-03 제어반 전기계통 고장 수리",
+   "job_detail": "주행 인버터 제어 접점·배선 점검 및 교체, 정전 후 작업",
+   "department": "설비보전부-전기2팀",
+   "supervisor": "황XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "안XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "workers": "3",
+   "hazards": "감전·아크, 재가동 시 끼임, 거더 상부 추락 / 수리 중 크레인 사용 금지 통보 필요",
+   "concurrent": "N",
+   "req_name": "황XX",
+   "req_date": "2026-10-26",
+   "req_sign": "황XX",
+   "double_check": "N",
+   "rated_voltage": "380",
+   "lock_count": "2",
+   "kind": "loto",
+   "days": [
+    [
+     "2026-10-27",
+     "08:30",
+     "11:30"
+    ]
+   ],
+   "checks": [
+    "crane_power",
+    "day",
+    "low_voltage"
+   ]
+  }
+ ],
+ "반장_테스트/화기_A_0701.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0701",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "",
+   "jsp_no": "HHIS-CW-A0001187-012-004",
+   "location": "대조립1부 용접3팀",
+   "location_detail": "",
+   "job": "취부 불량부 절단·재용접(B11, F31, E11 블록)",
+   "job_detail": "발판 위 높이 2.5m 구간 포함",
+   "department": "대조립1부-용접3팀",
+   "workers": "4",
+   "hazards": "용접흄, 소음",
+   "concurrent": "",
+   "double_check": "Y",
+   "kind": "hot",
+   "days": [
+    [
+     "2026-10-27",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-28",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-29",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-30",
+     "08:00",
+     "16:59"
+    ]
+   ],
+   "checks": [
+    "day",
+    "weld_cut"
+   ]
+  }
+ ],
+ "반장_테스트/화기_B_0702.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0702",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E33S",
+   "jsp_no": "HHIS-CW-A0001187-015-002",
+   "location": "대조립21공장 3BAY 14-16 칼럼",
+   "location_detail": "E33S 블록 하부 종통재",
+   "job": "E33S 블록 종통재 균열부 가우징·재용접",
+   "job_detail": "지상 작업, 화재감시자 1명 배치",
+   "department": "대조립3부-구조보수2팀",
+   "workers": "3",
+   "hazards": "불티 비산(화재), 용접흄, 절단물 낙하 / 하부 가연물 제거",
+   "concurrent": "N",
+   "double_check": "Y",
+   "kind": "hot",
+   "days": [
+    [
+     "2026-10-27",
+     "13:00",
+     "15:30"
+    ]
+   ],
+   "checks": [
+    "day",
+    "gouging",
+    "weld_cut"
+   ]
+  }
+ ],
+ "반장_테스트/밀폐_A_0703.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0703",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "",
+   "jsp_no": "HHIS-CN-C6B0-019",
+   "location": "UNIT3공장 유니트2팀",
+   "location_detail": "",
+   "job": "배관 내 사람이 들어가는 작업",
+   "job_detail": "파이프 내부 진입",
+   "department": "UNIT생산부-생산1과-UNIT2팀",
+   "workers": "2",
+   "hazards": "질식,소음",
+   "concurrent": "",
+   "double_check": "Y",
+   "kind": "confined",
+   "days": [
+    [
+     "2026-10-27",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-28",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-29",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-30",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-31",
+     "08:00",
+     "16:59"
+    ]
+   ],
+   "checks": [
+    "argon",
+    "confined_space",
+    "day"
+   ]
+  }
+ ],
+ "반장_테스트/밀폐_B_0704.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0704",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[전산허가]",
+   "hull_no": "3611-F12C",
+   "jsp_no": "HHIS-CN-C6B0-022",
+   "location": "대조립22공장 1BAY 8-10 칼럼",
+   "location_detail": "F12C 블록 이중저 내부",
+   "job": "F12C 이중저 내부 취부 상태 점검",
+   "job_detail": "진입 2명, 맨홀 외부 감시 1명",
+   "department": "대조립2부-취부1팀",
+   "workers": "3",
+   "hazards": "산소결핍·질식, 좁은 통로 대피 곤란 / 진입 전 산소·가스 측정",
+   "concurrent": "Y",
+   "double_check": "N",
+   "kind": "confined",
+   "days": [
+    [
+     "2026-10-27",
+     "09:00",
+     "11:30"
+    ]
+   ],
+   "checks": [
+    "confined_space",
+    "day"
+   ]
+  }
+ ],
+ "반장_테스트/고소_A_0705.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0705",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[전산허가]",
+   "hull_no": "3611-E42P",
+   "jsp_no": "HHIS-CW-A0001187-034-001",
+   "location": "대조립21공장",
+   "location_detail": "",
+   "job": "블록 상부 임시 러그 절단·제거",
+   "job_detail": "",
+   "department": "대조립3부-취부3팀",
+   "workers": "4",
+   "hazards": "안전대 착용, 공구 휴대",
+   "concurrent": "",
+   "double_check": "N",
+   "kind": "height",
+   "days": [
+    [
+     "2026-10-27",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-28",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-29",
+     "08:00",
+     "16:59"
+    ]
+   ],
+   "checks": [
+    "day"
+   ]
+  }
+ ],
+ "반장_테스트/고소_B_0706.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0706",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[전산허가]",
+   "hull_no": "3611-E42P",
+   "jsp_no": "HHIS-CW-A0001187-034-002",
+   "location": "대조립21공장 3BAY 17-20 칼럼",
+   "location_detail": "E42P 블록 상부 동측, 작업발판 WP-02",
+   "job": "E42P 블록 상부 임시 인양러그 절단·제거",
+   "job_detail": "사용 완료 러그 6EA 절단·회수",
+   "department": "대조립3부-취부3팀",
+   "workers": "4",
+   "hazards": "추락(4.8m), 러그·공구 낙하 / 하부 통행 통제",
+   "concurrent": "N",
+   "double_check": "N",
+   "work_height": "4.8",
+   "kind": "height",
+   "days": [
+    [
+     "2026-10-27",
+     "10:00",
+     "12:00"
+    ]
+   ],
+   "checks": [
+    "day",
+    "scaffold"
+   ]
+  }
+ ],
+ "반장_테스트/중량물인양_A_0707.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0707",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E21P",
+   "jsp_no": "HHIS-CW-A0001187-008-003",
+   "location": "대조립21공장 3BAY",
+   "location_detail": "",
+   "job": "E21P 블록 반출",
+   "job_detail": "천장크레인 사용",
+   "department": "대조립3부-운반1팀",
+   "workers": "5",
+   "hazards": "신호수 배치, 유도로프 사용",
+   "concurrent": "",
+   "double_check": "Y",
+   "load_weight": "38",
+   "lift_height": "3",
+   "kind": "lifting",
+   "days": [
+    [
+     "2026-10-27",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-28",
+     "08:00",
+     "16:59"
+    ]
+   ],
+   "checks": [
+    "day",
+    "overhead_crane"
+   ]
+  }
+ ],
+ "반장_테스트/중량물인양_B_0708.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0708",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[안전현장허가]",
+   "hull_no": "3611-E25S",
+   "jsp_no": "HHIS-CW-A0001187-008-004",
+   "location": "대조립21공장 2BAY 5-8 칼럼 → 1BAY 반출장",
+   "location_detail": "2BAY 서측 통로 경유",
+   "job": "E25S 블록 반출 인양·이동·안착 (천장크레인 OH-21-01)",
+   "job_detail": "정반 안착 후 줄걸이 해제",
+   "department": "대조립3부-운반1팀",
+   "workers": "5",
+   "hazards": "인양물 낙하·협착, 크레인 충돌 / 블록 내부 인원 확인",
+   "concurrent": "N",
+   "double_check": "Y",
+   "load_weight": "12",
+   "crane_swl": "20",
+   "lift_height": "2",
+   "kind": "lifting",
+   "days": [
+    [
+     "2026-10-27",
+     "11:00",
+     "11:40"
+    ]
+   ],
+   "checks": [
+    "day",
+    "overhead_crane"
+   ]
+  }
+ ],
+ "반장_테스트/정전LOTO_A_0709.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0709",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[전산허가]",
+   "hull_no": "",
+   "jsp_no": "HHIS-CE-B0000412-007-001",
+   "location": "설비보전부 전기2팀",
+   "location_detail": "",
+   "job": "천장크레인 제어반 점검",
+   "job_detail": "",
+   "department": "설비보전부-전기2팀",
+   "workers": "2",
+   "hazards": "감전",
+   "concurrent": "N",
+   "double_check": "N",
+   "kind": "loto",
+   "days": [
+    [
+     "2026-10-27",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-28",
+     "08:00",
+     "16:59"
+    ],
+    [
+     "2026-10-29",
+     "08:00",
+     "16:59"
+    ]
+   ],
+   "checks": [
+    "day",
+    "low_voltage"
+   ]
+  }
+ ],
+ "반장_테스트/정전LOTO_B_0710.pdf": [
+  {
+   "permit_no": "AC00-IH-20261027-0710",
+   "supervisor": "김XX",
+   "supervisor_phone": "010-XXXX-XXXX",
+   "manager": "박XX",
+   "manager_phone": "010-XXXX-XXXX",
+   "req_name": "김XX",
+   "req_date": "2026-10-26",
+   "req_sign": "김XX",
+   "permit_type": "[전산허가]",
+   "hull_no": "",
+   "jsp_no": "HHIS-CE-B0000412-005-002",
+   "location": "대조립21공장 3BAY 천장크레인 OH-21-03",
+   "location_detail": "크레인 거더 상부 제어반 CP-01",
+   "job": "천장크레인 OH-21-03 제어반 인버터 교체",
+   "job_detail": "정전·잠금 후 작업, 복구 전 시험운전",
+   "department": "설비보전부-전기2팀",
+   "workers": "3",
+   "hazards": "감전·아크, 재가동 시 끼임, 거더 상부 추락",
+   "concurrent": "N",
+   "double_check": "N",
+   "rated_voltage": "380",
+   "lock_count": "2",
+   "kind": "loto",
+   "days": [
+    [
+     "2026-10-27",
+     "13:00",
+     "15:00"
+    ]
+   ],
+   "checks": [
+    "crane_power",
+    "day",
+    "low_voltage"
+   ]
+  }
+ ],
+ "보관/위험작업허가서_빈양식_5종.pdf": [
+  {
+   "kind": "confined",
+   "days": [],
+   "checks": []
+  },
+  {
+   "kind": "hot",
+   "days": [],
+   "checks": []
+  },
+  {
+   "kind": "height",
+   "days": [],
+   "checks": []
+  },
+  {
+   "kind": "lifting",
+   "days": [],
+   "checks": []
+  },
+  {
+   "kind": "loto",
+   "days": [],
+   "checks": []
+  }
+ ]
+}

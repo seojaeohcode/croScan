@@ -1,0 +1,14 @@
+**/__pycache__
+**/*.pyc
+.env
+.env.*
+*.log
+bench_models.py
+tools
+# test PDFs are uploaded through the web page, never baked into the image
+samples
+data
+qa_inbox
+models
+llm
+qa_backup

@@ -1,0 +1,42 @@
+# croScan behind a company OIDC sign-in (example; the company's IdP, host name and TLS files are its own).
+#   cp oauth2-proxy.env.example oauth2-proxy.env   # fill in the IdP values (not in this repository)
+#   docker compose -f docker-compose.yml up -d
+# The app runs with CROSCAN_AUTH=proxy and is NOT published: only nginx (443) is reachable from outside.
+services:
+  croscan:
+    image: croscan:latest
+    environment:
+      PORT: "8765"
+      CROSCAN_AUTH: proxy
+      LLM_URL: http://llm:8000/v1/chat/completions
+    expose:
+      - "8765"                       # inside the compose network only (no "ports:")
+    volumes:
+      - ${CROSCAN_DATA_DIR:-croscan_data}:/app/data
+    restart: unless-stopped
+
+  oauth2-proxy:
+    image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
+    env_file: oauth2-proxy.env
+    command:
+      - --http-address=0.0.0.0:4180
+      - --reverse-proxy=true
+      - --set-xauthrequest=true      # X-Auth-Request-User / -Groups for nginx's auth_request
+      - --skip-provider-button=true
+      - --upstream=static://202
+    expose:
+      - "4180"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./tls:/etc/nginx/tls:ro
+    depends_on: [croscan, oauth2-proxy]
+    restart: unless-stopped
+
+volumes:
+  croscan_data:

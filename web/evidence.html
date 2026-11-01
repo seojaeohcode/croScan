@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>croScan 근거 지도</title>
+<link rel="stylesheet" href="/static/style.css?v=20261101c">
+<style>
+  body { background: var(--ground); color: var(--ink); font-family: var(--font); margin: 0; }
+  .em { max-width: 1280px; margin: 0 auto; padding: 24px 16px 48px; }
+  .em h1 { font-size: 2.4rem; margin: 0 0 4px; }
+  .em .lead { color: var(--ink-2); margin: 0 0 16px; font-size: 1.5rem; }
+  .em-flow { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 16px; }
+  .em-flow li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: 1.4rem; }
+  .em-flow b { display: block; font-size: 2rem; }
+  .em-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; }
+  .em-bar input, .em-bar select { font: inherit; font-size: 1.5rem; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--surface); color: var(--ink); }
+  .em-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; min-width: 960px; font-size: 1.35rem; }
+  th, td { border-bottom: 1px solid var(--line); padding: 8px; vertical-align: top; text-align: left; }
+  th { background: var(--surface-2); position: sticky; top: 0; font-size: 1.3rem; }
+  td.t b { display: block; } td.t small { color: var(--ink-3); }
+  .g { display: inline-block; font-size: 1.15rem; border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 4px; margin-right: 4px; }
+  .g.eg { border-style: dashed; }
+  .empty { color: var(--warn); font-weight: 600; }
+  .cand { color: var(--ink-2); } .cand small { color: var(--ink-3); display: block; }
+  details summary { cursor: pointer; }
+  .src { font-size: 1.3rem; color: var(--ink-2); }
+  .fit-약함, .fit-none { color: var(--warn); }
+  /* design §3.4.1·§19.8: a blank cell is hatched; 「—」 means no link was made, not that no law applies */
+  td.nil { background-image: repeating-linear-gradient(135deg, transparent 0 6px, var(--line) 6px 7px); }
+  .hatch { font-weight: 700; color: var(--ink-3); margin-right: 4px; }
+  .cand.none { color: var(--warn); }
+  .arts { margin: 4px 0 0; padding-left: 16px; font-size: 1.25rem; } .arts small { display: block; color: var(--ink-3); }
+  .em-legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 1.3rem; color: var(--ink-2); margin: 0 0 12px; padding: 0; list-style: none; }
+  .em-legend .sw { display: inline-block; width: 18px; height: 12px; border: 1px solid var(--line-strong); vertical-align: middle; margin-right: 4px; }
+  .em-legend .sw.nil { background-image: repeating-linear-gradient(135deg, transparent 0 4px, var(--line-strong) 4px 5px); }
+  @media (max-width: 640px) { .em h1 { font-size: 2rem; } }
+</style>
+</head>
+<body>
+<main class="em">
+  <p><a href="/">← croScan</a></p>
+  <h1>근거 지도</h1>
+  <p class="lead">체크리스트 항목과 위험 쌍 규칙이 무엇에 기대는지 등급별로 봅니다. [법령] 칸은 원문 수집·인용·규칙 적합성 검수를 따로 표시합니다. [조선사]·[팀] 칸은 검색 후보(검수 전)이고, [예시] 칸은 가상 자료입니다. 인용이 없는 항목은 「근거 보강 필요」입니다.</p>
+  <details class="em-build"><summary>구축 과정 (수집 → 조각 → 분류 → 연결)</summary>
+    <ul class="em-flow" id="flow" aria-label="구축 단계별 건수"></ul>
+  </details>
+  <ul class="em-legend" aria-label="범례">
+    <li><span class="sw nil" aria-hidden="true"></span>빗금·「—」: 연결 없음 (법령이 적용되지 않는다는 뜻이 아님)</li>
+    <li><span class="g">법령</span>현행 원문 수집 · 인용 · 규칙 적합성 검수 따로 표시 · 확인된 근거는 검수 「맞음」뿐</li>
+    <li><span class="g">공공</span><span class="g">조선사</span><span class="g">팀</span>검색 후보 · 검수 전</li>
+    <li><span class="g eg">예시</span>가상 자료 · 근거로 쓰지 않음</li>
+  </ul>
+  <div class="em-bar">
+    <label>보기 <select id="only"><option value="">전체</option><option value="empty">근거 보강 필요만</option><option value="rule">쌍 규칙만</option><option value="check">체크리스트만</option></select></label>
+    <label>검색 <input id="q" type="search" placeholder="예: 불티, 밀폐, 크레인"></label>
+  </div>
+  <div class="em-wrap"><table>
+    <thead><tr><th>항목</th><th><span class="g">법령</span>인용 조문 · 적합성 검수</th><th><span class="g">공공</span>KOSHA 검색 후보</th><th><span class="g">조선사</span>검색 후보</th><th><span class="g">팀</span>검색 후보</th><th><span class="g eg">예시</span>가상 자료</th></tr></thead>
+    <tbody id="rows"><tr><td colspan="6">불러오는 중…</td></tr></tbody>
+  </table></div>
+  <h2>자료 출처</h2>
+  <ul class="src" id="src"></ul>
+</main>
+<script src="/static/evidence.js?v=20261101c"></script>
+</body>
+</html>

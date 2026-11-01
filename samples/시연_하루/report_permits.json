@@ -1,0 +1,147 @@
+{
+ "permits": [
+  {
+   "permit_no": "AC00-IH-20261029-0731",
+   "kind": "hot",
+   "case": "A",
+   "file": "0731_화기_A.pdf",
+   "read_errors": 0,
+   "answers": 3,
+   "open": 0,
+   "checklist": {
+    "yes": 6,
+    "no": 1,
+    "check": 7
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0732",
+   "kind": "hot",
+   "case": "B",
+   "file": "0732_화기_B.pdf",
+   "read_errors": 0,
+   "answers": 2,
+   "open": 0,
+   "checklist": {
+    "yes": 8,
+    "no": 0,
+    "check": 6
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0733",
+   "kind": "confined",
+   "case": "A",
+   "file": "0733_밀폐_A.pdf",
+   "read_errors": 0,
+   "answers": 3,
+   "open": 0,
+   "checklist": {
+    "yes": 8,
+    "no": 1,
+    "check": 5
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0734",
+   "kind": "confined",
+   "case": "B",
+   "file": "0734_밀폐_B.pdf",
+   "read_errors": 0,
+   "answers": 1,
+   "open": 0,
+   "checklist": {
+    "yes": 10,
+    "no": 1,
+    "check": 3
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0735",
+   "kind": "height",
+   "case": "A",
+   "file": "0735_고소_A.pdf",
+   "read_errors": 0,
+   "answers": 7,
+   "open": 0,
+   "checklist": {
+    "yes": 11,
+    "no": 0,
+    "check": 2
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0736",
+   "kind": "height",
+   "case": "B",
+   "file": "0736_고소_B.pdf",
+   "read_errors": 0,
+   "answers": 2,
+   "open": 0,
+   "checklist": {
+    "yes": 7,
+    "no": 1,
+    "check": 5
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0737",
+   "kind": "lifting",
+   "case": "A",
+   "file": "0737_중량물인양_A.pdf",
+   "read_errors": 0,
+   "answers": 5,
+   "open": 0,
+   "checklist": {
+    "yes": 9,
+    "no": 1,
+    "check": 4
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0738",
+   "kind": "lifting",
+   "case": "B",
+   "file": "0738_중량물인양_B.pdf",
+   "read_errors": 0,
+   "answers": 1,
+   "open": 0,
+   "checklist": {
+    "yes": 9,
+    "no": 1,
+    "check": 4
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0739",
+   "kind": "loto",
+   "case": "A",
+   "file": "0739_정전LOTO_A.pdf",
+   "read_errors": 0,
+   "answers": 4,
+   "open": 0,
+   "checklist": {
+    "yes": 9,
+    "no": 1,
+    "check": 4
+   }
+  },
+  {
+   "permit_no": "AC00-IH-20261029-0740",
+   "kind": "loto",
+   "case": "B",
+   "file": "0740_정전LOTO_B.pdf",
+   "read_errors": 0,
+   "answers": 4,
+   "open": 0,
+   "checklist": {
+    "yes": 7,
+    "no": 0,
+    "check": 7
+   }
+  }
+ ],
+ "workplans": [],
+ "bad": [],
+ "log": []
+}

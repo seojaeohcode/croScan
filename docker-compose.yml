@@ -1,0 +1,53 @@
+# croScan
+#   docker compose up -d --build                web only            -> http://localhost:8765
+#   docker compose --profile ai up -d --build   web + local LLM Raon-1 mini preview (llama.cpp) for the AI chat
+#     first time: put the GGUF in ./models (DOCKER.md: 「AI 모델」), about 20 GB, 32 GB RAM on the server
+#   CROSCAN_PORT=80 docker compose up -d        publish on another host port
+#   QA_TOKEN (in .env next to this file) unlocks reading the QA reports (tools/qa_pull.py)
+services:
+  web:
+    build:
+      context: .
+    platform: linux/amd64
+    image: croscan:latest
+    ports:
+      - "${CROSCAN_PORT:-8765}:8765"
+    environment:
+      PORT: "8765"
+      LLM_URL: http://llm:8000/v1/chat/completions
+      LLM_MODEL: Raon-1-mini-preview
+      QA_TOKEN: ${QA_TOKEN:-}
+      # demo (open, the screens say so) | proxy (behind the company sign-in gateway: role and user headers; publish the
+      # port on 127.0.0.1 only then, e.g. CROSCAN_PORT=127.0.0.1:8765). Anything else stops the app at start.
+      CROSCAN_AUTH: ${CROSCAN_AUTH:-demo}
+    volumes:
+      # QA DB, attachments, 작업계획서 uploads and edits. On the server: CROSCAN_DATA_DIR=/data/app, a folder on the
+      # separate data disk, so it outlives the server (detach the disk before deleting a server). Default: a docker volume.
+      - ${CROSCAN_DATA_DIR:-qa}:/app/data
+    restart: unless-stopped
+
+  llm:
+    build:
+      context: ./llm
+    image: croscan-llm:raon-1-mini-preview
+    profiles: ["ai"]
+    # Raon's recommended sampling (model card); thinking stays on as KRAFTON advises.
+    # 16K context is plenty for one permit + the conversation. No --threads: llama.cpp takes the physical core count,
+    # right on whatever spec the server has (8 on s8-g3, measured best).
+    # (DFlash2 speculative decoding was measured on this 8-vCPU server: 4.3 tok/s against 6.7 without it, so it is off.)
+    command: >
+      -m /models/${LLM_GGUF:-raon-1-mini-preview-Q4_K_M.gguf}
+      --host 0.0.0.0 --port 8000 --alias Raon-1-mini-preview
+      --ctx-size ${LLM_CTX:-16384} --parallel ${LLM_PARALLEL:-1}
+      --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0
+      --repeat-penalty 1.0 --frequency-penalty 0.0 --presence-penalty 1.5
+      --reasoning on --reasoning-budget ${LLM_THINK_BUDGET:--1}
+      --chat-template-kwargs '{"truncate_history_thinking": false}'
+    volumes:
+      - ${LLM_MODELS:-./models}:/models:ro
+    ports:
+      - "127.0.0.1:8000:8000"          # the server itself only (checks, bench_models.py); the ACG does not open it
+    restart: unless-stopped
+
+volumes:
+  qa:

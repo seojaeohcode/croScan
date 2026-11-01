@@ -1,0 +1,17 @@
+# secrets and runtime state (never committed)
+.env
+.env.*
+!deploy/oidc-proxy/oauth2-proxy.env.example
+data/
+qa_inbox/
+qa_backup/
+# model weights (GGUF) live outside the repository (DOCKER.md)
+models/
+*.gguf
+# large bundles kept on the team drive (over GitHub's 100MB file limit)
+*.zip
+# test PDFs copied next to web/ for staging
+web/_t_*
+__pycache__/
+*.pyc
+*.log

@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A2A66">
+<title>croScan 사전검토</title>
+<link rel="preload" href="/static/fonts/Pretendard-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/static/croscan_mark.png" type="image/png">
+<link rel="stylesheet" href="/static/style.css?v=20261101c">
+<script>
+  // saved view settings before the first paint (no flash of the wrong size or colours)
+  try {
+    const v = JSON.parse(localStorage.getItem("croscan.view") || "{}"), r = document.documentElement;
+    for (const k of ["text", "contrast", "theme", "target", "motion"]) if (v[k]) r.dataset[k] = v[k];
+    r.dataset.mode = !v.theme || v.theme === "auto" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : v.theme;
+  } catch (e) { /* storage blocked: defaults */ }
+</script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 24×24, 2px round strokes (one icon language; sized by the text around it) -->
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 22c4 0 7-2.8 7-7 0-3.6-2.4-6.2-4.3-8.4-.5 2.3-1.7 3.6-3.2 4.1.4-3.3-.9-6.2-3-8.2C8.6 6 5 9.1 5 14.6 5 19 8 22 12 22z"/></symbol>
+  <symbol id="i-confined" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v4.5M12 16.5V21M3 12h4.5M16.5 12H21"/></symbol>
+  <symbol id="i-height" viewBox="0 0 24 24"><path d="M8 3v18M16 3v18M8 7h8M8 12h8M8 17h8"/></symbol>
+  <symbol id="i-lift" viewBox="0 0 24 24"><path d="M3 4h18M12 4v5"/><path d="M9 9h6l-1 3h-4z"/><rect x="6" y="14" width="12" height="7" rx="1"/></symbol>
+  <symbol id="i-loto" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3M12 15v2"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-files" viewBox="0 0 24 24"><path d="M15 2H9a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7z"/><path d="M15 2v5h5M4 7v13a2 2 0 0 0 2 2h9"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M7.5 10.5h6M10.5 7.5v6"/></symbol>
+  <symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M7.5 10.5h6"/></symbol>
+  <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.6v.6M12 17h.01"/></symbol>
+  <symbol id="i-message" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.5-6.5z"/></symbol>
+  <symbol id="i-restart" viewBox="0 0 24 24"><path d="M4 4v6h6"/><path d="M5.5 15a7.5 7.5 0 1 0 1.7-7.8L4 10"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-user-q" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2s6.5 2.6 6.5 6.2"/><path d="M16.3 5.8a2.3 2.3 0 1 1 3.2 2.1c-.6.3-.9.7-.9 1.3v.6M18.6 13.2h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3.5 6 1.5 1.5L7.5 5M3.5 12l1.5 1.5 2.5-2.5M3.5 18l1.5 1.5 2.5-2.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6A17.4 17.4 0 0 0 2 12s3.6 7 10 7a9.8 9.8 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16v-4h1.3a1.2 1.2 0 0 1 0 2.4H8.5M13 12v4h1a1.5 1.5 0 0 0 1.5-1.5v-1A1.5 1.5 0 0 0 14 12z"/></symbol>
+</svg>
+
+<header class="appbar">
+  <div class="brand" role="link" tabindex="0" aria-label="croScan 첫 화면으로" title="첫 화면으로">
+    <span class="brand-name"><img class="cs-logo cs-light" src="/static/croscan_logo.png" alt="croScan" width="538" height="128"><img class="cs-logo cs-dark" src="/static/croscan_logo_dark.png" alt="croScan" width="538" height="128"></span>
+  </div>
+  <nav class="stepper" aria-label="진행 단계">
+    <ol id="stepper">
+      <li data-step="3"><button type="button"><i>1</i><span>작업계획서 확인</span></button></li>
+      <li data-step="1"><button type="button"><i>2</i><span>허가서 올리기</span></button></li>
+      <li data-step="2"><button type="button"><i>3</i><span>허가서 검토</span></button></li>
+      <li data-step="4"><button type="button"><i>4</i><span>위험 체크리스트</span></button></li>
+      <li data-step="5"><button type="button"><i>5</i><span>제출</span></button></li>
+    </ol>
+  </nav>
+  <div class="appbar-tools">
+    <div class="textpop-wrap">
+      <button class="btn ghost" id="text-open" aria-expanded="false" aria-controls="textpop" aria-label="글자 크기"><b class="ic-text" aria-hidden="true">가<small>+</small></b><span>글자 크기</span></button>
+      <div class="textpop" id="textpop" hidden role="group" aria-label="글자 크기">
+        <div class="textpop-row"><button type="button" class="btn icon small" id="text-down" aria-label="글자 작게">가<small>−</small></button>
+          <input type="range" id="text-range" min="0" max="3" step="1" aria-label="글자 크기" aria-valuetext="보통">
+          <button type="button" class="btn icon small" id="text-up" aria-label="글자 크게">가<small>+</small></button></div>
+        <div class="textpop-ticks" aria-hidden="true"><span>작게</span><span>보통</span><span>크게</span><span>아주 크게</span></div>
+      </div>
+    </div>
+    <button class="btn ghost" id="view-open" aria-haspopup="dialog" aria-controls="viewset" aria-label="보기 설정"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg><span>보기 설정</span></button>
+    <button class="btn ghost" id="help-open" aria-haspopup="dialog" aria-controls="help" aria-label="도움말"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg><span>도움말</span></button>
+    <button class="btn ghost" id="qa-open" aria-haspopup="dialog" aria-controls="qa" aria-label="의견 보내기"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg><span>의견 보내기</span></button>
+  </div>
+</header>
+
+<div id="main" tabindex="-1">
+<!-- first screen (QA #25): whose view, then 로그인. The demo needs no ID or password: nothing is checked, sent or kept but the ID when 「ID 저장」 -->
+<section class="screen" id="s-login" hidden aria-labelledby="login-title">
+  <div class="login">
+    <div class="login-brand">
+      <img class="cs-logo cs-light" src="/static/croscan_logo.png" alt="croScan" width="538" height="128"><img class="cs-logo cs-dark" src="/static/croscan_logo_dark.png" alt="croScan" width="538" height="128">
+      <p>위험작업허가서 사전검토</p>
+    </div>
+    <form class="login-form" id="login-form" novalidate>
+      <h1 id="login-title" class="sr">croScan 로그인</h1>
+      <div class="login-roles" id="login-roles" role="radiogroup" aria-label="사용자">
+        <button type="button" role="radio" data-login="foreman" aria-checked="true">생산부서 작업반장</button>
+        <button type="button" role="radio" data-login="safety" aria-checked="false" tabindex="-1">안전관리자</button>
+      </div>
+      <label class="login-label" for="login-id">ID</label>
+      <input class="login-in" id="login-id" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="40" placeholder="시연판: 비워 두어도 됩니다">
+      <label class="login-label" for="login-pw">비밀번호</label>
+      <div class="login-pw">
+        <input class="login-in" id="login-pw" type="password" autocomplete="off" maxlength="40" placeholder="시연판: 비워 두어도 됩니다">
+        <button type="button" class="login-eye" id="login-eye" aria-label="비밀번호 보기" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg></button>
+      </div>
+      <button type="submit" class="btn primary xl block login-go">로그인</button>
+      <div class="login-foot">
+        <label class="login-save"><input type="checkbox" id="login-save">ID 저장</label>
+        <button type="button" class="linkbtn" id="login-find">비밀번호 찾기</button>
+      </div>
+    </form>
+  </div>
+</section>
+<!-- 1. 허가서 올리기 -->
+<section class="screen" id="s-upload" aria-labelledby="up-title">
+  <div class="card up-card">
+    <p class="eyebrow">2단계 · 허가서 올리기</p>
+    <h1 id="up-title">검토할 위험작업허가서를 올려 주세요</h1>
+    <p class="lead">croScan이 위험작업허가서를 읽고 필요한 것을 물어봅니다.</p>
+    <fieldset class="field">
+      <legend>허가서 종류</legend>
+      <div class="kinds" id="kinds" role="radiogroup" aria-label="허가서 종류"></div>
+    </fieldset>
+    <div class="field">
+      <div class="label" id="drop-label">허가서 PDF</div>
+      <label class="drop" id="drop" aria-labelledby="drop-label">
+        <input id="file" type="file" accept="application/pdf,.pdf" class="sr">
+        <svg class="drop-ic" aria-hidden="true"><use href="#i-upload"/></svg>
+        <span class="drop-main" id="drop-main">PDF를 여기로 끌어 놓거나 <u>눌러서 고르기</u></span>
+        <span class="drop-sub" id="drop-sub">전산에서 내려받은 PDF · 1개 · 50MB까지</span>
+      </label>
+    </div>
+    <button class="btn primary xl block" id="start" disabled>검토 시작<svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+    <p class="hint center" id="start-hint" aria-live="polite">허가서 종류를 고르고 PDF를 올리면 시작할 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- 안전관리자 시점: every document sent in for one work day (demo DB), its plan map, then the pair detection -->
+<section class="screen" id="s-safety" hidden aria-labelledby="sf-title">
+  <div class="sf-wrap">
+    <!-- QA #66: on wide screens the three views are a menu on the left (위험 쌍 opens into its 순위); narrower screens keep the tabs -->
+    <nav class="sf-nav" id="sf-nav" aria-label="안전관리자 화면 메뉴">
+      <div class="sf-nav-day" id="sfn-day"></div>
+      <p class="sf-nav-h">보기</p>
+      <ul class="sf-nav-list" id="sfn-list"></ul>
+      <div class="sf-nav-foot"><button type="button" class="btn block" id="sfn-detect">다시 찾기</button><p class="hint" id="sfn-note"></p></div>
+    </nav>
+    <div class="card sf-head">
+      <div class="sf-head-text">
+        <p class="eyebrow">안전관리자 · 수집 문서 검토</p>
+        <h1 id="sf-title">작업 서류</h1>
+        <p class="sf-sub" id="sf-sub"></p>
+      </div>
+      <div class="sf-detect">
+        <button class="btn lg sf-detect-btn" id="sf-detect" disabled>위험 쌍 찾기<svg class="ic" aria-hidden="true"><use href="#i-search"/></svg></button>
+        <p class="hint" id="sf-detect-note">분석 기능 준비 중</p>
+      </div>
+    </div>
+    <div class="card sf-note" id="sf-resume" hidden role="status">
+      <svg class="ic" aria-hidden="true"><use href="#i-restart"/></svg>
+      <div><b>지난번에 보던 곳</b><p id="sf-resume-text"></p></div>
+      <button class="btn small primary" id="sf-resume-go">이어서 보기</button>
+      <button class="btn ghost icon small" id="sf-resume-close" aria-label="닫기"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="alert bad" id="sf-err" role="alert" hidden></div>
+    <!-- QA #42: three tabs, one at a time (위험 쌍 · 계획 배치도 · 문서 목록); 현장 게시 opens from a pair -->
+    <nav class="sf-jump sf-main" id="sf-jump" aria-label="이 화면의 구역">
+      <button type="button" data-main="pairs" aria-pressed="true">위험 쌍</button>
+      <button type="button" data-main="map" aria-pressed="false">계획 배치도</button>
+      <button type="button" data-main="docs" aria-pressed="false">문서 목록</button>
+    </nav>
+    <!-- 쌍작업 위험탐지 결과 요약: how many pairs at each priority, and how the 445 candidates were narrowed -->
+    <div class="card sf-res" id="sf-res" hidden>
+      <div class="sf-res-main">
+        <h2 class="sf-res-h">위험 쌍 현황</h2>
+        <p class="sf-res-title hint" id="sf-res-title"></p>
+        <details class="sf-howd" id="sf-howd"><summary>검토 과정 보기</summary><div class="sf-steps4"><h3>위험 조합 검토 과정</h3><ol id="sf-funnel"></ol><button type="button" class="btn small sf-em-go" data-emap>근거 지도 보기</button></div><div class="sf-hybrid" id="sf-hybrid"></div></details>
+      </div>
+      <div class="sf-res-pri" id="sf-res-pri"></div>
+      <div class="seg sf-mode" id="sf-mode" role="group" aria-label="왼쪽 목록">
+        <button type="button" data-mode="pairs" aria-pressed="true">위험 쌍</button>
+        <button type="button" data-mode="docs" aria-pressed="false">문서 목록</button>
+        <button type="button" data-mode="post" aria-pressed="false">현장 게시</button>
+      </div>
+      <div class="sf-postgo">
+        <button class="btn primary" id="sf-post-btn">현장 게시 서류 준비<svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+        <p class="hint">반장들에게 작업 조정 문자를 쓰고 게시용 서류를 만듭니다</p>
+      </div>
+    </div>
+    <div class="sf-body" id="sf-body" data-pane="list">
+      <!-- documents: one row per work -->
+      <section class="card sf-list" aria-labelledby="sf-list-title">
+        <h2 class="sr" id="sf-list-title">문서 목록</h2>
+        <!-- review progress: what has been looked at (this browser), not an approval -->
+        <div class="sf-progress" id="sf-progress">
+          <p class="sf-prog-top"><b>작업 자료 확인</b><span id="sf-prog-n">0/0건</span></p>
+          <div class="sf-prog-bar" aria-hidden="true"><i id="sf-prog-fill"></i></div>
+          <p class="hint" id="sf-prog-sub"></p>
+        </div>
+        <!-- 요약: counts of the whole day; each one is also a shortcut that sets the matching filter -->
+        <div class="sf-tiles" id="sf-tiles" role="group" aria-label="요약 · 누르면 그 조건으로 목록을 좁힙니다"></div>
+        <div class="sf-bar-row">
+          <div class="tabs" id="sf-tabs" role="group" aria-label="문서 종류"></div>
+          <label class="plan-search sf-search"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><span class="sr">검색</span>
+            <input id="sf-q" type="search" placeholder="작업명 · 번호 · 업체 · 블록 · 설비  ( / )" autocomplete="off"></label>
+          <button class="btn sf-fbtn" id="sf-fbtn" aria-expanded="false" aria-controls="sf-filter"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg>필터<span class="sf-fcount" id="sf-fcount" hidden></span></button>
+          <label class="sf-sort"><span class="sr">정렬</span>
+            <select id="sf-sort">
+              <option value="bay">BAY별 · 시작 시각</option>
+              <option value="time">시작 시각</option>
+              <option value="todo">확인 전 먼저</option>
+            </select>
+          </label>
+        </div>
+        <!-- 필터: OR inside a group, AND between groups; each option shows how many it would give -->
+        <div class="sf-filter" id="sf-filter" hidden role="group" aria-label="필터"></div>
+        <div class="sf-active" id="sf-active"></div>
+        <!-- QA #45: wide screens show the list on the left and the picked document's summary on the right -->
+        <div class="sf-doc-layout">
+        <div class="sf-table-wrap" id="sf-table-wrap">
+          <table class="sf-table">
+            <thead><tr><th scope="col">문서</th><th scope="col">부서·협력사</th><th scope="col">위치</th><th scope="col">시간</th><th scope="col">자료 확인</th></tr></thead>
+            <tbody id="sf-rows"></tbody>
+          </table>
+          <p class="sf-empty" id="sf-empty" hidden>조건에 맞는 문서가 없습니다. <button type="button" class="linkbtn" data-unfilter>필터 초기화</button></p>
+        </div>
+        <aside class="sf-doc-sum" id="sf-doc-sum" aria-live="polite" aria-label="고른 문서 요약"></aside>
+        </div>
+        <p class="sf-foot" id="sf-foot"></p>
+      </section>
+      <!-- 위험 쌍: one row per pair, most urgent first; a row opens its explanation -->
+      <section class="card sf-pairs" aria-labelledby="sf-pairs-title">
+        <h2 class="sr" id="sf-pairs-title">위험 쌍</h2>
+        <div class="sf-bar-row">
+          <div class="tabs" id="sf-ptabs" role="group" aria-label="우선순위"></div>
+          <label class="sf-pkind-sel">작업 조합 <select id="sf-pkind"><option value="all">모두</option><option value="RN">일상작업 × 비일상작업</option><option value="NN">비일상작업끼리</option></select></label>
+        </div>
+        <ol class="sf-plist" id="sf-plist"></ol>
+        <p class="sf-more" id="sf-more" hidden aria-hidden="true"></p>
+        <details class="sf-near" id="sf-near"><summary id="sf-near-sum"></summary><p class="hint">서류의 시간·위치·설비를 규칙으로 검토했을 때 경보 조건에 해당하지 않은 작업쌍입니다. 안전 확인이나 작업 승인을 뜻하지 않습니다.</p><ul id="sf-near-list"></ul></details>
+      </section>
+      <!-- the pair picked in the list, beside it (wide screens; narrower ones open it over the page) -->
+      <section class="card sf-pdetail" id="sf-pdetail" aria-label="고른 위험 쌍" tabindex="-1">
+        <p class="sf-pd-empty hint">왼쪽 목록에서 위험 쌍을 고르면 여기에서 자세히 봅니다.</p>
+      </section>
+      <!-- 현장 게시: ① 작업 조정(반장들에게 일정 조율 협조 문자) → ② 서류 발행(편집) -->
+      <section class="card sf-post" aria-labelledby="sf-post-title">
+        <div class="sf-post-head">
+          <button type="button" class="btn small" id="sf-post-back"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg>위험 쌍으로</button>
+          <h2 id="sf-post-title">현장 게시용 서류</h2>
+          <ol class="sf-psteps" id="sf-psteps"></ol>
+        </div>
+        <div class="sf-post-body" id="sf-post-body"></div>
+      </section>
+      <!-- 계획 배치도: where the works are planned at a chosen time of the demo day (no judgement) -->
+      <div class="sf-side">
+      <section class="card sf-map" aria-labelledby="sf-map-title">
+        <div class="sf-map-head">
+          <h2 id="sf-map-title">계획 배치도</h2>
+          <div class="seg sf-view" id="sf-view" role="group" aria-label="배치도 보기">
+            <button type="button" data-view="map" aria-pressed="true">배치도</button>
+            <button type="button" data-view="day" aria-pressed="false">하루 일정</button>
+          </div>
+        </div>
+        <!-- QA #20: choosing the time is a box of its own, the BAY × 칼럼 map under it has its own head -->
+        <div class="sf-time" role="group" aria-labelledby="sf-time-h">
+          <p class="sf-time-h" id="sf-time-h"><b>시각 고르기</b></p>
+          <div class="sf-time-row">
+            <button class="btn icon small" id="sf-t-prev" aria-label="이전 15분"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg></button>
+            <label class="sf-clock-wrap"><span class="hint" id="sf-clock-label">선택 시각</span><input type="text" class="sf-clock" id="sf-clock" inputmode="numeric" maxlength="5" value="09:00" aria-describedby="sf-clock-label" autocomplete="off"></label>
+            <button class="btn icon small" id="sf-t-next" aria-label="다음 15분"><svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+            <span class="sf-now" id="sf-now" aria-live="polite"></span>
+          </div>
+          <!-- the busy hours (works planned per 15 min); clicking it moves the time there -->
+          <div class="sf-profile" id="sf-profile" title=""><div class="sf-prof-bars" id="sf-prof-bars"></div><i class="sf-prof-mark" id="sf-prof-mark"></i></div>
+          <input type="range" id="sf-t" min="450" max="1260" step="5" value="540" aria-label="선택 시각">
+          <!-- 07:30–21:00 = 810 min: 09:00 11.1 %, 12:00 33.3 %, 15:00 55.6 %, 18:00 77.8 % -->
+          <div class="sf-ticks" aria-hidden="true"><span style="left:0">07:30</span><span style="left:11.1%">09:00</span><span style="left:33.3%">12:00</span><span style="left:55.6%">15:00</span><span style="left:77.8%">18:00</span><span style="left:100%">21:00</span></div>
+        </div>
+        <p class="sf-grid-h" id="sf-grid-h"></p>
+        <p class="sf-swipe" aria-hidden="true">← 좌우로 밀어 칼럼 01–20을 봅니다 →</p>
+        <div class="sf-grid" id="sf-grid"></div>
+        <div class="sf-day" id="sf-day" hidden></div>
+        <p class="sf-off" id="sf-off" hidden></p>
+        <div class="sf-legend" id="sf-legend" aria-label="범례"></div>
+        <div class="sf-pick" id="sf-pick" hidden></div>
+      </section>
+      <!-- 현장 확인 일정: what the 안전관리자 has to go and see tomorrow, straight from the permits -->
+      <section class="card sf-sched" aria-labelledby="sf-sched-title">
+        <div class="sf-map-head">
+          <h2 id="sf-sched-title">작업 전 현장 확인 일정</h2>
+          <div class="seg sf-view" id="sf-schedtabs" role="group" aria-label="일정 종류"></div>
+        </div>
+        <p class="hint" id="sf-sched-note"></p>
+        <ol class="sf-sched-list" id="sf-sched-list"></ol>
+      </section>
+      </div>
+    </div>
+  </div>
+  <!-- one document: 허가서 / 추가검토서 / 위험 체크리스트, or a 작업계획서 -->
+  <aside class="sf-panel" id="sf-panel" hidden aria-labelledby="sf-p-title" tabindex="-1">
+    <div class="sf-p-head">
+      <div><p class="eyebrow" id="sf-p-kind"></p><h2 id="sf-p-title"></h2><p class="hint" id="sf-p-meta"></p></div>
+      <button class="btn ghost icon" id="sf-p-close" aria-label="닫기 (Esc)"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="tabs sf-p-tabs" id="sf-p-tabs" role="group" aria-label="자료"></div>
+    <div class="sf-p-note" id="sf-p-note" hidden></div>
+    <div class="sf-p-body" id="sf-p-body"></div>
+    <div class="sf-p-foot">
+      <div class="sf-p-nav">
+        <button class="btn icon" id="sf-p-prev" aria-label="이전 작업"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg></button>
+        <span class="sf-p-pos" id="sf-p-pos"></span>
+        <button class="btn icon" id="sf-p-next" aria-label="확인하지 않고 다음 작업"><svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+      </div>
+      <button class="btn" id="sf-p-undo" hidden></button>
+      <button class="btn primary" id="sf-p-go"></button>
+      <p class="sf-p-save hint" id="sf-p-save"></p>
+    </div>
+  </aside>
+</section>
+
+<!-- loading: the server reports each real stage as it finishes -->
+<section class="screen" id="s-load" hidden aria-labelledby="load-title">
+  <div class="card load-card">
+    <p class="eyebrow" id="load-eyebrow">허가서 읽는 중</p>
+    <h1 class="h2" id="load-title"><svg class="ic" aria-hidden="true"><use href="#i-pdf"/></svg><span id="lname"></span></h1>
+    <p class="hint" id="lsize"></p>
+    <ol class="steps" id="steps" aria-live="polite"></ol>
+    <div class="alert bad" id="lerr" role="alert" hidden></div>
+    <button class="btn" id="lback" hidden><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg>처음으로</button>
+  </div>
+</section>
+
+<!-- 2·3. 검토 화면: 문서(왼쪽) + 질문 대화 또는 작업계획서 목록(오른쪽) -->
+<section class="screen" id="s-edit" hidden>
+  <div class="workbar" role="toolbar" aria-label="문서 보기">
+    <div class="doc-title"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg><b id="docname">허가서</b><span class="muted" id="fname"></span></div>
+    <div class="pager" id="pager">
+      <button class="btn icon" id="pgprev" aria-label="이전 쪽"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg></button>
+      <div class="tabs" id="tabs"></div>
+      <button class="btn icon" id="pgnext" aria-label="다음 쪽"><svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+    </div>
+    <div class="seg" id="view" role="group" aria-label="보기">
+      <button data-v="form" aria-pressed="true">읽은 양식</button><button data-v="list" aria-pressed="false">칸 목록</button><button data-v="orig" aria-pressed="false">원본</button><button data-v="sheet" aria-pressed="false" id="v-sheet">추가검토서</button>
+    </div>
+    <span class="badge" id="changes">고친 칸 0개</span>
+    <button type="button" class="save" id="wpsave" hidden></button>
+    <button type="button" class="btn primary small" id="back-sum" hidden><svg class="ic" aria-hidden="true"><use href="#i-list"/></svg>제출 확인으로 돌아가기</button>
+  </div>
+  <div class="split">
+    <section class="docpane" aria-label="문서">
+      <div class="docwrap">
+      <div class="viewport" id="left">
+        <div class="stage" id="stage"><div class="sheet" id="sheet"></div></div>
+      </div>
+      <div class="zoombar" role="toolbar" aria-label="확대·축소">
+        <button class="btn icon" id="zout" aria-label="축소"><svg class="ic" aria-hidden="true"><use href="#i-zoom-out"/></svg></button>
+        <button class="btn zval" id="zval" aria-label="화면 폭에 맞추기">100%</button>
+        <button class="btn icon" id="zin" aria-label="확대"><svg class="ic" aria-hidden="true"><use href="#i-zoom-in"/></svg></button>
+        <button class="btn icon" id="zfit" aria-label="폭에 맞추기"><svg class="ic" aria-hidden="true"><use href="#i-fit"/></svg></button>
+      </div>
+      </div>
+      <!-- the field the user picked: what it is, what it was, what is wrong (no hover tooltips) -->
+      <div class="inspector" id="inspector" role="region" aria-label="선택한 칸" aria-live="polite" hidden></div>
+    </section>
+
+    <aside class="sidepane" id="sidepane" aria-label="질문과 확인">
+      <!-- 2단계: 질문 대화 -->
+      <div class="panel" id="p-chat">
+        <div class="panel-head">
+          <div><b>확인 질문</b><span class="muted" id="qcount"></span><span class="autosave" id="autosave" role="status"></span></div>
+          <button class="btn ghost small" id="restart" aria-label="확인 질문 처음부터 다시"><svg class="ic" aria-hidden="true"><use href="#i-restart"/></svg><span class="lbl">처음부터</span></button>
+        </div>
+        <div class="progress" id="qprogress" aria-hidden="true"><b></b></div>
+        <div class="msgs" id="msgs" role="log" aria-live="polite" aria-relevant="additions"></div>
+        <form class="composer" id="composer">
+          <!-- QA #38·#41: the blanks to fill, top to bottom; a picked field is edited in this same box -->
+          <div class="fillbar" id="fillbar" hidden></div>
+          <div class="fedit" id="fedit" hidden role="region" aria-label="고칠 칸" aria-live="polite"></div>
+          <p class="composer-hint" id="input-hint" hidden aria-live="polite"></p>
+          <label class="sr" for="input">답 입력</label>
+          <textarea id="input" rows="2" placeholder="버튼 또는 직접 입력" disabled></textarea>
+          <button class="btn primary" id="send" disabled><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg><span>보내기</span></button>
+        </form>
+        <div class="next-bar" id="to-plans" hidden>
+          <p id="go-plans-note">허가서 검토를 마쳤습니다. 다음은 위험 체크리스트입니다.</p>
+          <button class="btn primary lg block" id="go-plans">다음: 위험 체크리스트<svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+      </div>
+      <!-- 3단계: 작업계획서 -->
+      <div class="panel" id="p-plans" hidden>
+        <div class="panel-head">
+          <div><b>작업계획서</b><span class="muted" id="pcount"></span></div>
+          <button class="btn ghost small" id="plans-add"><svg class="ic" aria-hidden="true"><use href="#i-upload"/></svg>더 올리기</button>
+        </div>
+        <div class="progress" id="pprogress" aria-hidden="true"><b></b></div>
+        <div class="plan-search"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><label class="sr" for="plan-q">작업계획서 찾기</label><input id="plan-q" type="search" placeholder="작업명·부서·협력사·위치로 찾기"></div>
+        <p class="hint plan-guide">계획서마다 날짜·시간·위치를 보고, 그날 할 작업이 맞으면 「확인」을 누르세요.</p>
+        <ul class="plan-list" id="plan-list"></ul>
+        <div class="next-bar">
+          <p id="plans-left"></p>
+          <button class="btn primary lg block" id="go-submit">다음: 허가서 올리기<svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <!-- phones: one pane at a time -->
+  <div class="pane-switch" role="tablist" aria-label="화면 바꾸기">
+    <button role="tab" id="ps-doc" aria-selected="false"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg>문서</button>
+    <button role="tab" id="ps-side" aria-selected="true"><svg class="ic" aria-hidden="true"><use href="#i-message"/></svg><span id="ps-side-label">질문</span></button>
+  </div>
+</section>
+
+<!-- 1단계 (QA #33, screen id kept): 작업계획서 올리기 -->
+<section class="screen" id="s-plans" hidden aria-labelledby="wp-title">
+  <div class="card up-card">
+    <p class="eyebrow">1단계 · 작업계획서 확인</p>
+    <h1 id="wp-title">작업할 날의 작업계획서를 올려 주세요</h1>
+    <p class="lead">PDF 여러 개, 여러 건을 묶은 PDF, 폴더 모두 올릴 수 있습니다. 한 계획서가 여러 파일로 나뉘어 있어도 문서번호가 같으면 한 건으로 묶습니다.</p>
+    <label class="drop" id="wpdrop">
+      <input id="wpfile" type="file" accept="application/pdf,.pdf" multiple class="sr">
+      <svg class="drop-ic" aria-hidden="true"><use href="#i-files"/></svg>
+      <span class="drop-main" id="wp-main">작업계획서 PDF를 끌어 놓거나 <u>눌러서 고르기</u></span>
+      <span class="drop-sub">PDF 여러 개 · 묶음 PDF · 폴더</span>
+    </label>
+    <input id="wpdir" type="file" webkitdirectory class="sr" tabindex="-1">
+    <div class="filebar"><button type="button" class="btn small" id="wp-dirbtn"><svg class="ic" aria-hidden="true"><use href="#i-folder"/></svg>폴더 고르기</button></div>
+    <div class="filebar" id="wp-bar" hidden>
+      <b id="wp-count"></b>
+      <button type="button" class="btn small" id="wp-clear"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg>모두 빼기</button>
+    </div>
+    <ul class="file-list" id="wp-list"></ul>
+    <div class="actions">
+      <button class="btn lg" id="wp-back" hidden><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg>작업계획서 목록으로</button>
+      <button class="btn primary lg grow" id="wp-start" disabled>작업계획서 읽기<svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 위험 체크리스트 (작업반장, 작업 전날) -->
+<section class="screen" id="s-check" hidden aria-labelledby="ck-title">
+  <div class="card ck-card">
+    <p class="eyebrow">4단계 · 위험 체크리스트</p>
+    <h1 id="ck-title">위험 체크리스트를 확인해 주세요</h1>
+    <p class="lead">croScan이 허가서를 보고 미리 채웠습니다. 항목마다 <b>해당 여부</b>를 고르고, 해당하면 <b>안전조치</b>를 체크하세요.</p>
+    <p class="hint ck-means">「확인 완료」는 해당 여부를 반장이 확인했다는 뜻입니다. 안전조치 이행이나 작업 승인은 아닙니다.</p>
+    <div class="ck-bar" id="ck-bar" role="status"></div>
+    <div id="ck-list" aria-live="polite"></div>
+    <div class="ck-add">
+      <button type="button" class="btn" id="ck-add"><svg class="ic" aria-hidden="true"><use href="#i-list"/></svg>위험요인 직접 추가</button>
+      <button type="button" class="btn ghost" id="ck-pdf"><svg class="ic" aria-hidden="true"><use href="#i-pdf"/></svg>체크리스트 PDF 미리 보기</button>
+    </div>
+    <div class="actions">
+      <button class="btn lg" id="ck-back"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg>허가서 검토로</button>
+      <button class="btn primary lg grow" id="ck-next" disabled>다음: 제출 확인<svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+    </div>
+    <p class="ck-need" id="ck-need" role="status"></p>
+    <p class="hint" id="ck-msg" role="status"></p>
+  </div>
+</section>
+
+<!-- 5. 제출 확인 -->
+<section class="screen" id="s-submit" hidden aria-labelledby="sub-title">
+  <div class="card sub-card">
+    <p class="eyebrow">5단계 · 제출</p>
+    <h1 id="sub-title">제출하기 전에 확인해 주세요</h1>
+    <dl class="summary" id="summary"></dl>
+    <div class="alert info"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg><span>안전팀에는 <b>1) 허가서(원본 + 추가검토서)</b>, <b>2) 작업계획서</b>, <b>3) 위험 체크리스트</b> 서류 3가지가 제출됩니다. 하이세스(Hi-SEs) 신청, 생산부서 승인권한자의 전산승인, 작업 당일 현장 확인, 2중점검 Y 작업의 아침 대면허가는 기존과 동일합니다.</span></div>
+    <div class="actions">
+      <button class="btn lg" id="sub-back"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg>위험 체크리스트로</button>
+      <button class="btn primary xl grow" id="sendfinal"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>안전팀에 제출</button>
+    </div>
+    <div class="sub-docs" id="sub-docs" hidden>
+      <p class="sub-id" id="sub-id"></p>
+      <p class="sub-note">안전팀 검토자료 제출(시연)입니다.</p>
+      <ul class="doc-list" id="doc-list"></ul>
+    </div>
+    <div class="actions secondary">
+      <button class="btn" id="wpdl-all" hidden><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg>고친 작업계획서 PDF</button>
+      <button class="btn ghost" id="newpdf"><svg class="ic" aria-hidden="true"><use href="#i-restart"/></svg>새 허가서 검토</button>
+    </div>
+    <p class="hint" id="sub-msg" role="status"></p>
+  </div>
+</section>
+</div>
+
+<!-- 보기 설정: 글자 크기, 대비, 테마, 버튼 크기, 움직임 -->
+<div class="sheet-modal" id="viewset" role="dialog" aria-modal="true" aria-labelledby="vs-title" hidden>
+  <div class="dialog">
+    <div class="dialog-head"><h2 id="vs-title">보기 설정</h2><button class="btn icon" data-close aria-label="닫기"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <p class="hint">이 기기에 저장됩니다. 언제든 바꿀 수 있습니다.</p>
+    <div class="setting"><span class="label">글자 크기</span>
+      <div class="seg wide" data-set="text"><button data-v="s">작게</button><button data-v="m">보통</button><button data-v="l">크게</button><button data-v="xl">아주 크게</button></div>
+      <p class="preview">허가서 검토 · 가나다 123</p></div>
+    <div class="setting"><span class="label">화면 대비</span>
+      <div class="seg wide" data-set="contrast"><button data-v="normal">보통</button><button data-v="high">고대비 (햇빛 아래)</button></div></div>
+    <div class="setting"><span class="label">화면 밝기</span>
+      <div class="seg wide" data-set="theme"><button data-v="auto">기기 설정대로</button><button data-v="light">밝게</button><button data-v="dark">어둡게</button></div></div>
+    <div class="setting"><span class="label">버튼 크기</span>
+      <div class="seg wide" data-set="target"><button data-v="normal">보통</button><button data-v="glove">크게 (장갑 낀 손)</button></div></div>
+    <div class="setting"><span class="label">움직임</span>
+      <div class="seg wide" data-set="motion"><button data-v="auto">기기 설정대로</button><button data-v="reduce">줄이기</button></div></div>
+    <div class="dialog-foot"><button class="btn ghost" id="vs-reset"><svg class="ic" aria-hidden="true"><use href="#i-undo"/></svg>처음 설정으로</button><button class="btn primary" data-close>닫기</button></div>
+  </div>
+</div>
+
+<!-- 도움말: 화면별 안내와 단축키 (툴팁 대신 한곳에) -->
+<div class="sheet-modal" id="help" role="dialog" aria-modal="true" aria-labelledby="help-title" hidden>
+  <div class="dialog">
+    <div class="dialog-head"><h2 id="help-title">도움말</h2><button class="btn icon" data-close aria-label="닫기"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div id="help-body"></div>
+    <h3>단축키</h3>
+    <dl class="keys">
+      <dt><kbd>Ctrl</kbd> + 휠 · 두 손가락 벌리기</dt><dd>문서 확대 · 축소 (휠만 굴리면 문서를 위아래로 넘깁니다)</dd>
+      <dt><kbd>Ctrl</kbd> <kbd>+</kbd> / <kbd>-</kbd></dt><dd>화면 전체 확대 · 축소 (브라우저 기능 그대로)</dd>
+      <dt><kbd>Alt</kbd> <kbd>←</kbd> / <kbd>→</kbd></dt><dd>이전 · 다음 쪽</dd>
+      <dt><kbd>Enter</kbd></dt><dd>답 보내기 (<kbd>Shift</kbd> <kbd>Enter</kbd>는 줄 바꿈)</dd>
+      <dt><kbd>Esc</kbd></dt><dd>창 닫기 · 칸 선택 풀기</dd>
+    </dl>
+    <div class="dialog-foot"><button class="btn primary" data-close>닫기</button></div>
+  </div>
+</div>
+
+<!-- 의견 보내기 (QA): 캡처·파일 + 설명, 화면 정보는 함께 저장 -->
+<div class="sheet-modal" id="qa" hidden>
+  <form class="dialog" id="qa-form" role="dialog" aria-modal="true" aria-labelledby="qa-title">
+    <div class="dialog-head"><h2 id="qa-title">의견 보내기</h2><button type="button" class="btn icon" id="qa-close" aria-label="닫기"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <label class="drop small" id="qa-drop" tabindex="0">
+      <input id="qa-file" type="file" multiple class="sr">
+      <span class="drop-main">캡처·파일을 <kbd>Ctrl</kbd>+<kbd>V</kbd>로 붙여넣거나, 끌어 놓거나, <u>눌러서 고르기</u></span>
+      <span class="drop-sub">이미지, PDF, 워드, 엑셀 등 모든 파일</span>
+    </label>
+    <div class="qa-thumbs" id="qa-thumbs"></div>
+    <label class="label" for="qa-text">무엇이 불편하거나 이상한가요?</label>
+    <textarea id="qa-text" rows="5" placeholder="어떤 화면에서, 무엇을 했더니, 어떻게 됐는지"></textarea>
+    <label class="label" for="qa-author">보낸 사람 (선택)</label>
+    <input id="qa-author" maxlength="40" autocomplete="name">
+    <p class="hint">지금 화면 정보(파일 이름, 허가서 종류, 보던 화면, 입력값, 답변)가 함께 저장됩니다.</p>
+    <div class="dialog-foot"><span class="qa-msg" id="qa-msg" role="status"></span><button class="btn primary" id="qa-send"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>보내기</button></div>
+  </form>
+</div>
+
+<!-- 제출 직전 확인: 실수하기 쉬운 핵심 정보만 (확인하고 제출 / 돌아가서 고치기) -->
+<div class="sheet-modal" id="presub" hidden>
+  <div class="dialog presub" role="dialog" aria-modal="true" aria-labelledby="ps-title" aria-describedby="ps-lead">
+    <div class="dialog-head"><h2 id="ps-title">시간·위치 등 핵심 정보를 빠짐없이 확인하셨나요?</h2></div>
+    <p class="ps-lead" id="ps-lead">제출 전에 실수하기 쉬운 항목만 모았습니다. 틀린 것이 있으면 돌아가서 고쳐 주세요.</p>
+    <div class="ps-body" id="ps-body" tabindex="0" role="region" aria-label="제출할 핵심 정보"></div>
+    <div class="dialog-foot"><button type="button" class="btn ghost" data-close><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg>돌아가서 고치기</button><button type="button" class="btn primary" id="ps-ok"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>확인하고 제출</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script src="/static/app.js?v=20261101c"></script>
+</body>
+</html>
