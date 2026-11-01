@@ -2038,3 +2038,29 @@ body[data-screen="s-login"] .appbar-tools > :not(#qa-open) { display: none; }
 .choices2 { margin-top: -.4rem; }
 .ai-unread { border-style: dashed; }
 .ai-fail { color: var(--warn); }
+/* QA #108: 담당별 확인 — who to ask and what, first; the record and all questions folded */
+.sf-hq-lead { margin: .4rem 0 .2rem; font-weight: 700; }
+.sf-hq-who { margin: 0 0 .4rem; }
+.sf-hq-ask { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; padding: .6rem 0; border-top: 1px dashed var(--line); }
+.sf-hq-ask:first-of-type { border-top: 0; }
+.sf-hq-ask p { flex: 1 1 24rem; margin: 0; font-size: 1.55rem; line-height: 1.5; }
+.sf-hq-copy { display: inline-flex; align-items: center; gap: .6rem; }
+.sf-hq-hand { flex: 1 1 100%; }
+.sf-hq-more, .sf-hq-log, .sf-hq-all { margin: .4rem 0 0; }
+.sf-hq-more > summary, .sf-hq-log > summary, .sf-hq-all > summary { cursor: pointer; color: var(--primary); font-size: 1.4rem; padding: .3rem 0; }
+.sf-hq-log ol, .sf-hq-all ol { margin: .3rem 0 .5rem; padding-left: 1.8rem; }
+.sf-hq-log li, .sf-hq-all li { margin: .4rem 0; }
+.sf-hq-q { display: block; }
+.sf-hq-act { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin-top: .2rem; }
+.sf-hq-st.no { border-color: var(--warn-line); color: var(--warn); }
+.sf-hq-foot { margin-top: .6rem; }
+/* QA #105: how many are left and a way to each, in the sticky bar; the item taken to says why */
+.ck-left { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-left: auto; }
+.ck-left b { color: var(--warn); }
+.ck-left.done { color: var(--ok); font-weight: 700; }
+.ck-left-list { flex: 1 1 100%; max-height: 40vh; overflow: auto; margin: .4rem 0 0; padding: .6rem .6rem .6rem 2.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); }
+.ck-left-list li { margin: .3rem 0; }
+.ck-left-list small { display: block; color: var(--ink-3); }
+.ck-item.ck-attn { outline: 3px solid var(--warn-line); outline-offset: 4px; border-radius: var(--r-sm); }
+.ck-attn-why { margin: .4rem 0; padding: .4rem .8rem; background: var(--warn-soft); color: var(--warn); border-radius: var(--r-sm); font-weight: 700; }
+#s-check .ck-card > .actions { position: sticky; bottom: 0; z-index: 2; background: var(--surface); padding: 1rem 0; margin-bottom: 0; box-shadow: 0 -6px 12px -10px rgba(0,0,0,.25); }

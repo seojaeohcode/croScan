@@ -11,6 +11,8 @@ QA2 (Codex QA #99 검토) 1 출력 목록=그날 문서 전부 · 2 확인 기�
     묶인 확인·출력 · 5 읽기 둘이면 warm·phrase 즉시 취소.
 PS  preSubmitView (팀장 요청 2026-10-31): 제출 직전 확인 창의 핵심 정보 — 제출되는 값(검토 결과·반영본 칸 값)
     그대로, 날짜 묶기·다음 날 표시·팀 이름 위치·모름/답하지 않음/빈칸·체크리스트 남은 수를 맨 위에.
+CK  ckPending (QA #105): 미완료 = 해당 여부 미확인·「해당」인데 조치 미확인·AI 항목 재확인, 화면 순서(허가서별 자기 항목 → 공통),
+    허가서가 둘이어도 키가 겹치지 않음, 한 항목은 한 번만. HQ  sfHqText (QA #108): 질문 하나만, 대상 작업과 원문 그대로.
 입력칸 초안이 다른 질문으로 가지 않는 흐름(draftQ)은 DOM이 있어야 해서 브라우저에서 손으로 확인한다.
 """
 import json
@@ -327,6 +329,35 @@ console.log(JSON.stringify(out));
     return json.loads(r.stdout.strip().splitlines()[-1])
 
 
+CKNAV = r"""
+const st = { ck: { permits: [
+  { permit_no: "P-1", items: [
+    { id: "common_a", common: true, state: "check", touched: false, controls: [] },
+    { id: "hot_1", state: "yes", touched: false, ctl_touched: false, controls: [] },
+    { id: "hot_2", state: "yes", touched: true, ctl_touched: false, controls: [] },
+    { id: "hot_3", state: "no", touched: true, controls: [] },
+    { id: "hot_4", state: "check", touched: true, controls: [] },
+    { id: "U1", state: "yes", touched: true, ctl_touched: false, controls: [] },
+    { id: "A:x", state: "yes", touched: false, recheck: true, controls: [] }] },
+  { permit_no: "P-2", items: [{ id: "hot_1", state: "yes", touched: true, ctl_touched: true, controls: [] }, { id: "hot_2", state: "no", touched: false, controls: [] }] }] } };
+const list = ckPending(), c = ckCount();
+console.log(JSON.stringify({ keys: list.map((e) => e.key), why: list.map((e) => e.why.join("+")), left: c.left,
+  text: sfHqText({ text: "복구·시험운전 예정 시각과 주행 구간" }, { no: "0739", title: "천장크레인 제어반 고장 수리", who: "설비보전부" }),
+  text2: sfHqText({ text: "작업 끝 시각" }, { no: "WP-26", title: "", who: "" }) }));
+"""
+
+
+PSKEY = r"""
+const st = { sid: "S1", src: { file: { name: "0731_화기_A.pdf" } } };
+const v = { permits: [{ title: "화기", rows: [{ k: "작업일·작업시간", v: "10/29 09:00~11:30" }] }], open: ["작업 인원: 모름"] };
+const withCk = { ...v, open: [...v.open, "위험 체크리스트: 확인 안 함 3개"] };
+const a = psKey(v), b = psKey(withCk);
+const c = psKey({ ...v, permits: [{ title: "화기", rows: [{ k: "작업일·작업시간", v: "10/29 13:00~15:00" }] }] });
+st.sid = "S2"; const d = psKey(v);
+console.log(JSON.stringify({ ck: a === b, val: a !== c, sid: a !== d }));
+"""
+
+
 def main():
     r1 = run(LIB + A1)
     if r1 is None:
@@ -440,6 +471,18 @@ def main():
               and real.get("error") is None and real.get("hot") == "앞 답 철회 · 서류 값을 따름")
         if not OK[-1]:
             print("     ", real)
+    ck = run("\n".join(part(JS, x) for x in ("const ckNeedCtl = ", "function ckPending(", "function ckCount(", "function sfHqText(")) + CKNAV) or {}
+    check("CK 미완료: 해당 여부·조치·AI 재확인, 화면 순서(자기 항목 → 공통), 허가서 둘의 같은 id도 따로", ck.get("keys") == [
+        "P-1|hot_1", "P-1|hot_2", "P-1|A:x", "P-1|common_a", "P-2|hot_2"])
+    check("CK 이유: 두 확인이 빠지면 한 항목에 둘, 직접 추가(U)는 조치 확인 요구 없음, 해당 없음·안전팀 확인은 완료", ck.get("why") == [
+        "state+controls", "controls", "recheck", "state", "state"])
+    check("CK 미완료 수 = 화면의 「확인 완료」 계산과 같음", ck.get("left") == 5)
+    check("HQ 질문 하나만 복사: 틀·대상 작업·원문", ck.get("text") == "[작업 정보 확인 요청]\n대상: 0739 천장크레인 제어반 고장 수리\n복구·시험운전 예정 시각과 주행 구간")
+    check("HQ 작업명이 없으면 지어내지 않음", ck.get("text2") == "[작업 정보 확인 요청]\n대상: WP-26\n작업 끝 시각")
+    pk = run("\n".join(part(JS, x) for x in ("const psPrint = ", "const psKey = ")) + PSKEY) or {}
+    check("RC 확인 기록: 체크리스트 남은 수만 바뀌면 같은 확인(체크리스트 조작으로 다시 묻지 않음)", pk.get("ck") is True)
+    check("RC 확인 기록: 핵심 값이 바뀌면 다른 확인", pk.get("val") is True)
+    check("RC 확인 기록: 다른 검토 세션이면 다른 확인", pk.get("sid") is True)
     print(f"\n{sum(OK)}/{len(OK)}")
     sys.exit(0 if all(OK) else 1)
 

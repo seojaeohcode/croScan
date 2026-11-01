@@ -82,8 +82,12 @@ function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<
 const icon = (id) => `<svg class="ic" aria-hidden="true"><use href="#${id}"/></svg>`;
 const fmtKB = (n) => n >= 1024 * 1024 ? (n / 1024 / 1024).toFixed(1) + " MB" : Math.round(n / 1024) + " KB";
 let toastTimer = null;
-function toast(text) {
+// opt.above: show it just above that element (QA #103: the notice sits over the step's own button bar, never on the button)
+function toast(text, opt = {}) {
   const t = $("#toast"); t.textContent = text; t.hidden = false;
+  const r = opt.above && opt.above.getBoundingClientRect();
+  if (r && r.width) Object.assign(t.style, { left: `${r.left}px`, width: `${r.width}px`, right: "auto", top: "auto", bottom: `${innerHeight - r.top + 8}px`, transform: "none", maxWidth: "none" });
+  else t.removeAttribute("style");
   clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
 }
 
@@ -135,6 +139,8 @@ function paintStepper() {
 }
 function goStep(n) {
   if (!canGo(n)) return;
+  // QA #106 (Codex final #4): the checklist and the submit come after the key information is confirmed, whatever the way
+  if ((n === 4 || n === 5) && document.body.dataset.role === "foreman" && !psValid()) { enterChecklist(true); return; }
   st.step = n; if (st.doc) saveDraft();
   if (n === 5) st.fromSummary = false;
   if (document.body.dataset.role !== "foreman") { paintStepper(); return; }
@@ -156,6 +162,7 @@ function goStep(n) {
   $("#main").focus({ preventScroll: true });
   window.scrollTo(0, 0);
 }
+// the stepper's 위험 체크리스트 goes through the key-information window too when nothing valid was confirmed (QA #106)
 document.querySelectorAll("#stepper button").forEach((b) => b.onclick = () => goStep(+b.closest("li").dataset.step));
 // 1 생산부서·작업반장 / 2 안전관리자: the foreman's review stays as it was while the other view is open
 function setRole(role) {
@@ -372,6 +379,7 @@ function openDoc(doc, src) {
   st.doc = doc; st.findings = doc.findings || []; st.page = doc.pages[0].no;
   st.docs = [doc, ...(st.wp ? st.wp.plans.map((p) => p.doc || null) : [])]; st.di = 0; st.reviewed = false;
   st.src = src; st.rev = 0; st.exportedRev = -1; st.reviewPending = false; st.draftPlans = null; st.fromSummary = false;
+  st.psOk = null; st.psSeen = null; st.psMode = null;      // QA #106: what was confirmed belongs to the review it was made in
   st.ck = null; st.draftCk = null; $("#sub-docs").hidden = true;
   st.answers = []; st.live = false; st.sid = null; st.srev = null; st.props = [];   // nothing is saved over the 임시저장 until it is resumed or dropped
   $("#fname").textContent = src.file.name;
@@ -1559,7 +1567,7 @@ function finish() {
   $("#go-plans").focus();
   checkLinks();
 }
-$("#go-plans").onclick = () => goStep(st.wp ? 4 : 3);
+$("#go-plans").onclick = () => (st.wp ? enterChecklist(true) : goStep(3));
 // the 작업반장's answer, with a way to take it back
 function answerBubble(qid, text) {
   const ub = bubble("user", text);
@@ -2621,7 +2629,7 @@ function renderPlanList() {
       if (st.checked.has(i) && nx >= 0 && st.di === i + 1) {
         showDoc(nx + 1);
         toast(`${i + 1}번 확인. 다음은 ${nx + 1}번 「${st.wp.plans[nx].title || ""}」입니다. (확인 ${st.checked.size}/${st.wp.plans.length})`);
-      } else if (st.checked.has(i) && nx < 0) toast(`작업계획서를 모두 확인했습니다. 「${$("#go-submit").textContent.trim()}」 버튼을 눌러 주세요.`);
+      } else if (st.checked.has(i) && nx < 0) toast(`작업계획서를 모두 확인했습니다. 「${$("#go-submit").textContent.trim()}」 버튼을 눌러 주세요.`, { above: $("#go-submit").closest(".next-bar") });
     };
     li.append(open, chk);
     if (st.planOpen === i || !p.doc) li.appendChild(planDetail(p));
@@ -3007,9 +3015,27 @@ function preSubmitView(aug, fields, answers, ckLeft, pending) {
 }
 // what the window showed, to compare with what would be sent (the checklist count apart: sendFinal checks it itself)
 const psPrint = (v) => JSON.stringify([v.permits, v.open.filter((t) => !t.startsWith("위험 체크리스트"))]);
-const psNow = () => preSubmitView(st.aug, st.doc.fields, st.answers, ckCount().left, !!st.reviewPending);
+const psNow = () => preSubmitView(st.aug, st.doc.fields, st.answers, st.psMode === "check" ? 0 : ckCount().left, !!st.reviewPending);
+// QA #106: the key information is confirmed before the checklist (step 3 → 4), not at the submit. What he confirmed is
+// kept apart from what the window showed: the file, the review session and the key values (the checklist's choices,
+// memos and count are not part of it). In memory only: after a reload it is asked again (the answers stay).
+const psKey = (v) => JSON.stringify([st.sid || "", st.src ? `${st.src.kind || ""}|${st.src.hash || (st.src.file && st.src.file.name) || ""}` : "", psPrint(v)]);
+const psView = () => { const m = st.psMode; st.psMode = "check"; try { return psNow(); } finally { st.psMode = m; } };
+const psValid = () => !!st.doc && !!st.psOk && !st.reviewPending && psKey(psView()) === st.psOk;
+// into the checklist: the window first (always from 「다음: 위험 체크리스트」; from elsewhere when nothing valid was confirmed)
+function enterChecklist(always) {
+  if (!canGo(4)) return;
+  if (!always && psValid()) { goStep(4); return; }
+  if (st.step !== 2) goStep(2);                     // 돌아가서 고치기 · Escape leave him on the review
+  st.psMode = "check"; st.psSeen = null; openPreSubmit();
+}
 // changed: opened again because something changed; said only when what it shows did change
 function openPreSubmit(changed) {
+  const check = st.psMode === "check";
+  $("#ps-lead").textContent = check ? "위험 체크리스트를 작성하기 전에 허가서 핵심 정보를 확인해 주세요. 틀린 것이 있으면 돌아가서 고쳐 주세요."
+    : "제출 전에 실수하기 쉬운 항목만 모았습니다. 틀린 것이 있으면 돌아가서 고쳐 주세요.";
+  $("#ps-ok").innerHTML = check ? `확인하고 체크리스트로${icon("i-right")}` : `${icon("i-send")}확인하고 제출`;
+  $("#ps-body").setAttribute("aria-label", check ? "체크리스트 작성 전 확인할 핵심 정보" : "제출할 핵심 정보");
   const v = psNow(), print = psPrint(v), was = st.psSeen;
   const wait = !!st.reviewPending || v.none;
   st.psSeen = wait ? null : print;
@@ -3044,11 +3070,19 @@ function openPreSubmit(changed) {
 $("#ps-ok").onclick = () => {
   if (st.submitting) return;
   const v = psNow();
-  if (st.reviewPending || v.none || psPrint(v) !== st.psSeen) { openPreSubmit(true); return; }
+  if (st.reviewPending || v.none || psPrint(v) !== st.psSeen) { openPreSubmit(true); return; }   // what he saw is what is confirmed
+  if (st.psMode === "check") {                       // confirmed: into the checklist; nothing is submitted here
+    st.psOk = psKey(v); closeDialogs(); goStep(4); $("#ck-title")?.focus?.(); return;
+  }
   closeDialogs(); sendFinal();
 };
-// 「안전팀에 제출」: the key items first (one added step); 「확인하고 제출」 submits as before
-$("#sendfinal").onclick = () => { if (!st.doc || !sameSource() || !st.ck || st.submitting) return; st.psSeen = null; openPreSubmit(); };
+// 「안전팀에 제출」: no window when the key information is as he confirmed it before the checklist; else back to step 3,
+// where the window shows what changed (QA #106)
+$("#sendfinal").onclick = () => {
+  if (!st.doc || !sameSource() || !st.ck || st.submitting) return;
+  if (!psValid()) { toast("핵심 정보가 바뀌었거나 아직 확인하지 않았습니다. 허가서 검토 단계에서 다시 확인해 주세요."); st.psOk = null; goStep(2); enterChecklist(true); return; }
+  st.psMode = "submit"; st.psSeen = psPrint(psNow()); sendFinal();
+};
 // 제출본: original pages + 추가검토서 as one PDF (the original pages are not changed)
 // one submission at a time (the button can be pressed again while one is on its way)
 async function sendFinal() {
@@ -3066,11 +3100,12 @@ async function sendFinalOnce() {
   const changed = st.ck.permits.flatMap((P) => P.items).filter((it) => it.changed && !it.touched);
   if (changed.length) {
     toast(`허가서나 답이 바뀌어 위험 체크리스트 ${changed.length}개 항목을 다시 확인해야 합니다.`);
-    goStep(4); document.getElementById(`ck-${changed[0].id}`)?.scrollIntoView({ block: "center" }); return;
+    goStep(4); ckGo(ckPending()[0]); return;
   }
-  if (!sameSource() || !plansOk() || !ckDone()) { toast("바뀐 내용을 다시 확인해 주세요"); goStep(4); return; }
+  if (!sameSource() || !plansOk()) { toast("바뀐 내용을 다시 확인해 주세요"); goStep(4); return; }
+  if (!ckDone()) { toast(`위험 체크리스트에 확인할 항목이 ${ckPending().length}개 있습니다. 확인한 뒤 제출합니다.`); goStep(4); ckGo(ckPending()[0]); return; }
   const c = ckCount();
-  if (c.left) { toast(`위험 체크리스트에 확인하지 않은 항목이 ${c.left}개 있습니다. 모두 확인한 뒤 제출합니다.`); goStep(4); return; }
+  if (c.left) { toast(`위험 체크리스트에 확인하지 않은 항목이 ${c.left}개 있습니다. 모두 확인한 뒤 제출합니다.`); goStep(4); ckGo(ckPending()[0]); return; }
   // the plan edits go first, every time (also an edit put back to the original): the 작업계획서 PDF is drawn from the saved edits
   if (st.wp && st.wp.token && !(await savePlans())) {
     $("#sub-msg").textContent = "작업계획서에서 고친 값을 저장하지 못해 제출하지 않았습니다. 연결을 확인하고 다시 눌러 주세요."; return;
@@ -3080,17 +3115,21 @@ async function sendFinalOnce() {
   let sub;
   try {
     // Codex 2026-11-01: what is sent is what the window showed (the checklist drawn again, a review back meanwhile)
-    if (st.psSeen) {
-      await refreshAug();
-      if (psPrint(psNow()) !== st.psSeen) { openPreSubmit(true); return; }
-    }
+    await refreshAug();
+    if (!psValid()) { st.psOk = null; toast("핵심 정보가 바뀌어 제출하지 않았습니다. 바뀐 내용을 확인해 주세요."); goStep(2); enterChecklist(true); return; }
     const r = await fetch("/api/submissions", { method: "POST", body: submitForm() });
     const j = await r.json().catch(() => ({}));
     // the answers changed on another screen: taken from the server and shown again, not sent unseen
     if ((r.status === 409 || r.status === 428) && j.detail && ["stale_revision", "revision_required"].includes(j.detail.code)) {
-      await serverState(); await refreshAug(); openPreSubmit(true); return;
+      await serverState(); await refreshAug();
+      if (!psValid()) { st.psOk = null; toast("다른 화면에서 답이 바뀌었습니다. 바뀐 내용을 확인해 주세요."); goStep(2); enterChecklist(true); return; }
+      toast("다른 화면의 변경을 받아 왔습니다. 핵심 정보는 그대로입니다. 다시 제출해 주세요."); return;
     }
-    if (r.status === 409 && j.detail && /^checklist_/.test(j.detail.code || "")) { toast(j.detail.message); await openChecklist(true); goStep(4); return; }
+    if (r.status === 409 && j.detail && /^checklist_/.test(j.detail.code || "")) {
+      toast(j.detail.message); await openChecklist(true); goStep(4);
+      if (!ckPending().length) $("#ck-msg").textContent = "서버가 체크리스트 확인이 남았다고 했지만 이 화면에서 찾지 못했습니다. 체크리스트를 다시 열어 확인해 주세요.";
+      ckGo(ckPending()[0]); return;
+    }
     if (!r.ok) throw new Error((j.detail && j.detail.message) || (typeof j.detail === "string" ? j.detail : "") || `서버 오류 ${r.status}`);
     sub = j;
   } catch (e) { $("#sub-msg").textContent = `제출하지 못했습니다: ${e.message}. 다시 눌러 주세요.`; return; }
@@ -3191,10 +3230,49 @@ function ckMarkText(it, m) {
     : `하지 않는다는 말 ${q}이 있습니다. 누구의 어떤 작업인지 확인해 판단해 주세요.`;
 }
 const ckMark = (it) => (st.ckAi && st.ckAi.marks && st.ckAi.marks[it.id]) || null;
+// QA #105: what is still to confirm, item by item, in the screen's order (each permit: its own items, then the common ones);
+// the same test as ckCount (an item counts once even when both its checks are open)
+function ckPending() {
+  const out = [];
+  for (const P of (st.ck ? st.ck.permits : [])) for (const it of [...P.items.filter((x) => !x.common), ...P.items.filter((x) => x.common)]) {
+    const why = it.recheck ? ["recheck"] : [...(!it.touched ? ["state"] : []), ...(ckNeedCtl(it) ? ["controls"] : [])];
+    if (why.length) out.push({ P, it, key: `${P.permit_no}|${it.id}`, why });
+  }
+  return out;
+}
+const ckLi = (key) => [...document.querySelectorAll("#ck-list [data-ck-li]")].find((x) => x.dataset.ckLi === key);
+const CK_WHY = { state: "해당 여부 확인이 필요합니다", controls: "준비할 안전조치 확인이 필요합니다", recheck: "지금 작업과 맞는지 다시 확인해 주세요(이 항목 빼기 또는 반장 항목으로 유지)" };
+// bring the control that is missing into view and focus it; the item shows why until it is done
+function ckGo(e) {
+  if (!e) return;
+  st.ckAttn = e.key; st.ckListOpen = false;               // the list is closed: it would cover the item
+  if (st.ckLoading) { st.ckGoAfter = true; return; }      // drawn again when the draft is back: taken there then
+  renderChecklist();
+  const li = ckLi(e.key);
+  if (!li) return;
+  const f = (k) => [...li.querySelectorAll("[data-ck-focus]")].find((x) => x.dataset.ckFocus === `${e.key}|${k}`);
+  const t = e.why[0] === "recheck" ? (f("del") || li) : e.why[0] === "state" ? (f("ok") || f(e.it.state) || li) : (f("ctl") || li);
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.motion === "reduce";
+  // 9. into the band between the sticky bar and the sticky buttons (not the middle of the whole pane, Codex final #9)
+  const sc = $("#s-check"), r = t.getBoundingClientRect(), top = $("#ck-bar").getBoundingClientRect().bottom;
+  const act = $("#s-check .ck-card > .actions"), bottom = act ? act.getBoundingClientRect().top : innerHeight;
+  sc.scrollBy({ top: r.top - (top + Math.max(8, (bottom - top - r.height) / 2)), behavior: calm ? "auto" : "smooth" });
+  if (t.focus) t.focus({ preventScroll: true });
+}
+// 「다음 미완료로 이동」: the item last pointed at while it is still open, else the next open one after it (from the top again)
+function ckGoNext() {
+  const list = ckPending(); if (!list.length) return;
+  const here = list.find((x) => x.key === st.ckAttn);
+  if (here) { ckGo(here); return; }
+  const order = (st.ck ? st.ck.permits : []).flatMap((P) => [...P.items.filter((x) => !x.common), ...P.items.filter((x) => x.common)].map((it) => `${P.permit_no}|${it.id}`));
+  const at = order.indexOf(st.ckAttn);
+  ckGo(list.find((x) => order.indexOf(x.key) > at) || list[0]);
+}
 function ckCount() {
   const all = st.ck ? st.ck.permits.flatMap((P) => P.items) : [];
   const n = { yes: 0, no: 0, check: 0, left: 0, all: all.length };
-  for (const it of all) { n[it.state]++; if (!it.touched || ckNeedCtl(it)) n.left++; }
+  for (const it of all) n[it.state]++;
+  n.left = ckPending().length;                       // the same list the bar and 「다음」 take him through (QA #105)
   return n;
 }
 // what is kept (draft) and sent (package): the 작업반장's choices, not croScan's texts
@@ -3234,6 +3312,7 @@ async function openChecklist(quiet) {
     if (seq === ckSeq) { st.ckLoading = false; if (st.ck) renderCkBar(); paintStepper(); }
   }
   renderChecklist(); paintStepper();
+  if (st.ckGoAfter) { st.ckGoAfter = false; ckGo(ckPending().find((x) => x.key === st.ckAttn) || ckPending()[0]); }
   ckAiLoad();                                        // the AI suggestions below the list (made ahead, or now)
   return true;                                       // drafted from what is there now
 }
@@ -3264,12 +3343,29 @@ function ckMerge(fresh, old) {
 function ckChanged() { bump(); renderCkBar(); paintStepper(); }
 function renderCkBar() {
   const c = ckCount();
-  $("#ck-next").disabled = !ckDone();
+  // QA #105: 「다음」 can be pressed while items are open — it takes him to the first one instead of going on;
+  // it stays off while the checklist is not the one for the permit as it is now
+  $("#ck-next").disabled = !st.ck || st.ckLoading || !!st.ckError || st.ckBasis !== ckBasis();
   $("#ck-need").textContent = !st.ck ? "" : st.ckLoading ? "체크리스트를 지금 내용으로 다시 확인하는 중입니다." : st.ckError ? "체크리스트를 다시 확인하지 못했습니다. 다시 열어 주세요." : st.ckBasis !== ckBasis() ? "허가서나 답이 바뀌었습니다. 이 단계를 다시 열면 바뀐 내용으로 다시 채웁니다." : c.left ? `확인할 위험요인 ${c.left}개가 남았습니다. 모두 확인하면 제출 확인으로 넘어갈 수 있습니다.` : "";
   $("#ck-bar").innerHTML = `<span class="ck-prog"><b>${c.all - c.left}</b> / ${c.all} 확인 완료</span>`
     + `<span class="ck-n yes">해당 ${c.yes}</span><span class="ck-n no">해당 없음 ${c.no}</span><span class="ck-n check">안전팀 확인 ${c.check}</span>`
-    + `<span class="progress ck-progress" aria-hidden="true"><b style="width:${c.all ? (c.all - c.left) / c.all * 100 : 0}%"></b></span>`;
+    + `<span class="progress ck-progress" aria-hidden="true"><b style="width:${c.all ? (c.all - c.left) / c.all * 100 : 0}%"></b></span>`
+    + (!st.ck || !c.all ? "" : st.ckLoading ? `<span class="ck-left">지금 내용으로 다시 확인하는 중…</span>`
+      : st.ckError || st.ckBasis !== ckBasis() ? `<span class="ck-left"><b>체크리스트를 지금 내용으로 다시 확인해야 합니다</b><button type="button" class="btn small" data-ckreload>다시 불러오기</button></span>`
+      : c.left ? `<span class="ck-left"><b>미완료 ${c.left}개</b>`
+      + `<button type="button" class="btn small" data-cknext>다음 미완료로 이동</button>`
+      + `<button type="button" class="btn small ghost" data-cklist aria-expanded="${!!st.ckListOpen}">미완료 목록</button></span>`
+      + (st.ckListOpen ? `<ol class="ck-left-list">${ckPending().map((e, i) => `<li><button type="button" class="linkbtn" data-ckgo="${i}">`
+        + `${st.ck.permits.length > 1 ? `${esc(e.P.permit_no.slice(-4))} · ` : ""}${esc(e.it.title)}</button><small>${esc(e.why.map((w) => CK_WHY[w]).join(" · "))}</small></li>`).join("")}</ol>` : "")
+      : `<span class="ck-left done">모든 항목을 확인했습니다</span>`);
 }
+$("#ck-bar").addEventListener("click", (e) => {
+  if (e.target.closest("[data-cknext]")) { ckGoNext(); return; }
+  if (e.target.closest("[data-ckreload]")) { openChecklist(); return; }
+  if (e.target.closest("[data-cklist]")) { st.ckListOpen = !st.ckListOpen; renderCkBar(); $("#ck-bar [data-cklist]")?.focus(); return; }
+  const g = e.target.closest("[data-ckgo]");
+  if (g) { const e2 = ckPending()[+g.dataset.ckgo]; st.ckListOpen = false; ckGo(e2); }
+});
 function renderChecklist() {
   const box = $("#ck-list"), had = box.contains(document.activeElement) ? document.activeElement.dataset.ckFocus : null;
   box.innerHTML = "";
@@ -3303,15 +3399,19 @@ function renderChecklist() {
 function ckItem(P, it, no) {
   const key = `${P.permit_no}|${it.id}`;
   const li = el("li", `ck-item s-${it.state}${it.touched ? " touched" : ""}`);
-  li.id = `ck-${it.id}`;
+  li.dataset.ckLi = key;
   const head = el("div", "ck-head");
   const tt = el("b", "ck-title"); tt.append(el("span", "ck-no", String(no).padStart(2, "0")), it.title); head.appendChild(tt);
   if (it.id.startsWith("A:")) tt.appendChild(el("span", "ai-chip", "AI 제안 · 채택함"));
   head.appendChild(el("span", "ck-done", !it.touched ? "확인 전" : ckNeedCtl(it) ? "조치 확인 전" : "확인 완료"));
   li.appendChild(head);
   if (it.why) li.appendChild(el("p", "ck-why", it.why));
+  if (st.ckAttn === key) {
+    const e = ckPending().find((x) => x.key === key);
+    if (e) { li.classList.add("ck-attn"); const w = el("p", "ck-attn-why", e.why.map((x) => CK_WHY[x]).join(" · ")); w.setAttribute("role", "status"); li.appendChild(w); }
+  }
   if (!String(it.id).startsWith("A:") && !String(it.id).startsWith("U")) li.appendChild(xWhyBtn(() => ({ kind: "checklist", permit: P.permit_no, item: it.id,
-    now: { state: it.state, touched: !!it.touched, on: (it.controls || []).filter((k) => k.on).map((k) => k.id) } })));
+    now: { state: it.state, touched: !!it.touched, on: (it.controls || []).filter((k) => k.on).map((k) => k.id) } }), "위험한 이유 보기"));
   if (it.changed && (!it.touched || ckNeedCtl(it))) li.appendChild(el("p", "ck-changed", it.changed));
   const mk = ckMark(it);
   if (mk) {
@@ -3322,9 +3422,9 @@ function ckItem(P, it, no) {
   }
   if (it.recheck) {
     const row = el("div", "ck-memo");
-    const del = el("button", "btn small ghost", "이 항목 빼기"); del.type = "button";
+    const del = el("button", "btn small ghost", "이 항목 빼기"); del.type = "button"; del.dataset.ckFocus = `${key}|del`;
     del.onclick = () => { P.items = P.items.filter((x) => x !== it); ckChanged(); renderChecklist(); };
-    const mine = el("button", "btn small", "반장 항목으로 유지"); mine.type = "button";
+    const mine = el("button", "btn small", "반장 항목으로 유지"); mine.type = "button"; mine.dataset.ckFocus = `${key}|mine`;
     mine.onclick = () => {
       const i = P.items.indexOf(it); if (i < 0) return;
       P.items[i] = { id: `U${Date.now().toString(36)}`, title: it.title, why: "AI 추가 후보였던 항목 · 작업반장이 유지", common: false, state: it.state === "no" ? "yes" : it.state,
@@ -3523,7 +3623,7 @@ document.addEventListener("click", (e) => {
   const { spec, kind, origin, ...item } = x; void spec; void kind; void origin;
   P.items.push({ ...item, controls: item.controls.map((k) => ({ ...k })), touched: false });
   ckChanged(); renderChecklist();
-  document.getElementById(`ck-${x.id}`)?.scrollIntoView({ block: "center" });
+  ckLi(`${P.permit_no}|${x.id}`)?.scrollIntoView({ block: "center" });
 });
 const CK_MAX = 40;                                    // the server's limit per permit (server/checklist.py MAX_ITEMS)
 function ckAdd(P) {
@@ -3535,7 +3635,7 @@ function ckAdd(P) {
   P.items.push({ id, title: t.trim().slice(0, 80), why: "작업반장이 직접 추가", common: false, state: "yes", auto: null, touched: true, reasons: [],
     controls: c.trim() ? [{ id: "u1", text: c.trim().slice(0, 120), on: true }] : [], memo: "" });
   ckChanged(); renderChecklist();
-  document.getElementById(`ck-${id}`)?.scrollIntoView({ block: "center" });
+  ckLi(`${P.permit_no}|${id}`)?.scrollIntoView({ block: "center" });
 }
 $("#ck-pdf").onclick = async () => {
   const w = window.open("", "_blank");
@@ -3549,7 +3649,13 @@ $("#ck-pdf").onclick = async () => {
   } catch (e) { if (w) w.close(); toast(`PDF를 만들지 못했습니다: ${e.message}`); }
 };
 $("#ck-back").onclick = () => goStep(2);
-$("#ck-next").onclick = () => goStep(5);
+$("#ck-next").onclick = () => {
+  if (ckDone()) { goStep(5); return; }
+  const list = ckPending();
+  if (!list.length) { renderCkBar(); return; }
+  toast(`아직 확인하지 않은 항목이 ${list.length}개 있습니다. 첫 미완료 항목으로 이동합니다.`);
+  ckGo(list[0]);
+};
 
 // ---------------------------------------------------------------- dialogs: 보기 설정, 도움말, 의견 보내기
 let lastFocus = null;
@@ -4676,8 +4782,12 @@ async function sfReview(box) {
 // other's); a fact several pairs need is asked once. croScan sends nothing: the manager copies the 문안 and marks it
 const HQ_CLS = { "미전달": "no", "전달함": "sent", "응답 받음": "done" };
 const HQ_KO = { "미전달": "미전달", "전달함": "답변 대기", "응답 받음": "답변 받음" };     // §19.1: 미전달/답변 대기/답변 받음
+// the 확인 필요 line above is the first reason's; the other reasons still open (E 1) are listed here, as the rules wrote
+// them (QA #108: no new summary is made)
+const sfHoldAsks = (p) => [...new Set(p.reasons.filter((r) => r.E === 1).map((r) => r.ask).filter((a) => a && a !== p.reasons[0].ask))];
 const sfHoldInline = (p) => !p.reasons.some((r) => r.E === 1) ? "" : `<div class="sf-hq sf-hq-inline" data-hqpair="${esc(p.key)}">`
-  + `<p class="sf-hq-h"><b>담당별 확인</b> <span class="hint">규칙 확인사항을 각 반장이 답할 수 있는 자기 작업 질문으로 나눴습니다</span></p>`
+  + `<p class="sf-hq-h"><b>담당별 확인</b> <span class="hint">위 「확인 필요」를 각 반장이 답할 수 있는 자기 작업 질문으로 나눴습니다</span></p>`
+  + (sfHoldAsks(p).length ? `<details class="sf-hq-more"><summary>다른 확인사항 ${sfHoldAsks(p).length}개</summary><ul>${sfHoldAsks(p).map((a) => `<li>${esc(a)}</li>`).join("")}</ul></details>` : "")
   + `<div class="sf-hq-body"><p class="hint">정리하는 중…</p></div></div>`;
 function sfHoldAuto() { document.querySelectorAll(".sf-hq-inline:not([data-loaded])").forEach((b) => { b.dataset.loaded = "1"; sfHoldLoad(b); }); }
 const sfHoldBox = (p) => !p.reasons.some((r) => r.E === 1) ? "" : `<details class="sf-pc-d sf-hq" data-hqpair="${esc(p.key)}"><summary>담당별 확인 문안</summary>`
@@ -4691,19 +4801,42 @@ async function sfHoldLoad(box) {
     if (body.isConnected) sfHoldRender(box, j);
   } catch (e) { if (body.isConnected) body.innerHTML = `<p class="hint">문안을 만들지 못했습니다: ${esc(e.message)}</p>`; }
 }
+// QA #108: what to ask now first — each foreman's card holds only this pair's questions, each copied on its own; the
+// 전달·답변 record and all of his questions are folded (nothing removed: the same keys and states as before)
 function sfHoldRender(box, j) {
   const key = box.dataset.hqpair, docs = j.docs.filter((d) => d.questions.some((q) => q.pairs.includes(key)));
-  const btn = (q, s, t) => `<button type="button" class="linkbtn" data-hqmark="${esc(q.key)}" data-hqstate="${esc(s)}">${t}</button>`;
+  sf.hqData = j;
+  const open = (sf.hqOpen = sf.hqOpen || new Set()), op = (id) => (open.has(id) ? " open" : "");
+  const btn = (q, s, t) => `<button type="button" class="btn small ghost" data-hqmark="${esc(q.key)}" data-hqstate="${esc(s)}">${t}</button>`;
+  const badge = (q) => `<span class="sf-hq-st ${HQ_CLS[q.state] || "no"}">${esc(HQ_KO[q.state] || q.state)}</span>`;
+  const marks = (q) => (q.state === "미전달" ? btn(q, "전달함", "전달함 표시")
+    : q.state === "전달함" ? `${btn(q, "응답 받음", "답변 받음 표시")}${btn(q, "미전달", "되돌리기")}` : btn(q, "전달함", "되돌리기"));
+  const record = (q) => `<li><span class="sf-hq-q">${esc(q.text)}</span><span class="sf-hq-act">${badge(q)}`
+    + (q.flag ? `<span class="sf-hq-flag">${esc(q.flag)}</span>` : "") + marks(q) + `</span>`
+    + ((q.history || []).length ? `<small class="hint">작업 내용이 바뀌기 전: ${q.history.map((h) => esc(h.state + (h.flag ? ` · ${h.flag}` : ""))).join(", ")}</small>` : "") + `</li>`;
+  const ask = (d, q) => `<div class="sf-hq-ask"><p>${esc(q.text)}</p><span class="sf-hq-copy"><button type="button" class="btn small" data-hqq="${esc(q.key)}" data-hqdoc="${esc(String(d.doc ?? d.no))}">질문 복사</button>`
+    + `<small class="hint">복사 후 메신저로 전달</small></span></div>`;
   box.querySelector(".sf-hq-body").innerHTML = !docs.length ? `<p class="hint">이 쌍에서 반장에게 물을 것이 없습니다.</p>`
-    : `<p class="hint">각 반장에게 자기 작업만 묻습니다. croScan은 보내지 않습니다. 복사해 기존 연락 방법으로 보낸 뒤 「전달함 표시」를 누르세요(복사만으로는 상태가 바뀌지 않습니다). 「답변 받음」은 해석 확인이 아닙니다. 여러 쌍에 같은 질문은 한 번만 나옵니다.</p>`
-    + docs.map((d) => `<div class="sf-hq-doc"><p class="sf-hq-row"><b>${esc(d.no)} ${esc(d.who || d.title)}</b> → ${esc(d.questions.filter((q) => q.pairs.includes(key)).map((q) => q.text).join(" · "))}`
-      + ` → <span class="sf-hq-st ${HQ_CLS[sfHqWorst(d)] || "no"}">${esc(HQ_KO[sfHqWorst(d)] || sfHqWorst(d))}</span></p><ol>`
-      + d.questions.map((q) => `<li>${esc(q.text)} <span class="sf-hq-st ${HQ_CLS[q.state] || "no"}">${esc(HQ_KO[q.state] || q.state)}</span> `
-        + (q.flag ? `<span class="sf-hq-flag">${esc(q.flag)}</span> ` : "")
-        + ((q.history || []).length ? `<small class="hint">작업 내용이 바뀌기 전: ${q.history.map((h) => esc(h.state + (h.flag ? ` · ${h.flag}` : ""))).join(", ")}</small> ` : "")
-        + (q.state === "미전달" ? btn(q, "전달함", "전달함 표시") : q.state === "전달함" ? `${btn(q, "응답 받음", "답변 받음 표시")} · ${btn(q, "미전달", "되돌리기")}` : btn(q, "전달함", "되돌리기")) + `</li>`).join("")
-      + `</ol><textarea class="sf-hq-msg" rows="5" readonly aria-label="${esc(d.no)} 반장에게 보낼 전달문">${esc(d.message)}</textarea>`
-      + `<button type="button" class="btn small" data-hqcopy>전달문 복사</button></div>`).join("");
+    : `<p class="sf-hq-lead">${docs.length > 1 ? "두 반장에게 각각 물어보세요" : "반장에게 물어보세요"}</p>`
+    + docs.map((d) => {
+      const seen = new Set(), cur = d.questions.filter((q) => q.pairs.includes(key) && !seen.has(q.key) && seen.add(q.key));
+      const id = `${key}|${d.no}`;
+      return `<div class="sf-hq-doc"><p class="sf-hq-who"><b>${esc(d.no)}</b> ${esc(d.who || d.title || "")}${d.who && d.title ? ` <small class="hint">${esc(d.title)}</small>` : ""}</p>`
+        + ask(d, cur[0])
+        + (cur.length > 1 ? `<details class="sf-hq-more" data-hqopen="${esc(id)}|more"${op(`${id}|more`)}><summary>추가 질문 ${cur.length - 1}개</summary>${cur.slice(1).map((q) => ask(d, q)).join("")}</details>` : "")
+        + `<details class="sf-hq-log" data-hqopen="${esc(id)}|log"${op(`${id}|log`)}><summary>전달·답변 기록 보기 · ${esc(HQ_KO[sfHqWorst({ questions: cur })])}</summary>`
+        + `<ol>${cur.map(record).join("")}</ol><p class="hint">「답변 받음」은 받았다는 기록입니다. 위험이 풀렸다거나 작업 승인이라는 뜻이 아닙니다.</p></details>`
+        + (d.questions.length > cur.length || d.message ? `<details class="sf-hq-all" data-hqopen="${esc(id)}|all"${op(`${id}|all`)}><summary>이 반장의 전체 질문 보기 · ${d.questions.length}개 (다른 쌍 포함)</summary>`
+          + `<ol>${d.questions.map(record).join("")}</ol>`
+          + `<textarea class="sf-hq-msg" rows="5" readonly aria-label="${esc(d.no)} 반장에게 보낼 전체 요청문">${esc(d.message)}</textarea>`
+          + `<button type="button" class="btn small" data-hqcopy>전체 요청문 복사 (질문 ${d.questions.length}개)</button></details>` : "")
+        + `</div>`;
+    }).join("")
+    + `<p class="hint sf-hq-foot">croScan은 메시지를 보내지 않습니다. 복사해서 보낸 뒤 「전달·답변 기록 보기」에서 「전달함 표시」를 누르세요(복사만으로는 바뀌지 않습니다). 여러 쌍에 같은 질문은 한 번만 나옵니다.</p>`;
+}
+// the text one question is copied as: who it is for and the question as the server wrote it (nothing added)
+function sfHqText(q, d) {
+  return [`[작업 정보 확인 요청]`, `대상: ${d.no} ${d.title || d.who || ""}`.trimEnd(), q.text].join("\n");
 }
 // a foreman's row state: the least advanced of his questions (미전달 before 답변 대기 before 답변 받음)
 const sfHqWorst = (d) => ["미전달", "전달함", "응답 받음"].find((s) => d.questions.some((q) => q.state === s)) || "미전달";
@@ -4813,8 +4946,8 @@ async function xWhy(btn, target) {
     if (out.isConnected) out.innerHTML = xFrame(j);
   } catch (e) { if (out.isConnected) out.innerHTML = `<p class="hint">설명을 만들지 못했습니다: ${esc(e.message)}</p>`; }
 }
-function xWhyBtn(target) {
-  const b = el("button", "linkbtn x-why", "왜?"); b.type = "button"; b.setAttribute("aria-expanded", "false");
+function xWhyBtn(target, label = "왜?") {
+  const b = el("button", "linkbtn x-why", label); b.type = "button"; b.setAttribute("aria-expanded", "false");
   b.onclick = (e) => { e.stopPropagation(); xWhy(b, target); };
   return b;
 }
@@ -4823,14 +4956,43 @@ document.addEventListener("click", (e) => {
   let t = null; try { t = JSON.parse(b.dataset.xwhy); } catch (err) { return; }
   xWhy(b, t);
 });
+// one question to the clipboard; 「✓ 복사됨」 only once it is really there, on that button only (QA #108)
+async function sfHqCopy(b) {
+  if (b.disabled) return;
+  const d = ((sf.hqData && sf.hqData.docs) || []).find((x) => String(x.doc ?? x.no) === b.dataset.hqdoc), q = d && d.questions.find((x) => x.key === b.dataset.hqq);
+  if (!q) { toast("질문을 다시 불러와 주세요"); return; }
+  const text = sfHqText(q, d), label = b.textContent;
+  b.disabled = true;
+  try {
+    if (!navigator.clipboard) throw new Error("no clipboard");
+    await navigator.clipboard.writeText(text);
+    b.textContent = "✓ 복사됨"; b.setAttribute("aria-live", "polite");
+    setTimeout(() => { if (b.isConnected) { b.textContent = label; b.disabled = false; } }, 2000);
+  } catch (e) {
+    b.disabled = false;
+    const box = b.closest(".sf-hq-ask"); box.querySelector(".sf-hq-hand")?.remove();
+    const ta = el("textarea", "sf-hq-msg sf-hq-hand"); ta.readOnly = true; ta.rows = 3; ta.value = text; ta.setAttribute("aria-label", "직접 복사할 요청문");
+    box.appendChild(ta); ta.focus(); ta.select();
+    toast("복사하지 못했습니다. 요청문을 직접 복사해 주세요");
+  }
+}
+document.addEventListener("toggle", (e) => {
+  const d = e.target; if (!d.dataset || !d.dataset.hqopen) return;
+  const s = (sf.hqOpen = sf.hqOpen || new Set()); d.open ? s.add(d.dataset.hqopen) : s.delete(d.dataset.hqopen);
+}, true);
 async function sfHoldMark(b) {
   const box = b.closest(".sf-hq");
+  if (b.disabled) return;
+  // the same question has a button in its record and in 「전체 질문」: both wait for the save (QA #108, Codex)
+  const same = [...(box || document).querySelectorAll("[data-hqmark]")].filter((x) => x.dataset.hqmark === b.dataset.hqmark);
+  same.forEach((x) => { x.disabled = true; });
   try {
     const r = await fetch("/api/safety/hold-questions/mark", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ key: b.dataset.hqmark, state: b.dataset.hqstate }) });
     const j = await r.json().catch(() => ({}));
-    if (!r.ok) { toast(typeof j.detail === "string" ? j.detail : `서버 오류 ${r.status}`); return; }
+    if (!r.ok) { toast(typeof j.detail === "string" ? j.detail : `서버 오류 ${r.status}`); if (box && box.isConnected) sfHoldLoad(box); return; }
     if (box && box.isConnected) sfHoldLoad(box);
   } catch (e) { toast(`표시하지 못했습니다: ${e.message}`); }
+  finally { same.forEach((x) => { if (x.isConnected) x.disabled = false; }); }
 }
 function sfPairBody(p) {
   const R = p.reasons[0], C = sfDoc(R.cause), X = sfDoc(R.exposed), role = sfRoles(R);
@@ -5157,7 +5319,7 @@ function sheetFor(d) {
     return { id: k, title: `${pairLabel(p)} · ${PRI[b.priority][0]} · 상대: ${sfNo(other)} ${other.title}`,
       rows: [[`${k}.do`, "우리 반이 할 일", mine, 1], [`${k}.start`, "착수조건", t.start + (t.handoff ? ` / 인계: ${t.handoff}` : "")],
         [`${k}.other`, "상대 작업", `${sfNo(other)} · ${other.type === "permit" ? other.dept : other.company} · ${sfWhere(other)} · ${sfTimes(other)}`],
-        [`${k}.mine`, "우리 작업 일정", sfTimes(d)], [`${k}.risk`, "위험", t.risk], [`${k}.stop`, "중지·해제 조건", t.stop]]
+        [`${k}.mine`, "우리 작업 일정", sfTimes(d)], [`${k}.risk`, "예상 사고 경로", t.risk], [`${k}.stop`, "중지·해제 조건", t.stop]]
         .concat(t.keep ? [[`${k}.keep`, "조치 유지·효과 확인", t.keep]] : [])
         .concat([[`${k}.contact`, "상대 반장·연락처", myC], [`${k}.ref`, "대응 서류(상대 쪽)", oi ? oi.no : `${sheetNo(other, nextRev(other))} (발행 예정)`]]) };
   });
@@ -5696,6 +5858,8 @@ $("#s-safety").addEventListener("click", (e) => {
   const rv = e.target.closest("[data-rvgo]"); if (rv) { sfReview(rv.closest(".sf-ai-review")); return; }
   const hq = e.target.closest("[data-hqgo]"); if (hq) { sfHoldLoad(hq.closest(".sf-hq")); return; }
   const hm = e.target.closest("[data-hqmark]"); if (hm) { sfHoldMark(hm); return; }
+  const hq1 = e.target.closest("[data-hqq]");
+  if (hq1) { sfHqCopy(hq1); return; }
   const hc = e.target.closest("[data-hqcopy]");
   if (hc) {                                                     // copied here only: sending is the yard's own contact
     const ta = hc.previousElementSibling;

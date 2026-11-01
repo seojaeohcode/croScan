@@ -700,7 +700,12 @@ def effective(fields, answers):
                 dates = days_of()
                 if item == "T7":                     # a correction of the row asked about (t7_target): its day only
                     dates = [P["t7"][1]] if P["t7"] else dates
-                w = _parse_windows(a.get("read") or a.get("value", ""), dates, _force(get, item), amb)
+                said = a.get("read") or a.get("value", "")
+                w = _parse_windows(said, dates, _force(get, item), amb)
+                if item in ("T1", "T6") and choice != "stage":
+                    w = drop_restated(w, P["windows_req"], said, dates)
+                    if w and not amb:
+                        P.setdefault("said_windows", {})[item] = w      # what the 반영본 writes as the answer's time
                 if amb:
                     P["amb"] += [dict(x, src=item) for x in amb]
                 elif w and item == "T1" and P["kind"] == "lifting":
@@ -892,6 +897,28 @@ def _row_of(a):
         if m:
             return m.group(1)
     return "1"
+
+
+REQ_SAID = re.compile(r"신청|허가\s*(?:받은|낸)?\s*시간|하루\s*허가|서류(?:상|에)|적힌|적은")
+
+
+def drop_restated(w, req, text="", dates=()):
+    """An answer that gives the actual time often first says what the requested one is ('08:00~16:59는 하루 허가 신청
+    시간입니다. 실제 절단·용접은 09:00~11:30, 13:00~15:00', QA #106). A window is left out only when the answer says it
+    in a part that describes the request (신청·허가 시간·서류상, not 실제) and it equals the day's requested window,
+    and the answer gives other windows for that day. A time that only happens to equal the request is kept
+    ('08:00~16:59, 17:30~18:30': both are work, Codex final #1)."""
+    told = {}
+    for seg in re.split(r"(?<=[.!?。])\s+|\n|(?:이고|이며|인데|이지만|지만)\s", text or ""):
+        if REQ_SAID.search(seg) and "실제" not in seg:
+            for d, ws in _parse_windows(seg, list(dates), {}, []).items():
+                told.setdefault(d, set()).update(tuple(x) for x in ws)
+    out = {}
+    for d, ws in (w or {}).items():
+        drop = told.get(d, set()) & {tuple(x) for x in req.get(d, [])}
+        keep = [x for x in ws if tuple(x) not in drop]
+        out[d] = keep or ws
+    return out
 
 
 def _union(ws):

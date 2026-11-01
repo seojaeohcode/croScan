@@ -625,5 +625,37 @@ from server import holdq  # noqa: E402
 expect({"height", "equipment", "materials", "hazards"} <= set(holdq.FP_KEYS) and "rev" not in holdq.FP_KEYS,
        "#9 보류 질문 지문: 높이·장비·물질·유해위험은 넣고 개정 번호는 뺌")
 
+
+print("QA #106: 신청 시간을 다시 말하고 실제 시간을 준 답 · 허가서와 다른 블록이 든 답")
+f106 = F("0702", from_1="08:00", to_1="16:59")
+d106 = f106["p1.date_1"]["value"]
+t1 = Q(S(f106), "T1")
+said = "08:00~16:59는 하루 허가 신청 시간입니다. 실제 절단·용접은 09:00~11:30, 13:00~15:00에 하고, 나머지는 자재 준비와 대기 시간입니다."
+s106 = S(f106, [A(t1, "partial", said)]) if t1 else None
+expect(t1 and win(s106, d106) == ["09:00~11:30", "13:00~15:00"], f"신청 시간(08:00~16:59)을 다시 말한 구간은 실제 작업시간이 아님 ({s106 and win(s106, d106)})")
+expect(t1 and win(S(f106, [A(t1, "partial", "08:00~16:59")]), d106) == ["08:00~16:59"], "신청 시간만 답하면 그대로")
+pid106 = f106["p1.permit_no"]["value"]
+r106 = reflect.plan(f106, [A(t1, "partial", said)]).get(pid106, {}) if t1 else {}
+jd = next((x["text"] for x in r106.get("fills", []) if x["base"] == "job_detail"), "")
+expect(jd.startswith("실제 작업 예정 09:00~11:30, 13:00~15:00") and said not in jd, f"반영본 상세 줄은 읽은 실제 시간만 ({jd[:60]})")
+expect(any(said in t for _, t in r106.get("extra", [])), "긴 답 원문은 별지에 그대로")
+l6 = {"qid": f"L6:{pid106}", "choice": "text", "value": "3BAY 12~14칼럼의 E99P 블록 내부와 출입구, 작업 지점 바로 아래 통로를 출입 통제합니다.", "q": {"permit_no": pid106}}
+r6 = reflect.plan(f106, [l6]).get(pid106, {})
+expect(not any(x["base"] == "location_detail" for x in r6.get("fills", [])) and any("E99P" in t and "작업 지점 바로 아래" in t for _, t in r6.get("pending", [])),
+       "다른 블록이 든 통제 범위 답은 쉼표에서 잘라 뒷부분만 쓰지 않고 전체를 확인 필요로")
+expect(t1 and win(S(f106, [A(t1, "partial", "08:00~16:59, 17:30~18:30")]), d106) == ["08:00~16:59", "17:30~18:30"],
+       "신청 시간과 숫자만 같은 실제 시간은 지우지 않음 (Codex final #1)")
+expect(augment.drop_restated({d106: [(480, 1019), (540, 660)]}, {d106: [(480, 1019)]}, "08:00~16:59는 신청 시간이고 실제는 09:00~11:00", [d106])
+       == {d106: [(540, 660)]}, "「~이고」로 이어진 신청 시간 설명도 뺌")
+if t1:
+    r2 = reflect.plan(f106, [A(t1, "partial", "09:00~10:00, 2시~4시에 절단 작업합니다. 나머지는 자재 준비와 대기입니다.")]).get(pid106, {})
+    jd2 = next((x["text"] for x in r2.get("fills", []) if x["base"] == "job_detail"), "")
+    expect("09:00~10:00" in jd2 and "2시~4시" in jd2, f"오전·오후가 확인되지 않은 시간은 일부만 요약하지 않고 답 그대로 ({jd2[:50]})")
+    nd = augment.summary(f106, [A(t1, "partial", "다음 날 00:00~02:00에 절단 작업합니다. 그 전에는 자재 준비와 대기입니다.")])["effective"][0]
+    r3 = reflect.plan(f106, [A(t1, "partial", "다음 날 00:00~02:00에 절단 작업합니다. 그 전에는 자재 준비와 대기입니다.")]).get(pid106, {})
+    jd3 = next((x["text"] for x in r3.get("fills", []) if x["base"] == "job_detail"), "")
+    nxt = [d for d in nd["windows"] if d != d106]
+    expect(not nxt or (nxt[0][5:7] + "/" + nxt[0][8:]) in jd3, f"다른 날의 실제 시간은 날짜를 붙여 씀 ({jd3[:50]} / {list(nd['windows'])})")
+
 print(f"\n{ok}/{ok + bad}")
 sys.exit(1 if bad else 0)

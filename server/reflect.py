@@ -69,6 +69,21 @@ def _base(item):
 
 # ---------------------------------------------------------------- what each answer means (item, choice) -> facts
 # a fact: ("field", purpose, text) to put in a field, ("extra", label, text) for the 별지, ("pending", label, text) to check
+def _actual(head, v, P, item):
+    """The actual / stage time on the form: the times augment.effective read from this answer (said_windows: the 오전·
+    오후 and date check answers applied, the requested window said again left out), the day written unless the permit
+    has that one day only; a long answer that also explains is kept word for word on the 별지 (QA #106). An answer
+    whose times were not read, or are still unclear, is written as said (Codex final #2·#3)."""
+    got = (P.get("said_windows") or {}).get(item)
+    rest = re.sub(r"\d{1,2}\s*[:시]\s*\d{0,2}\s*분?|[~\-–,./\s]|오전|오후|부터|까지|에|는|은|및|그리고", "", v)
+    if not got or len(rest) <= 6:
+        return [("field", "job_detail", f"{head} {v}".strip())]
+    days = set(A._windows(P["p"]) if P.get("p") else ())
+    bare = len(days) == 1 and set(got) == days
+    when = ", ".join(f"{'' if bare else d[5:7] + '/' + d[8:] + ' '}{A.hm(x)}~{A.hm(y)}" for d, ws in sorted(got.items()) for x, y in ws)
+    return [("field", "job_detail", f"{head} {when}"), ("extra", f"{head.replace(' 예정', '')}시간(신청자 원문)", v)]
+
+
 def _facts(a, P):
     # a long answer that also answered other questions (QA #39): its own part ('read'), the rest went to those questions
     item, ch, v = _base(a["qid"].split(":")[0]), a.get("choice") or "", _clean(a.get("read") or a.get("value"))
@@ -111,7 +126,7 @@ def _facts(a, P):
         ("T0", "value"): [("t0", None, v)],
         ("T1", "yes"): [],
         # times: the 신청 작업일시 stays; the actual / stage window is a supplement to the work, in 작업내용(상세)
-        ("T1", "partial"): [("field", "job_detail", f"{'블록 이동' if lift else '실제 작업'} 예정 {v}")],
+        ("T1", "partial"): _actual(f"{'블록 이동' if lift else '실제 작업'} 예정", v, P, "T1"),
         ("T2", "partial"): [("field", "job_detail", f"날짜별 작업 예정 {v}")],
         ("T5", "overnight"): [("field", "job_detail", "다음 날 아침 종료(신청자 확인)")],
         ("T5", "fix"): [("time_row", None, v)],
@@ -123,7 +138,7 @@ def _facts(a, P):
         ("T7", "both"): [("extra", "주간·야간 체크와 시간", f"둘 다 맞음(현장 분류) — {(a.get('q') or {}).get('original', '')}")],
         ("T6", "yes"): [],
         ("T6", "text"): [("field", "job_detail", f"작업시간에 포함: {v}")],
-        ("T6", "retime"): [("field", "job_detail", f"실제 작업 예정 {v}")],
+        ("T6", "retime"): _actual("실제 작업 예정", v, P, "T6"),
         ("T6", "stage"): [("field", "job_detail", f"전체 작업 예정 {v}")],
         ("A3", "time"): [("field", "job_detail", f"실제 작업 예정 {v}")],
         ("U1", "time"): [("field", "job_detail", f"실제 작업 예정 {v}")],
@@ -334,19 +349,22 @@ def plan(fields, answers, perms=None):
                     put("location_detail", rest, src)
 
         def checked(text, src, name):
-            """The part of an answer that does not contradict the permit; what does is listed to be checked."""
-            keep = []
+            """An answer that does not contradict the permit is written; one that does, in any of its parts, is listed to
+            be checked whole and not written: the rest of a sentence cut at a comma has lost what it was about (the
+            「통제 예정 범위 …E41P 블록 내부와 출입구, 작업 지점 바로 아래 통로를…」 of QA #106 kept only its tail)."""
+            why = []
             for cl in [c.strip() for c in re.split(r"[,，;]", text) if c.strip()]:
                 bad = [m.group(1) for m in NEG.finditer(cl) if m.group(1) in P["orig_text"]
                        and not re.search(re.escape(m.group(1)) + r"\s*(?:없|안\s*함|하지)", P["orig_text"])]
                 other = set(BLOCK.findall(cl)) - ids_perm if ids_perm else set()
                 if bad:
-                    pending.append((name, f"'{cl}' — 허가서에는 '{bad[0]}'이(가) 있음 → 어느 쪽이 맞는지 확인 필요 ({src})"))
+                    why.append(f"허가서에는 '{bad[0]}'이(가) 있음 → 어느 쪽이 맞는지 확인 필요 ({src})")
                 elif other:                              # another block than the permit's: held, not written
-                    pending.append((name, f"'{cl}' — 블록 번호가 허가서와 다름 (허가서 {', '.join(sorted(ids_perm))} / 답 {', '.join(sorted(other))}) → 확인 필요"))
-                else:
-                    keep.append(cl)
-            return ", ".join(keep)
+                    why.append(f"블록 번호가 허가서와 다름 (허가서 {', '.join(sorted(ids_perm))} / 답 {', '.join(sorted(other))}) → 확인 필요")
+            if why:
+                pending.append((name, f"'{text}' — {' · '.join(dict.fromkeys(why))}"))
+                return ""
+            return text
         # 2. answers, in the order given; a later answer about the same thing is added, never silently dropped
         for a in answers or []:
             qid = a["qid"]
