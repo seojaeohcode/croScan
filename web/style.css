@@ -970,6 +970,14 @@ textarea.fi { white-space: pre-wrap; word-break: keep-all; overflow-wrap: anywhe
 .sf-chain p { font-size: 1.5rem; line-height: 1.5; }
 .sf-pdocs2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
 .sf-pdoc { padding: 1.2rem 1.4rem; border: 1px solid var(--line); border-radius: var(--r-md); display: flex; flex-direction: column; gap: .4rem; align-items: flex-start; }
+/* the two cards side by side line up: the same inner spacing, the title row the same height of type, and the
+   「문서 열기」 buttons on one line at the bottom even when one title takes two lines */
+.sf-pdocs2 { align-items: stretch; }
+.sf-pdoc > p { margin: 0; line-height: 1.5; }
+.sf-pdoc > p:not(.sf-role):not(.hint) { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; }
+.sf-pdoc > p:not(.sf-role):not(.hint) b { flex: 1 1 14rem; min-width: 0; }
+.sf-pdoc > .btn { margin-top: auto; }
+.sf-pdoc > .hint { margin-bottom: .6rem; }                 /* room above the button when the cards are already even */
 .sf-pdoc .hint { font-size: 1.35rem; }
 .sf-role { font: 700 1.25rem var(--font); color: var(--p1); }
 .sf-pdoc + .sf-pdoc .sf-role { color: var(--p2); }
