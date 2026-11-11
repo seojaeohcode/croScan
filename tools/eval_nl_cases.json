@@ -3,7 +3,7 @@
   "name": "러그 가스절단 6개#0",
   "seed": "러그 가스절단 6개",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -45,7 +45,7 @@
   "name": "러그 가스절단 6개#1",
   "seed": "러그 가스절단 6개",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -87,7 +87,7 @@
   "name": "러그 가스절단 6개#2",
   "seed": "러그 가스절단 6개",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -129,7 +129,7 @@
   "name": "러그 가스절단 6개#3",
   "seed": "러그 가스절단 6개",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -171,7 +171,7 @@
   "name": "러그 가스절단 6개#4",
   "seed": "러그 가스절단 6개",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -213,7 +213,7 @@
   "name": "러그 그라인더 3개#0",
   "seed": "러그 그라인더 3개",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -255,7 +255,7 @@
   "name": "러그 그라인더 3개#1",
   "seed": "러그 그라인더 3개",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -297,7 +297,7 @@
   "name": "러그 그라인더 3개#2",
   "seed": "러그 그라인더 3개",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -339,7 +339,7 @@
   "name": "러그 그라인더 3개#3",
   "seed": "러그 그라인더 3개",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -381,7 +381,7 @@
   "name": "러그 그라인더 3개#4",
   "seed": "러그 그라인더 3개",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -423,7 +423,7 @@
   "name": "작업 위치#0",
   "seed": "작업 위치",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -465,7 +465,7 @@
   "name": "작업 위치#1",
   "seed": "작업 위치",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -507,7 +507,7 @@
   "name": "작업 위치#2",
   "seed": "작업 위치",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -549,7 +549,7 @@
   "name": "작업 위치#3",
   "seed": "작업 위치",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -591,7 +591,7 @@
   "name": "작업 위치#4",
   "seed": "작업 위치",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -633,7 +633,7 @@
   "name": "옆 팀 도장(다른 팀 전언)#0",
   "seed": "옆 팀 도장(다른 팀 전언)",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -674,7 +674,7 @@
   "name": "옆 팀 도장(다른 팀 전언)#1",
   "seed": "옆 팀 도장(다른 팀 전언)",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -715,7 +715,7 @@
   "name": "옆 팀 도장(다른 팀 전언)#2",
   "seed": "옆 팀 도장(다른 팀 전언)",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -756,7 +756,7 @@
   "name": "옆 팀 도장(다른 팀 전언)#3",
   "seed": "옆 팀 도장(다른 팀 전언)",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -797,7 +797,7 @@
   "name": "옆 팀 도장(다른 팀 전언)#4",
   "seed": "옆 팀 도장(다른 팀 전언)",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -838,7 +838,7 @@
   "name": "러그 없음(부정)#0",
   "seed": "러그 없음(부정)",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -871,7 +871,7 @@
   "name": "러그 없음(부정)#1",
   "seed": "러그 없음(부정)",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -904,7 +904,7 @@
   "name": "러그 없음(부정)#2",
   "seed": "러그 없음(부정)",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -937,7 +937,7 @@
   "name": "러그 없음(부정)#3",
   "seed": "러그 없음(부정)",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -970,7 +970,7 @@
   "name": "러그 없음(부정)#4",
   "seed": "러그 없음(부정)",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1003,7 +1003,7 @@
   "name": "러그 회수#0",
   "seed": "러그 회수",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1036,7 +1036,7 @@
   "name": "러그 회수#1",
   "seed": "러그 회수",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1069,7 +1069,7 @@
   "name": "러그 회수#2",
   "seed": "러그 회수",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1102,7 +1102,7 @@
   "name": "러그 회수#3",
   "seed": "러그 회수",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1135,7 +1135,7 @@
   "name": "러그 회수#4",
   "seed": "러그 회수",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1168,7 +1168,7 @@
   "name": "확실하지 않음(아마)#0",
   "seed": "확실하지 않음(아마)",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1201,7 +1201,7 @@
   "name": "확실하지 않음(아마)#1",
   "seed": "확실하지 않음(아마)",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1234,7 +1234,7 @@
   "name": "확실하지 않음(아마)#2",
   "seed": "확실하지 않음(아마)",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1267,7 +1267,7 @@
   "name": "확실하지 않음(아마)#3",
   "seed": "확실하지 않음(아마)",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1300,7 +1300,7 @@
   "name": "확실하지 않음(아마)#4",
   "seed": "확실하지 않음(아마)",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1333,7 +1333,7 @@
   "name": "높이(위치 답에 섞임)#0",
   "seed": "높이(위치 답에 섞임)",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "L1",
   "choice": "place",
   "texts": [
@@ -1366,7 +1366,7 @@
   "name": "높이(위치 답에 섞임)#1",
   "seed": "높이(위치 답에 섞임)",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "L1",
   "choice": "place",
   "texts": [
@@ -1399,7 +1399,7 @@
   "name": "높이(위치 답에 섞임)#2",
   "seed": "높이(위치 답에 섞임)",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "L1",
   "choice": "place",
   "texts": [
@@ -1432,7 +1432,7 @@
   "name": "높이(위치 답에 섞임)#3",
   "seed": "높이(위치 답에 섞임)",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "L1",
   "choice": "place",
   "texts": [
@@ -1465,7 +1465,7 @@
   "name": "높이(위치 답에 섞임)#4",
   "seed": "높이(위치 답에 섞임)",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "L1",
   "choice": "place",
   "texts": [
@@ -1498,7 +1498,7 @@
   "name": "정정이 섞인 문장#0",
   "seed": "정정이 섞인 문장",
   "variant": 0,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1538,7 +1538,7 @@
   "name": "정정이 섞인 문장#1",
   "seed": "정정이 섞인 문장",
   "variant": 1,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1578,7 +1578,7 @@
   "name": "정정이 섞인 문장#2",
   "seed": "정정이 섞인 문장",
   "variant": 2,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1618,7 +1618,7 @@
   "name": "정정이 섞인 문장#3",
   "seed": "정정이 섞인 문장",
   "variant": 3,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1658,7 +1658,7 @@
   "name": "정정이 섞인 문장#4",
   "seed": "정정이 섞인 문장",
   "variant": 4,
-  "pno": "0735",
+  "pno": "8175",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1698,7 +1698,7 @@
   "name": "위치(화기)#0",
   "seed": "위치(화기)",
   "variant": 0,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1731,7 +1731,7 @@
   "name": "위치(화기)#1",
   "seed": "위치(화기)",
   "variant": 1,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1764,7 +1764,7 @@
   "name": "위치(화기)#2",
   "seed": "위치(화기)",
   "variant": 2,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1797,7 +1797,7 @@
   "name": "위치(화기)#3",
   "seed": "위치(화기)",
   "variant": 3,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1830,7 +1830,7 @@
   "name": "위치(화기)#4",
   "seed": "위치(화기)",
   "variant": 4,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1863,7 +1863,7 @@
   "name": "우리 위치 + 다른 팀 전언#0",
   "seed": "우리 위치 + 다른 팀 전언",
   "variant": 0,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1911,7 +1911,7 @@
   "name": "우리 위치 + 다른 팀 전언#1",
   "seed": "우리 위치 + 다른 팀 전언",
   "variant": 1,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -1959,7 +1959,7 @@
   "name": "우리 위치 + 다른 팀 전언#2",
   "seed": "우리 위치 + 다른 팀 전언",
   "variant": 2,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2007,7 +2007,7 @@
   "name": "우리 위치 + 다른 팀 전언#3",
   "seed": "우리 위치 + 다른 팀 전언",
   "variant": 3,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2055,7 +2055,7 @@
   "name": "우리 위치 + 다른 팀 전언#4",
   "seed": "우리 위치 + 다른 팀 전언",
   "variant": 4,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2103,7 +2103,7 @@
   "name": "주입 같은 문장#0",
   "seed": "주입 같은 문장",
   "variant": 0,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2137,7 +2137,7 @@
   "name": "주입 같은 문장#1",
   "seed": "주입 같은 문장",
   "variant": 1,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2171,7 +2171,7 @@
   "name": "주입 같은 문장#2",
   "seed": "주입 같은 문장",
   "variant": 2,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2205,7 +2205,7 @@
   "name": "주입 같은 문장#3",
   "seed": "주입 같은 문장",
   "variant": 3,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2239,7 +2239,7 @@
   "name": "주입 같은 문장#4",
   "seed": "주입 같은 문장",
   "variant": 4,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2273,7 +2273,7 @@
   "name": "위치 모름#0",
   "seed": "위치 모름",
   "variant": 0,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2306,7 +2306,7 @@
   "name": "위치 모름#1",
   "seed": "위치 모름",
   "variant": 1,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2339,7 +2339,7 @@
   "name": "위치 모름#2",
   "seed": "위치 모름",
   "variant": 2,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2372,7 +2372,7 @@
   "name": "위치 모름#3",
   "seed": "위치 모름",
   "variant": 3,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2405,7 +2405,7 @@
   "name": "위치 모름#4",
   "seed": "위치 모름",
   "variant": 4,
-  "pno": "0731",
+  "pno": "6733",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2438,7 +2438,7 @@
   "name": "용접부 보수 3군데#0",
   "seed": "용접부 보수 3군데",
   "variant": 0,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2471,7 +2471,7 @@
   "name": "용접부 보수 3군데#1",
   "seed": "용접부 보수 3군데",
   "variant": 1,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2504,7 +2504,7 @@
   "name": "용접부 보수 3군데#2",
   "seed": "용접부 보수 3군데",
   "variant": 2,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2537,7 +2537,7 @@
   "name": "용접부 보수 3군데#3",
   "seed": "용접부 보수 3군데",
   "variant": 3,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2570,7 +2570,7 @@
   "name": "용접부 보수 3군데#4",
   "seed": "용접부 보수 3군데",
   "variant": 4,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2603,7 +2603,7 @@
   "name": "방법·가스#0",
   "seed": "방법·가스",
   "variant": 0,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2636,7 +2636,7 @@
   "name": "방법·가스#1",
   "seed": "방법·가스",
   "variant": 1,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2669,7 +2669,7 @@
   "name": "방법·가스#2",
   "seed": "방법·가스",
   "variant": 2,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2702,7 +2702,7 @@
   "name": "방법·가스#3",
   "seed": "방법·가스",
   "variant": 3,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2735,7 +2735,7 @@
   "name": "방법·가스#4",
   "seed": "방법·가스",
   "variant": 4,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2768,7 +2768,7 @@
   "name": "가스 안 씀(부정)#0",
   "seed": "가스 안 씀(부정)",
   "variant": 0,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2801,7 +2801,7 @@
   "name": "가스 안 씀(부정)#1",
   "seed": "가스 안 씀(부정)",
   "variant": 1,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2834,7 +2834,7 @@
   "name": "가스 안 씀(부정)#2",
   "seed": "가스 안 씀(부정)",
   "variant": 2,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2867,7 +2867,7 @@
   "name": "가스 안 씀(부정)#3",
   "seed": "가스 안 씀(부정)",
   "variant": 3,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2900,7 +2900,7 @@
   "name": "가스 안 씀(부정)#4",
   "seed": "가스 안 씀(부정)",
   "variant": 4,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2933,7 +2933,7 @@
   "name": "부재 교체 2개#0",
   "seed": "부재 교체 2개",
   "variant": 0,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2966,7 +2966,7 @@
   "name": "부재 교체 2개#1",
   "seed": "부재 교체 2개",
   "variant": 1,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -2999,7 +2999,7 @@
   "name": "부재 교체 2개#2",
   "seed": "부재 교체 2개",
   "variant": 2,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3032,7 +3032,7 @@
   "name": "부재 교체 2개#3",
   "seed": "부재 교체 2개",
   "variant": 3,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3065,7 +3065,7 @@
   "name": "부재 교체 2개#4",
   "seed": "부재 교체 2개",
   "variant": 4,
-  "pno": "0732",
+  "pno": "6988",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3098,7 +3098,7 @@
   "name": "어제 끝난 다른 팀 작업(완료)#0",
   "seed": "어제 끝난 다른 팀 작업(완료)",
   "variant": 0,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3131,7 +3131,7 @@
   "name": "어제 끝난 다른 팀 작업(완료)#1",
   "seed": "어제 끝난 다른 팀 작업(완료)",
   "variant": 1,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3164,7 +3164,7 @@
   "name": "어제 끝난 다른 팀 작업(완료)#2",
   "seed": "어제 끝난 다른 팀 작업(완료)",
   "variant": 2,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3197,7 +3197,7 @@
   "name": "어제 끝난 다른 팀 작업(완료)#3",
   "seed": "어제 끝난 다른 팀 작업(완료)",
   "variant": 3,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3230,7 +3230,7 @@
   "name": "어제 끝난 다른 팀 작업(완료)#4",
   "seed": "어제 끝난 다른 팀 작업(완료)",
   "variant": 4,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3263,7 +3263,7 @@
   "name": "위치(밀폐)#0",
   "seed": "위치(밀폐)",
   "variant": 0,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3304,7 +3304,7 @@
   "name": "위치(밀폐)#1",
   "seed": "위치(밀폐)",
   "variant": 1,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3345,7 +3345,7 @@
   "name": "위치(밀폐)#2",
   "seed": "위치(밀폐)",
   "variant": 2,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3386,7 +3386,7 @@
   "name": "위치(밀폐)#3",
   "seed": "위치(밀폐)",
   "variant": 3,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3427,7 +3427,7 @@
   "name": "위치(밀폐)#4",
   "seed": "위치(밀폐)",
   "variant": 4,
-  "pno": "0733",
+  "pno": "7618",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3468,7 +3468,7 @@
   "name": "아르곤 계통 차단#0",
   "seed": "아르곤 계통 차단",
   "variant": 0,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3501,7 +3501,7 @@
   "name": "아르곤 계통 차단#1",
   "seed": "아르곤 계통 차단",
   "variant": 1,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3534,7 +3534,7 @@
   "name": "아르곤 계통 차단#2",
   "seed": "아르곤 계통 차단",
   "variant": 2,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3567,7 +3567,7 @@
   "name": "아르곤 계통 차단#3",
   "seed": "아르곤 계통 차단",
   "variant": 3,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3600,7 +3600,7 @@
   "name": "아르곤 계통 차단#4",
   "seed": "아르곤 계통 차단",
   "variant": 4,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3633,7 +3633,7 @@
   "name": "연결 계통 없음(부정)#0",
   "seed": "연결 계통 없음(부정)",
   "variant": 0,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3666,7 +3666,7 @@
   "name": "연결 계통 없음(부정)#1",
   "seed": "연결 계통 없음(부정)",
   "variant": 1,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3699,7 +3699,7 @@
   "name": "연결 계통 없음(부정)#2",
   "seed": "연결 계통 없음(부정)",
   "variant": 2,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3732,7 +3732,7 @@
   "name": "연결 계통 없음(부정)#3",
   "seed": "연결 계통 없음(부정)",
   "variant": 3,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3765,7 +3765,7 @@
   "name": "연결 계통 없음(부정)#4",
   "seed": "연결 계통 없음(부정)",
   "variant": 4,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3798,7 +3798,7 @@
   "name": "다른 팀 퍼지(전언)#0",
   "seed": "다른 팀 퍼지(전언)",
   "variant": 0,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3831,7 +3831,7 @@
   "name": "다른 팀 퍼지(전언)#1",
   "seed": "다른 팀 퍼지(전언)",
   "variant": 1,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3864,7 +3864,7 @@
   "name": "다른 팀 퍼지(전언)#2",
   "seed": "다른 팀 퍼지(전언)",
   "variant": 2,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3897,7 +3897,7 @@
   "name": "다른 팀 퍼지(전언)#3",
   "seed": "다른 팀 퍼지(전언)",
   "variant": 3,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3930,7 +3930,7 @@
   "name": "다른 팀 퍼지(전언)#4",
   "seed": "다른 팀 퍼지(전언)",
   "variant": 4,
-  "pno": "0734",
+  "pno": "7835",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -3963,7 +3963,7 @@
   "name": "크레인 번호#0",
   "seed": "크레인 번호",
   "variant": 0,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4005,7 +4005,7 @@
   "name": "크레인 번호#1",
   "seed": "크레인 번호",
   "variant": 1,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4047,7 +4047,7 @@
   "name": "크레인 번호#2",
   "seed": "크레인 번호",
   "variant": 2,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4089,7 +4089,7 @@
   "name": "크레인 번호#3",
   "seed": "크레인 번호",
   "variant": 3,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4131,7 +4131,7 @@
   "name": "크레인 번호#4",
   "seed": "크레인 번호",
   "variant": 4,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4173,7 +4173,7 @@
   "name": "이동 경로#0",
   "seed": "이동 경로",
   "variant": 0,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4206,7 +4206,7 @@
   "name": "이동 경로#1",
   "seed": "이동 경로",
   "variant": 1,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4239,7 +4239,7 @@
   "name": "이동 경로#2",
   "seed": "이동 경로",
   "variant": 2,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4272,7 +4272,7 @@
   "name": "이동 경로#3",
   "seed": "이동 경로",
   "variant": 3,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4305,7 +4305,7 @@
   "name": "이동 경로#4",
   "seed": "이동 경로",
   "variant": 4,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4338,7 +4338,7 @@
   "name": "블록 위 작업 없음(부정)#0",
   "seed": "블록 위 작업 없음(부정)",
   "variant": 0,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4371,7 +4371,7 @@
   "name": "블록 위 작업 없음(부정)#1",
   "seed": "블록 위 작업 없음(부정)",
   "variant": 1,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4404,7 +4404,7 @@
   "name": "블록 위 작업 없음(부정)#2",
   "seed": "블록 위 작업 없음(부정)",
   "variant": 2,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4437,7 +4437,7 @@
   "name": "블록 위 작업 없음(부정)#3",
   "seed": "블록 위 작업 없음(부정)",
   "variant": 3,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4470,7 +4470,7 @@
   "name": "블록 위 작업 없음(부정)#4",
   "seed": "블록 위 작업 없음(부정)",
   "variant": 4,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4503,7 +4503,7 @@
   "name": "조건부 크레인#0",
   "seed": "조건부 크레인",
   "variant": 0,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4536,7 +4536,7 @@
   "name": "조건부 크레인#1",
   "seed": "조건부 크레인",
   "variant": 1,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4569,7 +4569,7 @@
   "name": "조건부 크레인#2",
   "seed": "조건부 크레인",
   "variant": 2,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4602,7 +4602,7 @@
   "name": "조건부 크레인#3",
   "seed": "조건부 크레인",
   "variant": 3,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4635,7 +4635,7 @@
   "name": "조건부 크레인#4",
   "seed": "조건부 크레인",
   "variant": 4,
-  "pno": "0737",
+  "pno": "8741",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4668,7 +4668,7 @@
   "name": "차단·복구 시각#0",
   "seed": "차단·복구 시각",
   "variant": 0,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4710,7 +4710,7 @@
   "name": "차단·복구 시각#1",
   "seed": "차단·복구 시각",
   "variant": 1,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4752,7 +4752,7 @@
   "name": "차단·복구 시각#2",
   "seed": "차단·복구 시각",
   "variant": 2,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4794,7 +4794,7 @@
   "name": "차단·복구 시각#3",
   "seed": "차단·복구 시각",
   "variant": 3,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4836,7 +4836,7 @@
   "name": "차단·복구 시각#4",
   "seed": "차단·복구 시각",
   "variant": 4,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4878,7 +4878,7 @@
   "name": "거더 상부에도 올라감#0",
   "seed": "거더 상부에도 올라감",
   "variant": 0,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4911,7 +4911,7 @@
   "name": "거더 상부에도 올라감#1",
   "seed": "거더 상부에도 올라감",
   "variant": 1,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4944,7 +4944,7 @@
   "name": "거더 상부에도 올라감#2",
   "seed": "거더 상부에도 올라감",
   "variant": 2,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -4977,7 +4977,7 @@
   "name": "거더 상부에도 올라감#3",
   "seed": "거더 상부에도 올라감",
   "variant": 3,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -5010,7 +5010,7 @@
   "name": "거더 상부에도 올라감#4",
   "seed": "거더 상부에도 올라감",
   "variant": 4,
-  "pno": "0739",
+  "pno": "9488",
   "item": "T1",
   "choice": "partial",
   "texts": [
@@ -5043,7 +5043,7 @@
   "name": "부품 교체 + 차단 시각#0",
   "seed": "부품 교체 + 차단 시각",
   "variant": 0,
-  "pno": "0740",
+  "pno": "9715",
   "item": "LO1",
   "choice": "module",
   "texts": [
@@ -5076,7 +5076,7 @@
   "name": "부품 교체 + 차단 시각#1",
   "seed": "부품 교체 + 차단 시각",
   "variant": 1,
-  "pno": "0740",
+  "pno": "9715",
   "item": "LO1",
   "choice": "module",
   "texts": [
@@ -5109,7 +5109,7 @@
   "name": "부품 교체 + 차단 시각#2",
   "seed": "부품 교체 + 차단 시각",
   "variant": 2,
-  "pno": "0740",
+  "pno": "9715",
   "item": "LO1",
   "choice": "module",
   "texts": [
@@ -5142,7 +5142,7 @@
   "name": "부품 교체 + 차단 시각#3",
   "seed": "부품 교체 + 차단 시각",
   "variant": 3,
-  "pno": "0740",
+  "pno": "9715",
   "item": "LO1",
   "choice": "module",
   "texts": [
@@ -5175,7 +5175,7 @@
   "name": "부품 교체 + 차단 시각#4",
   "seed": "부품 교체 + 차단 시각",
   "variant": 4,
-  "pno": "0740",
+  "pno": "9715",
   "item": "LO1",
   "choice": "module",
   "texts": [
@@ -5208,7 +5208,7 @@
   "name": "러그 4개 + 회수#0",
   "seed": "러그 4개 + 회수",
   "variant": 0,
-  "pno": "0736",
+  "pno": "8602",
   "item": "HT1",
   "choice": "gas",
   "texts": [
@@ -5241,7 +5241,7 @@
   "name": "러그 4개 + 회수#1",
   "seed": "러그 4개 + 회수",
   "variant": 1,
-  "pno": "0736",
+  "pno": "8602",
   "item": "HT1",
   "choice": "gas",
   "texts": [
@@ -5274,7 +5274,7 @@
   "name": "러그 4개 + 회수#2",
   "seed": "러그 4개 + 회수",
   "variant": 2,
-  "pno": "0736",
+  "pno": "8602",
   "item": "HT1",
   "choice": "gas",
   "texts": [
@@ -5307,7 +5307,7 @@
   "name": "러그 4개 + 회수#3",
   "seed": "러그 4개 + 회수",
   "variant": 3,
-  "pno": "0736",
+  "pno": "8602",
   "item": "HT1",
   "choice": "gas",
   "texts": [
@@ -5340,7 +5340,7 @@
   "name": "러그 4개 + 회수#4",
   "seed": "러그 4개 + 회수",
   "variant": 4,
-  "pno": "0736",
+  "pno": "8602",
   "item": "HT1",
   "choice": "gas",
   "texts": [

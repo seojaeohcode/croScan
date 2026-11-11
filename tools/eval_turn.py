@@ -32,7 +32,7 @@ CASES = [  # (name, [phrasing 1, phrasing 2], expected {item: choice}, must not 
 async def main():
     ps = load("permits.json")
     ps = ps if isinstance(ps, list) else ps.get("permits", [])
-    d = next(x for x in ps if permit_name(x).startswith("0735"))
+    d = next(x for x in ps if permit_name(x).startswith("8175"))
     doc = extract.build(DIR / "허가서" / permit_name(d), d["kind"])
     fields = doc["fields"]
     open_, _, _, _ = augment.questions(fields, [])

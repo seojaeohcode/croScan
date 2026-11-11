@@ -7,7 +7,7 @@
 <title>croScan 사전검토</title>
 <link rel="preload" href="/static/fonts/Pretendard-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/static/croscan_mark.png" type="image/png">
-<link rel="stylesheet" href="/static/style.css?v=20261102c">
+<link rel="stylesheet" href="/static/style.css?v=20261103a">
 <script>
   // saved view settings before the first paint (no flash of the wrong size or colours)
   try {
@@ -525,7 +525,7 @@
 <!-- 의견 보내기 (QA): 캡처·파일 + 설명, 화면 정보는 함께 저장 -->
 <div class="sheet-modal" id="qa" hidden>
   <form class="dialog" id="qa-form" role="dialog" aria-modal="true" aria-labelledby="qa-title">
-    <div class="dialog-head"><h2 id="qa-title">의견 보내기</h2><button type="button" class="btn icon" id="qa-close" aria-label="닫기"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <div class="dialog-head"><h2 id="qa-title">의견 보내기</h2><button type="button" class="btn small ghost qa-board-open" id="qa-board-open" aria-haspopup="dialog" aria-controls="qaboard"><svg class="ic" aria-hidden="true"><use href="#i-list"/></svg>QA 현황</button><button type="button" class="btn icon" id="qa-close" aria-label="닫기"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
     <label class="drop small" id="qa-drop" tabindex="0">
       <input id="qa-file" type="file" multiple class="sr">
       <span class="drop-main">캡처·파일을 <kbd>Ctrl</kbd>+<kbd>V</kbd>로 붙여넣거나, 끌어 놓거나, <u>눌러서 고르기</u></span>
@@ -541,6 +541,22 @@
   </form>
 </div>
 
+<!-- QA 현황 (팀이 함께 봄): 최신 번호부터 처리 결과(수용·부분 수용·거절·보류)와 메모, 그리고 팀 PC의 QA 세션이 지금 하는 일 -->
+<div class="sheet-modal" id="qaboard" hidden>
+  <div class="dialog qab" role="dialog" aria-modal="true" aria-labelledby="qab-title">
+    <div class="dialog-head"><h2 id="qab-title">QA 현황</h2><button type="button" class="btn icon" data-close aria-label="닫기"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+    <section class="qab-run" aria-labelledby="qab-run-h">
+      <h3 id="qab-run-h">QA 반영 세션</h3>
+      <div id="qab-run" role="status" aria-live="polite"></div>
+      <div class="qab-go"><button type="button" class="btn primary" id="qab-start"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg>QA 시작하기</button>
+        <p class="hint">팀 PC의 Claude 세션에 「쌓인 QA를 Codex와 검토해 합리적인 것만 반영」을 요청합니다. 한 번에 하나만 요청되고, croScan 서버가 코드를 바꾸지는 않습니다.</p></div>
+    </section>
+    <div class="qab-bar"><p class="qab-sum" id="qab-sum"></p>
+      <div class="seg" id="qab-filter" role="group" aria-label="보기"><button data-qf="all" aria-pressed="true">전체</button><button data-qf="open" aria-pressed="false">미처리</button><button data-qf="done" aria-pressed="false">처리됨</button></div></div>
+    <ol class="qab-list" id="qab-list" aria-label="QA 목록 (최신 번호부터)"></ol>
+  </div>
+</div>
+
 <!-- 제출 직전 확인: 실수하기 쉬운 핵심 정보만 (확인하고 제출 / 돌아가서 고치기) -->
 <div class="sheet-modal" id="presub" hidden>
   <div class="dialog presub" role="dialog" aria-modal="true" aria-labelledby="ps-title" aria-describedby="ps-lead">
@@ -552,6 +568,6 @@
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="/static/app.js?v=20261102c"></script>
+<script src="/static/app.js?v=20261103a"></script>
 </body>
 </html>

@@ -32,6 +32,11 @@ def main():
         check("게이트웨이: 안전관리자는 열림", c.get("/api/knowledge/map", headers={A.ROLE_HEADER: "manager"}).status_code == 200)
         check("게이트웨이: 사용자 정보 없는 반장은 401", c.get("/api/submissions/x/permit.pdf", headers={A.ROLE_HEADER: "foreman"}).status_code == 401)
         check("게이트웨이: 남의 제출 문서는 없음(404)", c.get("/api/submissions/x/permit.pdf", headers={A.ROLE_HEADER: "foreman", A.USER_HEADER: "kim"}).status_code == 404)
+        os.environ["QA_TOKEN"] = "qa-test-token"
+        check("게이트웨이: QA 현황은 로그인 없으면 401", c.get("/api/qa/board").status_code == 401)
+        check("게이트웨이: 팀 PC 도구는 QA 토큰으로 통과(현황)", c.get("/api/qa/board", headers={"X-QA-Token": "qa-test-token"}).status_code == 200)
+        check("게이트웨이: 틀린 QA 토큰은 통과 못 함", c.get("/api/qa/board", headers={"X-QA-Token": "zz"}).status_code == 401)
+        check("게이트웨이: QA 토큰은 QA 경로에만", c.get("/api/knowledge/map", headers={"X-QA-Token": "qa-test-token"}).status_code == 401)
         check("게이트웨이: 근거 지도는 반장에게 403", c.get("/api/knowledge/search?q=불티", headers={A.ROLE_HEADER: "foreman", A.USER_HEADER: "kim"}).status_code == 403)
         check("게이트웨이: 쌍 설명(explanations/query kind=pair)은 반장에게 403", c.post("/api/explanations/query", json={"target": {"kind": "pair", "key": "x"}}, headers={A.ROLE_HEADER: "foreman", A.USER_HEADER: "kim"}).status_code == 403)
         check("게이트웨이: 반장 검토 API는 로그인 필요", c.post("/api/review", json={"fields": {}}).status_code == 401)

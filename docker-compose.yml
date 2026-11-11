@@ -11,12 +11,13 @@ services:
     platform: linux/amd64
     image: croscan:latest
     ports:
-      - "${CROSCAN_PORT:-8765}:8765"
+      - "${CROSCAN_PORT:-127.0.0.1:8765}:8765"
     environment:
       PORT: "8765"
       LLM_URL: http://llm:8000/v1/chat/completions
       LLM_MODEL: Raon-1-mini-preview
       QA_TOKEN: ${QA_TOKEN:-}
+      CROSCAN_KEEP_SUBMISSIONS: ${CROSCAN_KEEP_SUBMISSIONS:-0}
       # demo (open, the screens say so) | proxy (behind the company sign-in gateway: role and user headers; publish the
       # port on 127.0.0.1 only then, e.g. CROSCAN_PORT=127.0.0.1:8765). Anything else stops the app at start.
       CROSCAN_AUTH: ${CROSCAN_AUTH:-demo}

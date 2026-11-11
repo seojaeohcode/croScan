@@ -23,7 +23,7 @@ TEXTS = ["13시부터 15시까지 해요. 러그는 가스절단으로 6개 떼�
 async def main():
     ps = load("permits.json")
     ps = ps if isinstance(ps, list) else ps.get("permits", [])
-    d = next(x for x in ps if permit_name(x).startswith("0735"))
+    d = next(x for x in ps if permit_name(x).startswith("8175"))
     fields = extract.build(DIR / "허가서" / permit_name(d), d["kind"])["fields"]
     open_, _, _, _ = augment.questions(fields, [])
     t1 = next(q for q in open_ if q["item"] == "T1")
@@ -50,7 +50,7 @@ async def warm_case():
     review session, so the reading takes the list stored by the warm-up (understand._WARM) as the API does."""
     ps = load("permits.json")
     ps = ps if isinstance(ps, list) else ps.get("permits", [])
-    d = next(x for x in ps if permit_name(x).startswith("0735"))
+    d = next(x for x in ps if permit_name(x).startswith("8175"))
     fields = extract.build(DIR / "허가서" / permit_name(d), d["kind"])["fields"]
     open_, _, _, _ = augment.questions(fields, [])
     t1 = next(q for q in open_ if q["item"] == "T1")

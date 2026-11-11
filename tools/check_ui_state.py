@@ -158,7 +158,7 @@ setTimeout(() => { out.afterBusy = [againN, st.waitClose]; console.log(JSON.stri
 A11 = r"""
 const item = (id, x = {}) => ({ id, title: id, state: "yes", auto: "yes", basis: "b1", basis_ctl: "c1", touched: true, ctl_touched: true,
   memo: "", controls: [{ id: "k1", text: "환기", on: true }, { id: "k2", text: "감시", on: false }], ...x });
-const mk = () => ({ permits: [{ permit_no: "0701", items: [item("F1"), item("F2", { state: "no" }), item("A:h1", { quote: "그라인더", basis: "b9" })] }] });
+const mk = () => ({ permits: [{ permit_no: "4012", items: [item("F1"), item("F2", { state: "no" }), item("A:h1", { quote: "그라인더", basis: "b9" })] }] });
 const out = {};
 const empty = { status: "none", items: [], kept: {}, marks: {} }, fail = { status: "fail", items: [], kept: {}, marks: {} };
 let ck = mk(), s0 = ckSig(ck), n = ckTakeAi(ck, empty);
@@ -186,40 +186,40 @@ console.log(JSON.stringify(out));
 # QA #99: 최종 서류 출력 opens only after the safety manager's 자료 확인 (문서 목록) of every part of the document
 OUT = r"""
 const DAY = "2026-10-29", sf = { seen: {}, data: { date: DAY }, subs: {} }, sfNo = (d) => d.type === "permit" ? d.id : "WP-" + d.id.slice(-2), out = {};
-const P = { type: "permit", id: "0734", permit_no: "PTW-0734", rev: "h1" }, W = { type: "plan", id: "WP-1029-03", rev: "w1" };
+const P = { type: "permit", id: "7835", permit_no: "PTW-7835", rev: "h1" }, W = { type: "plan", id: "WP-1029-03", rev: "w1" };
 const K = (id, day = DAY) => sfSeenKey(day, id);
 const gate = (d) => outGate(sfState(d)).ok;
 out.todo = gate(P);
-sf.seen[K("0734")] = { h: "h1", sub: null, day: DAY, parts: { permit: true, addendum: true } }; out.part = [gate(P), outGate(sfState(P)).label];
-sf.seen[K("0734")].parts.checklist = true; out.done = [gate(P), outGate(sfState(P)).label];
+sf.seen[K("7835")] = { h: "h1", sub: null, day: DAY, parts: { permit: true, addendum: true } }; out.part = [gate(P), outGate(sfState(P)).label];
+sf.seen[K("7835")].parts.checklist = true; out.done = [gate(P), outGate(sfState(P)).label];
 out.changed = gate({ ...P, rev: "h2" });                       // the document changed after the 확인: not until checked again
-sf.seen[K("0734")].parts.addendum = false; out.unchecked = gate(P); // taken back in 문서 목록: closed again
+sf.seen[K("7835")].parts.addendum = false; out.unchecked = gate(P); // taken back in 문서 목록: closed again
 sf.seen[K("WP-1029-03")] = { h: "w1", sub: null, day: DAY, parts: { plan: true } }; out.plan = gate(W);
 const nm = (fs) => fs.map((f) => [f.name, f.url, f.body ? f.body.kind : null]);
 out.permitNew = nm(outFiles(P, null));
-out.permitIssued = nm(outFiles(P, { no: "S-0734/R2", sheet: { title: "x" } }));
+out.permitIssued = nm(outFiles(P, { no: "S-7835/R2", sheet: { title: "x" } }));
 out.plan2 = nm(outFiles(W, null));
 // Codex QA2 #1: the output list is every document of the day; the 별지 part only for those in a pair (or still out)
-const X = { type: "permit", id: "0732", permit_no: "PTW-0732", rev: "x1" };
+const X = { type: "permit", id: "6988", permit_no: "PTW-6988", rev: "x1" };
 out.list = outDocs([W, P, X]).map((d) => d.id);
-out.postable = [...postIds(["0734", "WP-1029-03"], { "0730": [{ status: "void", taken: null }], "0729": [{ status: "void", taken: "10:00" }] })];
+out.postable = [...postIds(["7835", "WP-1029-03"], { "0730": [{ status: "void", taken: null }], "0729": [{ status: "void", taken: "10:00" }] })];
 // Codex QA2 #2: yesterday's 확인 of the same 7-day permit does not open today's output
 const all = { permit: true, addendum: true, checklist: true };
-sf.seen = { [K("0734", "2026-10-28")]: { h: "h1", sub: null, day: "2026-10-28", parts: all } };
+sf.seen = { [K("7835", "2026-10-28")]: { h: "h1", sub: null, day: "2026-10-28", parts: all } };
 out.yesterday = [gate(P), sfState(P)];
 const rec = { h: "h1", sub: null, day: DAY, parts: all }, now = { day: DAY, rev: "h1", sub: null }, PP = SF_PARTS.permit;
-out.dayV = [outVerdict(sf.seen[K("0734", "2026-10-28")], DAY, now, PP), outVerdict(rec, DAY, { ...now, day: "2026-10-30" }, PP), outVerdict(rec, DAY, now, PP)];
+out.dayV = [outVerdict(sf.seen[K("7835", "2026-10-28")], DAY, now, PP), outVerdict(rec, DAY, { ...now, day: "2026-10-30" }, PP), outVerdict(rec, DAY, now, PP)];
 // Codex QA2 #3: the server's document changed after the 확인 (the list still has the old rev): refused before the output
 out.revV = outVerdict(rec, DAY, { ...now, rev: "h2" }, PP);
 out.partV = outVerdict({ ...rec, parts: { permit: true } }, DAY, now, PP);
 // Codex QA2 #4: a new submission drops the 확인; the output is the submission the 확인 was made on
-sf.seen = { [K("0734")]: { h: "h1", sub: "S1", day: DAY, parts: all } };
-sf.subs = { "PTW-0734": { id: "S1" } }; out.subSame = [gate(P), sfState(P)];
-sf.subs = { "PTW-0734": { id: "S2" } }; out.subNew = [gate(P), sfState(P)];
+sf.seen = { [K("7835")]: { h: "h1", sub: "S1", day: DAY, parts: all } };
+sf.subs = { "PTW-7835": { id: "S1" } }; out.subSame = [gate(P), sfState(P)];
+sf.subs = { "PTW-7835": { id: "S2" } }; out.subNew = [gate(P), sfState(P)];
 sf.subs = undefined; out.subUnknown = gate(P);                  // not read yet: the list keeps the mark, the output reads it again
 out.subV = [outVerdict({ ...rec, sub: "S1" }, DAY, { ...now, sub: "S2" }, PP), outVerdict(rec, DAY, { ...now, sub: "S1" }, PP), outVerdict({ ...rec, sub: "S1" }, DAY, { ...now, sub: "S1" }, PP)];
 out.subFiles = nm(outFiles(P, null, "S1"));
-out.subIssued = nm(outFiles(P, { no: "S-0734/R2", sheet: { title: "x" } }, "S1"));
+out.subIssued = nm(outFiles(P, { no: "S-7835/R2", sheet: { title: "x" } }, "S1"));
 console.log(JSON.stringify(out));
 """
 
@@ -230,50 +230,50 @@ const F = (no, key, value) => ({ [`p${no}.${key}`]: { page: no, key, value, orig
 const A = (qid, choice, value, q = {}) => ({ qid, choice, value, q });
 const out = {};
 // 화기 one permit: four days, three of them in a row at the same time; the answers changed the time (T1)
-const hot = { permit_no: "PTW-0701", no: 1, label: "화기", windows: { "2026-10-27": ["13:00~15:00"], "2026-10-28": ["13:00~15:00"],
+const hot = { permit_no: "PTW-4012", no: 1, label: "화기", windows: { "2026-10-27": ["13:00~15:00"], "2026-10-28": ["13:00~15:00"],
   "2026-10-29": ["13:00~15:00"], "2026-10-31": ["09:00~11:00"] }, windows_src: "신청자 답변",
   place: { text: "4BAY 12-14 칼럼", level: "L3", bays: ["4"], cols: "12-14 칼럼", whole: false }, targets: ["E41P"], cranes: [] };
 const aug1 = { effective: [hot], questions: [],
-  reflect: { "PTW-0701": { fills: [{ base: "job", final: "E41P 블록 러그 절단·용접 보수" }, { base: "workers", final: "4" }] } } };
+  reflect: { "PTW-4012": { fills: [{ base: "job", final: "E41P 블록 러그 절단·용접 보수" }, { base: "workers", final: "4" }] } } };
 const f1 = { ...F(1, "job", "용접 보수"), ...F(1, "workers", ""), ...F(1, "concurrent", "Y"), ...F(1, "location", "4BAY") };
-const ans1 = [A("H2:PTW-0701", "text", "가스절단, 산소·LPG"), A("W1:PTW-0701", "text", "화재감시인 1명"),
-  A("B3:PTW-0701", "yes", "도장팀 4BAY 도장"), A("T1:PTW-0701", "partial", "13시~15시")];
+const ans1 = [A("H2:PTW-4012", "text", "가스절단, 산소·LPG"), A("W1:PTW-4012", "text", "화재감시인 1명"),
+  A("B3:PTW-4012", "yes", "도장팀 4BAY 도장"), A("T1:PTW-4012", "partial", "13시~15시")];
 let v = preSubmitView(aug1, f1, ans1, 0, false);
 const rowsOf = (v, i = 0) => Object.fromEntries(v.permits[i].rows.map((r) => [r.k, [r.v, r.warn, r.flag, r.note]]));
 out.hot = rowsOf(v); out.hotOpen = v.open; out.hotTitle = v.permits[0].title;
 // 정전·LOTO, overnight, place written as a team name, 병행 모름, 작업인원 빈칸, 차단 시각 not answered yet, checklist left
-const lo = { permit_no: "PTW-0702", no: 1, label: "정전·LOTO", windows: { "2026-10-30": ["22:00~익일 02:00"] }, windows_src: "원본",
+const lo = { permit_no: "PTW-4403", no: 1, label: "정전·LOTO", windows: { "2026-10-30": ["22:00~익일 02:00"] }, windows_src: "원본",
   place: { text: "전기설비팀", level: "L0", bays: [], cols: "" }, targets: [], cranes: [] };
-const aug2 = { effective: [lo], reflect: {}, questions: [{ qid: "LO3:PTW-0702", item: "LO3", permit_no: "PTW-0702" }] };
+const aug2 = { effective: [lo], reflect: {}, questions: [{ qid: "LO3:PTW-4403", item: "LO3", permit_no: "PTW-4403" }] };
 const f2 = { ...F(1, "job", "OH-21 크레인 제어반 수리"), ...F(1, "workers", ""), ...F(1, "concurrent", "") };
-v = preSubmitView(aug2, f2, [A("B3:PTW-0702", "unknown", "")], 2, true);
+v = preSubmitView(aug2, f2, [A("B3:PTW-4403", "unknown", "")], 2, true);
 out.loto = rowsOf(v); out.lotoOpen = v.open;
 // a place with BAY but no column; no time at all
-const nocol = { ...lo, permit_no: "PTW-0703", label: "고소", windows: {}, place: { text: "3BAY 상부", level: "L2", bays: ["3"], cols: "" }, height: 6 };
+const nocol = { ...lo, permit_no: "PTW-4676", label: "고소", windows: {}, place: { text: "3BAY 상부", level: "L2", bays: ["3"], cols: "" }, height: 6 };
 v = preSubmitView({ effective: [nocol], reflect: {}, questions: [] }, { ...F(1, "job", "배관 지지대 설치"), ...F(1, "workers", "2"), ...F(1, "concurrent", "N") }, [], 0, false);
 out.nocol = rowsOf(v); out.nocolOpen = v.open;
 // no review yet: nothing made up, the checklist still counted
 v = preSubmitView(null, {}, [], 1, false); out.none = [v.none, v.permits.length, v.open];
 // 밀폐: CF2 「없음」 then C5.CF2 「추가로 적은 내용이 맞음」 (the earlier answer withdrawn); CF1 choice label kept beside the
 // typed value; workers did not fit the field (별지); the work time apart from the residual watch; a pending for the safety team
-const cf = { permit_no: "PTW-0704", no: 1, label: "밀폐", windows: { "2026-11-02": ["09:00~12:00"] }, windows_work: { "2026-11-02": ["09:00~11:00"] },
+const cf = { permit_no: "PTW-5067", no: 1, label: "밀폐", windows: { "2026-11-02": ["09:00~12:00"] }, windows_work: { "2026-11-02": ["09:00~11:00"] },
   residual: "12:00", windows_src: "원본", place: { text: "2BAY 05-07 칼럼 B11 블록", level: "L3", bays: ["2"], cols: "05-07 칼럼" }, targets: ["B11", "E170", "MCC-3"], cranes: [] };
-const fx = { effective: [cf], questions: [], reflect: { "PTW-0704": { fills: [], extra: [["작업인원", "3 (B1 답)"]], pending: [["연결 계통", "확인 필요 — 답 '없음'이 허가서 내용과 다름"]] } } };
+const fx = { effective: [cf], questions: [], reflect: { "PTW-5067": { fills: [], extra: [["작업인원", "3 (B1 답)"]], pending: [["연결 계통", "확인 필요 — 답 '없음'이 허가서 내용과 다름"]] } } };
 const fcf = { ...F(1, "job", ""), ...F(1, "job_detail", "탱크 내부 용접"), ...F(1, "workers", ""), ...F(1, "concurrent", "N") };
 fcf["p1.workers"].name = "작업인원";
 const ch = (id, label) => ({ choices: [{ id, label }] });
-v = preSubmitView(fx, fcf, [A("CF2:PTW-0704", "none", "", ch("none", "연결 계통 없음")), A("C5.CF2:PTW-0704", "free", "아르곤 퍼지 라인 V-12 연결 있음", ch("free", "추가로 적은 내용이 맞음")),
-  A("CF1:PTW-0704", "full", "맨홀 M-2, 안쪽 10m", ch("full", "전신 진입")), A("T9:PTW-0704", "unknown", "")], 0, false);
+v = preSubmitView(fx, fcf, [A("CF2:PTW-5067", "none", "", ch("none", "연결 계통 없음")), A("C5.CF2:PTW-5067", "free", "아르곤 퍼지 라인 V-12 연결 있음", ch("free", "추가로 적은 내용이 맞음")),
+  A("CF1:PTW-5067", "full", "맨홀 M-2, 안쪽 10m", ch("full", "전신 진입")), A("T9:PTW-5067", "unknown", "")], 0, false);
 out.cf = rowsOf(v); out.cfOpen = v.open;
 // 인양: the moving stage apart from the whole work
-const li = { permit_no: "PTW-0705", no: 1, label: "중량물인양", windows: { "2026-11-02": ["08:00~12:00"] }, windows_stage: { move: { "2026-11-02": ["10:00~10:30"] } },
+const li = { permit_no: "PTW-5151", no: 1, label: "중량물인양", windows: { "2026-11-02": ["08:00~12:00"] }, windows_stage: { move: { "2026-11-02": ["10:00~10:30"] } },
   time_meaning: "stage", windows_src: "신청자 답변", place: { text: "3BAY 10-12 칼럼", level: "L3", bays: ["3"], cols: "10-12 칼럼" }, targets: [], cranes: ["OH-21"] };
 v = preSubmitView({ effective: [li], questions: [], reflect: {} }, { ...F(1, "job", "블록 인양"), ...F(1, "workers", "4"), ...F(1, "concurrent", "N"),
   ...F(1, "load_weight", "80"), ...F(1, "crane_swl", "100t") }, [], 0, false);
 out.li = rowsOf(v);
 // 화기: the ember check end answered 「모름」 is its own line, the work time stays known (staging check 2026-11-01)
-v = preSubmitView({ effective: [{ ...hot, permit_no: "PTW-0706", windows_work: hot.windows }], questions: [], reflect: {} }, f1,
-  [A("T4:PTW-0706", "unknown", "")], 0, false);
+v = preSubmitView({ effective: [{ ...hot, permit_no: "PTW-5325", windows_work: hot.windows }], questions: [], reflect: {} }, f1,
+  [A("T4:PTW-5325", "unknown", "")], 0, false);
 out.t4 = rowsOf(v);
 console.log(JSON.stringify(out));
 """
@@ -291,7 +291,7 @@ def real_summary():
         print(f"SKIP 실제 검토 결과 시험: {e}")
         return None
     doc = lambda d: extract.build(ROOT / "samples/반장_테스트" / f"{KINDS[d['kind']]['label'].replace('·', '')}_{d['case']}_{d['permit_no'][-4:]}.pdf", d["kind"])
-    lift = next(d for d in FOREMAN if d["permit_no"].endswith("0707"))
+    lift = next(d for d in FOREMAN if d["permit_no"].endswith("5388"))
     f = doc(lift)["fields"]
     q = next(x for x in augment.summary(f, [])["questions"] if x["item"] == "T1")
     ans = [{"qid": q["qid"], "choice": "partial", "value": "10/27 10:30~11:30", "q": q}]
@@ -342,13 +342,13 @@ const st = { ck: { permits: [
   { permit_no: "P-2", items: [{ id: "hot_1", state: "yes", touched: true, ctl_touched: true, controls: [] }, { id: "hot_2", state: "no", touched: false, controls: [] }] }] } };
 const list = ckPending(), c = ckCount();
 console.log(JSON.stringify({ keys: list.map((e) => e.key), why: list.map((e) => e.why.join("+")), left: c.left,
-  text: sfHqText({ text: "복구·시험운전 예정 시각과 주행 구간" }, { no: "0739", title: "천장크레인 제어반 고장 수리", who: "설비보전부" }),
+  text: sfHqText({ text: "복구·시험운전 예정 시각과 주행 구간" }, { no: "9488", title: "천장크레인 제어반 고장 수리", who: "설비보전부" }),
   text2: sfHqText({ text: "작업 끝 시각" }, { no: "WP-26", title: "", who: "" }) }));
 """
 
 
 PSKEY = r"""
-const st = { sid: "S1", src: { file: { name: "0731_화기_A.pdf" } } };
+const st = { sid: "S1", src: { file: { name: "6733_화기_A.pdf" } } };
 const v = { permits: [{ title: "화기", rows: [{ k: "작업일·작업시간", v: "10/29 09:00~11:30" }] }], open: ["작업 인원: 모름"] };
 const withCk = { ...v, open: [...v.open, "위험 체크리스트: 확인 안 함 3개"] };
 const a = psKey(v), b = psKey(withCk);
@@ -410,12 +410,12 @@ def main():
     check("QA99 문서 목록에서 확인을 풀면 다시 잠김", ro.get("unchecked") is False)
     check("QA99 작업계획서도 확인하면 출력이 열림", ro.get("plan") is True)
     check("QA99 별지 발행 전: 허가서+추가검토서와 위험 체크리스트", ro.get("permitNew") == [
-        ["0734_허가서+추가검토서.pdf", "/api/safety/pdf/0734/full.pdf", None], ["0734_위험체크리스트.pdf", "/api/safety/pdf/0734/checklist.pdf", None]])
+        ["7835_허가서+추가검토서.pdf", "/api/safety/pdf/7835/full.pdf", None], ["7835_위험체크리스트.pdf", "/api/safety/pdf/7835/checklist.pdf", None]])
     check("QA99 별지 발행 뒤: 원본+별지(발행본)와 위험 체크리스트", ro.get("permitIssued") == [
-        ["S-0734_R2_현장게시용_원본+별지.pdf", "/api/safety/sheet.pdf", "post"], ["0734_위험체크리스트.pdf", "/api/safety/pdf/0734/checklist.pdf", None]])
+        ["S-7835_R2_현장게시용_원본+별지.pdf", "/api/safety/sheet.pdf", "post"], ["7835_위험체크리스트.pdf", "/api/safety/pdf/7835/checklist.pdf", None]])
     check("QA99 작업계획서는 원본(전달문 발행 전)", ro.get("plan2") == [["WP-03_작업계획서.pdf", "/api/safety/pdf/WP-1029-03/original.pdf", None]])
-    check("QA2-1 출력 목록은 그날 문서 전부(쌍 없는 0732 포함), 허가서 먼저", ro.get("list") == ["0732", "0734", "WP-1029-03"])
-    check("QA2-1 별지 대상은 쌍 문서와 회수 전 개정본이 남은 문서만", ro.get("postable") == ["0734", "WP-1029-03", "0730"])
+    check("QA2-1 출력 목록은 그날 문서 전부(쌍 없는 6988 포함), 허가서 먼저", ro.get("list") == ["6988", "7835", "WP-1029-03"])
+    check("QA2-1 별지 대상은 쌍 문서와 회수 전 개정본이 남은 문서만", ro.get("postable") == ["7835", "WP-1029-03", "0730"])
     check("QA2-1 출력 목록을 쌍 문서가 아니라 그날 문서 전체(sf.docs)로 만듦", "outDocs(sf.docs)" in part(JS, "function postIssueList("))
     check("QA2-2 전날 확인은 오늘 출력을 열지 않음(작업일 키)", ro.get("yesterday") == [False, "todo"])
     check("QA2-2 출력 직전: 다른 날 확인·서버 작업일 변경은 거절, 같은 날은 통과", ro.get("dayV") == ["day", "day", "ok"])
@@ -426,9 +426,9 @@ def main():
     check("QA2-4 제출본을 아직 못 읽었으면 목록 표시는 유지(출력 직전에 다시 확인)", ro.get("subUnknown") is True)
     check("QA2-4 출력 직전: 확인한 제출본과 최신 제출본이 다르면 거절", ro.get("subV") == ["sub", "sub", "ok"])
     check("QA2-4 제출본이 있으면 그 제출본의 추가검토서·체크리스트를 출력", ro.get("subFiles") == [
-        ["0734_허가서+추가검토서_제출본.pdf", "/api/submissions/S1/permit.pdf", None], ["0734_위험체크리스트_제출본.pdf", "/api/submissions/S1/checklist.pdf", None]])
+        ["7835_허가서+추가검토서_제출본.pdf", "/api/submissions/S1/permit.pdf", None], ["7835_위험체크리스트_제출본.pdf", "/api/submissions/S1/checklist.pdf", None]])
     check("QA2-4 별지 발행 뒤: 원본+별지와 제출본 체크리스트", ro.get("subIssued") == [
-        ["S-0734_R2_현장게시용_원본+별지.pdf", "/api/safety/sheet.pdf", "post"], ["0734_위험체크리스트_제출본.pdf", "/api/submissions/S1/checklist.pdf", None]])
+        ["S-7835_R2_현장게시용_원본+별지.pdf", "/api/safety/sheet.pdf", "post"], ["7835_위험체크리스트_제출본.pdf", "/api/submissions/S1/checklist.pdf", None]])
     rp = run("\n".join(part(JS, x) for x in ("const PS_KIND = ", "const PS_EXTRA = ", "const PS_COMMON = ", "const PS_INPUT_LABEL = ", "function preSubmitView(")) + PS) or {}
     real = real_summary()
     h, lo, nc = rp.get("hot") or {}, rp.get("loto") or {}, rp.get("nocol") or {}
@@ -439,7 +439,7 @@ def main():
           and (h.get("작업 인원") or [""])[0] == "4명 · 화재감시인 1명")
     check("PS 병행작업 있음(무엇)", (h.get("병행작업") or [""])[0] == "있음 · 도장팀 4BAY 도장")
     check("PS 화기: 절단·용접 방법·가스 답이 있으면 한 줄", (h.get("절단·용접 방법·가스") or [""])[0] == "가스절단, 산소·LPG")
-    check("PS 빠진 것 없으면 맨 위 목록 비어 있음, 승인번호 표시", rp.get("hotOpen") == [] and rp.get("hotTitle") == "화기 허가서 · 승인번호 PTW-0701")
+    check("PS 빠진 것 없으면 맨 위 목록 비어 있음, 승인번호 표시", rp.get("hotOpen") == [] and rp.get("hotTitle") == "화기 허가서 · 승인번호 PTW-4012")
     check("PS 다음 날까지 이어지는 시간 표시, 허가서 시간 그대로면 그렇게 적음", lo.get("작업일·작업시간") == ["10/30 22:00~익일 02:00", "", "다음 날까지 이어짐", "허가서에 적힌 시간"])
     check("PS 팀 이름 같은 위치는 표시", (lo.get("작업 위치") or ["", ""])[1] == "부서·팀 이름처럼 보임 (BAY·칼럼 없음)")
     check("PS 병행 「모름」·인원 빈칸·차단 시각 답하지 않음", lo.get("병행작업") == ["미확인", "모름", "", ""]
@@ -477,7 +477,7 @@ def main():
     check("CK 이유: 두 확인이 빠지면 한 항목에 둘, 직접 추가(U)는 조치 확인 요구 없음, 해당 없음·안전팀 확인은 완료", ck.get("why") == [
         "state+controls", "controls", "recheck", "state", "state"])
     check("CK 미완료 수 = 화면의 「확인 완료」 계산과 같음", ck.get("left") == 5)
-    check("HQ 질문 하나만 복사: 틀·대상 작업·원문", ck.get("text") == "[작업 정보 확인 요청]\n대상: 0739 천장크레인 제어반 고장 수리\n복구·시험운전 예정 시각과 주행 구간")
+    check("HQ 질문 하나만 복사: 틀·대상 작업·원문", ck.get("text") == "[작업 정보 확인 요청]\n대상: 9488 천장크레인 제어반 고장 수리\n복구·시험운전 예정 시각과 주행 구간")
     check("HQ 작업명이 없으면 지어내지 않음", ck.get("text2") == "[작업 정보 확인 요청]\n대상: WP-26\n작업 끝 시각")
     pk = run("\n".join(part(JS, x) for x in ("const psPrint = ", "const psKey = ")) + PSKEY) or {}
     check("RC 확인 기록: 체크리스트 남은 수만 바뀌면 같은 확인(체크리스트 조작으로 다시 묻지 않음)", pk.get("ck") is True)

@@ -1,0 +1,9 @@
+PASS 본 경로는 로그인 확인(auth_request)을 거침
+PASS 사용자 헤더는 프록시가 로그인 답에서 넣음
+PASS 역할 헤더는 프록시가 IdP 그룹에서 넣음(브라우저 값 덮어씀)
+PASS 그룹에 없으면 역할 없음(기본값 빈칸)
+PASS 로그인 없이 열리는 경로는 /oauth2/·/api/health뿐
+PASS 앱은 CROSCAN_AUTH=proxy로 실행
+PASS 앱 포트는 바깥에 열지 않음(ports 없음)
+
+7/7

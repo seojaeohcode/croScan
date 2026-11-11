@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="1080" viewBox="0 0 780 1080" fill="none" stroke="#2C6E78" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="0" y="0" width="780" height="1080" rx="0" fill="#0F2240" stroke="none"/>
+  <path d="M28 52 H752 V560 H28 Z" fill="#14284A" stroke="none"/>
+  <line x1="-240" y1="48" x2="425" y2="314" stroke="#2C6E78" stroke-opacity=".50"/>
+  <line x1="-40" y1="48" x2="425" y2="314" stroke="#2C6E78" stroke-opacity=".50"/>
+  <line x1="160" y1="48" x2="425" y2="314" stroke="#2C6E78" stroke-opacity=".50"/>
+  <line x1="360" y1="48" x2="425" y2="314" stroke="#2C6E78" stroke-opacity=".50"/>
+  <line x1="560" y1="48" x2="425" y2="314" stroke="#2C6E78" stroke-opacity=".50"/>
+  <line x1="760" y1="48" x2="425" y2="314" stroke="#2C6E78" stroke-opacity=".50"/>
+  <line x1="960" y1="48" x2="425" y2="314" stroke="#2C6E78" stroke-opacity=".50"/>
+  <line x1="1160" y1="48" x2="425" y2="314" stroke="#2C6E78" stroke-opacity=".50"/>
+  <path d="M26 88 H754" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M26 97 H754" fill="none" stroke="#FFFFFF" stroke-opacity=".10"/>
+  <path d="M109 154 H681" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M109 163 H681" fill="none" stroke="#FFFFFF" stroke-opacity=".10"/>
+  <path d="M197 211 H601" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M197 220 H601" fill="none" stroke="#FFFFFF" stroke-opacity=".10"/>
+  <path d="M290 257 H518" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M290 266 H518" fill="none" stroke="#FFFFFF" stroke-opacity=".10"/>
+  <polygon points="82,55 104,55 354,291 345,291" fill="#14284A" stroke="#2C6E78"/>
+  <polygon points="656,55 682,55 481,291 471,291" fill="#14284A" stroke="#2C6E78"/>
+  <path d="M83 153 L655 153 638 179 H110 Z" fill="#14284A"/>
+  <path d="M118 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M168 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M218 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M268 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M318 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M368 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M418 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M468 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M518 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M568 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <path d="M618 155 l22 22 22-22" fill="none" stroke="#2C6E78" stroke-opacity=".65"/>
+  <rect x="356" y="171" width="66" height="30" rx="5" fill="#14284A"/>
+  <line x1="389" y1="201" x2="389" y2="274"/>
+  <path d="M389 274 v12 c0 24 31 24 31 2" fill="none"/>
+  <path d="M55 180 V539" fill="none" stroke="#2C6E78" stroke-opacity=".50"/>
+  <path d="M63 187 V539" fill="none" stroke="#FFFFFF" stroke-opacity=".08"/>
+  <path d="M161 180 V539" fill="none" stroke="#2C6E78" stroke-opacity=".50"/>
+  <path d="M169 187 V539" fill="none" stroke="#FFFFFF" stroke-opacity=".08"/>
+  <path d="M648 180 V539" fill="none" stroke="#2C6E78" stroke-opacity=".50"/>
+  <path d="M656 187 V539" fill="none" stroke="#FFFFFF" stroke-opacity=".08"/>
+  <path d="M733 180 V539" fill="none" stroke="#2C6E78" stroke-opacity=".50"/>
+  <path d="M741 187 V539" fill="none" stroke="#FFFFFF" stroke-opacity=".08"/>
+  <path d="M55 365 L349 309 H486 L733 365" fill="none" stroke="#2C6E78" stroke-opacity=".4"/>
+  <path d="M54 595 H732 M30 620 H750" fill="none" stroke="#2C6E78" stroke-opacity=".22"/>
+  <line x1="44" y1="590" x2="425" y2="318" stroke="#2C6E78" stroke-opacity=".16"/>
+  <line x1="197" y1="590" x2="425" y2="318" stroke="#2C6E78" stroke-opacity=".16"/>
+  <line x1="620" y1="590" x2="425" y2="318" stroke="#2C6E78" stroke-opacity=".16"/>
+  <line x1="737" y1="590" x2="425" y2="318" stroke="#2C6E78" stroke-opacity=".16"/>
+  <polygon points="131,428 253,367 610,367 502,428" fill="#14284A"/>
+  <rect x="131" y="428" width="371" height="132" rx="2" fill="#14284A"/>
+  <polygon points="502,428 610,367 610,499 502,560" fill="#14284A"/>
+  <path d="M155 440 v107 m-6-97 h12 m-12 86 h12" fill="none" stroke="#2C6E78" stroke-opacity=".85"/>
+  <path d="M215 440 v107 m-6-97 h12 m-12 86 h12" fill="none" stroke="#2C6E78" stroke-opacity=".85"/>
+  <path d="M275 440 v107 m-6-97 h12 m-12 86 h12" fill="none" stroke="#2C6E78" stroke-opacity=".85"/>
+  <path d="M335 440 v107 m-6-97 h12 m-12 86 h12" fill="none" stroke="#2C6E78" stroke-opacity=".85"/>
+  <path d="M395 440 v107 m-6-97 h12 m-12 86 h12" fill="none" stroke="#2C6E78" stroke-opacity=".85"/>
+  <path d="M455 440 v107 m-6-97 h12 m-12 86 h12" fill="none" stroke="#2C6E78" stroke-opacity=".85"/>
+  <path d="M481 440 v107 m-6-97 h12 m-12 86 h12" fill="none" stroke="#2C6E78" stroke-opacity=".85"/>
+  <line x1="132" y1="498" x2="501" y2="498" stroke="#FFFFFF" stroke-opacity=".14"/>
+  <line x1="270" y1="371" x2="165" y2="425" stroke="#2C6E78" stroke-opacity=".6"/>
+  <line x1="330" y1="371" x2="225" y2="425" stroke="#2C6E78" stroke-opacity=".6"/>
+  <line x1="390" y1="371" x2="285" y2="425" stroke="#2C6E78" stroke-opacity=".6"/>
+  <line x1="450" y1="371" x2="345" y2="425" stroke="#2C6E78" stroke-opacity=".6"/>
+  <line x1="510" y1="371" x2="405" y2="425" stroke="#2C6E78" stroke-opacity=".6"/>
+  <line x1="570" y1="371" x2="465" y2="425" stroke="#2C6E78" stroke-opacity=".6"/>
+  <circle cx="389" cy="286" r="3" fill="#D4561F" stroke="none"/>
+  <circle cx="604" cy="369" r="3" fill="#D4561F" stroke="none"/>
+  <circle cx="156" cy="498" r="3" fill="#D4561F" stroke="none"/>
+  <circle cx="654" cy="154" r="3" fill="#D4561F" stroke="none"/>
+</svg>

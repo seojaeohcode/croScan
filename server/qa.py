@@ -41,6 +41,7 @@ def copy_with_floor(src, dst):
 
 
 _ready, _lock = False, threading.Lock()
+_runlock = threading.Lock()                         # one 「QA 시작하기」 request at a time (not the setup lock)
 
 
 def _setup(c):
@@ -56,8 +57,18 @@ def _setup(c):
     c.executescript("""
         CREATE TABLE IF NOT EXISTS qa (id INTEGER PRIMARY KEY AUTOINCREMENT, created TEXT, author TEXT, text TEXT,
                                        context TEXT, handled INTEGER NOT NULL DEFAULT 0, note TEXT DEFAULT '');
-        CREATE TABLE IF NOT EXISTS qa_file (qa_id INTEGER, n INTEGER, name TEXT, mime TEXT, size INTEGER, PRIMARY KEY (qa_id, n));""")
+        CREATE TABLE IF NOT EXISTS qa_file (qa_id INTEGER, n INTEGER, name TEXT, mime TEXT, size INTEGER, PRIMARY KEY (qa_id, n));
+        CREATE TABLE IF NOT EXISTS qa_run (id INTEGER PRIMARY KEY AUTOINCREMENT, requested TEXT, by TEXT, status TEXT,
+                                           started TEXT DEFAULT '', finished TEXT DEFAULT '', note TEXT DEFAULT '',
+                                           done TEXT DEFAULT '', open_at_request INTEGER DEFAULT 0);""")
     cols = {r["name"] for r in c.execute("PRAGMA table_info(qa)")}
+    for col in ("handled_at", "decision"):          # when it was handled · how (수용 · 부분 수용 · 거절 · 보류), shown to the team
+        if col not in cols:
+            try:
+                c.execute(f"ALTER TABLE qa ADD COLUMN {col} TEXT DEFAULT ''")
+            except sqlite3.OperationalError as e:   # another worker added it first
+                if "duplicate column" not in str(e):
+                    raise
     if "handled" not in cols:                       # older DB: open/done status -> handled 0/1
         c.execute("ALTER TABLE qa ADD COLUMN handled INTEGER NOT NULL DEFAULT 0")
         if "status" in cols:
@@ -153,6 +164,87 @@ def file(qid, n):
     return (row["name"], row["mime"], _path(qid, n)) if row and _path(qid, n).exists() else None
 
 
-def set_handled(qid, handled, note=None):
+def _now():
+    return datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
+
+
+DECISIONS = ("수용", "부분 수용", "거절", "보류")
+
+
+def set_handled(qid, handled, note=None, decision=None):
+    """decision: how it was handled (DECISIONS), shown to the team with the note; taken back when marked not handled."""
+    if decision is not None and decision not in DECISIONS:
+        raise ValueError(decision)
     with _db() as c:
-        return c.execute("UPDATE qa SET handled = ?, note = COALESCE(?, note) WHERE id = ?", (int(handled), note, qid)).rowcount > 0
+        # a note changed without a decision keeps the decision; marked not handled, both time and decision go
+        return c.execute("UPDATE qa SET handled = ?, note = COALESCE(?, note), handled_at = ?, "
+                         "decision = CASE WHEN ? = 0 THEN '' ELSE COALESCE(?, decision) END WHERE id = ?",
+                         (int(handled), note, _now() if handled else "", int(handled), decision, qid)).rowcount > 0
+
+
+# ---------------------------------------------------------------- the team's view: what was sent, what is done, who works on it
+# The board shows each report's number, time, sender, the start of its text and whether it is handled (newest first);
+# the screen state and the attachments stay behind the QA token.
+BOARD_TEXT = 300
+RUN_STATES = ("requested", "running", "done", "failed")
+
+
+SCREENS = {"s-login", "s-upload", "s-load", "s-edit", "s-plans", "s-check", "s-submit", "s-safety"}
+
+
+def board(show="all", limit=300):
+    """show: all · open (not handled) · done; filtered before the limit, so an old open report is not lost."""
+    where = {"open": " WHERE handled = 0", "done": " WHERE handled = 1"}.get(show, "")
+    with _db() as c:
+        rows = c.execute("SELECT id, created, author, text, context, handled, note, handled_at, decision FROM qa"
+                         + where + " ORDER BY id DESC LIMIT ?", (limit,)).fetchall()
+        nf = dict(c.execute("SELECT qa_id, COUNT(*) FROM qa_file GROUP BY qa_id").fetchall())
+        left = c.execute("SELECT COUNT(*) FROM qa WHERE handled = 0").fetchone()[0]
+        total = c.execute("SELECT COUNT(*) FROM qa").fetchone()[0]
+    out = []
+    for r in rows:
+        ctx = _context(r["context"])
+        out.append({"id": r["id"], "created": r["created"], "author": r["author"] or "", "text": (r["text"] or "")[:BOARD_TEXT],
+                    "more": len(r["text"] or "") > BOARD_TEXT, "screen": ctx.get("screen") if isinstance(ctx.get("screen"), str) and ctx.get("screen") in SCREENS else "",
+                    "files": nf.get(r["id"], 0),
+                    "handled": bool(r["handled"]), "decision": r["decision"] or "", "note": r["note"] or "", "handled_at": r["handled_at"] or ""})
+    return {"reports": out, "left": left, "total": total, "shown": show, "runs": runs()}
+
+
+def runs(limit=10):
+    with _db() as c:
+        return [dict(r) for r in c.execute("SELECT * FROM qa_run ORDER BY id DESC LIMIT ?", (limit,)).fetchall()]
+
+
+def request_run(by=""):
+    """「QA 시작하기」: one request at a time — while one is waiting or running, that one is given back (no second);
+    nothing to do (no report left) makes none. (None, False) then. Serialised over workers too (BEGIN IMMEDIATE)."""
+    with _runlock, _db() as c:
+        c.execute("BEGIN IMMEDIATE")
+        cur = c.execute("SELECT * FROM qa_run WHERE status IN ('requested', 'running') ORDER BY id DESC LIMIT 1").fetchone()
+        if cur:
+            return dict(cur), False
+        left = c.execute("SELECT COUNT(*) FROM qa WHERE handled = 0").fetchone()[0]
+        if not left:
+            return None, False
+        rid = c.execute("INSERT INTO qa_run (requested, by, status, open_at_request) VALUES (?, ?, 'requested', ?)",
+                        (_now(), (by or "")[:40], left)).lastrowid
+        return dict(c.execute("SELECT * FROM qa_run WHERE id = ?", (rid,)).fetchone()), True
+
+
+def set_run(rid, status, note=None, done=None):
+    """The session working on it says where it is: running (start time), done / failed (end time, the reports handled)."""
+    if status not in RUN_STATES:
+        raise ValueError(status)
+    with _db() as c:
+        sets, vals = ["status = ?"], [status]
+        if status == "running":
+            sets.append("started = ?"); vals.append(_now())
+        if status in ("done", "failed"):
+            sets.append("finished = ?"); vals.append(_now())
+        if note is not None:
+            sets.append("note = ?"); vals.append(note[:2000])
+        if done is not None:
+            sets.append("done = ?"); vals.append(",".join(str(int(x)) for x in done)[:2000])
+        n = c.execute(f"UPDATE qa_run SET {', '.join(sets)} WHERE id = ?", (*vals, rid)).rowcount
+        return n > 0

@@ -37,7 +37,7 @@ def fake(reply, calls=None):
 def main():
     ps = load("permits.json")
     ps = ps if isinstance(ps, list) else ps.get("permits", [])
-    d = next(x for x in ps if permit_name(x).startswith("0735"))              # 고소: 「블록 상부 임시 러그 절단·제거」
+    d = next(x for x in ps if permit_name(x).startswith("8175"))              # 고소: 「블록 상부 임시 러그 절단·제거」
     fields = extract.build(DIR / "허가서" / permit_name(d), d["kind"])["fields"]
     P = augment.effective(fields, [])[0]
     base = checklist.draft(fields, [])

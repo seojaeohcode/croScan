@@ -116,7 +116,7 @@ async def dialogues(n, human, warm):
     """whole dialogues on the demo permits: the open typed questions answered from BANK in order; the model's wait
     and an assumed reading/typing time per question (human); with --warm each question is warmed when shown"""
     totals, waits, asks = [], [], []
-    pnos = ["0735", "0731", "0732", "0733", "0734", "0737", "0739", "0740", "0736"]
+    pnos = ["8175", "6733", "6988", "7618", "7835", "8741", "9488", "9715", "8602"]
     for i in range(n):
         f = fields_of(pnos[i % len(pnos)])
         sid = store.create()
@@ -150,7 +150,7 @@ async def dialogues(n, human, warm):
 async def cache():
     """the same list read cold (cache off) and warmed; then two permits alternating (session switch)"""
     out = {}
-    f = fields_of("0735")
+    f = fields_of("8175")
     q = next(x for x in augment.questions(f, [])[0] if x["item"] == "T1")
     text = BANK["T1"][1]
     payload = llm._payload
@@ -163,7 +163,7 @@ async def cache():
     s, *_, m = await one(f, q, "partial", text, sid=sid)
     out["warm"] = {"s": s, "prompt_n": m.get("prompt_n"), "cache_n": m.get("cache_n")}
     sw = []
-    g = fields_of("0731")
+    g = fields_of("6733")
     q2 = next(x for x in augment.questions(g, [])[0] if x["item"] == "T1")
     for i in range(6):
         ff, qq = (f, q) if i % 2 == 0 else (g, q2)
@@ -176,10 +176,10 @@ async def cache():
 
 
 async def background():
-    f = fields_of("0735")
+    f = fields_of("8175")
     q = next(x for x in augment.questions(f, [])[0] if x["item"] == "T1")
     alone = [(await one(f, q, "partial", BANK["T1"][1]))[0] for _ in range(3)]
-    job = asyncio.create_task(analyze.analyze(fields_of("0731"), []))
+    job = asyncio.create_task(analyze.analyze(fields_of("6733"), []))
     await asyncio.sleep(0.5)
     busy = [(await one(f, q, "partial", BANK["T1"][1]))[0] for _ in range(3)]
     try:
@@ -194,7 +194,7 @@ async def background():
 
 
 async def concurrent(n):
-    f = fields_of("0735")
+    f = fields_of("8175")
     q = next(x for x in augment.questions(f, [])[0] if x["item"] == "T1")
     t = time.time()
     got = await asyncio.gather(*[one(f, q, "partial", BANK["T1"][1]) for _ in range(n)])

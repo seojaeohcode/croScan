@@ -250,7 +250,7 @@ try:
     big = {"permits": [{"permit_no": pno0, "kind": kind, "items": [{"id": f"U{i}", "title": "x" * 500, "state": "yes"} for i in range(5000)]}] * 50}
     r5 = cli.post("/api/checklist/pdf", json={"fields": doc["fields"], "checklist": big})
     expect(r5.status_code == 400, f"한도를 넘는 체크리스트는 잘라 내지 않고 거절 ({r5.status_code})")
-    r6 = cli.post("/api/checklist/pdf", json={"fields": doc["fields"], "checklist": {"permits": [{"permit_no": "AC00-XX-0000", "kind": kind, "items": []}]}})
+    r6 = cli.post("/api/checklist/pdf", json={"fields": doc["fields"], "checklist": {"permits": [{"permit_no": "BS22-XX-0000", "kind": kind, "items": []}]}})
     expect(r6.status_code == 400, f"이 파일에 없는 허가서 → 400 ({r6.status_code})")
     bad_r = cli.post("/api/submit", files={"file": (name, b"not a pdf", "application/pdf")}, data={"payload": json.dumps({"fields": doc["fields"]})})
     expect(bad_r.status_code == 400, f"PDF 아님 → 400 ({bad_r.status_code})")

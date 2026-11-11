@@ -15,3 +15,9 @@ web/_t_*
 __pycache__/
 *.pyc
 *.log
+
+!.env.example
+.venv/
+node_modules/
+media/video/out/
+media/slides/rendered/

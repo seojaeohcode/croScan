@@ -3,7 +3,7 @@ read the foremen's latest submissions.
 
   python tools/check_submit_link.py        # needs the demo day (samples/시연_하루); runs on a throwaway database
 
-A submission whose permit number is not in the day's list (0701) is listed apart with its documents, never dropped;
+A submission whose permit number is not in the day's list (4012) is listed apart with its documents, never dropped;
 a submission of a permit in the list adds the place and times its answers corrected through the hybrid path (new
 alarms can appear, the documents' alarms stay: pairs.floor) and every document says which version it used.
 """
@@ -31,31 +31,31 @@ def check(name, cond):
 def main():
     D = safety.data()
     day = D["date"]
-    p32 = next(p for p in D["permits"] if p["id"] == "0732")
+    p32 = next(p for p in D["permits"] if p["id"] == "6988")
     no = p32["permit_no"]
     ans = [{"qid": f"L1:{no}", "choice": "place", "value": "3BAY 08-10 칼럼 E42P 블록 상부"},
            {"qid": f"T2:{no}", "choice": "partial", "value": "13:00~14:00"}]
     t = time.time()
     s1 = submissions.create("sess1", 1, "k1", {"permit": b"%PDF a", "checklist": b"%PDF b"}, {"fields": p32["_fields"], "answers": ans},
                             {"permit_no": no, "label": p32["label"], "who": "test", "dates": [day]}, t)
-    out_no = no[:-4] + "0701"
+    out_no = no[:-4] + "4012"
     s2 = submissions.create("sess2", 1, "k2", {"permit": b"%PDF c"}, {"fields": {}, "answers": []},
                             {"permit_no": out_no, "label": "화기", "who": "test", "dates": [day]}, t + 1)
     c = TestClient(A.app)
     v = c.get("/api/safety/submissions").json()
     out = {x["permit_no"]: x for x in v.get("_outside", [])}
-    check("0701 제출은 관리자 목록에 「이 날 작업 목록에 없는 제출」로 (버리지 않음)", out.get(out_no, {}).get("why") == safety.OUTSIDE
+    check("4012 제출은 관리자 목록에 「이 날 작업 목록에 없는 제출」로 (버리지 않음)", out.get(out_no, {}).get("why") == safety.OUTSIDE
           and out[out_no]["id"] == s2["id"] and out[out_no]["files"] == ["permit"])
     check("작업 목록 안의 제출본은 판정 자료 판(제출본 반영)과 함께", v.get(no, {}).get("id") == s1["id"] and v[no]["used"]["version"] == safety.VERSION_SUB
           and v[no]["used"]["values"]["위치"] == "3BAY 08-10 칼럼 E42P 블록 상부")
     det = c.post("/api/safety/detect").json()
     base = pairs.detect()
     keys = lambda R: {(p["key"], r["rule"], r["cause"], r["exposed"]) for p in R["pairs"] for r in p["reasons"]}  # noqa: E731
-    check("판정: 0732의 제출본 위치·시간으로 새 경보(0732 × WP-1029-01)", any(p["key"] == "0732|WP-1029-01" for p in det["pairs"]))
+    check("판정: 6988의 제출본 위치·시간으로 새 경보(6988 × WP-1029-01)", any(p["key"] == "6988|WP-1029-01" for p in det["pairs"]))
     check("판정: 서류 기준 경보는 모두 남음(floor)", keys(det) >= keys(base))
-    check("판정: 문서마다 판정 자료 판(제출본 반영 / 서류 기준)", det["hybrid"]["versions"]["0732"]["version"] == safety.VERSION_SUB
-          and "0732" in det["hybrid"]["submitted"] and not any(k.endswith("0701") for k in det["hybrid"]["versions"]))
-    check("변경 기록: 새 경보에 제출본 위치·시간이 붙음", any(x["key"] == "0732|WP-1029-01" and any(f["item"].startswith("제출본") for f in x["from"])
+    check("판정: 문서마다 판정 자료 판(제출본 반영 / 서류 기준)", det["hybrid"]["versions"]["6988"]["version"] == safety.VERSION_SUB
+          and "6988" in det["hybrid"]["submitted"] and not any(k.endswith("4012") for k in det["hybrid"]["versions"]))
+    check("변경 기록: 새 경보에 제출본 위치·시간이 붙음", any(x["key"] == "6988|WP-1029-01" and any(f["item"].startswith("제출본") for f in x["from"])
                                                     for x in det["hybrid"]["changes"]["new"]))
     # Codex final A6: a place he corrected in the permit's own field (no answer) counts as well — against the uploaded original
     import copy
@@ -78,7 +78,7 @@ def main():
     check("제출 때 고친 계획서 값(위치·시작)을 스냅숏에 남김", pv == [{"doc_no": "WP-1029-02", "title": "시험", "place": "3BAY 08-10 칼럼 E42P 블록",
                                                         "start": f"{day}T13:00", "end": f"{day}T10:00", "changed": ["location", "start"]}])
     check("확인하지 않은 계획서·없는 업로드는 넣지 않음", safety.plan_values(tok, {}, []) == [] and safety.plan_values("b" * 32, {}, [0]) == [])
-    check("제출 안내: 0701은 관리자 작업 목록에 연결 안 됨", safety.placement(out_no, [day]) == {"day": day, "listed": False})
+    check("제출 안내: 4012은 관리자 작업 목록에 연결 안 됨", safety.placement(out_no, [day]) == {"day": day, "listed": False})
     print(f"\n{sum(OK)}/{len(OK)}")
     sys.exit(0 if all(OK) else 1)
 

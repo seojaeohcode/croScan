@@ -1,0 +1,364 @@
+<style>
+/* ===== 제작 C · PART 04 (pc- 접두어) ===== */
+.pc-n{right:640px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-t{font-size:26px;font-weight:900;color:var(--navy);letter-spacing:-.02em;line-height:1.25}
+.pc-s{font-size:24px;color:#3B4654;line-height:1.4;letter-spacing:-.01em}
+.pc-s b{color:var(--ink);font-weight:700}
+.pc-stp{position:absolute;top:84px;width:392px;height:384px;border-radius:14px;background:#fff;border:2px solid var(--navy);overflow:hidden}
+.pc-stp .h{height:78px;background:var(--navy);color:#fff;display:flex;align-items:center;gap:14px;padding:0 22px;font-size:31px;font-weight:900;letter-spacing:-.02em}
+.pc-stp .h i{font-style:normal;width:42px;height:42px;border-radius:50%;background:#fff;color:var(--navy);display:inline-flex;align-items:center;justify-content:center;font-size:23px;font-weight:900}
+.pc-stp .m{padding:26px 26px 0;font-size:30px;font-weight:700;color:#1F2833;line-height:1.45;letter-spacing:-.02em}
+.pc-stp .m small{display:block;margin-top:14px;font-size:24px;font-weight:700;color:#5E6977}
+.pc-stp.t{border-color:var(--teal)} .pc-stp.t .h{background:var(--teal)} .pc-stp.t .h i{color:var(--teal)}
+.pc-stp.g{border-color:var(--green)} .pc-stp.g .h{background:var(--green)} .pc-stp.g .h i{color:var(--green)}
+.pc-band{position:absolute;left:0;width:1748px;height:68px;border-radius:10px;display:flex;align-items:center;gap:18px;padding:0 22px;font-size:24px}
+table.pc-tb{width:100%;border-collapse:collapse}
+.pc-tb th{background:var(--navy);color:#fff;font-size:24px;font-weight:900;text-align:left;padding:10px 18px}
+.pc-tb td{font-size:24px;padding:12px 18px;border-bottom:1px solid #E3E8EE;line-height:1.3;color:#1F2833}
+.pc-tb td.k{font-weight:900;color:var(--navy);white-space:nowrap}
+.pc-tb td.v{color:#3B4654}
+.pc-tb tr:nth-child(even) td{background:#F8FAFC}
+.pc-tb tr.ai td{background:#E8F5F3}
+.pc-tb.pc-lg td{font-size:26px;padding:16px 22px;line-height:1.35} .pc-tb.pc-lg th{font-size:25px;padding:14px 22px}
+.pc-why{position:absolute;top:0;width:566px;height:160px;background:var(--bg1);border:1.5px solid var(--line);border-radius:12px;padding:16px 24px}
+.pc-why .no{display:inline-flex;height:34px;padding:0 14px;border-radius:17px;background:var(--navy);color:#fff;font-size:20px;font-weight:900;align-items:center;margin-right:12px}
+.pc-role{position:absolute;left:1090px;width:658px;height:200px;border-radius:14px;background:var(--bg1);border:1.5px solid var(--line);overflow:hidden;padding:0 26px 0 36px}
+.pc-role:before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:var(--navy)}
+.pc-role .rt{font-size:30px;font-weight:900;color:var(--navy);margin-top:24px;letter-spacing:-.02em}
+.pc-role .rb{font-size:28px;color:#2C3846;line-height:1.4;margin-top:10px;letter-spacing:-.02em}
+.pc-role.t:before{background:var(--teal)} .pc-role.t .rt{color:#13675F}
+.pc-role.g:before{background:var(--green)} .pc-role.g .rt{color:var(--green)}
+.pc-chips{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+.pc-chip{height:52px;border-radius:10px;background:#fff;border:1.5px solid #CFE3D7;display:flex;align-items:center;gap:12px;padding:0 16px;font-size:24px;font-weight:700;color:#24432F;white-space:nowrap}
+.pc-chip i{font-style:normal;flex:none;width:34px;height:34px;border-radius:50%;background:var(--green);color:#fff;font-size:19px;font-weight:900;display:inline-flex;align-items:center;justify-content:center}
+.pc-chip u{text-decoration:none;font-size:19px;font-weight:700;color:var(--gray)}
+.pc-fact{position:absolute;left:1210px;width:538px;border-radius:12px;background:var(--bg1);border:1.5px solid var(--line);padding:16px 22px}
+.pc-fact b{display:block;font-size:26px;font-weight:900;color:var(--navy);margin-bottom:4px}
+.pc-fact.o{background:var(--obg);border-color:#F1D6C7} .pc-fact.o b{color:#8A3410}
+.pc-ba{display:flex;align-items:center;gap:16px;height:118px;border-bottom:1.5px solid #E3E8EE}
+.pc-ba .k{width:230px;font-size:28px;font-weight:900;color:var(--navy);line-height:1.25}
+.pc-ba .k small{display:block;font-size:22px;color:#7D8796;font-weight:700}
+.pc-ba .b4{font-size:30px;font-weight:700;color:#98A2AF;text-decoration:line-through;text-decoration-thickness:2px;white-space:nowrap}
+.pc-ba .af{font-size:46px;font-weight:900;color:var(--orange);letter-spacing:-.02em;white-space:nowrap}
+.pc-ba .af small{font-size:24px;color:#5E6977;font-weight:700;margin-left:6px}
+.pc-tl{position:absolute;width:408px;height:200px;border-radius:12px;background:var(--bg1);border:1.5px solid var(--line);padding:20px 24px}
+.pc-tl .v{font-size:58px;font-weight:900;color:var(--navy);letter-spacing:-.03em;line-height:1}
+.pc-tl .v small{font-size:28px;margin-left:4px}
+.pc-tl .c{font-size:24px;font-weight:700;color:#3B4654;margin-top:12px;line-height:1.35}
+</style>
+
+<!-- ================= S25 PART 04 구분장 ================= -->
+<section class="slide part">
+  <div class="left"><img src="img/part4.png" alt=""><div class="shade"></div></div>
+  <div class="kicker">PART</div>
+  <div class="pnum">04</div>
+  <div class="pt">온프레미스 AI 기술</div>
+  <div class="pd">사내 서버에 배치할 수 있는 소형 모델과<br>규칙 판정의 결합</div>
+  <div class="toc" style="gap:16px">
+    <div class="it"><div class="k">01</div><div><div class="tt">한눈에 보는 구조</div><div class="dd">입력 판독 → 규칙 판정 → AI 보조 → 출력</div></div><div class="pp">{{P:아키텍처 ①}}쪽</div></div>
+    <div class="it"><div class="k">02</div><div><div class="tt">구성요소 상세</div><div class="dd">판독·규칙 5개 · AI·저장 4개</div></div><div class="pp">{{P:아키텍처 ②~아키텍처 ③}}쪽</div></div>
+    <div class="it"><div class="k">03</div><div><div class="tt">왜 온프레미스 · 소형 모델인가</div><div class="dd">개인정보 · 비용 · 재현성 · CPU 1대 실측</div></div><div class="pp">{{P:왜 온프레미스}}쪽</div></div>
+    <div class="it"><div class="k">04</div><div><div class="tt">AI가 하는 일 · 하지 않는 일</div><div class="dd">14가지 고르기 · 규칙과 사람의 몫</div></div><div class="pp">{{P:AI가 하는 일}}쪽</div></div>
+    <div class="it"><div class="k">05</div><div><div class="tt">답 해석 평가</div><div class="dd">합성 1,200건 · 285 → 794</div></div><div class="pp">{{P:실험 ①}}쪽</div></div>
+    <div class="it"><div class="k">06</div><div><div class="tt">속도 · 모델 설정 실험</div><div class="dd">15~30초 → 0.23~0.29초</div></div><div class="pp">{{P:실험 ②}}쪽</div></div>
+    <div class="it"><div class="k">07</div><div><div class="tt">규칙 보강 전후 · 검증</div><div class="dd">규칙 16 → 36 · 정답쌍 10/10 유지</div></div><div class="pp">{{P:실험 ③}}쪽</div></div>
+  </div>
+  <div class="brand">croScan · 발표 구성안</div>
+  <aside class="notes">
+    <p>설명: 지금부터 기술 부분입니다. croScan은 사내 서버에 배치할 수 있는 소형 모델과 규칙 판정을 결합했습니다. 구조, 온프레미스를 고른 이유와 실측 속도, 실험 결과를 차례로 보여 드립니다.</p>
+    <p>근거: BLUEPRINT 4절 PART 04, 인수인계 노트 02·09.</p>
+    <p>필요 자료: 없음.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S26-1 한눈에 보는 구조 ================= -->
+<section class="slide">
+  <div class="hd"><h1>아키텍처 ① <span class="sep">|</span><small>한눈에 보는 구조</small></h1><div class="sp"></div><span class="chip">기술 ①</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">규칙이 판정하고 AI는 제안 — <span class="o">네 단계, 서버 한 대 구성</span></div>
+  <div class="body">
+    <div class="abs" style="left:0;top:0;width:1748px;height:60px;display:flex;align-items:center;gap:16px">
+      <span class="pill" style="height:50px;font-size:24px">작업반장 · 안전관리자</span>
+      <svg width="40" height="20" viewBox="0 0 40 20" fill="none" stroke="#1B365D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h32M28 3l7 7-7 7"/></svg>
+      <span style="font-size:26px;font-weight:700;color:#2B3644">브라우저 화면 → 서버 한 대</span>
+    </div>
+    <div class="pc-stp" style="left:0"><div class="h"><i>1</i>입력 판독</div><div class="m">허가서 · 작업계획서<br>PDF 표를<br>칸 단위로 읽기<small>모델 안 씀</small></div></div>
+    <div class="pc-stp" style="left:452px"><div class="h"><i>2</i>규칙 판정</div><div class="m">빠진 정보 질문<br>겹치는 작업 쌍<br>위험 체크리스트<small>같은 입력 → 같은 판정</small></div></div>
+    <div class="pc-stp t" style="left:904px"><div class="h"><i>3</i>AI 보조</div><div class="m">Raon-1 mini가<br>반장 말을 읽고<br>추가 질문 후보 제안<small>결과는 확인 카드로만</small></div></div>
+    <div class="pc-stp g" style="left:1356px"><div class="h"><i>4</i>출력</div><div class="m">반영본 · 추가검토서<br>체크리스트 · 별지<br>협조 문자<small>원본 PDF는 그대로</small></div></div>
+    <svg class="abs" style="left:0;top:0" width="1748" height="480" viewBox="0 0 1748 480" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <g stroke="#1B365D" stroke-width="3"><path d="M398 276h48M436 266l10 10-10 10"/><path d="M850 276h48M888 266l10 10-10 10"/><path d="M1302 276h48M1340 266l10 10-10 10"/></g>
+    </svg>
+    <div class="pc-band" style="top:488px;background:var(--obg);border:1.5px solid #F1D6C7">
+      <span class="tag" style="font-size:20px">사람 확인</span>
+      <span style="font-weight:700;color:#5A3A2C">반장이 확인한 AI 해석만 판정에 들어감 · 모델이 실패하면 규칙만으로 계속</span>
+    </div>
+    <div class="pc-band" style="top:572px;background:var(--bg2)">
+      <span class="tag n" style="font-size:20px">배치</span>
+      <span style="font-weight:700;color:var(--navy)">현재 시연: Ncloud CPU 서버 · 사내 서버에 배치할 수 있는 구성</span>
+    </div>
+  </div>
+  <div class="note pc-n"><b>근거</b> 인수인계 노트 02 §0·§1.2 · AX 아키텍처 설명서 §1·§3</div>
+  <div class="need">필요: 운영 화면 캡처(선택)</div>
+  <aside class="notes">
+    <p>설명: croScan은 네 단계로 동작합니다. 먼저 허가서와 작업계획서 PDF의 표를 칸 단위까지 읽고, 이 단계에는 모델을 쓰지 않습니다. 다음으로 규칙이 빠진 정보를 묻고, 겹치는 작업 쌍과 위험 체크리스트를 판정하며, 같은 입력에는 같은 판정이 나옵니다. AI는 Raon-1 mini가 반장의 자유로운 말을 읽고 추가 질문 후보를 내지만, 결과는 확인 카드로만 나가 반장이 확인한 것만 판정에 들어갑니다. 마지막으로 반영본·추가검토서·체크리스트·현장 게시 별지·협조 문자를 만들고 원본 PDF는 고치지 않습니다. 현재 시연은 Ncloud CPU 서버에서 실행합니다. 사내 서버에 배치할 수 있는 구성이며, 사내 처리는 사내 배포와 내부 모델 주소 설정을 전제로 합니다.</p>
+    <p>근거: 노트 02 §0(부품 구성, 판단은 규칙·모델은 제안·확정은 사람)·§1.2·§1.3(LLM_URL을 바꾸면 그 주소로 서류가 감 — 사내 처리는 내부 주소 설정 전제), AX 설명서 §1(①구조화 추출 → ②가드레일 → ③검증 → ④인간 감독 → ⑤규칙 판정 → ⑥XAI)·§3(페일세이프), 노트 16 §7.4(Ncloud s8-g3, CPU만).</p>
+    <p>필요 자료: 운영 화면 캡처(선택).</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S26-2 구성요소 상세 1/2 (판독·규칙) — 디자인 담당이 2장으로 나눔 ================= -->
+<section class="slide">
+  <div class="hd"><h1>아키텍처 ② <span class="sep">|</span><small>판독 · 규칙 구성요소</small></h1><div class="sp"></div><span class="chip">기술 ①</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">구성요소 9개 중 5개 — <span class="o">판독·판정은 모델 없이 규칙</span>으로</div>
+  <div class="body">
+    <table class="pc-tb pc-lg">
+      <tr><th style="width:290px">구성요소</th><th style="width:600px">하는 일</th><th>수치 · 설정</th></tr>
+      <tr><td class="k">브라우저</td><td>반장 5단계 · 안전관리자 화면</td><td class="v">HTML·CSS·JS 5개 파일 · 빌드 없음</td></tr>
+      <tr><td class="k">FastAPI 서버</td><td>끝점 · 접근 통제 · 모듈 연결</td><td class="v">34개 모듈 · 끝점 문서 기준 61<br>(11-02 앱 사본 64)</td></tr>
+      <tr><td class="k">PDF 판독</td><td>표 구조와 칸 값 읽기</td><td class="v">한컴 OpenDataLoader(Java 17)<br>+ PyMuPDF</td></tr>
+      <tr><td class="k">규칙 엔진</td><td>질문 · 쌍 판정 · 체크리스트</td><td class="v">질문 46종 · 쌍 규칙 36개<br>카탈로그 86항목</td></tr>
+      <tr><td class="k">근거 검색</td><td>법령 · KOSHA · 팀 자료 인용</td><td class="v">BM25 · 출처 11개 · 634조각<br>인용 검사</td></tr>
+    </table>
+    <div class="bar" style="left:0;right:0;bottom:24px"><div class="l">규칙 영역</div><div class="r"><span>PDF 판독과 규칙 엔진에는 모델이 들어가지 않음 — <span class="o">같은 입력이면 같은 판정</span></span></div></div>
+  </div>
+  <div class="note pc-n"><b>근거</b> 노트 02·03·09·16 · outB §1 · AX 설명서 §3 · 상세 배포는 부록 A13</div>
+  <div class="need">필요: 사내 이전 시 서버 사양 확인</div>
+  <aside class="notes">
+    <p>설명: 앞 장의 네 단계를 이루는 구성요소입니다. PDF 판독과 규칙 엔진에는 모델이 들어가지 않습니다. 모델 Raon-1 mini는 llama.cpp로 CPU에서 돌고, 모든 호출은 LLM 게이트웨이 한 곳을 지나며 JSON 스키마·기한·우선순위·원문 대조 검사를 받습니다. 기한은 호출마다 다르며 30~120초이고, 반장 답 읽기(TURN)는 60초입니다. 회사 로그인은 붙일 자리만 있고 실제 연결은 하지 않았으며, 지금은 시연 모드입니다.</p>
+    <p>근거: 노트 02 §1.2(부품)·04b(HTTP 끝점 문서 기준 61개 = /api 60 + /; 11-02 앱 사본 계수 64개, outB §1), 노트 03 §12·§13(llm.py, 호출별 기한, 슬롯 1·우선순위 FG>ASKED>PREPARED>WARM), 노트 03 §12.2(질문 46종), outB §1(쌍 규칙 36·체크리스트 86), 노트 09 §1.1(RAG 출처 11·634조각, BM25), outB §5(Q4_K_M GGUF 약 19.7GB, 문맥 16384), 노트 10(Raon-1 mini preview, KRAFTON, Apache 2.0), 노트 02 §1.2(nginx + oauth2-proxy 로그인 자리).</p>
+    <p>필요 자료: 사내 이전 시 서버 사양 확인.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S26-3 구성요소 상세 2/2 (AI·저장·로그인) ================= -->
+<section class="slide">
+  <div class="hd"><h1>아키텍처 ③ <span class="sep">|</span><small>AI · 저장 구성요소</small></h1><div class="sp"></div><span class="chip">기술 ①</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">모델은 <span class="o">게이트웨이 한 곳 뒤</span>에서만 — 스키마·기한·원문 대조 검사</div>
+  <div class="body">
+    <table class="pc-tb pc-lg">
+      <tr><th style="width:290px">구성요소</th><th style="width:600px">하는 일</th><th>수치 · 설정</th></tr>
+      <tr class="ai"><td class="k" style="color:#13675F">LLM 게이트웨이</td><td>스키마 · 기한 · 우선순위 · 원문 대조</td><td class="v">호출별 기한 30~120초<br>(TURN 60초) · 슬롯 1</td></tr>
+      <tr class="ai"><td class="k" style="color:#13675F">Raon-1 mini</td><td>반장 말 읽기 · 추가 질문 후보</td><td class="v">llama.cpp · CPU · Q4_K_M 약 20GB<br>문맥 16,384</td></tr>
+      <tr><td class="k">저장소</td><td>검토 · 제출 기록, 원본 보존</td><td class="v">SQLite + PDF · 원본 해시<br>제출본 30일</td></tr>
+      <tr><td class="k">로그인 자리</td><td>회사 SSO를 붙일 자리</td><td class="v">nginx + oauth2-proxy<br>실연결 전, 지금은 시연 모드</td></tr>
+    </table>
+    <div class="bar t" style="left:0;right:0;bottom:24px"><div class="l">AI 영역</div><div class="r"><span>반장 말 읽기·질문 후보만 — <span class="o">반장이 확인한 것만 판정에 반영</span></span></div></div>
+  </div>
+  <div class="note pc-n"><b>근거</b> 노트 02·03·10·16 · outB §1·§5 · AX 설명서 §3</div>
+  <div class="need">필요: 사내 이전 시 서버 사양 확인</div>
+  <aside class="notes">
+    <p>설명: 앞 장의 네 단계를 이루는 구성요소입니다. PDF 판독과 규칙 엔진에는 모델이 들어가지 않습니다. 모델 Raon-1 mini는 llama.cpp로 CPU에서 돌고, 모든 호출은 LLM 게이트웨이 한 곳을 지나며 JSON 스키마·기한·우선순위·원문 대조 검사를 받습니다. 기한은 호출마다 다르며 30~120초이고, 반장 답 읽기(TURN)는 60초입니다. 회사 로그인은 붙일 자리만 있고 실제 연결은 하지 않았으며, 지금은 시연 모드입니다.</p>
+    <p>근거: 노트 02 §1.2(부품)·04b(HTTP 끝점 문서 기준 61개 = /api 60 + /; 11-02 앱 사본 계수 64개, outB §1), 노트 03 §12·§13(llm.py, 호출별 기한, 슬롯 1·우선순위 FG>ASKED>PREPARED>WARM), 노트 03 §12.2(질문 46종), outB §1(쌍 규칙 36·체크리스트 86), 노트 09 §1.1(RAG 출처 11·634조각, BM25), outB §5(Q4_K_M GGUF 약 19.7GB, 문맥 16384), 노트 10(Raon-1 mini preview, KRAFTON, Apache 2.0), 노트 02 §1.2(nginx + oauth2-proxy 로그인 자리).</p>
+    <p>필요 자료: 사내 이전 시 서버 사양 확인.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S27-1 왜 온프레미스 · 실측 ================= -->
+<section class="slide">
+  <div class="hd"><h1>왜 온프레미스 · 소형 모델인가</h1><div class="sp"></div><span class="chip">기술 ②</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">사내에 둘 수 있는 구성 — <span class="o">CPU 서버 1대에서 실제 속도를 실측</span></div>
+  <div class="body">
+    <div class="pc-why" style="left:0"><div style="display:flex;align-items:center"><span class="no">보안 · 개인정보</span><span class="pc-t">사내 배치 가능</span></div><div class="pc-s" style="margin-top:12px">허가서에 이름·전화·현장 정보<br>사내 배포 시 서류가 사내에</div></div>
+    <div class="pc-why" style="left:591px"><div style="display:flex;align-items:center"><span class="no" style="background:var(--green)">비용 · 운영</span><span class="pc-t">GPU 없이 CPU 1대</span></div><div class="pc-s" style="margin-top:12px">현재 시연 Ncloud CPU 서버<br>외부 AI API 요금 없음</div></div>
+    <div class="pc-why" style="left:1182px"><div style="display:flex;align-items:center"><span class="no" style="background:var(--teal)">통제 · 재현</span><span class="pc-t">같은 입력 → 같은 판정</span></div><div class="pc-s" style="margin-top:12px">모델 파일 · 빌드 커밋 고정<br>판정은 규칙이 담당</div></div>
+
+    <div class="card" style="position:absolute;left:0;top:184px;width:1748px;height:466px;background:#fff">
+      <div class="tab">CPU 서버 1대 실측 · 초</div>
+      <svg width="1748" height="466" viewBox="0 0 1748 466" style="position:absolute;left:0;top:0">
+        <text x="1720" y="50" font-size="22" fill="#7D8796" text-anchor="end">막대 = 측정 범위 · 반장은 AI를 기다리지 않고 다음 질문에 답함</text>
+        <g font-size="26" fill="#2B3644" font-weight="700">
+          <text x="34" y="106">답 → 다음 질문 표시</text>
+          <text x="34" y="156">미리 읽은 프롬프트 처리</text>
+          <text x="34" y="206">허가서만 업로드 분석(5건)</text>
+          <text x="34" y="256">「왜?」 자유 질문</text>
+          <text x="34" y="306">AI 쌍 검토(운영 3쌍)</text>
+          <text x="34" y="356">동시 사용자 4명 · 1인 중앙값</text>
+          <text x="34" y="406">허가서 + 계획서 분석(1건)</text>
+        </g>
+        <!-- x 460 → 1660 = 0~40초 (30px/초) -->
+        <g stroke="#E3E8EE" stroke-width="1.5"><line x1="460" y1="76" x2="460" y2="420"/><line x1="760" y1="76" x2="760" y2="420"/><line x1="1060" y1="76" x2="1060" y2="420"/><line x1="1360" y1="76" x2="1360" y2="420"/><line x1="1660" y1="76" x2="1660" y2="420"/></g>
+        <g font-size="20" fill="#8892A0" text-anchor="middle"><text x="460" y="446">0</text><text x="760" y="446">10</text><text x="1060" y="446">20</text><text x="1360" y="446">30</text><text x="1660" y="446">40초</text></g>
+        <rect x="460" y="84" width="9" height="28" rx="3" fill="#D4561F"/>
+        <rect x="514" y="134" width="15" height="28" rx="4" fill="#D4561F"/><rect x="460" y="145" width="54" height="7" rx="3" fill="#F3C8B3"/>
+        <rect x="610" y="184" width="330" height="28" rx="6" fill="#1B365D"/><rect x="460" y="195" width="150" height="7" rx="3" fill="#C9D3E1"/>
+        <rect x="730" y="234" width="150" height="28" rx="6" fill="#1B365D"/><rect x="460" y="245" width="270" height="7" rx="3" fill="#C9D3E1"/>
+        <rect x="1300" y="284" width="90" height="28" rx="6" fill="#1B365D"/><rect x="460" y="295" width="840" height="7" rx="3" fill="#C9D3E1"/>
+        <rect x="460" y="334" width="966" height="28" rx="6" fill="#1B365D"/>
+        <rect x="460" y="384" width="1140" height="28" rx="6" fill="#1B365D"/>
+        <g font-size="26" font-weight="900" fill="#1B365D">
+          <text x="482" y="107" fill="#D4561F">0.23~0.29초</text>
+          <text x="542" y="157" fill="#D4561F">1.8~2.3초</text>
+          <text x="954" y="207">5~16초</text>
+          <text x="894" y="257">9~14초</text>
+          <text x="1404" y="307">28~31초</text>
+          <text x="1440" y="357">32.2초 <tspan font-size="22" font-weight="700" fill="#5E6977">실패 0</tspan></text>
+          <text x="1614" y="407">38초</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="note pc-n"><b>근거</b> AI도입계획 부록 · 진행정리 · AX 설명서 §5 · 노트 09 §3.1 — 서버 측정</div>
+  <div class="need">필요: GPU 이전 시 재측정 · 사내 보안 심사 기준</div>
+  <aside class="notes">
+    <p>설명: 허가서에는 작업자 이름과 전화번호, 현장 정보가 들어 있어 모델을 서버 안의 컨테이너로 두었습니다. 현재 시연은 Ncloud CPU 서버에서 실행하며, 사내 서버에 배치할 수 있는 구성이고 사내 처리는 사내 배포와 내부 모델 주소 설정을 전제로 합니다. GPU 없이 8 vCPU·32GB CPU 서버 한 대에서 실제로 쟀습니다. 반장이 답을 보내면 다음 질문은 0.23~0.29초에 뜨고, AI 해석은 뒤에서 계산해 카드로 붙기 때문에 반장은 기다리지 않습니다. 업로드 분석은 허가서만 5~16초, 계획서까지 38초였고, 4명이 동시에 써도 실패는 없었습니다. GPU 이전은 계획만 있었고 하지 않았습니다.</p>
+    <p>근거: AI도입계획 부록 3조각(허가서만 5건 5~16초, 허가서+계획서 1건 38초)·5조각(자유 질문 9~14초), 진행정리 2026-10-31 §5(운영 AI 쌍 검토 3쌍 각 28~31초), AX 설명서 §5(동시 사용자 4명 1인 중앙값 32.2초·실패 0), 노트 09 §3.1(답→다음 질문 0.23~0.29초, 프롬프트 284토큰 9초 → 38토큰 1.8~2.3초), 노트 02 §1.3(개인정보 때문에 같은 서버 컨테이너), 노트 16 §7.4(s8-g3 8 vCPU·32GB), outC §5(GPU 이전 미실시). 원자료는 서버 측정이며 로컬 원자료 없음.</p>
+    <p>필요 자료: GPU 이전 시 재측정, 사내 보안 심사 기준.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S27-2 AI가 하는 일 · 하지 않는 일 ================= -->
+<section class="slide">
+  <div class="hd"><h1>AI가 하는 일 · 하지 않는 일</h1><div class="sp"></div><span class="chip">기술 ②</span><span class="badge"><b>평가항목</b><i></i>실현 가능성 · 창의성</span></div>
+  <div class="key">AI는 서버가 준 보기 안에서 고르기만 — <span class="o">판정은 규칙, 확정은 사람</span></div>
+  <div class="body">
+    <div class="card gr" style="position:absolute;left:0;top:0;width:1060px;height:650px">
+      <div class="tab g">AI가 하는 일 14가지</div>
+      <div class="pc-chips" style="position:absolute;left:24px;right:24px;top:72px">
+        <div class="pc-chip"><i>1</i>반장 말 읽기</div><div class="pc-chip"><i>2</i>질문 미리 읽히기</div>
+        <div class="pc-chip"><i>3</i>정정 문장 읽기 <u>꺼 둠</u></div><div class="pc-chip"><i>4</i>다음 질문 문구 고르기</div>
+        <div class="pc-chip"><i>5</i>뜻 한 번 더 대조</div><div class="pc-chip"><i>6</i>업로드 서류 분석</div>
+        <div class="pc-chip"><i>7</i>고친 칸 다시 읽기</div><div class="pc-chip"><i>8</i>체크리스트 추가 제안</div>
+        <div class="pc-chip"><i>9</i>모르는 칸 이름 짝짓기</div><div class="pc-chip"><i>10</i>계획서 연결 제안</div>
+        <div class="pc-chip"><i>11</i>허가 검토 신호</div><div class="pc-chip"><i>12</i>규칙 밖 검토 권장</div>
+        <div class="pc-chip"><i>13</i>「왜?」 자유 질문</div><div class="pc-chip"><i>14</i>협조 문자 · 게시 문안</div>
+      </div>
+      <div class="pc-s" style="position:absolute;left:28px;right:24px;bottom:20px;color:#24432F;font-weight:700">결과는 「AI 제안」 표시와 함께 나가고, 사람이 확인해야 반영</div>
+    </div>
+    <div class="pc-role t" style="top:0"><div class="rt">AI · 읽고 제안</div><div class="rb">반장 말 → 확인 카드<br>모호함에 추가 질문 후보</div></div>
+    <div class="pc-role" style="top:225px"><div class="rt">규칙 · 판정과 질문 관리</div><div class="rb">쌍 판정 · 점수 · 순위<br>질문 카탈로그 · 순서 · 한도</div></div>
+    <div class="pc-role g" style="top:450px"><div class="rt">사람 · 확인과 승인</div><div class="rb">반장이 AI 해석을 확인<br>승인 · 현장 확인은 기존 담당자</div></div>
+  </div>
+  <div class="note pc-n"><b>근거</b> 노트 03 §12.1·§12.3 · 노트 02 §1.4 · AX 설명서 §2</div>
+  <div class="need">필요: 없음</div>
+  <aside class="notes">
+    <p>설명: AI가 맡는 일은 14가지이고, 모두 서버가 준 번호와 보기 안에서 고르는 일입니다. 화면에 보이는 문장은 서버의 틀로 만들고, AI 결과는 「AI 제안」 표시와 함께 나가 사람이 확인해야 반영됩니다. 기본 질문 카탈로그·순서·한도는 규칙이 관리합니다. AI는 규칙이 묻지 않은 모호함에 대해 분석당 최대 2개의 추가 질문 후보를 제안합니다. 쌍 판정·점수·순위는 규칙이 하고, 승인과 현장 확인은 기존 담당자가 합니다. 정정 문장 읽기는 지금 꺼 두었습니다.</p>
+    <p>근거: 노트 03 §12.1(라온이 맡는 작업 14개: TURN·TURN_WARM·NORMALIZE(꺼짐)·PHRASE·CRITIQUE·UPLOAD_ANALYZE·DISCOVER_DELTA·CHECKLIST·MAP_CELL·LINK·PERMIT_SIGNAL·PAIR_REVIEW·EXPLAIN·WRITE)·§12.3(맡지 않는 일: 판정·승인·일정·작업 차단·쌍 점수·순위, 질문 목록·순서, PDF 판독, 화면 문장, 반장 대신 답하기, 「해당 없음」 만들기), 노트 02 §1.4(AI 질문 분석 1회당 최대 2개, 검토 1건 최대 8개), AX 설명서 §2(판정을 LLM에 맡기지 않는 이유).</p>
+    <p>필요 자료: 없음.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S28-1 답 해석 평가 ================= -->
+<section class="slide">
+  <div class="hd"><h1>실험 ① <span class="sep">|</span><small>답 해석 평가</small></h1><div class="sp"></div><span class="chip">기술 ③</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">팀 합성 자연어 1,200건 — 규칙만 <span class="n">285</span> → 규칙+AI <span class="o">794</span></div>
+  <div class="body">
+    <div class="card" style="position:absolute;left:0;top:0;width:1180px;height:650px;background:#fff">
+      <div class="tab">기대 정보 1,000개 중 판독 결과</div>
+      <div class="abs" style="right:28px;top:22px;display:flex;gap:22px;font-size:24px;font-weight:700;color:#3B4654">
+        <span style="display:flex;align-items:center;gap:8px"><i style="display:inline-block;width:24px;height:18px;border-radius:3px;background:#B9C2CE"></i>규칙만</span>
+        <span style="display:flex;align-items:center;gap:8px"><i style="display:inline-block;width:24px;height:18px;border-radius:3px;background:#1B365D"></i>규칙+AI</span>
+      </div>
+      <svg width="1180" height="650" viewBox="0 0 1180 650" style="position:absolute;left:0;top:0">
+        <!-- x 230 → 1030 = 0~1000 (0.8px/건) -->
+        <g stroke="#EDF0F4" stroke-width="1.5"><line x1="230" y1="90" x2="230" y2="590"/><line x1="430" y1="90" x2="430" y2="590"/><line x1="630" y1="90" x2="630" y2="590"/><line x1="830" y1="90" x2="830" y2="590"/><line x1="1030" y1="90" x2="1030" y2="590"/></g>
+        <g font-size="20" fill="#A5AEBB" text-anchor="middle"><text x="230" y="616">0</text><text x="430" y="616">250</text><text x="630" y="616">500</text><text x="830" y="616">750</text><text x="1030" y="616">1,000</text></g>
+        <g font-size="30" font-weight="900" fill="#1B365D"><text x="34" y="138">맞음</text><text x="34" y="258">놓침</text><text x="34" y="378">틀림</text><text x="34" y="498">금지</text></g>
+        <g font-size="22" fill="#7D8796" font-weight="700"><text x="34" y="168">바르게 읽음</text><text x="34" y="288">다시 물음</text><text x="34" y="408">값이 다름</text><text x="34" y="528">남의 작업 · 안 한 말</text></g>
+        <rect x="230" y="104" width="228" height="34" rx="6" fill="#B9C2CE"/><text x="470" y="132" font-size="30" font-weight="900" fill="#5E6977">285</text>
+        <rect x="230" y="144" width="635" height="34" rx="6" fill="#1B365D"/><text x="877" y="172" font-size="30" font-weight="900" fill="#1B365D">794</text>
+        <rect x="230" y="224" width="572" height="34" rx="6" fill="#B9C2CE"/><text x="814" y="252" font-size="30" font-weight="900" fill="#5E6977">715</text>
+        <rect x="230" y="264" width="165" height="34" rx="6" fill="#1B365D"/><text x="407" y="292" font-size="30" font-weight="900" fill="#1B365D">206</text>
+        <rect x="230" y="344" width="3" height="34" fill="#B9C2CE"/><text x="245" y="372" font-size="30" font-weight="900" fill="#5E6977">0</text>
+        <rect x="230" y="384" width="42" height="34" rx="6" fill="#1B365D"/><text x="284" y="412" font-size="30" font-weight="900" fill="#1B365D">53</text>
+        <rect x="230" y="464" width="3" height="34" fill="#B9C2CE"/><text x="245" y="492" font-size="30" font-weight="900" fill="#5E6977">0</text>
+        <rect x="230" y="504" width="3" height="34" fill="#1B365D"/><text x="245" y="532" font-size="30" font-weight="900" fill="#1B365D">0</text>
+      </svg>
+    </div>
+    <div class="pc-fact" style="top:0;height:150px"><b>평가 구성</b><div class="pc-s">팀 작성 30 시나리오 × 값 5 × 말투 8 · 10/31 코드</div></div>
+    <div class="pc-fact" style="top:166px;height:150px"><b>틀림 53 · 실패 6</b><div class="pc-s">값·주체·시점 틀림 0 · 「없음」 표기 차이(수작업 분류)</div></div>
+    <div class="pc-fact" style="top:332px;height:150px"><b>금지 0의 범위</b><div class="pc-s">10/31 코드 판독 기준 · 하류 처리의 주체 오류 0은 아님</div></div>
+    <div class="pc-fact o" style="top:498px;height:152px"><b>한계</b><div class="pc-s">11/01 보강 뒤 재평가 안 함 · 현장 정확도 아님</div></div>
+  </div>
+  <div class="note pc-n"><b>근거</b> 진행정리 2026-10-31 §1 · 노트 09 §2·§3.1 · AX 설명서 §5 · outB §5</div>
+  <div class="need">필요: 보강 후 1,200건 재평가 여부 결정</div>
+  <aside class="notes">
+    <p>설명: 소형 모델을 붙였을 때 실제로 나아졌는지 같은 조건에서 비교했습니다. 팀이 작성한 합성 자연어 1,200건의 답 해석 평가에서 기대 정보 1,000개 중 규칙만으로는 285개, 규칙에 AI와 비평 단계를 더하자 794개를 바르게 읽었고, 다시 물어야 하는 놓침은 715개에서 206개로 줄었습니다. 남의 작업이나 하지 않은 말을 반장 사실로 적은 금지 판독은 0건이었는데, 10/31 코드의 판독 기준이며 하류 처리의 주체 오류가 0이라는 뜻은 아닙니다. 틀림 53개는 원자료상 값·주체·시점이 틀린 경우가 0이고, 「없음」을 글로 적은 표기 차이라는 분류는 사람이 검토한 결과입니다. 11월 1일 보강 뒤 1,200건은 다시 돌리지 않았습니다.</p>
+    <p>근거: 진행정리 2026-10-31 §1(규칙만 285/0/715/0, 통합 794/53/206/0, 실패 6 = 60초 초과), 노트 09 §2(1,200 짜임: 시나리오 30 → 값 ×5 = 150 → 말투 ×8 = 1,200, 기대 제안 1,000, 제안 금지 글 240)·§3.1, AX 설명서 §5, outB §5(같은 1,200건 통합, 값·주체·시점 틀림 0은 원자료 기록, 53건 분류는 사람 검토).</p>
+    <p>필요 자료: 보강 후 1,200건 재평가 여부 결정.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S28-2 속도 · 모델 설정 ================= -->
+<section class="slide">
+  <div class="hd"><h1>실험 ② <span class="sep">|</span><small>속도 · 모델 설정</small></h1><div class="sp"></div><span class="chip">기술 ③</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">CPU에서도 기다리지 않게 — <span class="o">미리 계산하고, 생각 끔 + 검수 예시</span></div>
+  <div class="body">
+    <div class="card" style="position:absolute;left:0;top:0;width:860px;height:500px;background:#fff">
+      <div class="tab t">기다림 줄이기</div>
+      <div style="position:absolute;left:30px;right:30px;top:76px">
+        <div class="pc-ba"><div class="k">답 → 다음 질문<small>선계산 · 비차단</small></div><div class="b4">15~30초</div><svg width="34" height="22" viewBox="0 0 30 20" fill="none" stroke="#D4561F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h22M18 3l7 7-7 7"/></svg><div class="af">0.23~0.29<small>초</small></div></div>
+        <div class="pc-ba"><div class="k">프롬프트 처리<small>284 → 38토큰</small></div><div class="b4">9초</div><svg width="34" height="22" viewBox="0 0 30 20" fill="none" stroke="#D4561F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h22M18 3l7 7-7 7"/></svg><div class="af">1.8~2.3<small>초</small></div></div>
+        <div class="pc-s" style="margin-top:22px">질문이 보일 때 미리 읽어 두는 KV 캐시 · AI 카드 자체가 0.3초에 나오는 것은 아님</div>
+      </div>
+    </div>
+    <div class="card" style="position:absolute;left:888px;top:0;width:860px;height:500px;background:#fff">
+      <div class="tab gy">모델 설정 실험 2건 · 따로 비교</div>
+      <div style="position:absolute;left:26px;right:26px;top:70px">
+        <div class="pc-t" style="font-size:24px;margin-bottom:8px">짧은 답 · 같은 답 1건 · 정답 3개</div>
+        <table class="pc-tb">
+          <tr><th>설정</th><th style="text-align:right">시간</th><th>결과</th></tr>
+          <tr><td class="k">생각 무제한</td><td style="text-align:right">123초</td><td class="v">빈 답</td></tr>
+          <tr><td class="k">생각 끔 · 예시 0</td><td style="text-align:right">2.4초</td><td class="v">값 없음</td></tr>
+          <tr class="ai"><td class="k" style="color:#13675F">생각 끔 · 검수 예시 1</td><td style="text-align:right;font-weight:900">8.7~16.4초</td><td class="v">정답 2</td></tr>
+        </table>
+        <div class="pc-t" style="font-size:24px;margin:18px 0 6px">별도 긴 답 실험 · 제안 3~5개</div>
+        <div class="pc-s">생각 상한 128: 88초 · 잘림 → 생각 끔 + 예시 · 캐시: <b>18~22초</b></div>
+      </div>
+    </div>
+    <div class="abs" style="left:0;top:524px;width:1748px;height:110px;display:flex;border-radius:12px;overflow:hidden;background:var(--bg2)">
+      <div style="width:200px;flex:none;background:var(--navy);color:#fff;font-size:30px;font-weight:900;display:flex;align-items:center;justify-content:center">채택</div>
+      <div style="flex:1;display:flex;align-items:center;padding:0 30px;font-size:28px;font-weight:700;color:var(--navy)">답 읽기 = 생각 끔 + 검수 예시 · 온도 0 · 두 실험은 서로 다른 답이라 합치지 않음</div>
+    </div>
+  </div>
+  <div class="note pc-n"><b>근거</b> 노트 09 §3.1·§3.2 · AI도입계획 부록 「최종 검수 기록」·1조각 · outB §5</div>
+  <div class="need">필요: GPU 이전 시 재측정</div>
+  <aside class="notes">
+    <p>설명: CPU에서 모델이 느리기 때문에 구조를 바꿨습니다. 질문이 화면에 뜰 때 그 질문 목록을 미리 모델에 읽혀 두고, 반장의 답을 기다리지 않고 다음 질문을 띄워 기다림을 15~30초에서 0.23~0.29초로 줄였습니다. 다만 AI 해석 카드 자체가 0.3초에 나오는 것은 아니고, 카드는 뒤에서 계산되는 대로 붙습니다. 모델 설정은 두 실험을 따로 했습니다. 짧은 답 실험에서는 생각 무제한이 123초에 빈 답을 냈고, 생각 끔+검수 예시 1개는 8.7~16.4초에 정답 2개를 냈습니다. 별도의 긴 답 실험에서는 생각 상한 128이 88초에서 잘렸고, 생각 끔+예시·캐시가 18~22초였습니다. 그래서 답 읽기는 생각 끔+검수 예시로 정했습니다.</p>
+    <p>근거: 노트 09 §3.1(답→다음 질문 15~30초 → 0.23~0.29초, 프롬프트 284토큰·9초 → 38토큰·1.8~2.3초)·§3.2(짧은 답: 생각 무제한·출력 700 → 123초 빈 답, 생각 끔·예시 0 → 2.4초 값 없음, 생각 끔·검수 예시 1 → 8.7~16.4초 2개, 생각 상한 128·예시 1 → 30~34초 3개; 긴 답: 128+예시 1 → 88초·608토큰 상한 잘림, 생각 끔+예시 1 캐시 있음 18~22초·캐시 없음 31초; 온도 0, 같은 답 두 번 같은 결과), AI도입계획 부록 「최종 검수 기록」·1조각 실측, outB §5(두 실험을 단순 속도 개선율로 비교하지 않음).</p>
+    <p>필요 자료: GPU 이전 시 재측정.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S28-3 규칙 보강 전후 · 검증 ================= -->
+<section class="slide">
+  <div class="hd"><h1>실험 ③ <span class="sep">|</span><small>규칙 보강 전후 · 검증</small></h1><div class="sp"></div><span class="chip">기술 ③</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">규칙을 16 → 36개로 늘려도 — <span class="o">정답쌍 10/10 유지, 근접 확정 경보 0</span></div>
+  <div class="body">
+    <div class="card" style="position:absolute;left:0;top:0;width:880px;height:650px;background:#fff">
+      <div class="tab t">합성 시연일 · 같은 후보 445쌍</div>
+      <div style="position:absolute;left:26px;right:26px;top:72px">
+        <table class="pc-tb">
+          <tr><th>지표</th><th style="text-align:right">이전 16규칙</th><th style="text-align:right">현재 36규칙</th></tr>
+          <tr><td class="k">경보 전체</td><td style="text-align:right">12쌍</td><td style="text-align:right">26쌍</td></tr>
+          <tr><td class="k">1 · 2 · 3순위</td><td style="text-align:right">8 · 2 · 2</td><td style="text-align:right">8 · 2 · 16</td></tr>
+          <tr><td class="k">정답쌍 발견</td><td style="text-align:right">10/10</td><td style="text-align:right;color:var(--green);font-weight:900">10/10</td></tr>
+          <tr><td class="k">순위까지 일치</td><td style="text-align:right">8/10</td><td style="text-align:right">8/10</td></tr>
+          <tr><td class="k">근접 5쌍 확정 경보</td><td style="text-align:right">0</td><td style="text-align:right;color:var(--green);font-weight:900">0</td></tr>
+          <tr><td class="k">정답표 밖 경보</td><td style="text-align:right">1쌍</td><td style="text-align:right;color:var(--orange);font-weight:900">13쌍</td></tr>
+        </table>
+        <div class="pc-s" style="margin-top:18px">늘어난 14쌍은 모두 3순위(잔류·거리 미확인 → 판정보류)<br>경보 증가 ≠ 안전 향상 · 13쌍의 진위는 미확정</div>
+      </div>
+    </div>
+    <div class="pc-tl" style="left:910px;top:0"><div class="v">32<small>+2 / 34</small></div><div class="c">11/01 마지막 전체 실행<br>로컬 32 · 별도 2 통과</div></div>
+    <div class="pc-tl" style="left:1340px;top:0"><div class="v">108<small>건</small></div><div class="c">사용자 의견 전부 처리<br>수용 93 · 부분 15</div></div>
+    <div class="pc-tl" style="left:910px;top:222px"><div class="v">1,993<small>/1,993</small></div><div class="c">PDF 판독 정답표<br>18파일 · 27쪽</div></div>
+    <div class="pc-tl" style="left:1340px;top:222px"><div class="v">0<small>픽셀</small></div><div class="c">제출본의 양식 칸 밖 변화<br>원본 양식 무손상</div></div>
+    <div class="pc-fact o" style="left:910px;top:444px;width:838px;height:206px"><b>한계</b><div class="pc-s">합성 시연 자료 기준 · 현장 재현율 아님<br>11/02 앱 사본 도구 35개 전체 재실행은 아님<br>실제 사용자 시험 전</div></div>
+  </div>
+  <div class="note pc-n"><b>근거</b> 노트 09 §3.1·§3.9·§5 · 팀 66장 자료 p.59 · 진행정리 §5 · outB §6</div>
+  <div class="need">필요: 정답표 밖 13쌍 현업 판정</div>
+  <aside class="notes">
+    <p>설명: 조사자료를 한 줄씩 대조해 쌍 판정 규칙을 16개에서 36개로 늘렸습니다. 같은 합성 시연일 후보 445쌍에서 정답쌍 10개는 그대로 모두 찾았고, 순위까지 맞은 것도 8개로 같았으며, 경보하면 안 되는 근접 5쌍에는 여전히 확정 경보를 내지 않았습니다. 대신 경보가 12쌍에서 26쌍으로 늘었고, 늘어난 14쌍은 모두 「서류만으로는 모르니 확인하라」는 3순위입니다. 경보가 늘었다고 더 안전해진 것은 아니며, 정답표 밖 13쌍이 진짜 위험인지 오경보인지는 아직 정하지 않았습니다. 시험은 11/01 마지막 전체 실행에서 34종 중 로컬 32종과 별도 실행 2종이 통과했고, 11/02 앱 사본의 도구 35개를 모두 다시 돌린 것은 아닙니다.</p>
+    <p>근거: 노트 09 §3.1(기준본 v1 16규칙 대 현재 36규칙, 11-02 재실행: 경보 12→26, 1·2·3순위 8·2·2 → 8·2·16, 정답 10/10, 순위 8/10, 근접 5쌍 확정 0→0, 정답표 밖 1→13)·§3.9(check_extract 1,993/1,993, 18파일 27쪽; 제출본 칸 밖 픽셀 변화 0, 위 24pt·칸 둘레 2pt 제외)·§5(의견 108건 = #1~#109 중 #32 없음, 수용 93·부분 15), 팀 66장 자료 p.59, 진행정리 §5(check_* 34종 중 로컬 32·인자 필요 2종 별도 통과), outB §6(11/02 도구 35개, 전체 재실행 결과 아님).</p>
+    <p>필요 자료: 정답표 밖 13쌍에 대한 현업 판정.</p>
+  </aside>
+  {{FT}}
+</section>

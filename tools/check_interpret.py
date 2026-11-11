@@ -2,7 +2,7 @@
 
   python tools/check_interpret.py          (on the server: needs the ODL reader, like make_demo_day)
 
-The permit 0731 (hot work) with 작업일시·작업장소·작업인원 emptied, as in the QA report, answered once with the reporter's
+The permit 6733 (hot work) with 작업일시·작업장소·작업인원 emptied, as in the QA report, answered once with the reporter's
 sentence. What must hold: the place, the time and the workers are taken for their questions with the clause they came
 from; '12–14' after a BAY is never a time; the watcher goes to the 별지 and is not added to 작업인원; a condition, a hedge
 or another team's work is not taken; the source answer's own value is its part only; the questions answered are not
@@ -51,7 +51,7 @@ def run(fields, answers, confirm=True, sid=None):
     return s
 
 
-d = next(x for x in load("permits.json")["permits"] if x["permit_no"].endswith("0731"))
+d = next(x for x in load("permits.json")["permits"] if x["permit_no"].endswith("6733"))
 doc = extract.build(DIR / "허가서" / permit_name(d), d["kind"])
 EMPTY = {f"{a}_{i}" for i in range(1, 8) for a in ("date", "from", "to")} | {"location", "location_detail", "workers"}
 F = blank(doc["fields"], EMPTY)

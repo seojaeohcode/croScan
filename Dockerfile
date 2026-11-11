@@ -23,6 +23,7 @@ RUN pip install -r requirements.txt
 
 COPY server ./server
 COPY web ./web
+COPY ["samples/시연_하루", "./samples/시연_하루"]
 
 # run as a normal user; /tmp holds the uploaded PDF and OpenDataLoader's output while a request runs.
 # /app/data keeps the QA reports (mount a volume there so they survive a rebuild)

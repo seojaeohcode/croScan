@@ -32,13 +32,13 @@ NOTE = ("업로드한 원본 파일은 바꾸지 않았습니다. 앞의 반영�
         "파란 글씨(①…)로 적었고, 변경 내역과 양식에 넣지 않은 내용은 아래에 적었습니다. 당일 작성·서명·승인 칸에는 적지 않습니다. "
         "전산 원본의 정정·전산승인은 생산부서 승인권한자가, 현장 확인과 (2중점검 Y 작업의) 대면허가는 안전 측이 기존 절차대로 합니다. croScan은 승인하지 않습니다.")
 ROOT = Path(__file__).resolve().parent.parent
-LOGO = ROOT / "web" / "hd_logo.png"
+LOGO = ROOT / "web" / "croscan_logo.png"
 FONTS = [(Path("/usr/share/fonts/truetype/nanum/NanumGothic.ttf"), Path("/usr/share/fonts/truetype/nanum/NanumGothicBold.ttf")),
          (Path("C:/Windows/Fonts/malgun.ttf"), Path("C:/Windows/Fonts/malgunbd.ttf"))]
 
 # page 1 geometry (pt): frame x 30–565 from y 78, logo at the same place, 0.6pt black lines
 X0, X1, TOP, BOTTOM, LINE = 30, 565, 78, 812, 0.6
-LOGO_RECT = pymupdf.Rect(33, 30, 227, 64)
+LOGO_RECT = pymupdf.Rect(33, 31.6, 33 + 28.8 * 538 / 128, 60.4)     # croScan logo (538×128 px) at the height of page 1's mark
 BLUE, GRAY = (0.13, 0.36, 0.71), (0.878, 0.89, 0.902)          # #215CB5, #E0E3E6
 LABEL_W, SUB_W, PAD_X, PAD_Y = 0.205, 0.188, 5, 4               # label column, sub-label column (fractions of the frame)
 TITLE_W, HEAD_LABEL_W, HEAD_ROW = 0.367, 0.101, 21
@@ -205,7 +205,7 @@ def _cols(ws):
 
 
 def html(L):
-    o = ["<div class='a2'><img class='a2-logo' src='/static/hd_logo.png' alt='HD HYUNDAI'>",
+    o = ["<div class='a2'><img class='a2-logo' src='/static/croscan_logo.png' alt='croScan'>",
          f"<table>{_cols([TITLE_W, HEAD_LABEL_W, 1 - TITLE_W - HEAD_LABEL_W])}"]
     for i, (k, v) in enumerate(L["head"]):
         title = "<td class='a2-title' rowspan='3'>croScan 추가검토서 (별지)</td>" if i == 0 else ""

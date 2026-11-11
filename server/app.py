@@ -14,6 +14,8 @@
   POST /api/qa      QA report from the page: any attached files + text + screen state -> saved in data/qa.sqlite3
   GET  /api/qa      QA reports, ?handled=false for the ones still to do (header X-QA-Token = env QA_TOKEN);
                     /api/qa/{id}/file/{n}, POST /api/qa/{id}/handled
+  GET  /api/qa/board QA 현황 for the team: newest first, handled or not, the QA session's runs (no token; text start only)
+  POST /api/qa/run   「QA 시작하기」: one request for the team's QA session; POST /api/qa/run/{id} its state (token)
   GET  /api/safety/overview  안전관리자: every document sent in for the demo day (demo DB, read-only, no answer key)
   POST /api/safety/detect  쌍작업 위험탐지: every 일상×비일상 and 비일상×비일상 pair judged by rules (pair_rules.json)
   POST /api/safety/sheet.pdf  현장 게시용(허가서 원본 + 병행작업 조정 별지) or 일상작업반 전달문, from the edited sheet
@@ -81,6 +83,10 @@ def _needs(path, method):
 async def _gate(request: Request, call_next):
     if AUTH == "proxy":
         need = _needs(request.url.path, request.method)
+        # the team PC's QA tools (qa_pull, qa_watch) come with the QA token, not through the company login
+        want = os.environ.get("QA_TOKEN", "")
+        if request.url.path.startswith("/api/qa") and want and hmac.compare_digest(request.headers.get("X-QA-Token", "").encode("utf-8", "replace"), want.encode()):
+            need = None
         role = (request.headers.get(ROLE_HEADER) or "").strip().lower()
         if need == "manager" and role != "manager" or need == "user" and role not in ("manager", "foreman"):
             from fastapi.responses import JSONResponse
@@ -1637,7 +1643,7 @@ def qa_add(text: str = Form(""), author: str = Form(""), context: str = Form("{}
 
 def _qa_auth(token):
     want = os.environ.get("QA_TOKEN", "")
-    if not want or not hmac.compare_digest(token or "", want):
+    if not want or not hmac.compare_digest((token or "").encode("utf-8", "replace"), want.encode()):
         raise HTTPException(403, "QA 토큰이 필요합니다")
 
 
@@ -1657,15 +1663,59 @@ def qa_file(qid: int, n: int, x_qa_token: str | None = Header(None)):
     return FileResponse(path, media_type=mime, filename=name)
 
 
+# the team's QA board (QA 현황): newest first, handled or not, and whether the QA session is on it. No token: the text
+# shown is the report's start only; the screen state and attachments stay behind the QA token (GET /api/qa).
+@app.get("/api/qa/board")
+def qa_board(show: str = "all"):
+    return qa.board(show if show in ("all", "open", "done") else "all")
+
+
+class QARunReq(BaseModel):
+    by: str = ""
+
+
+@app.post("/api/qa/run")
+def qa_run_request(body: QARunReq):
+    """「QA 시작하기」: asks the team's QA session (a Claude Code session on a team PC watching this) to work through
+    the reports. One at a time; nothing runs on this server."""
+    run, made = qa.request_run(body.by.strip())
+    if run is None:
+        raise HTTPException(409, "미처리 QA가 없습니다")
+    return {"run": run, "made": made}
+
+
+class QARunState(BaseModel):
+    status: str
+    note: str | None = None
+    done: list[int] | None = None
+
+
+@app.post("/api/qa/run/{rid}")
+def qa_run_state(rid: int, body: QARunState, x_qa_token: str | None = Header(None)):
+    _qa_auth(x_qa_token)
+    try:
+        ok = qa.set_run(rid, body.status, body.note, body.done)
+    except ValueError:
+        raise HTTPException(422, "status: requested · running · done · failed")
+    if not ok:
+        raise HTTPException(404)
+    return {"ok": True}
+
+
 class QAHandled(BaseModel):
     handled: bool = True
     note: str | None = None
+    decision: str | None = None          # 수용 · 부분 수용 · 거절 · 보류
 
 
 @app.post("/api/qa/{qid}/handled")
 def qa_handled(qid: int, body: QAHandled, x_qa_token: str | None = Header(None)):
     _qa_auth(x_qa_token)
-    if not qa.set_handled(qid, body.handled, body.note):
+    try:
+        ok = qa.set_handled(qid, body.handled, body.note, body.decision)
+    except ValueError:
+        raise HTTPException(422, "decision: " + " · ".join(qa.DECISIONS))
+    if not ok:
         raise HTTPException(404)
     return {"ok": True}
 

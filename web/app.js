@@ -32,7 +32,7 @@ function valid(f, v) {
 // QA #35: three code fields have their own rule. Loose on purpose where real numbers vary (a demo aid, not the
 // company's full standard): 승인번호 4 segments with a real date, 호선/공사 a 4-digit hull then segments, 작업표준 HHIS-…
 const CODE_RULES = {
-  permit_no: { ex: "AC00-IH-20261014-0400", help: "4구간 · 영문 2자리+숫자 2자리 - 영문 2자리 - 날짜 8자리(연월일) - 숫자 4자리" },
+  permit_no: { ex: "BS22-IV-20261014-1305", help: "4구간 · 영문 2자리+숫자 2자리 - 영문 2자리 - 날짜 8자리(연월일) - 숫자 4자리" },
   hull_no: { ex: "3612-B21S", help: "호선 숫자 4자리 - 블록·공사 구간(영문 대문자·숫자). 구간은 하이픈(-)으로 나눕니다" },
   jsp_no: { ex: "HHIS-CW-A0001190-012-001", help: "HHIS로 시작 - 영문 대문자·숫자 구간. 구간은 하이픈(-)으로 나눕니다" },
 };
@@ -49,11 +49,11 @@ function codeProblem(r, v) {
   if (g.some((x) => !x)) return `하이픈(-) 사이가 비어 있습니다. 예: ${r.ex}`;
   if (r.key === "permit_no") {
     if (g.length !== 4) return `승인번호는 하이픈으로 나뉜 4구간입니다 (지금 ${g.length}구간). 예: ${r.ex}`;
-    if (!/^[A-Z]{2}\d{2}$/.test(g[0])) return "첫 번째 구간은 영문 대문자 2자리와 숫자 2자리입니다. 예: AC00";
-    if (!/^[A-Z]{2}$/.test(g[1])) return "두 번째 구간은 영문 대문자 2자리입니다. 예: IH";
+    if (!/^[A-Z]{2}\d{2}$/.test(g[0])) return "첫 번째 구간은 영문 대문자 2자리와 숫자 2자리입니다. 예: BS22";
+    if (!/^[A-Z]{2}$/.test(g[1])) return "두 번째 구간은 영문 대문자 2자리입니다. 예: IV";
     if (!/^\d{8}$/.test(g[2])) return "세 번째 구간은 날짜 숫자 8자리(연월일)입니다. 예: 20261014";
     if (!realDate(g[2])) return "세 번째 구간의 날짜를 확인해 주세요 (없는 날짜). 예: 20261014";
-    if (!/^\d{4}$/.test(g[3])) return "네 번째 구간은 숫자 4자리입니다 (앞자리 0 포함). 예: 0400";
+    if (!/^\d{4}$/.test(g[3])) return "네 번째 구간은 숫자 4자리입니다 (앞자리 0 포함). 예: 1305";
     return "";
   }
   if (r.key === "hull_no") {
@@ -1080,7 +1080,7 @@ function showInOriginal(key, f) {
 }
 // the box's own hint: a code field shows its own pattern (호선 is not an 승인번호)
 const hintFor = (key, f) => f.type === "code" ? "" : HINT[f.type];     // QA #35: nothing needed only in a placeholder
-const HINT = { code: "AC00-IH-…", phone: "010-0000-0000", count: "0", number: "0", yn: "Y/N", date: "YYYY-MM-DD", time: "HH:MM" };
+const HINT = { code: "BS22-IV-…", phone: "010-0000-0000", count: "0", number: "0", yn: "Y/N", date: "YYYY-MM-DD", time: "HH:MM" };
 
 // a value changed on the form: the same value printed on other pages follows; the review or the plan save runs
 function edited(key, f) {
@@ -3791,6 +3791,66 @@ $("#qa-open").onclick = () => {
   openDialog("qa"); $("#qa-text").focus();
 };
 $("#qa-close").onclick = closeDialogs;
+// QA 현황: the team sees every report (newest first) with how it was handled, and what the QA session on the team PC is
+// doing; 「QA 시작하기」 asks that session to start (one request at a time; it is done there, not on this server)
+const QA_DEC = { "수용": "ok", "부분 수용": "part", "거절": "no", "보류": "hold" };
+const QA_RUN = { requested: "요청됨 · 팀 PC의 QA 세션이 받기를 기다리는 중", running: "수행 중", done: "완료", failed: "중단" };
+const qab = { f: "all", timer: null, data: null };
+async function qabLoad() {
+  try {
+    const r = await fetch(`/api/qa/board?show=${qab.f}`), j = await r.json();
+    if (!r.ok) throw new Error(j.detail || `서버 오류 ${r.status}`);
+    qab.data = j; qabRender();
+  } catch (e) { $("#qab-run").innerHTML = `<p class="hint">현황을 불러오지 못했습니다: ${esc(e.message)}</p>`; }
+}
+function qabRender() {
+  const j = qab.data; if (!j) return;
+  // a refresh keeps what he opened and where the keyboard was (the history's fold, a filter button)
+  const ae = document.activeElement, was = ae && ae.closest("#qaboard") ? (ae.matches(".qab-hist summary") ? "hist" : ae.dataset.qf ? `qf:${ae.dataset.qf}` : ae.id) : null;
+  qab.histOpen = !!$("#qab-run .qab-hist")?.open || (qab.histOpen && !$("#qab-run .qab-hist"));
+  const run = j.runs[0], busy = run && (run.status === "requested" || run.status === "running");
+  $("#qab-run").innerHTML = !run ? `<p class="hint">아직 요청한 적이 없습니다.</p>`
+    : `<p class="qab-state ${esc(run.status)}"><b>${esc(QA_RUN[run.status] || run.status)}</b>`
+      + ` <span>요청 ${esc(run.requested)}${run.by ? ` · ${esc(run.by)}` : ""} · 그때 미처리 ${run.open_at_request}건</span>`
+      + (run.started ? ` <span>시작 ${esc(run.started)}</span>` : "") + (run.finished ? ` <span>끝 ${esc(run.finished)}</span>` : "") + `</p>`
+      + (run.done ? `<p class="qab-done">처리한 QA: ${run.done.split(",").map((x) => `#${esc(x)}`).join(" ")}</p>` : "")
+      + (run.note ? `<p class="qab-note">${esc(run.note)}</p>` : "")
+      + (j.runs.length > 1 ? `<details class="qab-hist"${qab.histOpen ? " open" : ""}><summary>지난 요청 ${j.runs.length - 1}건</summary><ul>${j.runs.slice(1).map((x) =>
+        `<li>#${x.id} · ${esc(QA_RUN[x.status] || x.status)} · 요청 ${esc(x.requested)}${x.finished ? ` · 끝 ${esc(x.finished)}` : ""}${x.done ? ` · 처리 ${esc(x.done)}` : ""}</li>`).join("")}</ul></details>` : "");
+  const sb = $("#qab-start"); sb.disabled = !!busy || !j.left;
+  sb.title = busy ? "이미 요청했거나 수행 중입니다" : !j.left ? "미처리 QA가 없습니다" : "";
+  $("#qab-sum").textContent = `전체 ${j.total}건 · 미처리 ${j.left}건 · 최신 번호부터`;
+  document.querySelectorAll("#qab-filter [data-qf]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.qf === qab.f)));
+  const rows = j.reports;                            // filtered by the server, before its limit
+  $("#qab-list").innerHTML = rows.map((q) => `<li class="qab-row${q.handled ? " done" : ""}"><p class="qab-h"><b>#${q.id}</b>`
+    + `<span class="qab-dec ${q.handled ? QA_DEC[q.decision] || "ok" : "open"}">${q.handled ? esc(q.decision || "처리됨") : "미처리"}</span>`
+    + `<small>${esc(q.created)}${q.author ? ` · ${esc(q.author)}` : ""}${q.files ? ` · 첨부 ${q.files}` : ""}</small></p>`
+    + `<p class="qab-text">${esc(q.text)}${q.more ? "…" : ""}</p>`
+    + (q.handled && (q.note || q.handled_at) ? `<p class="qab-how"><b>처리</b> ${esc(q.note || "")}${q.handled_at ? ` <small>${esc(q.handled_at)}</small>` : ""}</p>` : "")
+    + `</li>`).join("") || `<li class="hint">해당하는 QA가 없습니다.</li>`;
+  if (was === "hist") $("#qab-run .qab-hist summary")?.focus();
+  else if (was && was.startsWith("qf:")) $(`#qab-filter [data-qf="${was.slice(3)}"]`)?.focus();
+}
+function qabOpen() {
+  $("#qa").hidden = true;                           // hidden, not closed: what he was writing stays (closeDialogs would reset it)
+  openDialog("qaboard"); lastFocus = $("#qa-open"); qabLoad();
+  clearInterval(qab.timer); qab.timer = setInterval(() => { if ($("#qaboard").hidden) clearInterval(qab.timer); else qabLoad(); }, 15000);
+}
+$("#qa-board-open").onclick = qabOpen;
+$("#qab-filter").onclick = (e) => { const b = e.target.closest("[data-qf]"); if (b) { qab.f = b.dataset.qf; qabLoad(); } };
+$("#qab-start").onclick = async () => {
+  const left = qab.data ? qab.data.left : 0;
+  if (!confirm(`미처리 QA ${left}건의 반영을 팀 PC의 Claude 세션에 요청할까요?`)) return;
+  const b = $("#qab-start"); b.disabled = true;
+  let by = ""; try { by = localStorage.getItem("croscan.qa.author") || ""; } catch (e) { /* storage blocked */ }
+  try {
+    const r = await fetch("/api/qa/run", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ by }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(typeof j.detail === "string" ? j.detail : `서버 오류 ${r.status}`);
+    toast(j.made ? "QA 반영을 요청했습니다. 팀 PC의 세션이 받으면 「수행 중」으로 바뀝니다." : "이미 요청된 것이 있습니다. 그 진행 상황을 보여 드립니다.");
+  } catch (e) { toast(`요청하지 못했습니다: ${e.message}`); }
+  qabLoad();
+};
 $("#qa-file").onchange = (e) => { qaAdd(e.target.files); e.target.value = ""; };
 $("#qa").addEventListener("paste", (e) => {
   const files = [...e.clipboardData.items].filter((x) => x.kind === "file").map((x) => x.getAsFile()).filter(Boolean);
@@ -4044,7 +4104,7 @@ async function sfLoad() {
   $("#sf-detect-note").textContent = `전체 ${sf.docs.length}건 대상 · 분석 기능 준비 중`;
   const resume = sfLoadView();
   $("#sf-q").value = sf.q; $("#sf-sort").value = sf.sort;
-  const link = location.hash.split("/");                     // #safety/2026-10-29/0737
+  const link = location.hash.split("/");                     // #safety/2026-10-29/8741
   sfProfile(); sfSetTime(sf.t, true); sfRefresh();
   const linked = link[2] && decodeURIComponent(link[2]);
   // detection is rerun (it is cheap and the documents may have changed) when it had been run, or a pair is linked

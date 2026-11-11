@@ -546,7 +546,7 @@ textarea.fi { white-space: pre-wrap; word-break: keep-all; overflow-wrap: anywhe
 
 /* ---------- 추가검토서 (page 2): same frame, lines and colours as page 1 (server/addendum.py draws the PDF from the same layout) */
 .addendum { position: static !important; background: #fff; color: #000; width: min(820px, 100%); margin: 0 auto; padding: 26px 30px 34px; box-shadow: 0 1px 6px rgba(0,0,0,.15); font: 400 max(1.4rem, 13px)/1.45 "Malgun Gothic", "Pretendard", sans-serif; word-break: normal; }
-.a2-logo { display: block; width: 36%; max-width: 260px; margin: 0 0 18px 2px; }
+.a2-logo { display: block; width: 22.6%; max-width: 163px; margin: 0 0 18px 2px; }
 .a2 table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: -1px; }
 .a2 td { border: 1px solid #000; padding: 4px 7px; vertical-align: middle; text-align: left; line-height: 1.4; }
 .a2 .a2-title { background: #215cb5; color: #fff; font-weight: 700; font-size: 1.15em; text-align: center; }
@@ -2072,3 +2072,34 @@ body[data-screen="s-login"] .appbar-tools > :not(#qa-open) { display: none; }
 .ck-item.ck-attn { outline: 3px solid var(--warn-line); outline-offset: 4px; border-radius: var(--r-sm); }
 .ck-attn-why { margin: .4rem 0; padding: .4rem .8rem; background: var(--warn-soft); color: var(--warn); border-radius: var(--r-sm); font-weight: 700; }
 #s-check .ck-card > .actions { position: sticky; bottom: 0; z-index: 2; background: var(--surface); padding: 1rem 0; margin-bottom: 0; box-shadow: 0 -6px 12px -10px rgba(0,0,0,.25); }
+/* QA 현황: what the team sent, how each was handled, and what the QA session is doing (newest first) */
+.qab { max-width: 72rem; width: calc(100% - 3.2rem); max-height: calc(100vh - 6rem); display: flex; flex-direction: column; }
+.qab-run { border: 1px solid var(--line); border-radius: var(--r-md); padding: 1rem 1.2rem; margin-bottom: 1rem; background: var(--surface-2); }
+.qab-run h3 { margin: 0 0 .4rem; font-size: 1.5rem; }
+.qab-state { margin: 0; display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: baseline; }
+.qab-state b { padding: .1rem .8rem; border-radius: var(--r-pill); }
+.qab-state.requested b { background: var(--warn-soft); color: var(--warn); }
+.qab-state.running b { background: var(--primary-soft); color: var(--primary); }
+.qab-state.done b { background: var(--ok-soft); color: var(--ok); }
+.qab-state.failed b { background: #FDECEC; color: #A61B1B; }
+.qab-state span, .qab-done, .qab-note { color: var(--ink-2); font-size: 1.35rem; }
+.qab-done, .qab-note { margin: .3rem 0 0; }
+.qab-hist { margin-top: .4rem; font-size: 1.3rem; }
+.qab-go { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.2rem; margin-top: .8rem; }
+.qab-go .hint { flex: 1 1 24rem; margin: 0; }
+.qab-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem; margin: .2rem 0 .6rem; }
+.qab-sum { margin: 0; font-weight: 700; }
+.qab-list { list-style: none; margin: 0; padding: 0; overflow: auto; flex: 1 1 auto; min-height: 12rem; }
+.qab-row { border-top: 1px solid var(--line); padding: .8rem .2rem; }
+.qab-h { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .8rem; margin: 0; }
+.qab-h small { color: var(--ink-3); }
+.qab-dec { padding: 0 .8rem; border-radius: var(--r-pill); font-size: 1.25rem; font-weight: 700; border: 1px solid transparent; }
+.qab-dec.open { background: var(--warn-soft); color: var(--warn); border-color: var(--warn-line); }
+.qab-dec.ok { background: var(--ok-soft); color: var(--ok); }
+.qab-dec.part { background: var(--primary-soft); color: var(--primary); }
+.qab-dec.no { background: #FDECEC; color: #A61B1B; }
+.qab-dec.hold { background: var(--surface-2); color: var(--ink-2); border-color: var(--line); }
+.qab-text { margin: .3rem 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.qab-how { margin: .3rem 0 0; padding: .4rem .8rem; background: var(--surface-2); border-radius: var(--r-sm); font-size: 1.35rem; }
+.qab-how small { color: var(--ink-3); margin-left: .4rem; }
+.qa-board-open { margin-left: auto; margin-right: .4rem; }

@@ -97,7 +97,7 @@ def main():
               and set(link.LINKED) == {"same_work", "contains", "phase_of", "related"})
 
         # 허가 검토 신호
-        D = {"date": "2026-10-29", "permits": [{"id": "0735", "kind": "hot", "title": "E41P 러그 절단", "detail": "", "place": "3BAY 12-14 칼럼",
+        D = {"date": "2026-10-29", "permits": [{"id": "8175", "kind": "hot", "title": "E41P 러그 절단", "detail": "", "place": "3BAY 12-14 칼럼",
                                                "spans": [{"bay": 3, "c0": 12, "c1": 14}], "windows": [{"start": "13:00", "end": "15:00"}]}],
              "plans": [{"id": "WP-1", "title": "E41P 가용접", "place": "3BAY 12칼럼", "spans": [{"bay": 3, "c0": 12, "c1": 12}],
                         "windows": [{"start": "14:00", "end": "16:00"}], "_items": [{"label": "작업명", "value": "E41P 가용접으로 임시 고정"}]},
@@ -138,14 +138,14 @@ def main():
             print("(시연 하루 없음: 요약 시험 3건 건너뜀)")
 
         # 게시 문안 보충: the model picks, the server writes the fixed shape
-        det2 = {"pairs": [{"key": "0735|WP-1", "a": "0735", "b": "WP-1", "reasons": [{"rule": "FIRE", "cause": "0735", "exposed": "WP-1",
+        det2 = {"pairs": [{"key": "8175|WP-1", "a": "8175", "b": "WP-1", "reasons": [{"rule": "FIRE", "cause": "8175", "exposed": "WP-1",
                                                                                          "measures": ["가연물 제거", "감시자 배치"], "ask": "도장 종료 시각"}]}],
                 "rules": [{"id": "FIRE", "post": {"cause": "도장과 겹치는 동안 화기 금지", "exposed": "화기 끝난 뒤 착수", "start": "잔불 없음 확인 뒤 알림"}}]}
         safety_find = safety.find
         safety.find = lambda i: {"id": i, "title": "러그 절단", "place": "대조립21공장 3BAY 12-14 칼럼", "windows": [{"start": "13:00", "end": "15:00"}]}
         try:
             llm.call_json = fake({"a": "A1", "f": "F1", "c": "C1"})
-            out = asyncio.run(posting.draft(det2, "0735|WP-1", "0735", [{"item": "HT1", "value": "가스절단 4개"}]))
+            out = asyncio.run(posting.draft(det2, "8175|WP-1", "8175", [{"item": "HT1", "value": "가스절단 4개"}]))
             check("문안 틀: 우리 반은 {시점·대상}에 {할 일} → 착수조건 → 중지·변경 시 연락", out["status"] == "ok" and out["lines"][0] ==
                   "우리 반은 13:00~15:00 3BAY 12-14 칼럼 (가스절단 4개)에 도장과 겹치는 동안 화기 금지." and out["lines"][1].startswith("착수조건: ")
                   and out["lines"][2].startswith("중지·변경 시: "))
@@ -153,14 +153,14 @@ def main():
             check("추가조치 3줄·TBM 초안도 같은 고름에서", len(out["extra"]) == 3 and out["tbm"][0].startswith("오늘 러그 절단:"))
             posting._DRAFTS.clear()
             llm.call_json = fake({"a": "A1", "f": "none", "c": "C1", "text": "16시에 시작하기로 합의"})
-            out = asyncio.run(posting.draft(det2, "0735|WP-1", "0735", [{"item": "HT1", "value": "가스절단 4개"}]))
+            out = asyncio.run(posting.draft(det2, "8175|WP-1", "8175", [{"item": "HT1", "value": "가스절단 4개"}]))
             check("모델이 문장을 덧붙이면 받지 않음(fail)", out["status"] == "fail" and not out["lines"])
             posting._DRAFTS.clear()
             CALLS.clear()
             out = asyncio.run(posting.draft({**det2, "pairs": [{**det2["pairs"][0], "reasons": [{**det2["pairs"][0]["reasons"][0], "measures": [], "ask": ""}]}]},
-                                            "0735|WP-1", "0735", []))
+                                            "8175|WP-1", "8175", []))
             check("고를 것이 하나뿐이면 모델 없이 서버 문장(fixed)", out["status"] == "fixed" and not CALLS)
-            check("없는 쌍이면 문안 없음", asyncio.run(posting.draft(det2, "x|y", "0735"))["status"] == "none")
+            check("없는 쌍이면 문안 없음", asyncio.run(posting.draft(det2, "x|y", "8175"))["status"] == "none")
         finally:
             safety.find = safety_find
     finally:

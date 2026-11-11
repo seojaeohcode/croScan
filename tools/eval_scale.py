@@ -44,7 +44,7 @@ def _n(default):
     return int(sys.argv[sys.argv.index("--n") + 1]) if "--n" in sys.argv else default
 
 
-def _permit(prefix="0735"):
+def _permit(prefix="8175"):
     from make_demo_day import DIR, load, permit_name
     from server import extract
     ps = load("permits.json")
@@ -70,7 +70,7 @@ PAST = ["어제 {a} 끝냈어요", "지난주에 {a} 마쳤어요", "{a}은 그�
 
 
 def safety_set(n):
-    fields = _permit("0735")
+    fields = _permit("8175")
     qs = [q for q in augment.questions(fields, [])[0] if any(c["id"] != "unknown" for c in q["choices"])]
     t1 = next(q for q in qs if q["item"] == "T1")
     others = [q for q in qs if q["item"] != "T1"]
@@ -239,7 +239,7 @@ def hybrid_set(n):
 
 # 체크리스트 200 -----------------------------------------------------------------------------------------------------
 def checklist_set(n):
-    fields = _permit("0735")
+    fields = _permit("8175")
     job = next(k for k, f in fields.items() if isinstance(f, dict) and f.get("key") == "job")
     adds = ["가스절단", "그라인더", "크레인 인양", "밀폐 탱크 진입", "전원 차단", "도장", "안전대 착용", "하부 통제", "용접", "없음"]
     base_ids = None
@@ -275,7 +275,7 @@ def checklist_set(n):
 
 # 문서 연결 200 ------------------------------------------------------------------------------------------------------
 def link_set(n):
-    fields = _permit("0735")
+    fields = _permit("8175")
     hidden_seen, bad = [], []
     plan_fields = lambda b: {"r1": {"name": "작업명", "value": f"{b} 블록 상부 러그 절단"}, "r2": {"name": "작업장소", "value": "3BAY 12칼럼"},
                              "r3": {"name": "작성자 연락처", "value": "010-1234-5678"}, "r4": {"name": "서명", "value": "김반장"},

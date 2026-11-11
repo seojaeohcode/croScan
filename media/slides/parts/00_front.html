@@ -1,0 +1,221 @@
+<style>
+/* 00_front 전용(접두어 f-) — 디자인 담당 */
+.f-seg{position:absolute;top:0;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 16px;color:#fff;border-right:3px solid #fff;overflow:hidden;white-space:nowrap}
+.f-seg:last-child{border-right:0}
+.f-seg b{font-size:24px;font-weight:900;letter-spacing:-.02em;line-height:1.15}
+.f-seg span{font-size:20px;font-weight:700;opacity:.88}
+.f-lg{position:absolute;font-size:21px;font-weight:700;color:#5D6878;white-space:nowrap;line-height:1.3}
+.f-lg b{display:block;color:#25303D;font-weight:900;font-size:24px}
+.f-ev{position:absolute;top:60px;bottom:14px;padding:16px 22px 0}
+.f-ev .nm{font-size:25px;font-weight:900;color:#25303D;letter-spacing:-.02em}
+.f-ev .sc{position:absolute;right:22px;top:8px;font-size:52px;font-weight:900;color:var(--navy);letter-spacing:-.03em}
+.f-ev .tr{position:absolute;left:22px;right:22px;top:72px;height:10px;border-radius:5px;background:#E6EBF1}
+.f-ev .tr i{display:block;height:100%;border-radius:5px;background:var(--navy)}
+.f-ev .sl{position:absolute;left:22px;right:22px;top:92px;font-size:21px;color:#5D6878;line-height:1.4}
+.f-ev .sl b{color:var(--navy)}
+.f-pr{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px;position:absolute;left:28px;right:28px;top:72px}
+.f-pr>div{display:flex;gap:14px;align-items:flex-start}
+.f-pr p{font-size:24px;font-weight:900;color:#25303D;line-height:1.25}
+.f-pr p span{display:block;font-size:21px;font-weight:500;color:#5D6878;margin-top:3px}
+.f-tt{position:absolute;left:28px;right:28px;top:70px;display:flex;flex-direction:column;gap:16px}
+.f-tt>div{display:flex;align-items:center;gap:16px;font-size:25px;font-weight:700;color:#25303D;letter-spacing:-.02em}
+.f-tt .tag{width:84px;text-align:center}
+/* G2 장표 지도 */
+.f-map{position:absolute;left:86px;right:86px;top:180px;display:flex;flex-direction:column;gap:12px}
+.f-band{display:flex;gap:14px}
+.f-bl{width:178px;flex:none;border-radius:8px;color:#fff;padding:10px 16px;display:flex;flex-direction:column;justify-content:center}
+.f-bl b{font-size:22px;font-weight:900;letter-spacing:-.02em;line-height:1.2}
+.f-bl span{font-size:19px;font-weight:700;opacity:.9;margin-top:4px}
+.f-gr{flex:1;display:grid;grid-template-columns:repeat(6,1fr);gap:7px 9px;align-content:start}
+.f-c{height:44px;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #DCE3EB;border-left:6px solid var(--cc);border-radius:4px 6px 6px 4px;padding:0 10px;font-size:20px;font-weight:700;color:#25303D;white-space:nowrap;overflow:hidden;letter-spacing:-.03em}
+.f-c b{color:var(--cc);font-weight:900;min-width:38px;flex:none;text-align:right;margin-right:4px}
+.f-c.dv{background:#F2F5F9;color:#6E7887}
+/* G3 필요 자료 */
+.f-dec{position:absolute;left:0;right:0;top:0;height:112px;display:flex;border-radius:8px;overflow:hidden;background:#FFF6DA;border:1.5px solid #E4B84E}
+.f-dec .l{width:190px;flex:none;background:var(--gold);color:#2A1E00;font-size:27px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1.25;text-align:center}
+.f-dec .r{flex:1;display:grid;grid-template-columns:repeat(3,1fr)}
+.f-dec .r>div{display:flex;align-items:center;gap:14px;padding:0 20px;font-size:23px;font-weight:900;color:#2A3442;line-height:1.3;letter-spacing:-.02em}
+.f-dec .r>div+div{border-left:1.5px solid #EED596}
+.f-dec .r small{display:block;font-size:19px;font-weight:700;color:#8A6A1F;margin-top:2px}
+.f-cols{position:absolute;left:0;right:0;top:148px;bottom:24px;display:flex;gap:26px}
+.f-cols>.card{flex:1}
+.f-li{position:absolute;left:22px;right:22px;top:60px;display:flex;flex-direction:column}
+.f-li>div{display:flex;align-items:center;gap:12px;min-height:66px;padding:6px 0;border-bottom:1.5px solid #DFE5EC;font-size:21px;font-weight:700;color:#25303D;line-height:1.3;letter-spacing:-.02em}
+.f-li>div:last-child{border-bottom:0}
+.f-li .pg{margin-left:auto;flex:none;font-size:18px;font-weight:900;color:#fff;background:var(--cc);border-radius:5px;padding:3px 9px;white-space:nowrap}
+.f-li i{font-style:normal;display:block;color:#8892A0;font-weight:500;font-size:18px}
+/* S02 목차 */
+.f-toc{position:absolute;left:86px;right:86px;top:176px;bottom:80px;display:flex;flex-direction:column}
+.f-toc>div{flex:1;display:flex;align-items:center;border-bottom:1.5px solid #E3E8EE}
+.f-toc>div:last-child{border-bottom:0}
+.f-toc .k{width:108px;flex:none;font-size:54px;font-weight:900;color:var(--cc);letter-spacing:-.03em;line-height:1}
+.f-toc .tt{width:470px;flex:none}
+.f-toc .tt b{display:block;font-size:33px;font-weight:900;color:#1F2833;letter-spacing:-.03em;line-height:1.2}
+.f-toc .tt span{display:block;font-size:21px;font-weight:700;color:var(--cc);margin-top:6px}
+.f-toc .bar2{width:5px;align-self:stretch;margin:20px 36px 20px 0;border-radius:3px;background:var(--cc);opacity:.85}
+.f-toc .dd{flex:1;font-size:23px;font-weight:700;color:#3A4655;line-height:1.75;letter-spacing:-.02em}
+.f-toc .dd span{white-space:nowrap;margin-right:26px;display:inline-block}
+.f-toc .dd span i{font-style:normal;font-size:18px;font-weight:900;color:var(--cc);margin-left:7px}
+</style>
+
+<!-- ───────── G1 구성안 안내 — 전체본 구성안 ───────── -->
+<section class="slide plan">
+  <div class="hd"><h1>구성안 안내<span class="sep">|</span><small>전체본 구성안</small></h1><div class="sp"></div>
+    <span class="chip gy">구성안 G1</span><span class="badge gray"><b>구성안</b><i></i>팀 확인용 · 발표 시 제외</span></div>
+  <div class="key">팀원 확인용 <span class="o">전체본</span> — 구성안 안내 4 · 본편 64 · 부록 60, 모두 128장</div>
+  <div class="body">
+    <div class="card" style="position:absolute;left:0;right:0;top:0;height:192px">
+      <div class="tab">파트별 흐름 · 막대 길이 = 장 수</div>
+      <div class="f-lg" style="left:28px;top:60px"><b>본편 64장</b>{{P:@cover~@end}}쪽</div>
+      <div style="position:absolute;left:230px;right:28px;top:58px;height:58px;border-radius:7px;overflow:hidden"><div class="f-seg" style="left:0.0000%;width:3.1250%;background:#5C6776;padding:0;align-items:center"><b style="font-size:20px">2</b></div><div class="f-seg" style="left:3.1250%;width:14.0625%;background:#1B365D"><b>PART 01</b><span>9장</span></div><div class="f-seg" style="left:17.1875%;width:15.6250%;background:#1F9A8E"><b>PART 02</b><span>10장</span></div><div class="f-seg" style="left:32.8125%;width:32.8125%;background:#D4561F"><b>PART 03</b><span>21장</span></div><div class="f-seg" style="left:65.6250%;width:14.0625%;background:#14284A"><b>PART 04</b><span>9장</span></div><div class="f-seg" style="left:79.6875%;width:20.3125%;background:#1E6B47"><b>PART 05·마무리</b><span>13장</span></div></div>
+      <div class="f-lg" style="left:28px;top:124px"><b>부록 60장</b>{{P:@APPENDIX~A20}}쪽</div>
+      <div style="position:absolute;left:230px;right:28px;top:128px;height:44px;border-radius:7px;overflow:hidden"><div class="f-seg" style="left:0;width:3.3333%;background:#3A3F48;padding:0;border-right-width:2px"></div><div class="f-seg" style="left:3.3333%;width:6.6667%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A01</b></div><div class="f-seg" style="left:10.0000%;width:5.0000%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A02</b></div><div class="f-seg" style="left:15.0000%;width:5.0000%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A03</b></div><div class="f-seg" style="left:20.0000%;width:3.3333%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:23.3333%;width:1.6667%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:25.0000%;width:1.6667%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:26.6667%;width:5.0000%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A07</b></div><div class="f-seg" style="left:31.6667%;width:10.0000%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A08</b></div><div class="f-seg" style="left:41.6667%;width:1.6667%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:43.3333%;width:5.0000%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A10</b></div><div class="f-seg" style="left:48.3333%;width:3.3333%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:51.6667%;width:1.6667%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:53.3333%;width:1.6667%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:55.0000%;width:5.0000%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A14</b></div><div class="f-seg" style="left:60.0000%;width:1.6667%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:61.6667%;width:6.6667%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A16</b></div><div class="f-seg" style="left:68.3333%;width:5.0000%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A17</b></div><div class="f-seg" style="left:73.3333%;width:3.3333%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"></div><div class="f-seg" style="left:76.6667%;width:20.0000%;background:#7D8796;padding:0;align-items:center;border-right-width:2px"><b style="font-size:19px">A19</b></div><div class="f-seg" style="left:96.6667%;width:3.3333%;background:#9AA4B1;padding:0;align-items:center;border-right-width:2px"></div></div>
+    </div>
+    <div class="card" style="position:absolute;left:0;right:0;top:222px;height:200px">
+      <div class="tab g">본선 평가항목 · 배점 100 · 해당 본편 장 수</div>
+      <div style="position:absolute;left:28px;right:28px;top:0;bottom:0">
+        <div class="in f-ev" style="left:0;width:calc(20% - 12px)"><div class="nm">주제 적합성</div><div class="sc">10</div><div class="tr"><i style="width:33.3%"></i></div><div class="sl"><b>8장</b> · 현황·사례·As-Is</div></div>
+        <div class="in f-ev" style="left:20%;width:calc(20% - 12px);border:3px solid #E9B999"><div class="nm">창의성</div><div class="sc" style="color:var(--orange)">30</div><div class="tr"><i style="width:100%;background:var(--orange)"></i></div><div class="sl"><b>18장</b> · 현장 반영·보완</div></div>
+        <div class="in f-ev" style="left:40%;width:calc(20% - 12px)"><div class="nm">실현 가능성</div><div class="sc">20</div><div class="tr"><i style="width:66.7%"></i></div><div class="sl"><b>33장</b> · 시연·구조·실측</div></div>
+        <div class="in f-ev" style="left:60%;width:calc(20% - 12px)"><div class="nm">창출효과</div><div class="sc">20</div><div class="tr"><i style="width:66.7%"></i></div><div class="sl"><b>12장</b> · 가정 시나리오</div></div>
+        <div class="in f-ev" style="left:80%;width:20%"><div class="nm">표현력</div><div class="sc">20</div><div class="tr"><i style="width:66.7%"></i></div><div class="sl"><b>전 장표</b> · 도식·통일 양식</div></div>
+      </div>
+    </div>
+    <div class="card" style="position:absolute;left:0;width:842px;top:452px;height:226px">
+      <div class="tab">장표 원칙</div>
+      <div class="f-pr">
+        <div><span class="nc">1</span><p>한 장 한 주장<span>가운데 핵심 메시지 한 줄</span></p></div>
+        <div><span class="nc">2</span><p>근거 표시<span>아래 회색 줄에 출처·쪽</span></p></div>
+        <div><span class="nc">3</span><p>가정 표시<span>효과는 「가정 시나리오」</span></p></div>
+        <div><span class="nc gold">4</span><p>필요 자료<span>오른쪽 아래 금색 칸 → G3</span></p></div>
+      </div>
+    </div>
+    <div class="card" style="position:absolute;left:870px;right:0;top:452px;height:226px">
+      <div class="tab o">표지 제목 후보 (구성자 초안)</div>
+      <div class="f-tt">
+        <div><span class="tag">초안 A</span>작업 전에 서류를 읽고, 작업 사이의 위험까지 묻는 AI</div>
+        <div><span class="tag gy">대안 B</span>허가서의 빈칸에서, 함께하는 작업의 위험까지</div>
+        <div><span class="tag gy">대안 C</span>서류는 있는데 정보가 부족하다 — 작업 전 사전검토 AI</div>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>근거</b> 본선 평가항목: 팀 스토리보드 R10(예선 공고: 주제 적합성 20·창의성 30·실현 가능성 30·창출효과 20) · 장 수는 각 장 금색 뱃지 집계(항목 2개면 둘 다 셈)</div>
+  <aside class="notes">구성안 안내 첫 장입니다. 이 파일은 발표용 압축본이 아니라 팀원이 내용을 확인하는 전체본입니다. 본편 64장과 부록 60장을 모두 담았고, 발표 길이에 맞춘 압축은 팀이 직접 정합니다.</aside>
+  {{FT}}
+</section>
+
+<!-- ───────── G2-1 구성안 안내 — 전체 장표 지도(본편) ───────── -->
+<section class="slide plan">
+  <div class="hd"><h1>구성안 안내<span class="sep">|</span><small>전체 장표 지도 ① 본편 64장</small></h1><div class="sp"></div>
+    <span class="chip gy">구성안 G2-1</span><span class="badge gray"><b>구성안</b><i></i>팀 확인용 · 발표 시 제외</span></div>
+  <div class="f-map">
+    <div class="f-band" style="--cc:#1B365D">
+      <div class="f-bl" style="background:#1B365D"><b>도입·배경</b><span>{{P:@cover~문제 정의}}쪽</span></div>
+      <div class="f-gr"><div class="f-c dv"><b>{{P:@cover}}</b>표지</div><div class="f-c dv"><b>{{P:목차}}</b>목차</div><div class="f-c dv"><b>{{P:PART 왜 이 문제인가}}</b>PART 01 구분</div><div class="f-c"><b>{{P:조선업 안전 현황 | 재해}}</b>안전 현황 ① 규모</div><div class="f-c"><b>{{P:조선업 안전 현황 | 어떤}}</b>안전 현황 ② 작업</div><div class="f-c"><b>{{P:위험은 작업의 경계}}</b>경계를 넘는 위험</div><div class="f-c"><b>{{P:조선 3사의 안전 방향}}</b>조선 3사의 방향</div><div class="f-c"><b>{{P:법이 정한 원청의 의무}}</b>원청의 법적 의무</div><div class="f-c"><b>{{P:현장 PTW는}}</b>현장 PTW(As-Is)</div><div class="f-c"><b>{{P:흐름 속 빈틈}}</b>흐름 속 빈틈 3곳</div><div class="f-c"><b>{{P:문제 정의}}</b>문제 정의</div></div>
+    </div>
+    <div class="f-band" style="--cc:#1F9A8E">
+      <div class="f-bl" style="background:#1F9A8E"><b>선정·현장 검증</b><span>{{P:PART 현장에서 좁히고 검증~설계 원칙 | AI가}}쪽</span></div>
+      <div class="f-gr"><div class="f-c dv"><b>{{P:PART 현장에서 좁히고 검증}}</b>PART 02 구분</div><div class="f-c"><b>{{P:7개 공정에서}}</b>대조립 고른 이유</div><div class="f-c"><b>{{P:대조립 선정 기준}}</b>선정 기준·경위</div><div class="f-c"><b>{{P:대조립에서 다루는 서류}}</b>대조립의 서류</div><div class="f-c"><b>{{P:현장 적용 원칙}}</b>현장 적용 원칙</div><div class="f-c"><b>{{P:현장 목소리 | 만난}}</b>현장 목소리 ① 사람</div><div class="f-c"><b>{{P:현장 목소리 | 바뀐}}</b>현장 목소리 ② 결정</div><div class="f-c"><b>{{P:현장 정정 35항목}}</b>현장 정정 35항목</div><div class="f-c"><b>{{P:설계 원칙}}</b>설계 원칙 ①</div><div class="f-c"><b>{{P:설계 원칙 | AI가}}</b>설계 원칙 ② AI 밖</div></div>
+    </div>
+    <div class="f-band" style="--cc:#D4561F">
+      <div class="f-bl" style="background:#D4561F"><b>솔루션·시연</b><span>{{P:PART croScan 솔루션~안전관리자 흐름 ④}}쪽</span></div>
+      <div class="f-gr"><div class="f-c dv"><b>{{P:PART croScan 솔루션}}</b>PART 03 구분</div><div class="f-c"><b>{{P:croScan 한 장 요약}}</b>한 장 요약</div><div class="f-c"><b>{{P:지금 현장 vs croScan}}</b>현장 vs croScan</div><div class="f-c"><b>{{P:croScan이 붙는 3곳}}</b>붙는 3곳</div><div class="f-c"><b>{{P:단계별로 무엇이 달라지나 ①}}</b>단계별 변화 ①</div><div class="f-c"><b>{{P:단계별로 무엇이 달라지나 ②}}</b>단계별 변화 ②</div><div class="f-c"><b>{{P:HiSEs가 이미 하는 일}}</b>HiSEs가 하는 일</div><div class="f-c"><b>{{P:croScan이 더하는 것}}</b>croScan이 더하는 것</div><div class="f-c"><b>{{P:같은 목표, 다른 단계}}</b>축별 비교</div><div class="f-c"><b>{{P:HiSEs와 잇는 지점}}</b>HiSEs와 잇는 지점</div><div class="f-c"><b>{{P:기존 전산 대비 무엇이 달라지나 ①}}</b>기존 전산 대비 ①</div><div class="f-c"><b>{{P:기존 전산 대비 무엇이 달라지나 ②}}</b>기존 전산 대비 ②</div><div class="f-c"><b>{{P:가치 기능 4가지}}</b>가치 기능 4가지</div><div class="f-c"><b>{{P:작업반장 흐름 ①}}</b>반장 ① 되묻기</div><div class="f-c"><b>{{P:작업반장 흐름 ②}}</b>반장 ② 체크리스트</div><div class="f-c"><b>{{P:작업반장 흐름 ③}}</b>반장 ③ 제출</div><div class="f-c"><b>{{P:제출되는 서류 3가지}}</b>제출 서류 3가지</div><div class="f-c"><b>{{P:안전관리자 흐름 ①}}</b>안전관리자 ① 하루</div><div class="f-c"><b>{{P:안전관리자 흐름 ②}}</b>안전관리자 ② 1순위</div><div class="f-c"><b>{{P:안전관리자 흐름 ③}}</b>안전관리자 ③ 근거</div><div class="f-c"><b>{{P:안전관리자 흐름 ④}}</b>안전관리자 ④ 게시</div></div>
+    </div>
+    <div class="f-band" style="--cc:#14284A">
+      <div class="f-bl" style="background:#14284A"><b>기술</b><span>{{P:PART 온프레미스 AI 기술~실험 ③}}쪽</span></div>
+      <div class="f-gr"><div class="f-c dv"><b>{{P:PART 온프레미스 AI 기술}}</b>PART 04 구분</div><div class="f-c"><b>{{P:아키텍처 ①}}</b>아키텍처 ① 구조</div><div class="f-c"><b>{{P:아키텍처 ②}}</b>아키텍처 ② 규칙</div><div class="f-c"><b>{{P:아키텍처 ③}}</b>아키텍처 ③ AI</div><div class="f-c"><b>{{P:왜 온프레미스}}</b>온프레미스 이유</div><div class="f-c"><b>{{P:AI가 하는 일 · 하지 않는 일}}</b>AI가 하는 일</div><div class="f-c"><b>{{P:실험 ①}}</b>실험 ① 답 해석</div><div class="f-c"><b>{{P:실험 ②}}</b>실험 ② 속도</div><div class="f-c"><b>{{P:실험 ③}}</b>실험 ③ 규칙 보강</div></div>
+    </div>
+    <div class="f-band" style="--cc:#1E6B47">
+      <div class="f-bl" style="background:#1E6B47"><b>사업화·효과</b><span>{{P:PART 사업화 · 기대효과~@end}}쪽</span></div>
+      <div class="f-gr"><div class="f-c dv"><b>{{P:PART 사업화 · 기대효과}}</b>PART 05 구분</div><div class="f-c"><b>{{P:누가 쓰나}}</b>역할 페르소나</div><div class="f-c"><b>{{P:HiSEs 편입 ①}}</b>HiSEs 편입 ① 구조</div><div class="f-c"><b>{{P:HiSEs 편입 ②}}</b>HiSEs 편입 ② 모델</div><div class="f-c"><b>{{P:정량 효과 ①}}</b>정량 ① 공장 1곳</div><div class="f-c"><b>{{P:정량 효과 ②}}</b>정량 ② 일반식</div><div class="f-c"><b>{{P:정량 효과 ③}}</b>정량 ③ TDABC</div><div class="f-c"><b>{{P:안전 · 업무 효과 ①}}</b>효과 ① 핵심 5</div><div class="f-c"><b>{{P:안전 · 업무 효과 ②}}</b>효과 ② 생산</div><div class="f-c"><b>{{P:안전 · 업무 효과 ③}}</b>효과 ③ 측정 축</div><div class="f-c"><b>{{P:후속계획 ①}}</b>후속 ① 로드맵</div><div class="f-c"><b>{{P:후속계획 ②}}</b>후속 ② 연동 조건</div><div class="f-c dv"><b>{{P:@end}}</b>마무리</div></div>
+    </div>
+  </div>
+  <div class="note"><b>읽는 법</b> 칸 앞 숫자 = 쪽 번호 · 회색 칸 = 표지·목차·구분장·마무리 · 이름은 줄임말, 원제목은 해당 쪽 참조 · 쪽 번호는 build.py가 제목으로 계산</div>
+  <aside class="notes">본편 전체 지도입니다. 파트 색으로 묶었고, 칸 앞 숫자는 이 파일의 쪽 번호입니다.</aside>
+  {{FT}}
+</section>
+
+<!-- ───────── G2-2 구성안 안내 — 전체 장표 지도(부록) ───────── -->
+<section class="slide plan">
+  <div class="hd"><h1>구성안 안내<span class="sep">|</span><small>전체 장표 지도 ② 부록 60장</small></h1><div class="sp"></div>
+    <span class="chip gy">구성안 G2-2</span><span class="badge gray"><b>구성안</b><i></i>팀 확인용 · 발표 시 제외</span></div>
+  <div class="f-map">
+    <div class="f-band" style="--cc:#6F7B8A">
+      <div class="f-bl" style="background:#6F7B8A"><b>근거·현장</b><span>{{P:@APPENDIX~A05}}쪽</span></div>
+      <div class="f-gr"><div class="f-c dv"><b>{{P:@APPENDIX}}</b>APPENDIX 장</div><div class="f-c dv"><b>{{P:@A00}}</b>부록 구분·목차</div><div class="f-c"><b>{{P:A01-1}}</b>A01-1 재해 통계</div><div class="f-c"><b>{{P:A01-2}}</b>A01-2 재해 유형</div><div class="f-c"><b>{{P:A01-3}}</b>A01-3 법령</div><div class="f-c"><b>{{P:A01-4}}</b>A01-4 정책·산업</div><div class="f-c"><b>{{P:A02-1}}</b>A02-1 HD 2026</div><div class="f-c"><b>{{P:A02-2}}</b>A02-2 HD 2024</div><div class="f-c"><b>{{P:A02-3}}</b>A02-3 한화·삼성</div><div class="f-c"><b>{{P:A03-1}}</b>A03-1 운영 기능 ①</div><div class="f-c"><b>{{P:A03-2}}</b>A03-2 운영 기능 ②</div><div class="f-c"><b>{{P:A03-3}}</b>A03-3 계획·예정</div><div class="f-c"><b>{{P:A04-1}}</b>A04-1 기록 ~10/28</div><div class="f-c"><b>{{P:A04-2}}</b>A04-2 기록 ~10/31</div><div class="f-c"><b>{{P:A05}}</b>A05 7공정 비교</div></div>
+    </div>
+    <div class="f-band" style="--cc:#5C6776">
+      <div class="f-bl" style="background:#5C6776"><b>시스템·규칙</b><span>{{P:A06~A10}}쪽</span></div>
+      <div class="f-gr"><div class="f-c"><b>{{P:A06}}</b>A06 양식 77칸</div><div class="f-c"><b>{{P:A07-1}}</b>A07-1 질문 ①</div><div class="f-c"><b>{{P:A07-2}}</b>A07-2 질문 ②</div><div class="f-c"><b>{{P:A07-3}}</b>A07-3 순서·예산</div><div class="f-c"><b>{{P:A08-1}}</b>A08-1 판정식</div><div class="f-c"><b>{{P:A08-2}}</b>A08-2 규칙 1~8</div><div class="f-c"><b>{{P:A08-3}}</b>A08-3 규칙 9~16</div><div class="f-c"><b>{{P:A08-4}}</b>A08-4 규칙 17~24</div><div class="f-c"><b>{{P:A08-5}}</b>A08-5 규칙 25~32</div><div class="f-c"><b>{{P:A08-6}}</b>A08-6 규칙 33~36</div><div class="f-c"><b>{{P:A09}}</b>A09 체크리스트 86</div><div class="f-c"><b>{{P:A10-1}}</b>A10-1 AI 하는 일 ①</div><div class="f-c"><b>{{P:A10-2}}</b>A10-2 AI 하는 일 ②</div><div class="f-c"><b>{{P:A10-3}}</b>A10-3 안 하는 일</div></div>
+    </div>
+    <div class="f-band" style="--cc:#6F7B8A">
+      <div class="f-bl" style="background:#6F7B8A"><b>실험·운영·효과</b><span>{{P:A11~A16}}쪽</span></div>
+      <div class="f-gr"><div class="f-c"><b>{{P:A11-1}}</b>A11-1 답 읽기 평가</div><div class="f-c"><b>{{P:A11-2}}</b>A11-2 속도</div><div class="f-c"><b>{{P:A12}}</b>A12 시험·QA</div><div class="f-c"><b>{{P:A13}}</b>A13 배포·보안</div><div class="f-c"><b>{{P:A14-1}}</b>A14-1 이전 가정</div><div class="f-c"><b>{{P:A14-2}}</b>A14-2 433시간</div><div class="f-c"><b>{{P:A14-3}}</b>A14-3 TDABC</div><div class="f-c"><b>{{P:A15}}</b>A15 안전효과 검증</div><div class="f-c"><b>{{P:A16-1}}</b>A16-1 허가서 10건</div><div class="f-c"><b>{{P:A16-2}}</b>A16-2 데이터 구성</div><div class="f-c"><b>{{P:A16-3}}</b>A16-3 클립·반장</div><div class="f-c"><b>{{P:A16-4}}</b>A16-4 클립·관리자</div></div>
+    </div>
+    <div class="f-band" style="--cc:#5C6776">
+      <div class="f-bl" style="background:#5C6776"><b>한계·출처·비교</b><span>{{P:A17~A20}}쪽</span></div>
+      <div class="f-gr"><div class="f-c"><b>{{P:A17-1}}</b>A17-1 한계</div><div class="f-c"><b>{{P:A17-2}}</b>A17-2 미확인 자료</div><div class="f-c"><b>{{P:A17-3}}</b>A17-3 예상 질문</div><div class="f-c"><b>{{P:A18-1}}</b>A18-1 출처 ①</div><div class="f-c"><b>{{P:A18-2}}</b>A18-2 출처 ②</div><div class="f-c"><b>{{P:A19-1 기존}}</b>A19-1 승인·검토</div><div class="f-c"><b>{{P:A19-2 기존}}</b>A19-2 위험 발견 ①</div><div class="f-c"><b>{{P:A19-3 기존}}</b>A19-3 위험 발견 ②</div><div class="f-c"><b>{{P:A19-4 기존}}</b>A19-4 위험 발견 ③</div><div class="f-c"><b>{{P:A19-5 기존}}</b>A19-5 반복업무 ①</div><div class="f-c"><b>{{P:A19-6 기존}}</b>A19-6 반복업무 ②</div><div class="f-c"><b>{{P:A19-7 기존}}</b>A19-7 반복업무 ③</div><div class="f-c"><b>{{P:A19-8 기존}}</b>A19-8 협의·전달 ①</div><div class="f-c"><b>{{P:A19-9 기존}}</b>A19-9 협의·전달 ②</div><div class="f-c"><b>{{P:A19-10 기존}}</b>A19-10 생산·경제 ①</div><div class="f-c"><b>{{P:A19-11 기존}}</b>A19-11 생산·경제 ②</div><div class="f-c"><b>{{P:A19-12 기존}}</b>A19-12 추가 구축</div><div class="f-c"><b>{{P:A20-1}}</b>A20-1 핵심 문장 5</div><div class="f-c"><b>{{P:A20-2}}</b>A20-2 금지 표현</div></div>
+    </div>
+  </div>
+  <div class="note"><b>읽는 법</b> 칸 앞 숫자 = 쪽 번호 · 부록은 질의응답·사전 검토용 · A19는 기존 전산 대비 58항목 비교(12장)</div>
+  <aside class="notes">부록 전체 지도입니다. 질문이 나오면 이 지도에서 A번호와 쪽을 찾아 바로 넘깁니다.</aside>
+  {{FT}}
+</section>
+
+<!-- ───────── G3 구성안 안내 — 필요 자료 · 팀 결정 ───────── -->
+<section class="slide plan">
+  <div class="hd"><h1>구성안 안내<span class="sep">|</span><small>필요 자료 · 팀 결정 사항</small></h1><div class="sp"></div>
+    <span class="chip gy">구성안 G3</span><span class="badge gray"><b>구성안</b><i></i>팀 확인용 · 발표 시 제외</span></div>
+  <div class="key">각 장의 필요 자료를 모아 정리 — <span class="o">팀이 결정할 것 3가지</span>부터</div>
+  <div class="body">
+    <div class="f-dec"><div class="l">팀 결정<br>3가지</div><div class="r">
+      <div><span class="nc gold">1</span><span>효과 가정값 확정<small>건수·분·일수 · {{P:정량 효과 ①~정량 효과 ③}}쪽</small></span></div>
+      <div><span class="nc gold">2</span><span>작성자 급여 공식 통계 교체 여부<small>지금은 채용공고 대리값 · {{P:정량 효과 ③}}쪽 · A14</small></span></div>
+      <div><span class="nc gold">3</span><span>안전관리 담당자 질의서 응답 범위<small>3번째 관계자 · {{P:현장 목소리 | 만난}}쪽</small></span></div>
+    </div></div>
+    <div class="f-cols"><div class="card" style="--cc:#1E6B47"><div class="tab g">보유</div><div class="f-li"><div><span>시연 21클립 · 대표화면 21장<i>앱 실제 화면 · 합성 시연 자료</i></span><span class="pg">{{P:작업반장 흐름 ①~안전관리자 흐름 ④}}쪽</span></div><div><span>조선 3사 공식보고서<i>HD현대중공업 · 한화오션 · 삼성중공업</i></span><span class="pg">{{P:조선 3사의 안전 방향}}쪽 · A02</span></div><div><span>고용노동부 재해현황 · 사례집</span><span class="pg">{{P:조선업 안전 현황~위험은 작업의 경계}}쪽 · A01</span></div><div><span>현장 인터뷰 · 멘토링 · 정정 35</span><span class="pg">{{P:현장 목소리 | 만난~현장 정정 35항목}}쪽 · A04</span></div><div><span>서버 실측 · 답 해석 1,200건</span><span class="pg">{{P:왜 온프레미스~실험 ③}}쪽 · A11</span></div><div><span>생성 이미지 8장 · 일러스트 17종<i>실제 현장 사진 아님</i></span><span class="pg">표지 · 구분장</span></div></div></div><div class="card or" style="--cc:#D4561F"><div class="tab o">추가 확보</div><div class="f-li"><div><span>실제 현장·공정 사진 사용권</span><span class="pg">{{P:@cover}} · {{P:7개 공정에서}}쪽</span></div><div><span>실물 허가서 0453 사진<i>개인정보 가림 처리</i></span><span class="pg">{{P:흐름 속 빈틈~문제 정의}}쪽</span></div><div><span>앱 화면 확대 캡처<i>V01 · V11 · V12 등</i></span><span class="pg">{{P:작업반장 흐름 ①~안전관리자 흐름 ③}}쪽</span></div><div><span>업무 시간 실측 · 대기 기록<i>업·다운로드 포함 총업무</i></span><span class="pg">{{P:안전 · 업무 효과 ③}}쪽 · A19</span></div><div><span>실사용자 시험 일정 · 참여자<i>반장 5 · 안전관리자 2, 미실시</i></span><span class="pg">{{P:후속계획 ②}}쪽 · A12</span></div><div><span>발표 중 재생할 클립 구간</span><span class="pg">{{P:가치 기능 4가지}}쪽 · A16</span></div></div></div><div class="card" style="--cc:#1B365D"><div class="tab">확인 필요</div><div class="f-li"><div><span>팀원 이름 · 소속 · 표지 제목</span><span class="pg">{{P:@cover}}쪽 · G1</span></div><div><span>최신 통계 · 사례집 원문 쪽</span><span class="pg">{{P:조선업 안전 현황~위험은 작업의 경계}}쪽</span></div><div><span>2중점검 Y/N 기준 · 스캔 주체</span><span class="pg">{{P:현장 PTW는}}쪽</span></div><div><span>HiSEs 사용 범위 · 연동 방식<i>회사 확인</i></span><span class="pg">{{P:HiSEs가 이미 하는 일}} · {{P:HiSEs 편입 ②}}쪽</span></div><div><span>사내 서버 사양 · GPU 재측정</span><span class="pg">{{P:아키텍처 ②~왜 온프레미스}}쪽</span></div><div><span>보강 후 1,200건 재평가 여부</span><span class="pg">{{P:실험 ③}}쪽 · A11</span></div></div></div></div>
+  </div>
+  <div class="note"><b>근거</b> 각 장 오른쪽 아래 「필요」 칸 모음(본편·부록) · img/INDEX.md(생성 이미지) · 숫자는 쪽 번호</div>
+  <aside class="notes">각 장의 필요 자료 칸을 모은 목록입니다. 위의 세 가지는 팀이 정해야 해당 장의 문장과 숫자가 확정됩니다.</aside>
+  {{FT}}
+</section>
+
+<!-- ───────── S01 표지 ───────── -->
+<section class="slide cover">
+  <img class="bgimg" src="img/cover.png" alt="">
+  <div class="shade"></div>
+  <div class="low"></div>
+  <div class="kick">2026 K-조선 해커톤<i></i>본선 발표 · 안전 분야</div>
+  <div class="ttl">작업 전에 서류를 읽고,<br>작업 사이의 <span class="o">위험까지</span> 묻는 AI</div>
+  <div class="subt">대조립 위험작업허가서·작업계획서 사전검토 AX · croScan</div>
+  <div class="team"><img src="../croScan_video/public/croscan_logo_real.png" alt="croScan"></div>
+  <div class="aff">소속 · 발표자 <span style="color:#A26C00;font-weight:700">[팀원 이름 확인 필요]</span></div>
+  <div class="ev">K-조선 해커톤 본선</div>
+  <div class="dt">2026. 11. 9.(월)</div>
+  <div class="host">주최 산업통상부<i></i>주관 한국산업기술진흥원 · 한국조선해양플랜트협회</div>
+  <div class="need">팀원 이름·소속 · 제목 확정(G1 후보 3개) · 실제 현장 사진 사용권</div>
+  <aside class="notes">표지입니다. 팀 이름과 주제를 소개합니다. 제목은 구성자 초안이며, G1의 후보 3개 중에서 팀이 확정합니다.</aside>
+  {{FT}}
+</section>
+
+<!-- ───────── S02 목차 ───────── -->
+<section class="slide">
+  <div class="hd"><h1>목차</h1><div class="sp"></div>
+    <span class="badge"><b>평가항목</b><i></i>표현력</span></div>
+  <div class="f-toc">
+    <div style="--cc:#1B365D"><span class="k">01</span><div class="tt"><b>왜 이 문제인가</b><span>{{P:PART 왜 이 문제인가~문제 정의}}쪽 · 배경 · 문제</span></div><i class="bar2"></i>
+      <div class="dd"><span>조선업 안전 현황<i>{{P:조선업 안전 현황}}</i></span><span>경계를 넘는 위험<i>{{P:위험은 작업의 경계}}</i></span><span>3사 방향 · 법적 의무<i>{{P:조선 3사의 안전 방향~법이 정한}}</i></span><span>현장 PTW(As-Is)<i>{{P:현장 PTW는~흐름 속 빈틈}}</i></span><span>문제 정의<i>{{P:문제 정의}}</i></span></div></div>
+    <div style="--cc:#1F9A8E"><span class="k">02</span><div class="tt"><b>현장에서 좁히고 검증한 과정</b><span>{{P:PART 현장에서 좁히고 검증~설계 원칙 | AI가}}쪽 · 선정 · 현장 검증</span></div><i class="bar2"></i>
+      <div class="dd"><span>대조립 선정<i>{{P:7개 공정에서~대조립 선정 기준}}</i></span><span>대조립의 서류<i>{{P:대조립에서 다루는 서류~현장 적용 원칙}}</i></span><span>현장 목소리<i>{{P:현장 목소리}}</i></span><span>현장 정정 35항목<i>{{P:현장 정정 35항목}}</i></span><span>설계 원칙<i>{{P:설계 원칙~설계 원칙 | AI가}}</i></span></div></div>
+    <div style="--cc:#D4561F"><span class="k">03</span><div class="tt"><b>croScan 솔루션</b><span>{{P:PART croScan 솔루션~안전관리자 흐름 ④}}쪽 · 솔루션 · 시연</span></div><i class="bar2"></i>
+      <div class="dd"><span>한 장 요약<i>{{P:croScan 한 장 요약}}</i></span><span>현장 vs croScan<i>{{P:지금 현장 vs croScan~단계별로 무엇이 달라지나 ②}}</i></span><span>HiSEs와 무엇이 다른가<i>{{P:HiSEs가 이미 하는 일~기존 전산 대비 무엇이 달라지나 ②}}</i></span><span>가치 기능 4가지<i>{{P:가치 기능 4가지}}</i></span><span>작업반장 흐름<i>{{P:작업반장 흐름 ①~제출되는 서류 3가지}}</i></span><span>안전관리자 흐름<i>{{P:안전관리자 흐름}}</i></span></div></div>
+    <div style="--cc:#14284A"><span class="k">04</span><div class="tt"><b>온프레미스 AI 기술</b><span>{{P:PART 온프레미스 AI 기술~실험 ③}}쪽 · 기술</span></div><i class="bar2"></i>
+      <div class="dd"><span>아키텍처<i>{{P:아키텍처}}</i></span><span>온프레미스 · 소형 모델<i>{{P:왜 온프레미스}}</i></span><span>AI가 하는 일 · 하지 않는 일<i>{{P:AI가 하는 일}}</i></span><span>실험과 검증<i>{{P:실험}}</i></span></div></div>
+    <div style="--cc:#1E6B47"><span class="k">05</span><div class="tt"><b>사업화 · 기대효과</b><span>{{P:PART 사업화 · 기대효과~@end}}쪽 · 사업화 · 효과 · 마무리</span></div><i class="bar2"></i>
+      <div class="dd"><span>역할 페르소나<i>{{P:누가 쓰나}}</i></span><span>HiSEs 편입 사업모델<i>{{P:HiSEs 편입}}</i></span><span>정량 효과<i>{{P:정량 효과}}</i></span><span>안전 · 생산 효과<i>{{P:안전 · 업무 효과}}</i></span><span>후속계획<i>{{P:후속계획}}</i></span><span>마무리<i>{{P:@end}}</i></span></div></div>
+    <div style="--cc:#7D8796"><span class="k"><span style="font-size:40px">APX</span></span><div class="tt"><b>부록</b><span>{{P:@APPENDIX~A20}}쪽 · 질의응답 · 사전 검토용</span></div><i class="bar2"></i>
+      <div class="dd"><span>통계 · 3사 자료<i>{{P:A01~A02}}</i></span><span>원문 대조 · 현장 기록<i>{{P:A03~A05}}</i></span><span>규칙 · 체크리스트 · AI<i>{{P:A06~A10}}</i></span><span>실험 · 운영 · 효과 산식<i>{{P:A11~A16}}</i></span><span>한계 · 출처 · 전산 비교<i>{{P:A17~A20}}</i></span></div></div>
+  </div>
+  <aside class="notes">목차입니다. 왜 이 문제인가, 현장에서 좁히고 검증한 과정, croScan 솔루션, 온프레미스 AI 기술, 사업화와 기대효과 순서로 설명하고, 상세 근거는 부록에 모았습니다.</aside>
+  {{FT}}
+</section>

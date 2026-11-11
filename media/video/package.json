@@ -1,0 +1,17 @@
+{
+  "name": "croscan-video",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render src/index.ts CroScan out/croscan_promo.mp4 --codec=h264 --crf=18 --audio-codec=aac --audio-bitrate=192k",
+    "still": "remotion still src/index.ts CroScan"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.539",
+    "@types/react": "^18.3.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.539",
+    "typescript": "^5.9.3"
+  }
+}

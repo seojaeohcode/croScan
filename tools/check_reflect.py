@@ -84,7 +84,7 @@ for d in PERMITS:
         p1 = " ".join(o[0].get_text().split())
         for lab in ("작업장소(LOCATION)", "작업내용(JOB DESCRIPTION)", "병행여부", "승인번호(PERMIT NO.)"):
             expect(lab in p1, f"{name}: 바꾼 칸 옆의 양식 라벨 '{lab}'은 그대로")
-    if d["permit_no"].endswith("0737"):            # 「추가로 적은 내용이 맞음」 withdraws the earlier 'none' (C5)
+    if d["permit_no"].endswith("8741"):            # 「추가로 적은 내용이 맞음」 withdraws the earlier 'none' (C5)
         pid0 = d["permit_no"]
         c5 = answers + [{"qid": f"C5.LI2:{pid0}", "choice": "free", "value": "블록 안 취부 2명, 10:00 철수", "q": {}}]
         P5 = reflect.plan(doc["fields"], c5)[pid0]
@@ -93,7 +93,7 @@ for d in PERMITS:
                "C5 「추가로 적은 내용이 맞음」: 앞의 '없음'은 반영본에서 빠지고, 블록 안 다른 작업은 별지로")
 
 # answers that must not be written: 「모름」, a value that only says it is unknown, a blank's 「해당 없음」
-d = next(x for x in PERMITS if x["permit_no"].endswith("0731"))
+d = next(x for x in PERMITS if x["permit_no"].endswith("6733"))
 doc = extract.build(DIR / permit_name(d), d["kind"])
 qs = {q["qid"]: q for q in augment.summary(doc["fields"], [])["questions"]}
 bad_ans = []

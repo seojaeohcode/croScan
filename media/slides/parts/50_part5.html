@@ -1,0 +1,526 @@
+<style>
+/* ===== 제작 C · PART 05 (pc5- 접두어) ===== */
+.pc5-n{right:600px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc5-t{font-size:26px;font-weight:900;color:var(--navy);letter-spacing:-.02em;line-height:1.25}
+.pc5-s{font-size:24px;color:#3B4654;line-height:1.42;letter-spacing:-.01em}
+.pc5-s b{color:var(--ink);font-weight:700}
+.pc5-role{position:absolute;top:0;width:404px;height:540px;background:var(--bg1);border:1.5px solid var(--line);border-radius:14px;padding:0 26px}
+.pc5-role svg.av{display:block;margin:22px auto 8px}
+.pc5-role .nm{text-align:center;font-size:29px;font-weight:900;color:var(--navy);letter-spacing:-.02em}
+.pc5-role .rl{display:flex;justify-content:center;margin:8px 0 14px}
+.pc5-role .rl span{height:36px;padding:0 16px;border-radius:18px;background:#fff;border:1.5px solid #C9D3E1;font-size:21px;font-weight:700;color:#3B4654;display:inline-flex;align-items:center}
+.pc5-k{display:inline-block;font-size:19px;font-weight:900;padding:3px 10px;border-radius:6px;margin-bottom:6px}
+.pc5-k.now{background:#E3E8EE;color:#5C6776}
+.pc5-k.aft{background:var(--green);color:#fff}
+.pc5-down{display:block;margin:6px auto}
+.pc5-ref{font-size:18px;font-weight:700;color:#A26C00;background:#FFF8E6;border:1px solid #E6BC55;border-radius:5px;padding:1px 6px;margin-left:4px;white-space:nowrap}
+.pc5-flow{position:absolute;height:76px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:27px;font-weight:900;text-align:center;line-height:1.15}
+.pc5-chk{position:absolute;top:400px;width:566px;height:250px;border-radius:14px;background:var(--bg1);border:1.5px solid var(--line);padding:22px 26px}
+.pc5-chk i{font-style:normal;width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;font-size:23px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;margin-right:12px;vertical-align:middle}
+.pc5-chk b{font-size:28px;font-weight:900;color:var(--navy);letter-spacing:-.02em;vertical-align:middle}
+.pc5-chk .pc5-s{margin-top:14px}
+.pc5-bm{display:flex;gap:24px;padding:22px 0;border-bottom:1.5px solid #CFE3D7}
+.pc5-bm .h{width:120px;flex:none;font-size:30px;font-weight:900;color:var(--green);letter-spacing:-.02em}
+.pc5-bm .b{font-size:28px;color:#1F2833;line-height:1.4;letter-spacing:-.02em}
+.pc5-var{position:absolute;top:170px;width:418px;height:400px;background:#fff;border:1.5px solid #D3DCE7;border-radius:14px;padding:24px 26px}
+.pc5-var .l{width:70px;height:70px;border-radius:12px;background:var(--navy);color:#fff;font-size:40px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.pc5-var.o .l{background:var(--orange)}
+.pc5-var .m{font-size:28px;font-weight:900;color:#1F2833;line-height:1.35;margin-top:18px;letter-spacing:-.02em}
+.pc5-var .st{position:absolute;left:26px;right:26px;bottom:22px;border-top:1.5px solid #E3E8EE;padding-top:12px}
+.pc5-var .st b{display:block;font-size:20px;font-weight:900;color:#7D8796}
+table.pc5-in{width:100%;border-collapse:collapse}
+.pc5-in th{background:var(--navy);color:#fff;font-size:24px;font-weight:900;text-align:left;padding:9px 14px}
+.pc5-in td{font-size:24px;padding:10px 14px;border-bottom:1px solid #E3E8EE;line-height:1.32;vertical-align:middle}
+.pc5-in td.k{font-weight:900;color:var(--navy);white-space:nowrap}
+.pc5-in tr:nth-child(even) td{background:#F8FAFC}
+.pc5-gr{position:absolute;left:0;width:1748px;height:100px;display:flex;gap:12px}
+.pc5-gr .no{width:92px;flex:none;border-radius:10px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900}
+.pc5-gr .tx{width:1000px;flex:none;border-radius:10px;background:var(--bg1);border:1.5px solid var(--line);display:flex;align-items:center;padding:0 24px;font-size:26px;font-weight:700;color:#1F2833;line-height:1.35;letter-spacing:-.02em}
+.pc5-gr .ix{flex:1;border-radius:10px;background:var(--gbg);border:1.5px solid #CFE3D7;display:flex;align-items:center;padding:0 20px;font-size:24px;font-weight:700;color:#24432F;line-height:1.35}
+.pc5-eg{position:absolute;top:0;width:566px;height:470px;border-radius:14px;background:var(--bg1);border:1.5px solid var(--line);overflow:hidden}
+.pc5-eg .h{height:84px;color:#fff;display:flex;align-items:center;padding:0 26px;font-size:30px;font-weight:900;letter-spacing:-.02em}
+.pc5-eg ul{list-style:none;padding:12px 26px}
+.pc5-eg li{font-size:26px;font-weight:700;color:#1F2833;padding:10px 0;border-bottom:1.5px dashed #D3DCE7;display:flex;gap:12px;align-items:baseline}
+.pc5-eg li:last-child{border:0}
+.pc5-eg li b{flex:none;font-size:20px;color:#7D8796;font-weight:900;width:48px}
+.pc5-eg li span{display:block;font-size:22px;font-weight:500;color:#5E6977;margin-top:2px}
+.pc5-ax{position:absolute;left:790px;width:958px;height:196px;background:var(--bg1);border:1.5px solid var(--line);border-radius:14px;padding:22px 28px}
+.pc5-ax .h{font-size:30px;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.pc5-ax .h i{font-style:normal;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;font-size:20px;display:inline-flex;align-items:center;justify-content:center}
+.pc5-step{position:absolute;top:0;width:328px;height:290px;background:#fff;border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
+.pc5-step .h{height:74px;background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:0 20px;font-size:28px;font-weight:900;letter-spacing:-.02em}
+.pc5-step .h i{font-style:normal;width:38px;height:38px;border-radius:50%;background:#fff;color:var(--navy);display:inline-flex;align-items:center;justify-content:center;font-size:21px;font-weight:900}
+.pc5-step .bd{padding:18px 20px 0;font-size:28px;line-height:1.45;color:#1F2833;letter-spacing:-.02em}
+.pc5-gate{position:absolute;top:314px;left:0;width:1748px;height:230px;border-radius:14px;background:var(--bg1);border:1.5px solid var(--line);display:flex;overflow:hidden}
+.pc5-gate>div{flex:1;padding:24px 30px}
+.pc5-gate>div+div{border-left:1.5px solid var(--line)}
+.pc5-gate .t5{font-size:28px;font-weight:900;color:var(--navy);margin-bottom:10px}
+.pc5-gate .x5{font-size:26px;color:#1F2833;line-height:1.45;letter-spacing:-.02em}
+.pc5-f{position:absolute;left:0;width:880px;height:142px;border-radius:12px;background:var(--gbg);border:1.5px solid #CFE3D7;display:flex;align-items:center;gap:22px;padding:0 26px}
+.pc5-f b{flex:none;width:84px;height:58px;border-radius:10px;background:var(--green);color:#fff;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.pc5-f span{font-size:26px;font-weight:700;color:#1F2833;line-height:1.35;letter-spacing:-.02em}
+.pc5-vf{position:absolute;left:910px;width:838px;height:196px;border-radius:12px;background:var(--bg1);border:1.5px solid var(--line);padding:20px 26px}
+.pc5-vf .h{font-size:28px;font-weight:900;color:var(--navy);margin-bottom:8px}
+.pc5-end .vis{position:absolute;left:118px;top:160px;color:#fff;font-size:80px;font-weight:900;letter-spacing:-.035em;line-height:1.22}
+.pc5-end .vis .o2{color:#F08A55}
+.pc5-end .kick{position:absolute;left:122px;top:92px;color:var(--gold);font-size:26px;font-weight:900;letter-spacing:.08em}
+.pc5-who{position:absolute;top:446px;width:540px;border-left:3px solid var(--gold);padding-left:18px}
+.pc5-who b{display:block;font-size:25px;font-weight:900;color:var(--gold);margin-bottom:6px}
+.pc5-who span{font-size:24px;color:#DCE3EE;line-height:1.45}
+</style>
+
+<!-- ================= S29 PART 05 구분장 ================= -->
+<section class="slide part">
+  <div class="left"><img src="img/part5.png" alt=""><div class="shade"></div></div>
+  <div class="kicker">PART</div>
+  <div class="pnum">05</div>
+  <div class="pt">사업화 · 기대효과</div>
+  <div class="pd">HiSEs 앞단의 사전검토 모듈로.<br>누가 쓰고, 어떻게 들어가고, 무엇이 달라지나</div>
+  <div class="toc">
+    <div class="it"><div class="k">01</div><div><div class="tt">누가 쓰나 — 역할 페르소나</div><div class="dd">허가서를 올리고 보는 모든 연계 작업자</div></div><div class="pp">{{P:누가 쓰나}}쪽</div></div>
+    <div class="it"><div class="k">02</div><div><div class="tt">HiSEs 편입 사업모델</div><div class="dd">연동 구조 · 고객 · 과금 · 확장</div></div><div class="pp">{{P:HiSEs 편입 ①~HiSEs 편입 ②}}쪽</div></div>
+    <div class="it"><div class="k">03</div><div><div class="tt">정량 효과</div><div class="dd">공장 1곳 433시간 · 일반식 · 전사 TDABC</div></div><div class="pp">{{P:정량 효과 ①~정량 효과 ③}}쪽</div></div>
+    <div class="it"><div class="k">04</div><div><div class="tt">안전 · 생산 효과</div><div class="dd">핵심 문장 5 · 금액화하지 않은 효과 · 측정 축</div></div><div class="pp">{{P:안전 · 업무 효과 ①~안전 · 업무 효과 ③}}쪽</div></div>
+    <div class="it"><div class="k">05</div><div><div class="tt">후속계획</div><div class="dd">5단계 로드맵 · 연동 조건 · 다음 검증</div></div><div class="pp">{{P:후속계획 ①~후속계획 ②}}쪽</div></div>
+  </div>
+  <div class="brand">croScan · 발표 구성안</div>
+  <aside class="notes">
+    <p>설명: 마지막 부분은 사업화와 기대효과입니다. 누가 쓰는지, HiSEs에 어떻게 들어가는지, 무엇이 달라지는지를 차례로 말씀드립니다. 효과 숫자는 모두 조건부 계산이나 가정 시나리오로 표시합니다.</p>
+    <p>근거: BLUEPRINT 4절 PART 05, 팀 66장 자료 p.55~62, croScan 기존전산 대비 프로세스 차이와 기대효과 전체비교(팀, 2026-11-02).</p>
+    <p>필요 자료: 없음.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S30 페르소나 ================= -->
+<section class="slide">
+  <div class="hd"><h1>누가 쓰나 <span class="sep">|</span><small>역할 페르소나</small></h1><div class="sp"></div><span class="chip g">사업화 ①</span><span class="badge"><b>평가항목</b><i></i>창출효과</span></div>
+  <div class="key">사용자 = <span class="o">HiSEs로 허가서를 올리고 보는 모든 연계 작업자</span></div>
+  <div class="body">
+    <div class="pc5-role" style="left:0">
+      <svg class="av" width="96" height="96" viewBox="0 0 96 96" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="48" r="46" fill="#fff" stroke="#C9D3E1" stroke-width="2"/><path d="M30 22h26l12 12v40H30Z" fill="#E6EBF1"/><path d="M56 22v12h12"/><path d="M37 46h18M37 56h12"/><path d="M58 70l16-16 5 5-16 16-7 2Z" fill="#E2A72E" stroke="#1B365D"/></svg>
+      <div class="nm">작업반장</div><div class="rl"><span>작성 · 허가서 올리고 답하기</span></div>
+      <span class="pc5-k now">지금</span><div class="pc5-s">7일 단위 · 종일 시간<br>장소에 팀 이름</div>
+      <svg class="pc5-down" width="28" height="22" viewBox="0 0 28 22" fill="none" stroke="#1E6B47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v16M6 11l8 8 8-8"/></svg>
+      <span class="pc5-k aft">croScan 후</span><div class="pc5-s"><b>부족한 칸만 질문</b><br>반영본 · 추가검토서<br>종류별 체크리스트 초안</div>
+    </div>
+    <div class="pc5-role" style="left:448px">
+      <svg class="av" width="96" height="96" viewBox="0 0 96 96" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="48" r="46" fill="#fff" stroke="#C9D3E1" stroke-width="2"/><path d="M28 20h30v36H28Z" fill="#E6EBF1"/><path d="M35 30h16M35 39h12"/><circle cx="60" cy="62" r="14" fill="#1E6B47" stroke="#1E6B47"/><path d="M53 62l5 5 9-10" stroke="#fff"/><path d="M28 76h40"/></svg>
+      <div class="nm">생산부서 승인권한자</div><div class="rl"><span>승인 · HiSEs 전산승인</span></div>
+      <span class="pc5-k now">지금</span><div class="pc5-s">허가서 칸의 값으로<br>승인 여부 판단</div>
+      <svg class="pc5-down" width="28" height="22" viewBox="0 0 28 22" fill="none" stroke="#1E6B47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v16M6 11l8 8 8-8"/></svg>
+      <span class="pc5-k aft">croScan 후</span><div class="pc5-s"><b>반장 답이 반영된</b><br>반영본 · 추가검토서 참고<br>승인 권한은 그대로</div>
+    </div>
+    <div class="pc5-role" style="left:896px">
+      <svg class="av" width="96" height="96" viewBox="0 0 96 96" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="48" r="46" fill="#fff" stroke="#C9D3E1" stroke-width="2"/><path d="M24 24h22v14H24ZM24 46h22v14H24Z" fill="#E6EBF1"/><path d="M50 31h8M50 53h8" stroke="#D4561F"/><circle cx="62" cy="46" r="12" fill="#fff"/><path d="M71 55l9 9"/></svg>
+      <div class="nm">안전관리자 · 안전요원</div><div class="rl"><span>검토 · 하루 전체와 현장</span></div>
+      <span class="pc5-k now">지금</span><div class="pc5-s">공장 담당 1명 순회<br>신규 약 8건/일<span class="pc5-ref">참고값</span></div>
+      <svg class="pc5-down" width="28" height="22" viewBox="0 0 28 22" fill="none" stroke="#1E6B47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v16M6 11l8 8 8-8"/></svg>
+      <span class="pc5-k aft">croScan 후</span><div class="pc5-s"><b>하루 쌍을 1~3순위로</b><br>근거 · 원문 위치 함께<br>현장 확인 순서 자료</div>
+    </div>
+    <div class="pc5-role" style="left:1344px">
+      <svg class="av" width="96" height="96" viewBox="0 0 96 96" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="48" r="46" fill="#fff" stroke="#C9D3E1" stroke-width="2"/><path d="M20 28h34v22H34l-8 7v-7h-6Z" fill="#E6EBF1"/><path d="M42 42h34v22h-6v7l-8-7H42Z" fill="#1F9A8E" stroke="#1F9A8E"/><path d="M50 53h18" stroke="#fff"/><path d="M28 37h18"/></svg>
+      <div class="nm">인접 작업반장 · 협력사</div><div class="rl"><span>협업 · 같은 공간에서 함께</span></div>
+      <span class="pc5-k now">지금</span><div class="pc5-s">옆 작업 정보는<br>「병행여부」 칸 한 줄</div>
+      <svg class="pc5-down" width="28" height="22" viewBox="0 0 28 22" fill="none" stroke="#1E6B47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v16M6 11l8 8 8-8"/></svg>
+      <span class="pc5-k aft">croScan 후</span><div class="pc5-s"><b>협조 문자 · 게시 별지</b><br>착수 전 협의<br>문자는 사람이 보냄</div>
+    </div>
+    <svg class="abs" style="left:0;top:0" width="1748" height="200" viewBox="0 0 1748 200" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M410 70h32M434 62l8 8-8 8"/><path d="M858 70h32M882 62l8 8-8 8"/><path d="M1306 70h32M1330 62l8 8-8 8"/>
+    </svg>
+  </div>
+  <div class="bar g" style="top:846px;height:90px"><div class="l">정의</div><div class="r">실명·나이가 아닌 역할 — 올리는 · 승인하는 · 검토하는 · 옆에서 함께 일하는 사람</div></div>
+  <div class="note pc5-n"><b>근거</b> 현장정정 D01 · 인터뷰 통합본 p.11 · 실물 허가서 0453 · 노트 01·02 · outB</div>
+  <div class="need">필요: 역할별 실제 사용자 의견(시험 후)</div>
+  <aside class="notes">
+    <p>설명: croScan의 사용자는 한 사람이 아니라 HiSEs로 허가서를 올리고 보는 모든 연계 작업자입니다. 작업반장은 허가서를 올리면 부족한 칸만 질문받고(검토당 최대 12회) 반영본과 추가검토서, 허가 종류별 체크리스트 초안을 받습니다. 생산부서 승인권한자는 반장 답이 반영된 자료를 참고하되 승인 절차와 권한은 바뀌지 않습니다. 안전관리자와 안전요원은 그날 허가서와 계획서의 쌍을 우선순위로 보고 현장 확인 순서를 정합니다. 옆에서 함께 일하는 작업반장과 협력사는 협조 문자와 게시 별지로 착수 전에 협의하며, 문자는 croScan이 보내지 않고 사람이 복사해 보냅니다.</p>
+    <p>근거: 현장정정 D01(전산승인 = 생산부서 승인권한자), 인터뷰 통합본 p.11(안전담당자 공장 담당 1명 순회점검, 신규 허가 신청 하루 평균 약 8건 = 멘토 설명값·실측 아님), 실물 허가서 0453(6일 모두 08:00~16:59, 7일 단위 신청, 팀 이름 장소), 노트 01 245행(허가서 「병행여부」 칸), 노트 02 §1.4(질문 12회), outB(전체 카탈로그 86항목 중 허가 종류별 기본 19~28항목 제안, 화기 기본 28항목).</p>
+    <p>필요 자료: 역할별 실제 사용자 의견(사용자 시험 후).</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S31-1 HiSEs 연동 구조 ================= -->
+<section class="slide">
+  <div class="hd"><h1>HiSEs 편입 ① <span class="sep">|</span><small>연동 구조</small></h1><div class="sp"></div><span class="chip g">사업화 ②</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">대체가 아닌 연동 — <span class="o">HiSEs PTW 앞단의 사전검토 모듈</span></div>
+  <div class="body">
+    <div class="card w" style="position:absolute;left:0;top:0;width:1748px;height:376px">
+      <div class="tab">연동 흐름 · 제안</div>
+      <span class="tag gold" style="position:absolute;right:20px;top:18px;color:#3A2A00;font-size:21px">실연동 미확인 · 연동 전 확인 필요</span>
+      <div class="pc5-s" style="position:absolute;left:30px;top:66px;font-weight:900;color:var(--navy)">HiSEs — 기존 절차 그대로</div>
+      <div class="pc5-flow" style="left:30px;top:104px;width:380px;border:2px solid var(--navy);color:var(--navy);background:#fff">PTW 신청 · 작업반장</div>
+      <div class="pc5-flow" style="left:466px;top:104px;width:380px;border:2px solid var(--navy);color:var(--navy);background:#fff">생산부서 전산승인</div>
+      <div class="pc5-flow" style="left:902px;top:104px;width:380px;border:2px solid var(--navy);color:var(--navy);background:#fff">스캔 · 2중점검</div>
+      <div class="pc5-flow" style="left:1338px;top:104px;width:380px;border:2px solid var(--navy);color:var(--navy);background:#fff">대면허가 · 현장 확인</div>
+      <div class="pc5-flow" style="left:30px;top:272px;width:1688px;background:#E8F5F3;border:2px dashed var(--teal);color:#13675F">croScan 사전검토 — 질문 · 반영본 · 체크리스트 · 쌍 근거 · 협조 문안</div>
+      <svg class="abs" style="left:0;top:0" width="1748" height="376" viewBox="0 0 1748 376" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="#1B365D" stroke-width="3"><path d="M412 142h50M452 134l10 8-10 8"/><path d="M848 142h50M888 134l10 8-10 8"/><path d="M1284 142h50M1324 134l10 8-10 8"/></g>
+        <g stroke="#1F9A8E" stroke-width="3"><path d="M150 182v84M142 256l8 10 8-10"/><path d="M656 266v-84M648 192l8-10 8 10"/><path d="M1528 266v-84M1520 192l8-10 8 10"/></g>
+        <g font-size="22" font-weight="700" fill="#13675F"><text x="166" y="234">허가서 · 계획서</text><text x="672" y="234">반영본 · 추가검토서</text><text x="1544" y="234">확인 순서</text></g>
+      </svg>
+    </div>
+    <div class="pc5-chk" style="left:0"><i>1</i><b>연동 경로 · 권한</b><div class="pc5-s">HiSEs DB · 결재의 조회와<br>반환 경로, 문서 식별자</div></div>
+    <div class="pc5-chk" style="left:591px"><i>2</i><b>기존 기능과 역할 분담</b><div class="pc5-s">Hi-Standard 체크리스트 ·<br>도장·화기 병행 필터와 중복<br>(HD 2026 p.53·56)</div></div>
+    <div class="pc5-chk" style="left:1182px"><i>3</i><b>회사 SSO · 보존 정책</b><div class="pc5-s">역할 · 문서 접근 · 보존 기간<br>SSO 실연결은 아직 안 함</div></div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> outC §6 · HD 2026 보고서 p.9·10·11·53·56 · 기대효과 전체비교(팀, 2026-11-02) F02</div>
+  <div class="need">필요: HiSEs 연동 방식 회사 확인</div>
+  <aside class="notes">
+    <p>설명: croScan은 HiSEs를 바꾸는 시스템이 아니라 PTW 신청 앞단에 붙는 사전검토 모듈로 제안합니다. 반장이 올린 허가서·계획서를 croScan이 검토해, 반영본·추가검토서를 전산승인 참고자료로, 체크리스트와 쌍 근거를 현장 확인 순서 자료로 돌려주는 흐름입니다. 신청·전산승인·2중점검·대면허가·현장 확인은 기존 절차 그대로입니다. 이 흐름은 제안이고 실제 HiSEs 연동은 아직 확인하지 않았으며, 연동 경로와 권한, 기존 기능과의 역할 분담, 회사 SSO와 보존 정책을 먼저 확인해야 합니다. croScan은 사내 서버에 배치할 수 있는 구성이며, 사내 처리는 사내 배포와 내부 모델 주소 설정을 전제로 합니다.</p>
+    <p>근거: outC §6(연동 지점 6: 입력 재사용·입력 품질 AI·체크리스트·병행 필터·알람·위험성평가–PTW·통합 플랫폼, 모두 제안·연동 전 확인, HiSEs API·접수·승인 실연동 미확인), HD 2026 보고서 p.9(수시 위험성평가–작업허가 연계)·p.10(HiSEs 4차 고도화 2단계)·p.11(PTW 신청 편의성: 허가서 불러오기)·p.53(Hi-Standard 맞춤 체크리스트)·p.56(병행 필터·알람 메일·일정 조정), 기대효과 전체비교(팀, 2026-11-02) F02(HiSEs DB·결재 실연동 시 다운로드·재업로드 부담 감소), 노트 16(회사 SSO 실연결 미실시).</p>
+    <p>필요 자료: HiSEs 연동 방식·권한 회사 확인.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S31-2 사업모델 ================= -->
+<section class="slide">
+  <div class="hd"><h1>HiSEs 편입 ② <span class="sep">|</span><small>사업모델</small></h1><div class="sp"></div><span class="chip g">사업화 ③</span><span class="badge"><b>평가항목</b><i></i>창출효과</span></div>
+  <div class="key">공장 단위 온프레미스 라이선스 — <span class="o">대조립 1공장부터 넓힌다</span></div>
+  <div class="body">
+    <div class="card gr" style="position:absolute;left:0;top:0;width:1040px;height:650px">
+      <div class="tab g">사업 모델 · B2B</div>
+      <div style="position:absolute;left:36px;right:36px;top:66px">
+        <div class="pc5-bm"><div class="h">고객</div><div class="b">조선사 안전 · HSE 시스템 부서</div></div>
+        <div class="pc5-bm"><div class="h">과금</div><div class="b">공장 단위 온프레미스 라이선스<br>+ 유지보수 · 규칙 업데이트 <span class="tag gold" style="font-size:20px;color:#3A2A00;vertical-align:4px">금액 협의</span></div></div>
+        <div class="pc5-bm"><div class="h">도입</div><div class="b">사내 서버 컨테이너 2개 · 사내 SSO</div></div>
+        <div class="pc5-bm" style="border:0"><div class="h">확장</div><div class="b">대조립 1공장 → 다른 내업 공정<br>→ 외업 공정 → 3사 · 협력사</div></div>
+      </div>
+    </div>
+    <div class="card" style="position:absolute;left:1070px;top:0;width:678px;height:650px;background:#fff">
+      <div class="tab gy">사용 환경 · 매출 규모 아님</div>
+      <div style="position:absolute;left:34px;right:30px;top:84px">
+        <div style="font-size:24px;font-weight:900;color:#7D8796">2024.9 고용보험 기준</div>
+        <div style="font-size:64px;font-weight:900;color:var(--navy);letter-spacing:-.03em;line-height:1.1">116,072<small style="font-size:28px">명</small></div>
+        <div class="pc5-s">조선 분야 피보험자 · 6,418개사</div>
+        <div style="height:1.5px;background:#DDE4EC;margin:28px 0"></div>
+        <div style="font-size:24px;font-weight:900;color:#7D8796">별도 2022 협회 통계</div>
+        <div style="font-size:64px;font-weight:900;color:var(--orange);letter-spacing:-.03em;line-height:1.1">57.1<small style="font-size:28px">%</small></div>
+        <div class="pc5-s">사내 협력사 55,009명 / 96,254명<br>두 통계는 연도 · 모집단이 달라 합치지 않음</div>
+      </div>
+    </div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> outA §6 · outC §6 · research_web(산업연구원 2025 정책자료 표 2-1·2-3 재인용)</div>
+  <div class="need">필요: 과금 방식 협의</div>
+  <aside class="notes">
+    <p>설명: 계약은 조선사의 안전·HSE 시스템 부서와 맺습니다. 과금은 공장 단위 온프레미스 라이선스와 유지보수·규칙 업데이트로 하고, 금액은 협의로 둡니다. 도입은 사내 서버에 컨테이너 두 개를 두고 사내 SSO를 붙이는 방식이며, 대조립 한 공장에서 시작해 다른 내업 공정, 외업 공정, 조선 3사와 협력사로 넓힙니다. 2024년 9월 고용보험 기준 조선 분야 피보험자는 116,072명이고, 별도인 2022년 협회 인력 통계에서 사내 협력사는 96,254명 중 55,009명(57.1%)입니다. 두 통계는 연도와 모집단이 달라 합치지 않으며, 매출 규모가 아니라 사용 환경을 보여 줍니다.</p>
+    <p>근거: outA §6·outC §6(B2B 편입 시나리오), research_web.md(산업연구원 정책자료 2025-06 표 2-3: 고용보험 DB 조선 분야 C311 피보험자 2024.9 116,072명·6,418개사; 표 2-1: 협회 조사 2022 직영 41,245 + 사내 협력사 55,009 = 96,254명, 57.1%는 계산값). 구매 결정 구조는 팀 추정이라 장표에서 뺐습니다. 안전 투자 예산을 시장 규모·매출로 쓰지 않습니다(스토리보드 §5). 확장 공정 분류: 내업 판넬조립·선행의장·선행도장, 내업·외업 모두 PE장, 외업 탑재·선체도장(outA).</p>
+    <p>필요 자료: 과금 방식 협의.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S32-1 공장 1곳 ================= -->
+<section class="slide">
+  <div class="hd"><h1>정량 효과 ① 공장 1곳 <span class="sep">|</span><small>조건부 계산</small></h1><div class="sp"></div><span class="chip g">사업화 ④</span><span class="badge"><b>평가항목</b><i></i>창출효과</span></div>
+  <div class="key">공장 한 곳 하루 170분 → 66분 — <span class="o">연 433시간의 업무 여력</span></div>
+  <div class="body">
+    <div class="card" style="position:absolute;left:0;top:0;width:1060px;height:650px;background:#fff">
+      <div class="tab">작업 단위별 업무시간 · 분/일</div>
+      <div class="abs" style="right:26px;top:22px;display:flex;gap:20px;font-size:22px;font-weight:700;color:#3B4654">
+        <span style="display:flex;align-items:center;gap:8px"><i style="display:inline-block;width:22px;height:16px;border-radius:3px;background:#B9C2CE"></i>기존 · 멘토 참고값</span>
+        <span style="display:flex;align-items:center;gap:8px"><i style="display:inline-block;width:22px;height:16px;border-radius:3px;background:#D4561F"></i>croScan 후 · 팀 예상</span>
+      </div>
+      <svg width="1060" height="650" viewBox="0 0 1060 650" style="position:absolute;left:0;top:0">
+        <g stroke="#EDF0F4" stroke-width="1.5"><line x1="330" y1="88" x2="330" y2="500"/><line x1="480" y1="88" x2="480" y2="500"/><line x1="630" y1="88" x2="630" y2="500"/><line x1="780" y1="88" x2="780" y2="500"/><line x1="930" y1="88" x2="930" y2="500"/></g>
+        <g font-size="20" fill="#A5AEBB" text-anchor="middle"><text x="330" y="524">0</text><text x="480" y="524">30</text><text x="630" y="524">60</text><text x="780" y="524">90</text><text x="930" y="524">120분</text></g>
+        <g font-size="28" font-weight="900" fill="#1B365D"><text x="32" y="140">허가서 작성</text><text x="32" y="280">허가서 검토</text><text x="32" y="420">전체 계획검토</text></g>
+        <g font-size="22" fill="#5E6977" font-weight="700"><text x="32" y="172">8건 × 15 → 5분</text><text x="32" y="312">8건 × 5 → 3분</text><text x="32" y="452">1회 × 10 → 2분</text></g>
+        <rect x="330" y="112" width="600" height="32" rx="6" fill="#B9C2CE"/><text x="942" y="138" font-size="28" font-weight="900" fill="#5E6977">120</text>
+        <rect x="330" y="150" width="200" height="36" rx="6" fill="#D4561F"/><text x="542" y="178" font-size="30" font-weight="900" fill="#D4561F">40</text>
+        <rect x="330" y="252" width="200" height="32" rx="6" fill="#B9C2CE"/><text x="542" y="278" font-size="28" font-weight="900" fill="#5E6977">40</text>
+        <rect x="330" y="290" width="120" height="36" rx="6" fill="#D4561F"/><text x="462" y="318" font-size="30" font-weight="900" fill="#D4561F">24</text>
+        <rect x="330" y="392" width="50" height="32" rx="6" fill="#B9C2CE"/><text x="392" y="418" font-size="28" font-weight="900" fill="#5E6977">10</text>
+        <rect x="330" y="430" width="10" height="36" rx="3" fill="#D4561F"/><text x="352" y="458" font-size="30" font-weight="900" fill="#D4561F">2</text>
+      </svg>
+      <div class="abs" style="left:26px;right:26px;bottom:22px;height:70px;border-radius:10px;background:var(--bg1);display:flex;align-items:center;padding:0 24px;gap:18px">
+        <span style="font-size:26px;font-weight:900;color:var(--navy)">하루 합계</span>
+        <span style="font-size:28px;font-weight:700;color:#98A2AF;text-decoration:line-through">170분</span>
+        <span style="font-size:30px;font-weight:900;color:var(--orange)">→ 66분</span>
+        <span class="pc5-s" style="margin-left:auto">전체 참여자 합계 · −104분/일</span>
+      </div>
+    </div>
+    <div class="card" style="position:absolute;left:1090px;top:0;width:658px;height:650px;background:#fff;border:2px solid var(--navy)">
+      <div class="tab o">공장 1곳 · 연 250일</div>
+      <div style="position:absolute;left:34px;top:86px;display:flex;align-items:baseline;gap:6px">
+        <span style="font-size:136px;font-weight:900;color:var(--orange);letter-spacing:-.04em;line-height:1">433</span>
+        <span style="font-size:52px;font-weight:900;color:var(--orange)">.3</span>
+      </div>
+      <div style="position:absolute;left:38px;top:236px;font-size:34px;font-weight:900;color:var(--navy)">시간 / 년 · 업무 여력</div>
+      <div style="position:absolute;left:34px;right:30px;top:300px;background:var(--bg1);border-radius:10px;padding:16px 20px">
+        <div style="font-size:28px;font-weight:900;color:var(--navy)">(170 − 66) × 250 ÷ 60</div>
+        <div class="pc5-s" style="margin-top:6px">신규허가 8건/일 · 허가서별 검토 1회<br>전체 계획검토 하루 1회 · 연 250일</div>
+      </div>
+      <div style="position:absolute;left:34px;right:24px;top:500px;display:flex;flex-wrap:wrap;gap:10px">
+        <span class="tag" style="font-size:20px">조건부 계산</span><span class="tag" style="font-size:20px">실측 아님</span><span class="tag gy" style="font-size:20px">추가 질문·교정·검수 포함 가정</span><span class="tag gy" style="font-size:20px">한 사람 시간 · 현금 절감 아님</span>
+      </div>
+    </div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> 팀 66장 자료 p.56(조선소전체_업무량근거와AX정량효과 10-31) · 인터뷰 통합본 p.11</div>
+  <div class="need">필요: 효과 가정값 팀 확정</div>
+  <aside class="notes">
+    <p>설명: 대조립 공장 한 곳을 기준으로 한 조건부 계산입니다. 하루 신규허가 8건, 허가서별 검토 1회, 공장 전체 계획검토 하루 1회, 연 250일을 넣었습니다. 작성은 15분에서 5분, 검토는 5분에서 3분, 전체 계획검토는 10분에서 2분으로 줄어든다고 가정하면 하루 170분이 66분이 됩니다. (170−66)×250÷60 = 433.3시간이 연간 업무 여력입니다. 이 값은 전체 참여자의 업무시간 합계이고, 한 사람의 시간이나 건조기간, 현금 절감액이 아닙니다. 추가 질문·교정·검수 부담이 새 예상시간에 들어 있다는 가정이며 실측이 아닙니다.</p>
+    <p>산식: 하루 = 작성 8×15 = 120 → 8×5 = 40, 검토 8×5 = 40 → 8×3 = 24, 전체 계획검토 10 → 2, 합계 170 → 66분. 연간 = (170−66)×250÷60 = 433.3시간.</p>
+    <p>근거: 팀 66장 자료 p.56(공장 1곳 연 433시간, 「조선소전체_업무량근거와AX정량효과」 2026-10-31), 인터뷰 통합본 p.11(기존 15·5·10분과 하루 약 8건 = 멘토 설명값, 실측 아님). 도입 후 5·3·2분은 팀 예상값. 스토리보드의 「167시간·500만 원」 계산은 이 장으로 대체했습니다. 참고값들은 단위별로 나눠 쓰고 합산하지 않습니다(기대효과 전체비교 P15).</p>
+    <p>필요 자료: 효과 가정값 팀 확정.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S32-2 일반식 ================= -->
+<section class="slide">
+  <div class="hd"><h1>정량 효과 ② <span class="sep">|</span><small>확대할 때의 일반식</small></h1><div class="sp"></div><span class="chip g">사업화 ④</span><span class="badge"><b>평가항목</b><i></i>창출효과 · 실현 가능성</span></div>
+  <div class="key">계산 예시를 그대로 키우지 않는다 — <span class="o">실제 적용 단위를 센다</span></div>
+  <div class="body">
+    <div class="abs" style="left:0;top:0;width:1748px;height:140px;border-radius:14px;background:var(--navy);display:flex;align-items:center;justify-content:center;gap:30px">
+      <span style="font-size:30px;font-weight:700;color:#C9D3E1">연간 순절감시간 =</span>
+      <span style="font-size:58px;font-weight:900;color:#fff;letter-spacing:-.01em">(10A + 2V + 8P − E) ÷ 60</span>
+    </div>
+    <div class="pc5-var" style="left:0"><div class="l">A</div><div class="m">croScan 적용<br>신규 허가서<br>작성 건수(연)</div><div class="st"><b>계수 10 = 작성 15 → 5분</b><div class="pc5-s">전사 실제값 미확인</div></div></div>
+    <div class="pc5-var" style="left:443px"><div class="l">V</div><div class="m">같은 범위의<br>허가서<br>검토 건수</div><div class="st"><b>계수 2 = 검토 5 → 3분</b><div class="pc5-s">역할·검토 횟수 확인 필요</div></div></div>
+    <div class="pc5-var" style="left:886px"><div class="l">P</div><div class="m">공장 전체<br>계획검토 횟수</div><div class="st"><b>계수 8 = 10 → 2분</b><div class="pc5-s">허가서 수와 구분해 집계</div></div></div>
+    <div class="pc5-var o" style="left:1330px"><div class="l">E</div><div class="m">새 예상시간에 없는<br>추가 업무(분)</div><div class="st"><b>질문·교정·검수·오경보</b><div class="pc5-s">아직 측정 안 함</div></div></div>
+    <div class="abs" style="left:0;top:586px;width:1748px;height:58px;border-radius:10px;background:var(--obg);border:1.5px solid #F1D6C7;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#8A3410">ROI는 가격 · 운영비 · 현금화 비율이 있어야 계산 가능</div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> 팀 66장 자료 p.57(정량효과 검토 2026-10-31 · 시간 차이는 가정값)</div>
+  <div class="need">필요: A · V · P 실제 집계 · E 측정</div>
+  <aside class="notes">
+    <p>설명: 공장 한 곳의 계산 예시를 실제 조선소 전체 물량으로 그대로 바꾸지 않습니다. 넓힐 때는 실제로 적용되는 단위를 세서 이 식에 넣습니다. A는 croScan을 적용한 신규 허가서 작성 건수, V는 같은 범위의 허가서 검토 건수, P는 공장 전체 계획검토 횟수, E는 새 예상시간에 들어 있지 않은 추가 업무의 분입니다. 계수 10·2·8은 건당 줄어든다고 가정한 분입니다. 질문·교정·검수·오경보 같은 추가 부담 E는 아직 재지 않았고, 가격·운영비·현금화 비율이 있어야 ROI를 계산할 수 있습니다.</p>
+    <p>산식: 연간 순절감시간 가정 = (10A + 2V + 8P − E) ÷ 60. A = 연간 croScan 적용 신규 허가서 작성 건수(전사 실제값 미확인), V = 같은 범위의 허가서 검토 건수(실제 역할·검토 횟수 확인 필요), P = 공장 전체 계획검토 횟수(허가서 수와 구분해 집계), E = 새 예상시간에 미포함인 추가 업무의 분(질문·교정·검수·오경보 부담 미측정).</p>
+    <p>근거: 팀 66장 자료 p.57(「효과를 확대할 때도 실제 적용 단위를 셉니다」, 정량효과 검토 2026-10-31; 시간 차이는 가정값).</p>
+    <p>필요 자료: A·V·P 실제 집계, 추가 업무 E 측정.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S32-3 전사 확대 TDABC ================= -->
+<section class="slide">
+  <div class="hd"><h1>정량 효과 ③ 전사 확대 <span class="sep">|</span><small>시간기반 활동원가(TDABC)</small></h1><div class="sp"></div><span class="chip g">사업화 ④</span><span class="badge"><b>평가항목</b><i></i>창출효과</span></div>
+  <div class="key">연 13만 건 · 건당 20분 → 8분 — <span class="o">연 26,000시간, 급여 환산 약 8.43억 원</span></div>
+  <div class="body">
+    <div class="card" style="position:absolute;left:0;top:0;width:930px;height:650px;background:#fff">
+      <div class="tab">입력 변수</div>
+      <div style="position:absolute;left:22px;right:22px;top:66px">
+        <table class="pc5-in">
+          <tr><th style="width:170px">항목</th><th style="width:300px">값</th><th>근거 · 성격</th></tr>
+          <tr><td class="k">연간 업무량</td><td><b>13만 건</b><br>작성 · 검토 각 1회</td><td>2020 대면허가 실적<br>HD현대중공업 2021 보고서 p.93</td></tr>
+          <tr><td class="k">연 근무시간</td><td>250일 × 8시간<br>= 120,000분</td><td><span class="tag gy" style="font-size:20px">가정</span> 가용시간 미실측</td></tr>
+          <tr><td class="k">작성자 급여</td><td>연 5,500만 원<br>→ <b>458.33원/분</b></td><td><span class="tag" style="background:#A26C00;font-size:20px">대리값</span> 협력사 조·반장<br>채용공고 중간값</td></tr>
+          <tr><td class="k">검토자 급여</td><td>연 1억 1,427만 원<br>→ <b>952.28원/분</b></td><td><span class="tag" style="background:#A26C00;font-size:20px">대리값</span> 전사 평균<br>HD한국조선해양 p.82</td></tr>
+          <tr><td class="k" style="border:0">건당 시간</td><td style="border:0">작성 15 → 5분<br>검토 5 → 3분</td><td style="border:0">기존 = 멘토 참고값<br>도입 후 = 팀 예상</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card" style="position:absolute;left:960px;top:0;width:788px;height:200px;background:#fff">
+      <div class="tab t">건당 처리시간</div>
+      <svg width="788" height="200" viewBox="0 0 788 200" style="position:absolute;left:0;top:0">
+        <g font-size="24" font-weight="900" fill="#1B365D"><text x="26" y="104">기존</text><text x="26" y="160">도입 후</text></g>
+        <rect x="126" y="78" width="375" height="36" rx="5" fill="#B9C2CE"/><rect x="501" y="78" width="125" height="36" rx="5" fill="#8B97A8"/>
+        <text x="313" y="104" font-size="22" font-weight="900" fill="#2B3644" text-anchor="middle">작성 15</text><text x="563" y="104" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">검토 5</text>
+        <text x="638" y="105" font-size="26" font-weight="900" fill="#5E6977">20분</text>
+        <rect x="126" y="134" width="125" height="36" rx="5" fill="#D4561F"/><rect x="251" y="134" width="75" height="36" rx="5" fill="#1B365D"/>
+        <text x="188" y="160" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">작성 5</text><text x="288" y="160" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">검토 3</text>
+        <text x="338" y="161" font-size="26" font-weight="900" fill="#D4561F">8분</text>
+        <text x="764" y="166" font-size="46" font-weight="900" fill="#D4561F" text-anchor="end">−60%</text>
+      </svg>
+    </div>
+    <div class="card" style="position:absolute;left:960px;top:222px;width:788px;height:254px;background:#fff">
+      <div class="tab o">연간 결과</div>
+      <div style="position:absolute;left:30px;right:26px;top:72px;display:flex">
+        <div style="flex:1"><div style="font-size:22px;font-weight:900;color:#7D8796">확보시간</div><div style="font-size:52px;font-weight:900;color:var(--navy);letter-spacing:-.03em;line-height:1.1">26,000<small style="font-size:26px">시간</small></div><div class="pc5-s" style="font-size:22px">작성 21,666시간 40분<br>검토 4,333시간 20분</div></div>
+        <div style="flex:1;padding-left:24px;border-left:1.5px solid #DDE4EC"><div style="font-size:22px;font-weight:900;color:#7D8796">급여 환산</div><div style="font-size:52px;font-weight:900;color:var(--orange);letter-spacing:-.03em;line-height:1.1">약 8.43<small style="font-size:26px">억 원</small></div><div class="pc5-s" style="font-size:22px">작성 약 5.96억<br>검토 약 2.48억</div></div>
+      </div>
+    </div>
+    <div class="card or" style="position:absolute;left:960px;top:498px;width:788px;height:152px">
+      <div style="position:absolute;left:28px;right:24px;top:22px;font-size:25px;font-weight:900;color:#8A3410;line-height:1.45">급여 환산 가치 — 현금 절감 · 순이익 아님<br><span style="font-weight:700;color:#5A3A2C;font-size:24px">도입·운영비 · 간접비 · 사고감소 편익 제외</span></div>
+    </div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> 팀 TDABC 정리 p.1·2 · HD현대중공업 2021 안전보건환경보고서 p.93 · HD한국조선해양 2025 p.82</div>
+  <div class="need">필요: 작성자 급여 공식 임금통계(고용노동부 등)로 교체 검토</div>
+  <aside class="notes">
+    <p>설명: 공장 한 곳의 계산을 전사로 넓히면 어떻게 되는지 시간기반 활동원가, TDABC 방식으로 본 1차 시나리오입니다. 업무별 소요시간에 분당 인건비를 곱해 업무 원가를 계산합니다. 2020년 대면허가 실적 13만 건에 작성 10분, 검토 2분이 줄어든다고 가정하면 건당 20분이 8분으로 60% 줄고, 연 26,000시간이 확보됩니다. 급여로 환산하면 작성 약 5.96억 원, 검토 약 2.48억 원, 합계 약 8.43억 원입니다. 이것은 급여 환산 가치일 뿐 현금 절감이나 순이익이 아니며, 도입·운영비, 사용자 부담금·간접비, 사고감소 편익은 넣지 않았습니다. 13만 건은 2020년 실적을 바탕으로 정한 적용물량이고 지금의 신규 허가 건수 실측값이 아닙니다.</p>
+    <p>산식: 연 근무 250일×8시간 = 2,000시간 = 120,000분. 분당 원가 = 작성 55,000,000 ÷ 120,000 = 약 458.33원/분, 검토 114,274,000 ÷ 120,000 = 약 952.28원/분(중간 반올림 없음). 가치 = 건수 × 줄어든 분 × 분당 원가. 작성 130,000건 × 10분 = 1,300,000분 = 21,666시간 40분, × 458.33 = 약 5.96억 원. 검토 130,000건 × 2분 = 260,000분 = 4,333시간 20분, × 952.28 = 약 2.48억 원. 합계 26,000시간/년, 843,427,000원(약 8.43억 원/년). 건당 20분 → 8분(−60%). 대상 업무의 연간 급여 배부액 약 15.13억 원 → 6.69억 원(−55.8%). 병행작업 검토는 제외하고 담당자 수를 추가로 곱하지 않습니다.</p>
+    <p>근거: 팀 TDABC 정리 p.1·2. 연 13만 건 = HD현대중공업 2021 안전보건환경보고서 PDF 93쪽/책자 150쪽 「위험작업허가 중 대면허가(130,000건)」(2020년 실적). 검토자 급여 114,274,000원 = HD한국조선해양 지속가능경영보고서 2025 PDF 82쪽 「주요 사업장별 임금 지급 현황」 HD현대중공업 행(전사 평균, 대리값). 작성자 급여 55,000,000원 = 사내협력사 조·반장 채용공고 제시액(연 5,000~6,000만 원)의 중간값, 대리값(채용공고)이며 출처가 약합니다. 건당 시간 15·5분은 멘토 참고값, 5·3분은 팀 예상.</p>
+    <p>필요 자료: 작성자 급여를 공식 임금통계(고용노동부 등)로 교체 검토, 실측 시간·직무별 급여·실질 가용시간 확보 후 보정.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S33-1 핵심 문장 5 ================= -->
+<section class="slide">
+  <div class="hd"><h1>안전 · 업무 효과 ① <span class="sep">|</span><small>핵심 문장 5</small></h1><div class="sp"></div><span class="chip g">사업화 ⑤</span><span class="badge"><b>평가항목</b><i></i>창출효과</span></div>
+  <div class="key">전산승인 전에 보강하고 작업 사이를 잇는다 — <span class="o">문장마다 검증 지표</span></div>
+  <div class="body">
+    <div class="abs" style="left:0;top:0;width:1748px;height:36px;display:flex;gap:12px;font-size:22px;font-weight:900;color:#5E6977">
+      <div style="width:92px"></div><div style="width:1000px;padding-left:24px">기대효과 · 발표용 핵심 문장</div><div style="flex:1;padding-left:20px;color:var(--green)">검증 지표</div>
+    </div>
+    <div class="pc5-gr" style="top:42px"><div class="no">G01</div><div class="tx"><span>생산부서 <span class="o">전산승인 전에</span> 부족한 정보와 위험 조건을 보강해 검토 누락을 줄일 수 있습니다.</span></div><div class="ix">보완 후 남은 미확인 항목 수 · 승인 전 추가 확인 건수</div></div>
+    <div class="pc5-gr" style="top:154px"><div class="no">G02</div><div class="tx"><span>개별 허가서와 <span class="o">주변 일상작업</span>을 연결해 부서·협력사 사이의 혼재 위험을 검토할 수 있습니다.</span></div><div class="ix">전문가 기준 위험쌍 누락률 · 정밀도</div></div>
+    <div class="pc5-gr" style="top:266px"><div class="no">G03</div><div class="tx"><span>재입력·재문의·문서 대조·중복 연락을 줄여 <span class="o">반복업무</span>를 완화할 수 있습니다.</span></div><div class="ix">재입력·재문의·재제출 횟수 · 추가 업무 포함 순시간</div></div>
+    <div class="pc5-gr" style="top:378px"><div class="no">G04</div><div class="tx"><span>위험 원인과 필요한 조치를 담당자 질문·체크리스트·<span class="o">현장 공유자료</span>로 연결할 수 있습니다.</span></div><div class="ix">조치 계획 확인 비율 · TBM·게시 내용 이해도</div></div>
+    <div class="pc5-gr" style="top:490px"><div class="no" style="background:var(--green)">G05</div><div class="tx"><span>사전 협의가 실제로 이루어지면 작업 당일의 <span class="o">중단·대기·재준비</span>를 줄일 수 있습니다.</span></div><div class="ix">착수 전 협의 기록 · 원인별 당일 중단·대기 인·시간</div></div>
+    <div class="abs" style="left:0;top:604px;width:1748px;height:46px;border-radius:8px;background:var(--obg);border:1.5px solid #F1D6C7;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#8A3410">기대효과는 미실측 가설 · 실제 승인과 현장 조치 확인은 기존 담당자 수행</div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> croScan 기존전산 대비 프로세스 차이와 기대효과 전체비교(팀, 2026-11-02) G01~G05 · 스토리보드 §6</div>
+  <div class="need">필요: 현업 비교 검증 설계 확정</div>
+  <aside class="notes">
+    <p>설명: 안전과 업무 측면의 기대효과를 다섯 문장으로 정리했습니다. 첫째, 생산부서 전산승인 전에 부족한 정보와 위험 조건을 보강해 검토 누락을 줄일 수 있습니다. 둘째, 개별 허가서와 주변 일상작업을 연결해 부서·협력사 사이의 혼재 위험을 검토할 수 있습니다. 셋째, 재입력·재문의·문서 대조·중복 연락을 줄여 검토에 필요한 반복업무를 완화할 수 있습니다. 넷째, 위험 원인과 필요한 조치를 담당자 질문·체크리스트·현장 공유자료로 연결할 수 있습니다. 다섯째, 사전 협의가 실제로 이루어지면 작업 당일의 중단·대기·재준비를 줄일 수 있습니다. 모두 미실측 가설이며, 오른쪽 지표로 현업과 비교해 검증하겠습니다.</p>
+    <p>주의: 전체비교 P15의 「현재 확정해서 말할 수 없는 표현」은 쓰지 않습니다. 자기승인 방지까지 말하려면 작성자·승인자 권한 분리, 승인 전 안전검토 필수화, 실제 결재 연동이 필요합니다(P13). 기존 Hi-SEs에도 도장·화기 병행 필터링이 공개돼 있으므로, croScan의 차이는 입력 보강 → 작업 간 관계 검토 → 위험 이유 설명 → 담당자 확인·조치 자료의 연결성으로 설명합니다. 경보 수가 늘어나는 것을 성과로 보지 않습니다(스토리보드 §6).</p>
+    <p>근거: croScan 기존전산 대비 프로세스 차이와 기대효과 전체비교(팀, 2026-11-02) P14 G01~G05(발표용 핵심 문장), P1(요약 5행), P13·P15. 검증 지표는 스토리보드 §6과 팀 66장 자료 p.55의 측정 방향을 문장별로 짝지은 것입니다.</p>
+    <p>필요 자료: 현업 비교 검증 설계(비교 기준·표본) 확정.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S33-2 금액화하지 않은 생산 효과 ================= -->
+<section class="slide">
+  <div class="hd"><h1>안전 · 업무 효과 ② <span class="sep">|</span><small>금액화하지 않은 생산 효과</small></h1><div class="sp"></div><span class="chip g">사업화 ⑤</span><span class="badge"><b>평가항목</b><i></i>창출효과</span></div>
+  <div class="key">사전 검토가 실제 조정으로 이어지면 — <span class="o">현장 · 일정 · 손실의 후속 효과</span></div>
+  <div class="body">
+    <div class="pc5-eg" style="left:0"><div class="h" style="background:var(--navy)">현장 작업</div><ul>
+      <li><b>E01</b><div>당일 돌발 중단<span>충돌을 전날 발견·협의</span></div></li>
+      <li><b>E02</b><div>작업자 대기<span>선행·주변 작업 관계 미리 확인</span></div></li>
+      <li><b>E03</b><div>크레인 대기 · 재예약<span>장비 투입 뒤 간섭 발견 감소</span></div></li>
+      <li><b>E04</b><div>공구 · 자재 재준비<span>취소·이동에 따른 반복 준비</span></div></li></ul></div>
+    <div class="pc5-eg" style="left:591px"><div class="h" style="background:var(--teal)">일정 · 인력</div><ul>
+      <li><b>E05</b><div>일정 예측 가능성<span>조정 대상을 일찍 파악</span></div></li>
+      <li><b>E06</b><div>초과근무 · 추가 투입<span>당일 지연·재준비가 줄면 완화</span></div></li>
+      <li><b>E07</b><div>안전관리자 업무 배분<span>자료 찾기 → 현장 확인으로</span></div></li></ul></div>
+    <div class="pc5-eg" style="left:1182px"><div class="h" style="background:var(--green)">손실 · 조정</div><ul>
+      <li><b>E08</b><div>인적 · 물적 손실<span>발견한 위험이 통제될 때 가능성</span></div></li>
+      <li><b>E09</b><div>협력사 조정 비용<span>같은 근거 공유로 재협의 감소</span></div></li></ul></div>
+    <div class="abs" style="left:0;top:494px;width:1748px;height:150px;display:flex;border-radius:12px;overflow:hidden;background:var(--obg);border:1.5px solid #F1D6C7">
+      <div style="width:260px;flex:none;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900">조건</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 32px">
+        <div style="font-size:30px;font-weight:900;color:#8A3410">담당자가 실제로 조정했을 때만 기대할 수 있음</div>
+        <div class="pc5-s" style="margin-top:6px">정보 보강과 위험 발견만으로는 생산·경제 효과가 생기지 않음 · 금액은 산정하지 않음</div>
+      </div>
+    </div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> croScan 기존전산 대비 프로세스 차이와 기대효과 전체비교(팀, 2026-11-02) P11·P12 E01~E09</div>
+  <div class="need">필요: 원인별 대기·변경 기록 확보</div>
+  <aside class="notes">
+    <p>설명: 생산과 경제 쪽 효과는 금액으로 계산하지 않았습니다. 사전 검토로 충돌을 전날 발견해 협의하면 당일 돌발 중단, 작업자 대기, 크레인 대기와 재예약, 공구·자재 재준비를 줄일 수 있고, 일정 예측 가능성이 높아지며 초과근무와 추가 투입 부담이 줄 수 있습니다. 안전관리자는 자료 찾기 대신 현장 확인에 시간을 쓸 수 있고, 발견한 위험이 통제되면 인적·물적 손실과 협력사 간 조정 비용도 줄 가능성이 있습니다. 다만 정보 보강과 위험 발견만으로는 이런 효과가 생기지 않고, 담당자가 내용을 확인하고 작업 순서·시간·조치를 실제로 조정했을 때만 기대할 수 있습니다.</p>
+    <p>근거: croScan 기존전산 대비 프로세스 차이와 기대효과 전체비교(팀, 2026-11-02) P11(E01 당일 돌발 중단, E02 작업자 대기, E03 크레인·장비 대기와 재예약, E04 작업 준비의 반복, E05 공정 일정 예측 가능성)·P12(E06 초과근무·추가 투입, E07 안전관리자 업무 배분, E08 인적·물적 손실 감소 가능성, E09 협력사 간 조정 비용; 단서 「정보 보강과 위험 발견만으로 생산·경제 효과가 발생하지 않는다. 담당자가 내용을 확인하고 작업 순서·시간·조치를 실제로 조정했을 때 기대할 수 있다」). 검증에 필요한 자료는 스토리보드 §5 「추가로 기대할 수 있지만 아직 금액화하지 않은 효과」 표(원인별 대기 인·시간, 변경 횟수 등).</p>
+    <p>필요 자료: 원인별 대기·변경 기록 확보.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S33-3 안전 배경 · 측정 축 ================= -->
+<section class="slide">
+  <div class="hd"><h1>안전 · 업무 효과 ③ <span class="sep">|</span><small>안전 배경과 측정 축</small></h1><div class="sp"></div><span class="chip g">사업화 ⑤</span><span class="badge"><b>평가항목</b><i></i>창출효과 · 주제 적합성</span></div>
+  <div class="key">재해 공시는 늘고 있다 — <span class="o">업무 부담 · 검토 품질 · 현장 활용</span>으로 잰다</div>
+  <div class="body">
+    <div class="card" style="position:absolute;left:0;top:0;width:760px;height:650px;background:#fff">
+      <div class="tab gy">안전 배경 · 회사 공시</div>
+      <div class="pc5-t" style="position:absolute;left:30px;top:66px">한화오션 거제사업장 임직원 LTI</div>
+      <div class="pc5-s" style="position:absolute;left:30px;top:102px">근로손실재해(3일 이상 휴업) 건수</div>
+      <svg width="760" height="650" viewBox="0 0 760 650" style="position:absolute;left:0;top:0">
+        <line x1="40" y1="500" x2="720" y2="500" stroke="#C9D3E1" stroke-width="2"/>
+        <rect x="80" y="403" width="110" height="97" rx="8" fill="#B9C2CE"/>
+        <rect x="240" y="360" width="110" height="140" rx="8" fill="#9AA6B6"/>
+        <rect x="400" y="327" width="110" height="173" rx="8" fill="#7D8796"/>
+        <rect x="560" y="230" width="110" height="270" rx="8" fill="#D4561F"/>
+        <g font-size="32" font-weight="900" fill="#2B3644" text-anchor="middle"><text x="135" y="390">18</text><text x="295" y="347">26</text><text x="455" y="314">32</text><text x="615" y="217" fill="#D4561F" font-size="38">50</text></g>
+        <g font-size="22" fill="#5E6977" font-weight="700" text-anchor="middle"><text x="135" y="530">2022</text><text x="295" y="530">2023</text><text x="455" y="530">2024</text><text x="615" y="530">2025</text></g>
+        <text x="40" y="190" font-size="54" font-weight="900" fill="#D4561F">+177.8%</text>
+        <text x="300" y="190" font-size="22" fill="#5E6977" font-weight="700">2022 → 2025 · 세로축 0부터</text>
+      </svg>
+      <div class="pc5-s" style="position:absolute;left:30px;right:26px;bottom:20px;background:var(--bg1);border-radius:8px;padding:10px 16px">회사 공시 현황 · <b>croScan 효과 아님</b> · 보고서 p.13·43·155</div>
+    </div>
+    <div class="pc5-ax" style="top:0"><div class="h"><i>01</i>업무 부담</div><div class="pc5-s">반복 타이핑·자료 탐색·재문의·문안 작성의 감소<br>파일 준비·교정·추가 확인이 늘어나는 부담도 함께 측정</div></div>
+    <div class="pc5-ax" style="top:227px"><div class="h"><i style="background:var(--teal)">02</i>검토 품질</div><div class="pc5-s">입력 누락·잘못 읽힌 값·중요 위험쌍 놓침 확인<br>경보가 늘 때 실제 필요성·검토 피로도도 확인</div></div>
+    <div class="pc5-ax" style="top:454px"><div class="h"><i style="background:var(--green)">03</i>현장 활용</div><div class="pc5-s">위험 이유가 협의·게시·TBM에서 이해되고 조치로 이어졌는지<br>자료 생성량을 예방 실적으로 바꾸지 않음</div></div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> 한화오션 지속가능경영보고서 2025 p.13·43·155 · 팀 66장 자료 p.55 · 합성 시험 결과는 S28-1·S28-3</div>
+  <div class="need">필요: 다른 2사 공시 지표 비교(선택)</div>
+  <aside class="notes">
+    <p>설명: 배경으로, 한화오션 거제사업장 임직원 근로손실재해(LTI)는 2022년 18건에서 2025년 50건으로 늘었습니다. 이것은 회사가 공시한 현황이고 croScan의 효과와는 관계가 없습니다. croScan의 효과는 사고 감소율이 아니라 세 축으로 재겠습니다. 업무 부담은 반복 입력과 재문의가 줄었는지와 함께 새로 늘어난 부담까지, 검토 품질은 누락·오독·놓침과 경보 피로도를, 현장 활용은 위험 이유가 협의·게시·TBM에서 이해되고 조치로 이어졌는지를 봅니다. 지금까지의 합성 시험 결과(놓침 715 → 206, 틀림 53·실패 6, 해석시간 중앙값 22.6초·p95 50.0초, 규칙 16 → 36개 보강 뒤 정답쌍 10/10 유지·정답표 밖 경보 1 → 13)는 기술 파트의 실험 장(S28-1·S28-3)에 있습니다.</p>
+    <p>근거: 한화오션 지속가능경영보고서 2025(2026 발간) p.13(LTIR 정의: 근로손실재해 = 3일 이상 휴업), p.43(거제사업장 임직원 LTI 18·26·32·50건; 같은 표 LTIR 0.21·0.19·0.29·0.41, ref 텍스트에서 확인), p.155(GRI 403-9 업무 관련 부상). 증가율 = (50−18)÷18×100 = 177.8%. LTI는 인원·근로시간을 보정하지 않은 건수이며, 2025년 50건에서 질병 제외 여부까지는 확인하지 않았습니다. 팀 66장 자료 p.55(3축)·p.58·p.59(합성 시험). 앞부분 S04(제작 A)와 숫자가 겹치면 한쪽만 씁니다.</p>
+    <p>필요 자료: 다른 2사 공시 지표 비교(선택).</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S34-1 로드맵 ================= -->
+<section class="slide">
+  <div class="hd"><h1>후속계획 ① <span class="sep">|</span><small>5단계 로드맵</small></h1><div class="sp"></div><span class="chip g">사업화 ⑥</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">일정보다 먼저 — <span class="o">단계마다 통과 조건을 정하고 넘어간다</span></div>
+  <div class="body">
+    <div class="pc5-step" style="left:0"><div class="h"><i>1</i>실제 자료 확보</div><div class="bd">비식별 문서·일정<br>구역·검토결과<br>대조립 한 공장</div></div>
+    <div class="pc5-step" style="left:355px"><div class="h"><i>2</i>고정 평가셋</div><div class="bd">개발용·평가용 분리<br>1,200건 재평가</div></div>
+    <div class="pc5-step" style="left:710px"><div class="h"><i>3</i>병행 PoC</div><div class="bd">원래 검토와 비교<br>결과 · 시간<br>추가 업무까지</div></div>
+    <div class="pc5-step" style="left:1065px"><div class="h" style="background:var(--teal)"><i style="color:var(--teal)">4</i>운영 연동</div><div class="bd">SSO · DB · 권한<br>문서 버전<br>조건 F01~F04</div></div>
+    <div class="pc5-step" style="left:1420px"><div class="h" style="background:var(--green)"><i style="color:var(--green)">5</i>범위 확대</div><div class="bd">공장 · 유형<br>상태 · 지원 기능<br>다른 공정 → 3사</div></div>
+    <svg class="abs" style="left:0;top:0" width="1748" height="80" viewBox="0 0 1748 80" fill="none" stroke="#1B365D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M331 37h20M345 31l6 6-6 6"/><path d="M686 37h20M700 31l6 6-6 6"/><path d="M1041 37h20M1055 31l6 6-6 6"/><path d="M1396 37h20M1410 31l6 6-6 6"/>
+    </svg>
+    <div class="pc5-gate">
+      <div><div class="t5">초기 통과 조건 · 1~3단계</div><div class="x5">자료 누락을 확인할 수 있고, 중요한 경보를 설명하며, 추가 업무가 포함된 순효과를 측정할 수 있을 것</div></div>
+      <div style="background:var(--gbg)"><div class="t5" style="color:var(--green)">확대 통과 조건 · 5단계 전</div><div class="x5">기준 갱신 · 장애 대응 · 권한 · 보존 담당이 정해지고, 현장 검토자가 결과 활용을 확인할 것</div></div>
+    </div>
+    <div class="abs" style="left:0;top:566px;width:1748px;height:78px;display:flex;border-radius:10px;overflow:hidden;background:var(--bg2)">
+      <div style="width:240px;flex:none;background:var(--navy);color:#fff;font-size:26px;font-weight:900;display:flex;align-items:center;justify-content:center">공통 선행조건</div>
+      <div style="flex:1;display:flex;align-items:center;padding:0 28px;font-size:26px;font-weight:700;color:var(--navy)">기존 신청 · 전산승인 · 대면허가 · 당일 현장 확인은 그대로 유지 · 일정 미정</div>
+    </div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> 팀 66장 자료 p.61 · 기대효과 전체비교(팀, 2026-11-02) P13 · 스토리보드 17장</div>
+  <div class="need">필요: 검증 공장 · 작업 범위 · 일정</div>
+  <aside class="notes">
+    <p>설명: 후속 계획은 데이터, 병행 검증, 연동, 확대 순서입니다. 비식별 실제 문서·일정·구역·검토결과를 대조립 한 공장에서 확보하고, 개발용과 평가용을 나눈 고정 평가셋을 만든 뒤, 원래 검토와 croScan의 결과·시간을 추가 업무까지 포함해 나란히 비교하는 병행 PoC를 합니다. 초기 통과 조건을 만족하면 SSO·DB·권한·문서 버전을 갖춘 운영 연동으로, 확대 통과 조건을 만족하면 공장·유형·상태·지원 기능을 넓힙니다. 일정은 아직 정하지 않았고, 기존 신청·전산승인·대면허가·당일 현장 확인은 그대로 유지합니다.</p>
+    <p>근거: 팀 66장 자료 p.61(「후속 계획은 데이터·병행 검증·연동·확대 순서입니다」, 일정 미정, 초기 통과 조건: 자료 누락을 확인할 수 있고 중요한 경보를 설명하며 추가 업무가 포함된 순효과를 측정할 수 있을 것, 확대 통과 조건: 기준 갱신·장애 대응·권한·보존 담당이 정해지고 현장 검토자가 결과 활용을 확인할 것), 기대효과 전체비교(팀, 2026-11-02) P13(기존 신청·전산승인·작업 당일 현장 확인 유지, 대면허가·조치·작업자 전달 생략 안 함), 스토리보드 17장(한 공장·선정 작업 → 현업 비교 검증 → 확장). 확대 공정 분류: 내업 판넬조립·선행의장·선행도장, 내업·외업 모두 PE장, 외업 탑재·선체도장(outA). 미실행 상세 목록은 부록 A17. 정부 「AI·디지털 조선소」 R&D(2026년 949억 원, 산업통상부 2026.2.24)는 실증 과제 연계 후보로 말로만 덧붙일 수 있습니다.</p>
+    <p>필요 자료: 검증할 공장·작업 범위와 일정, 협조 기관 확인.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S34-2 연동 조건 · 다음 검증 ================= -->
+<section class="slide">
+  <div class="hd"><h1>후속계획 ② <span class="sep">|</span><small>연동 조건 · 다음 검증</small></h1><div class="sp"></div><span class="chip g">사업화 ⑥</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">연동은 조건부터 — <span class="o">구축 조건 4개와 현장 검증 3가지</span></div>
+  <div class="body">
+    <div class="pc5-s" style="position:absolute;left:0;top:0;font-size:26px;font-weight:900;color:var(--green)">운영 연동 단계의 추가 구축 조건</div>
+    <div class="pc5-f" style="top:44px"><b>F01</b><span>작성자 · 승인자 권한 분리<br>+ 승인 전 안전검토 필수화</span></div>
+    <div class="pc5-f" style="top:196px"><b>F02</b><span>HiSEs DB · 결재 실연동<br>(다운로드 · 재업로드 부담 해소)</span></div>
+    <div class="pc5-f" style="top:348px"><b>F03</b><span>취소 · 변경 · 완료 · 재진입<br>정보를 계속 갱신</span></div>
+    <div class="pc5-f" style="top:500px"><b>F04</b><span>회사 공통 검토기록 · 버전 관리<br>(교대 · 담당자 변경 인계)</span></div>
+    <div class="pc5-s" style="position:absolute;left:910px;top:0;font-size:26px;font-weight:900;color:var(--navy)">다음 검증 3가지 · 현장 사용자의 전체 업무</div>
+    <div class="pc5-vf" style="top:44px"><div class="h">입력 · 대화</div><div class="pc5-s">실제 허가서 · 오타 · 사투리 · 정정 · 모름 포함<br>시작~제출의 교정 · 확인 · 대기시간 기록</div></div>
+    <div class="pc5-vf" style="top:256px"><div class="h">위험 · 조치</div><div class="pc5-s">같은 사례를 현업자 검토와 비교<br>놓침 · 과잉경보 · 판정보류 · 조치 실행성</div></div>
+    <div class="pc5-vf" style="top:468px;height:176px"><div class="h">실제 사용 <span class="tag gy" style="font-size:19px;vertical-align:4px">준비 기록만</span></div><div class="pc5-s">반장 5명 · 안전관리자 2명 시험<br>장갑 · 작은 화면 · 야외 밝기 · 중단 후 재개</div></div>
+  </div>
+  <div class="note pc5-n"><b>근거</b> 기대효과 전체비교(팀, 2026-11-02) P13 F01~F04 · 팀 66장 자료 p.60 · 노트 09 §3.12</div>
+  <div class="need">필요: 사용자 시험 일정 · 참여자 확보</div>
+  <aside class="notes">
+    <p>설명: 현재 croScan이 자기승인을 차단하는 것은 아니며, 최종 흐름에서도 생산부서의 전산승인은 유지됩니다. 운영 연동 단계에는 네 가지 조건이 붙습니다. 작성자·승인자 권한 분리와 승인 전 안전검토 필수화, HiSEs DB·결재 실연동, 취소·변경·완료·재진입 정보의 지속 갱신, 회사 공통 검토기록과 버전 관리입니다. 그 전에 현장 사용자의 전체 업무를 재는 검증을 세 가지로 합니다. 실제 허가서의 오타·사투리·정정·모름을 포함한 입력·대화 검증, 같은 사례를 현업자 검토와 비교하는 위험·조치 검증, 반장 5명·안전관리자 2명의 실제 사용 검증이며, 실제 사용 시험은 준비 기록만 있고 아직 하지 않았습니다.</p>
+    <p>근거: croScan 기존전산 대비 프로세스 차이와 기대효과 전체비교(팀, 2026-11-02) P13(F01 작성자·승인자 권한 분리와 승인 전 안전검토 필수화, F02 Hi-SEs DB·결재 실연동, F03 취소·변경·완료·재진입 정보 지속 갱신, F04 회사 공통 검토기록·버전 관리; 「현재 croScan이 자기승인을 차단하는 것은 아니다」), 팀 66장 자료 p.60(다음 검증 3가지), 노트 09 §3.12(사용자 시험 통과 기준: 확인 카드 읽기 성공 90% 이상, 「해석 확인 = 작업 승인」 오해 0건, 질문 수 중앙값 ≤ 8·최대 12).</p>
+    <p>필요 자료: 사용자 시험 일정·참여자 확보.</p>
+  </aside>
+  {{FT}}
+</section>
+
+<!-- ================= S35 마무리 ================= -->
+<section class="slide cover pc5-end">
+  <img class="bgimg" src="img/cover.png" alt="">
+  <div class="shade"></div>
+  <div class="kick">CROSCAN · 한 줄 비전</div>
+  <div class="vis">내 작업의 확인사항에서,<br><span class="o2">함께하는 작업의 위험까지.</span></div>
+  <div class="pc5-who" style="left:122px"><b>작업반장에게</b><span>시간·위치·인원·설비를 원문과<br>대조하고 부족 정보를 확인하는 도구</span></div>
+  <div class="pc5-who" style="left:702px"><b>안전관리자에게</b><span>겹치는 시간·위치·설비와 사고 경로,<br>담당별 질문을 보여주는 도구</span></div>
+  <div class="pc5-who" style="left:1282px"><b>기업에게</b><span>기존 안전전산에 편입해 기준·근거·<br>서류를 연결하는 검토 모듈</span></div>
+  <div class="low"></div>
+  <img src="../croScan_video/public/croscan_logo_real.png" alt="croScan" style="position:absolute;left:118px;top:770px;height:120px">
+  <div class="abs" style="left:118px;top:910px;font-size:24px;color:#5E6977;font-weight:700">대조립 위험작업허가서 · 작업계획서 사전검토 AX</div>
+  <div class="abs" style="right:96px;top:790px;text-align:right">
+    <div style="font-size:30px;font-weight:900;color:var(--green)">2026 K-조선 해커톤 본선</div>
+    <div style="font-size:24px;color:#2B3644;margin-top:10px;font-weight:700">안전 분야 · 2026. 11. 9.(월)</div>
+  </div>
+  <aside class="notes">
+    <p>설명: 처음의 질문으로 돌아갑니다. 함께 일하는 현장의 위험을 함께 보려면, 각자의 서류가 서로의 확인과 협의로 이어져야 합니다. croScan은 작업반장에게는 원문과 대조해 부족한 정보를 확인하는 도구, 안전관리자에게는 겹치는 작업과 사고 경로를 보여주는 도구, 기업에게는 기존 안전전산에 편입되는 검토 모듈이 되겠습니다. 내 작업의 확인사항에서, 함께하는 작업의 위험까지. croScan입니다.</p>
+    <p>근거: 스토리보드 v2 §1 마지막 문장·18장 대본, 팀 66장 자료 p.62(제품 비전·팀 제안: 작업반장에게 / 안전관리자에게 / 기업에게).</p>
+    <p>필요 자료: 로고 최종본 확인.</p>
+  </aside>
+  {{FT}}
+</section>

@@ -18,12 +18,12 @@ def check(name, cond):
 
 
 def pair(ask, evidence):
-    return {"reasons": [{"name": "화기 발생물 × 같은 곳 작업자", "headline": "불티", "cause": "0735", "exposed": "0736", "rule": "HOT_PERSON",
+    return {"reasons": [{"name": "화기 발생물 × 같은 곳 작업자", "headline": "불티", "cause": "8175", "exposed": "8602", "rule": "HOT_PERSON",
                          "ask": ask, "evidence": evidence}]}
 
 
-FACT = {"doc": "0735", "field": "작업반장 답변 · 반장 답변 확인 HT1", "value": "가스절단 4개", "confirmed": True}
-DOCV = {"doc": "0735", "field": "작업명", "value": "블록 상부 임시 러그 절단·제거"}
+FACT = {"doc": "8175", "field": "작업반장 답변 · 반장 답변 확인 HT1", "value": "가스절단 4개", "confirmed": True}
+DOCV = {"doc": "8175", "field": "작업명", "value": "블록 상부 임시 러그 절단·제거"}
 NO = lambda i: i
 
 
@@ -40,12 +40,12 @@ def main():
     out = asyncio.run(coordnote.note(pair("작업자 위치", [DOCV]), NO))
     check("확인된 사실이 없으면 제안 없음(모델 안 부름)", out["status"] == "none" and not out["text"])
     out = asyncio.run(coordnote.note(pair("작업자 위치", [FACT]), NO))
-    check("고를 것이 하나뿐이면 모델 없이 서버 문장", out["status"] == "fixed" and out["text"] == "0735 반장 확인 답 「가스절단 4개」에 맞춰 작업자 위치를 서로 확인해 주세요.")
+    check("고를 것이 하나뿐이면 모델 없이 서버 문장", out["status"] == "fixed" and out["text"] == "8175 반장 확인 답 「가스절단 4개」에 맞춰 작업자 위치를 서로 확인해 주세요.")
     real = llm.call_json
     try:
         llm.call_json = fake({"f": "F1", "c": "C2"})
         out = asyncio.run(coordnote.note(p, NO))
-        check("모델은 사실·확인할 것만 고르고 문장은 서버 틀", out["status"] == "ok" and out["text"] == "0735 반장 확인 답 「가스절단 4개」에 맞춰 작업자 위치를 서로 확인해 주세요.")
+        check("모델은 사실·확인할 것만 고르고 문장은 서버 틀", out["status"] == "ok" and out["text"] == "8175 반장 확인 답 「가스절단 4개」에 맞춰 작업자 위치를 서로 확인해 주세요.")
         llm.call_json = fake({"f": "F1", "c": "C2", "text": "4시에 시작하기로 확인해 주세요"})
         out = asyncio.run(coordnote.note(p, NO))
         check("모델이 문장을 덧붙이면 받지 않고 서버 문장", out["status"] == "fixed" and "4시" not in out["text"])

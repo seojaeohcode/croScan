@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+/* croScan 구성안 공통 스타일 — 디자인 담당 소유. 클래스 이름은 바꾸지 않는다(제작자 4명이 사용 중).
+   기준: ref/p*.png(1600×900) × 1.2. 좌우 여백 86px · 제목 줄 y=150 · 핵심 메시지 중심 y≈218 · 본문 y=285~984 · 근거 줄 bottom 78 · 하단 띠 58px */
+:root{
+  --navy:#1B365D; --navy2:#14284A; --ink:#1D2633; --green:#1E6B47; --teal:#1F9A8E; --orange:#D4561F; --gold:#E2A72E;
+  --line:#DCE3EB; --bg1:#F2F5F9; --bg2:#E9EEF5; --gbg:#EAF3EE; --obg:#FBF0EA; --tbg:#E6F4F2; --gray:#7D8796; --gray2:#A5AEBB;
+}
+@page{size:1920px 1080px;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{font-family:"Noto Sans KR",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;word-break:keep-all;font-feature-settings:"tnum" 0}
+section.slide{width:1920px;height:1080px;position:relative;overflow:hidden;page-break-after:always;break-after:page;background:#fff}
+.o{color:var(--orange)} .n{color:var(--navy)} .g{color:var(--green)} .t{color:var(--teal)} .mut{color:var(--gray)} .b{font-weight:900}
+
+/* ── header: 왼쪽 위 큰 남색 제목 + 2.5px 남색 줄(y=150), 오른쪽 칩·뱃지 ── */
+.hd{position:absolute;left:86px;right:86px;top:34px;height:116px;display:flex;align-items:center;gap:18px;border-bottom:2.5px solid var(--navy)}
+.hd h1{font-size:52px;font-weight:900;color:var(--navy);letter-spacing:-.03em;white-space:nowrap;line-height:1.1}
+.hd h1 .sep{display:inline-block;width:2px;height:34px;background:#C5CDD8;margin:0 22px 0 20px;vertical-align:middle;position:relative;top:-3px;font-size:0;color:transparent}
+.hd h1 small{font-size:38px;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.hd .sp{flex:1}
+.chip{display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:27px;background:var(--navy);color:#fff;font-size:23px;font-weight:700;white-space:nowrap;letter-spacing:-.01em}
+.chip.g{background:var(--green)} .chip.t{background:var(--teal)} .chip.o{background:var(--orange)}
+.chip.gy{background:#fff;color:#5C6776;border:1.5px solid #C9D0DA}
+.badge{display:inline-flex;align-items:center;height:58px;padding:0 24px;border-radius:6px;background:#FFF6DA;border:1.5px solid #E4B84E;font-size:21px;font-weight:700;color:#2A3442;white-space:nowrap}
+.badge b{color:#A26C00;font-weight:900;margin-right:14px}
+.badge i{display:inline-block;width:1.5px;height:22px;background:#D9B25A;margin-right:14px}
+.badge.gray{background:#F2F4F7;border-color:#C9D0DA} .badge.gray b{color:#5C6776} .badge.gray i{background:#C2CAD5}
+/* ★ 중요 장표 표시(참고 10·12·19쪽 오른쪽 위 금색 별) */
+.star{position:absolute;right:22px;top:14px;width:44px;height:44px;background:var(--gold);clip-path:polygon(50% 0%,61.8% 35.4%,100% 38.2%,69.1% 61.8%,80.9% 100%,50% 76.4%,19.1% 100%,30.9% 61.8%,0% 38.2%,38.2% 35.4%)}
+
+/* ── key message: 가운데 정렬 한 줄, 주황 강조(.o) ── */
+.key{position:absolute;left:86px;right:86px;top:190px;text-align:center;font-size:40px;font-weight:900;letter-spacing:-.03em;line-height:1.3;color:#1F2833}
+.key .o,.key em{color:var(--orange);font-style:normal}
+.body{position:absolute;left:86px;right:86px;top:285px;bottom:96px}
+.note{position:absolute;left:86px;right:86px;bottom:78px;font-size:17.5px;color:#8892A0;line-height:1.45}
+.note b{color:#5D6878;font-weight:700}
+.need{position:absolute;right:86px;bottom:78px;font-size:17px;color:#A26C00;font-weight:700;background:#FFF8E6;border:1px dashed #E4B84E;border-radius:6px;padding:3px 12px;line-height:1.45}
+
+/* ── footer: 남색→초록 그라데이션(부록 회색, 구성안 안내 진회색) ── */
+.ft{position:absolute;left:0;right:0;bottom:0;height:58px;background:linear-gradient(90deg,#15305A 0%,#1A4468 55%,#1E6B55 100%);color:#fff;display:flex;align-items:center;padding:0 54px;font-size:17px;font-weight:500;letter-spacing:0}
+.ft .pg{margin-left:auto;font-weight:900;font-size:19px;font-variant-numeric:tabular-nums}
+.ft .tm{margin-left:auto;margin-right:40px;font-size:16px;opacity:.85;font-weight:700}
+.ft .tm~.pg{margin-left:0}
+.apx .ft{background:linear-gradient(90deg,#6A7786 0%,#8D98A6 60%,#A2ACB9 100%)}
+.plan .ft{background:linear-gradient(90deg,#363C45,#59616C)}
+
+/* ── cards: 연회색 카드 + 남색·초록 탭 라벨 ── */
+.card{position:relative;background:var(--bg1);border:1.5px solid var(--line);border-radius:10px}
+.card.w{background:#fff}
+.card.gr{background:var(--gbg);border-color:#CFE3D7}
+.card.or{background:var(--obg);border-color:#F1D6C7}
+.card.tl{background:var(--tbg);border-color:#C6E5E0}
+.tab{position:absolute;left:-1.5px;top:-12px;height:56px;padding:0 36px 0 26px;display:flex;align-items:center;background:var(--navy);color:#fff;font-size:27px;font-weight:900;letter-spacing:-.02em;border-radius:8px 8px 24px 0;box-shadow:5px 5px 0 rgba(27,54,93,.10);white-space:nowrap}
+.tab.g{background:var(--green);box-shadow:5px 5px 0 rgba(30,107,71,.12)} .tab.t{background:var(--teal);box-shadow:5px 5px 0 rgba(31,154,142,.14)} .tab.o{background:var(--orange);box-shadow:5px 5px 0 rgba(212,86,31,.12)} .tab.gy{background:#7D8796}
+/* 카드 머리 막대(참고 4쪽: 카드 위쪽 전체를 남색·초록으로) */
+.hdr{background:var(--navy);color:#fff;padding:18px 30px;font-size:29px;font-weight:900;line-height:1.3;letter-spacing:-.02em;border-radius:8.5px 8.5px 0 0}
+.hdr small{display:block;font-size:22px;font-weight:700;opacity:.85}
+.hdr.g{background:var(--green)} .hdr.t{background:var(--teal)} .hdr.o{background:var(--orange)} .hdr.gy{background:#7D8796}
+/* 카드 윗부분 그림 영역(참고 3쪽: 옅은 색 바탕 위 일러스트) */
+.ctop{background:var(--bg2);border-radius:8.5px 8.5px 0 0;display:flex;align-items:center;justify-content:center}
+.ctop.o{background:var(--obg)} .ctop.g{background:var(--gbg)} .ctop.t{background:var(--tbg)}
+/* 카드 안 흰 상자, 왼쪽 강조선 상자 */
+.in{background:#fff;border:1.5px solid #E1E7EE;border-radius:8px}
+.acc{background:#fff;border:1.5px solid #E1E7EE;border-left:6px solid var(--teal);border-radius:4px 8px 8px 4px}
+.acc.n{border-left-color:var(--navy)} .acc.g{border-left-color:var(--green)} .acc.o{border-left-color:var(--orange)} .acc.gold{border-left-color:var(--gold)}
+.pill{display:inline-flex;align-items:center;height:46px;padding:0 24px;border-radius:23px;background:var(--navy);color:#fff;font-size:23px;font-weight:900;white-space:nowrap}
+.pill.o{background:var(--orange)} .pill.g{background:var(--green)} .pill.t{background:var(--teal)} .pill.gy{background:#8A94A3}
+.pill.sm{height:36px;font-size:19px;padding:0 16px;border-radius:18px}
+.pill.line{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+/* 번호 원(①②③): .nc 기본 남색, .o .g .t .gold */
+.nc{display:inline-flex;align-items:center;justify-content:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;font-size:22px;font-weight:900;line-height:1;vertical-align:middle;font-variant-numeric:tabular-nums}
+.nc.o{background:var(--orange)} .nc.g{background:var(--green)} .nc.t{background:var(--teal)} .nc.gold{background:var(--gold)} .nc.sm{width:32px;height:32px;font-size:18px}
+/* 카드 사이 연회색 꺾쇠(참고 3·12쪽) — <i class="chv"></i>, 아래 방향은 .chv.dn */
+.chv{display:inline-block;flex:none;width:22px;height:22px;border-top:3.5px solid #A9B3C0;border-right:3.5px solid #A9B3C0;border-radius:2px;transform:rotate(45deg)}
+.chv.dn{transform:rotate(135deg)} .chv.n{border-color:var(--navy)} .chv.o{border-color:var(--orange)}
+
+/* ── summary bar: 남색 라벨 블록 + 연파랑 본문 ── */
+.bar{position:absolute;left:86px;right:86px;height:96px;display:flex;border-radius:8px;overflow:hidden;background:var(--bg2)}
+.bar .l{width:230px;flex:none;background:var(--navy);color:#fff;font-size:29px;font-weight:900;display:flex;align-items:center;justify-content:center;letter-spacing:-.02em}
+.bar.g .l{background:var(--green)} .bar.o .l{background:var(--orange)} .bar.t .l{background:var(--teal)}
+.bar .r{flex:1;display:block;align-self:center;padding:0 34px;line-height:1.35;font-size:28px;font-weight:700;color:var(--navy);letter-spacing:-.02em}
+.bar .r .o{color:var(--orange)}
+
+/* ── numbers ── */
+.big{font-size:86px;font-weight:900;color:var(--navy);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.big small{font-size:34px;font-weight:900;margin-left:4px;letter-spacing:-.01em}
+.big.o{color:var(--orange)} .big.g{color:var(--green)} .big.t{color:var(--teal)}
+.cap{font-size:25px;font-weight:700;color:#2B3644;margin-top:14px;line-height:1.35}
+.sub{font-size:19px;color:var(--gray);margin-top:6px;line-height:1.4}
+
+/* ── list rows ── */
+.rows{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;align-items:stretch;gap:12px;height:var(--rh,104px)}
+.row .no{width:104px;flex:none;background:var(--navy);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900}
+.row .no.g{background:var(--green)} .row .no.o{background:var(--orange)} .row .no.t{background:var(--teal)}
+.row .a{flex:1.15;background:var(--bg1);border:1.5px solid var(--line);border-radius:8px;display:flex;align-items:center;padding:0 26px;font-size:27px;font-weight:700}
+.row .ar{width:44px;flex:none;display:flex;align-items:center;justify-content:center}
+.row .c{flex:1;background:var(--bg2);border-radius:8px;display:flex;align-items:center;padding:0 26px;font-size:27px;font-weight:700;color:var(--navy)}
+.row .c.g{background:var(--gbg);color:var(--green)}
+.row .c em{font-style:normal;margin-left:auto;color:var(--gray2);font-size:24px;font-weight:700}
+.chev{width:26px;height:40px}
+/* 이름–값 줄(참고 7쪽 오른쪽 카드) */
+.kv{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1.5px solid #DFE5EC;font-size:24px}
+.kv>:first-child{flex:none;width:var(--kw,180px);color:var(--teal);font-weight:900}
+.kv.n>:first-child{color:var(--navy)}
+
+/* ── tables ── */
+table.tb{width:100%;border-collapse:collapse;font-size:21px}
+.tb th{background:var(--navy);color:#fff;text-align:left;font-weight:900;padding:13px 16px;font-size:22px;letter-spacing:-.01em}
+.tb th:first-child{border-radius:6px 0 0 0} .tb th:last-child{border-radius:0 6px 0 0}
+.tb.g th{background:var(--green)} .tb.gy th{background:#6F7B8A}
+.tb td{padding:11px 16px;border-bottom:1px solid #E3E8EE;vertical-align:middle;line-height:1.35}
+.tb tr:nth-child(even) td{background:#F6F8FB}
+.tb td:first-child{color:var(--navy);font-weight:900}
+.tb.g td:first-child{color:var(--green)}
+.tb tr:last-child td{border-bottom:2px solid var(--navy)}
+.tb.g tr:last-child td{border-bottom-color:var(--green)}
+.tb td.n,.tb th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tb td.c,.tb th.c{text-align:center}
+.tb tr.hl td{background:#FFF4EE}
+.tb tr.hl td:first-child{border-left:5px solid var(--orange)}
+
+/* ── misc ── */
+.flex{display:flex} .col{display:flex;flex-direction:column} .cen{align-items:center;justify-content:center} .gap{gap:24px}
+.abs{position:absolute}
+.ill{display:block}
+.photo{border-radius:50%;object-fit:cover;border:6px solid var(--navy)}
+.ph{border:2px dashed #C3CBD6;border-radius:10px;background:#FAFBFC;color:#97A1AE;font-size:21px;font-weight:700;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.4}
+.shot{border-radius:8px;border:1.5px solid #D5DCE5;box-shadow:0 10px 28px rgba(20,40,74,.12);object-fit:cover;object-position:top left;background:#fff}
+.tag{display:inline-block;font-size:18px;font-weight:900;padding:4px 12px;border-radius:5px;background:var(--orange);color:#fff;line-height:1.3;white-space:nowrap}
+.tag.n{background:var(--navy)} .tag.g{background:var(--green)} .tag.t{background:var(--teal)} .tag.gy{background:#8A94A3} .tag.gold{background:var(--gold);color:#3A2A00}
+.tag.ln{background:#fff;color:var(--orange);border:1.5px solid var(--orange);padding:2.5px 10.5px}
+ul.dot{list-style:none} ul.dot li{position:relative;padding-left:24px;font-size:24px;line-height:1.55} ul.dot li:before{content:"";position:absolute;left:4px;top:.68em;width:8px;height:8px;border-radius:50%;background:var(--navy)}
+ul.dot.o li:before{background:var(--orange)} ul.dot.g li:before{background:var(--green)}
+.qt{font-size:24px;font-weight:700;color:#2C3846;line-height:1.5}
+.qt:before{content:"“";color:var(--orange);font-weight:900;margin-right:4px}
+.qt:after{content:"”";color:var(--orange);font-weight:900;margin-left:2px}
+.hr{height:1.5px;background:#DFE5EC}
+.lab{font-size:19px;font-weight:700;color:var(--gray);letter-spacing:0}
+
+/* ── cover (S01, S35): 위 사진+남색 그늘, 아래 흰 영역 ── */
+.cover{background:#0F2240}
+.cover .bgimg{position:absolute;left:0;top:0;width:1920px;height:690px;object-fit:cover;object-position:center 58%}
+.cover .shade{position:absolute;left:0;top:0;width:1920px;height:690px;background:linear-gradient(90deg,rgba(13,31,60,.97) 0%,rgba(14,33,63,.90) 38%,rgba(15,34,64,.45) 72%,rgba(15,34,64,.18) 100%),linear-gradient(180deg,rgba(18,40,74,0) 50%,rgba(20,72,78,.55) 100%)}
+.cover .low{position:absolute;left:0;top:690px;width:1920px;height:390px;background:#fff}
+.cover .kick{position:absolute;left:115px;top:88px;color:#fff;font-size:25px;font-weight:700;letter-spacing:-.01em}
+.cover .kick i{display:inline-block;width:2px;height:22px;background:rgba(255,255,255,.7);margin:0 16px;vertical-align:-2px}
+.cover .ttl{position:absolute;left:112px;top:300px;color:#fff;font-size:72px;font-weight:900;line-height:1.24;letter-spacing:-.035em}
+.cover .ttl .o{color:#F08A4B}
+.cover .subt{position:absolute;left:115px;top:510px;color:#BFD0E0;font-size:32px;font-weight:500;letter-spacing:-.02em}
+.cover .team{position:absolute;left:115px;top:744px;display:flex;align-items:center;gap:26px}
+.cover .team img{height:58px;display:block}
+.cover .aff{position:absolute;left:115px;top:826px;font-size:25px;color:#6E7887;font-weight:500}
+.cover .ev{position:absolute;right:115px;top:752px;text-align:right;font-size:34px;font-weight:900;color:var(--green);letter-spacing:-.01em}
+.cover .dt{position:absolute;right:115px;top:806px;text-align:right;font-size:26px;font-weight:700;color:var(--navy)}
+.cover .host{position:absolute;left:115px;top:968px;font-size:19px;color:#8892A0}
+.cover .host i{display:inline-block;width:1.5px;height:16px;background:#C5CDD8;margin:0 14px;vertical-align:-1px}
+.cover .ft{background:none;color:#B3BCC8;height:40px;font-size:15px;padding:0 115px}
+.cover .ft .pg{font-size:16px;color:#9AA4B1}
+
+/* ── PART 구분 장표: 왼쪽 어두운 사진·번호, 오른쪽 소목차·쪽수 ── */
+.part .left{position:absolute;left:0;top:0;width:750px;height:1080px;overflow:hidden;background:#0F2240}
+.part .left img{width:100%;height:100%;object-fit:cover;opacity:.95}
+.part .left .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,28,54,.50) 0%,rgba(12,28,54,.68) 42%,rgba(10,24,46,.93) 100%)}
+.part .left:after{content:"";position:absolute;right:0;top:0;bottom:0;width:8px;background:linear-gradient(180deg,var(--navy),var(--green))}
+.part .kicker{position:absolute;left:118px;top:300px;color:var(--gold);font-size:32px;font-weight:900;letter-spacing:.14em}
+.part .pnum{position:absolute;left:110px;top:350px;color:#fff;font-size:188px;font-weight:900;letter-spacing:-.04em;line-height:1}
+.part .pt{position:absolute;left:118px;top:580px;width:600px;color:#fff;font-size:54px;font-weight:900;letter-spacing:-.03em;line-height:1.2}
+.part .pd{position:absolute;left:118px;top:690px;width:560px;color:#C9D3E1;font-size:24px;line-height:1.5}
+.part .toc{position:absolute;left:900px;right:110px;top:0;bottom:58px;display:flex;flex-direction:column;justify-content:center;gap:36px}
+.part .toc .it{display:flex;align-items:flex-start;gap:44px}
+.part .toc .k{font-size:44px;font-weight:900;color:var(--navy);width:70px;line-height:1;font-variant-numeric:tabular-nums}
+.part .toc .tt{font-size:33px;font-weight:900;color:#25303D;line-height:1.15;letter-spacing:-.02em}
+.part .toc .dd{font-size:22px;color:#5E6977;margin-top:10px;line-height:1.4}
+.part .toc .pp{margin-left:auto;font-size:22px;font-weight:700;color:#8892A0;white-space:nowrap}
+.part .brand{position:absolute;right:90px;bottom:84px;font-size:20px;color:#8892A0}
+
+/* ── 시연 영상 자리(PPTX에서 실제 mp4가 .vid 상자를 덮는다) ── */
+.vid{position:relative;border-radius:12px;border:1.5px solid var(--navy);box-shadow:0 12px 30px rgba(20,40,74,.16);overflow:hidden;background:#0F2240}
+.vid>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+.vid .play{position:absolute;right:14px;bottom:14px;width:56px;height:56px;border-radius:50%;background:rgba(20,40,74,.78);box-shadow:0 6px 16px rgba(0,0,0,.25)}   /* corner badge: never covers the screen content */
+.vid .play:after{content:"";position:absolute;left:22px;top:16px;border-style:solid;border-width:12px 0 12px 19px;border-color:transparent transparent transparent #fff}
+.vid .vlab{position:absolute;left:0;top:0;background:var(--navy);color:#fff;font-size:18px;font-weight:900;padding:8px 16px;border-radius:0 0 10px 0;letter-spacing:-.01em;white-space:nowrap;z-index:1}
+.vid .vlab.o{background:var(--orange)} .vid .vlab.g{background:var(--green)}
+.notes{display:none}
+/* 영상 옆 짚어 주기 목록: <ol class="vcap"><li><b>제목</b>설명</li>…</ol> — 번호 원 자동 */
+ol.vcap{list-style:none;counter-reset:vc;display:flex;flex-direction:column;gap:18px}
+ol.vcap li{counter-increment:vc;position:relative;padding-left:58px;min-height:40px;font-size:22px;font-weight:500;color:#3A4655;line-height:1.4;letter-spacing:-.02em}
+ol.vcap li:before{content:counter(vc);position:absolute;left:0;top:-1px;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center}
+ol.vcap li b{display:block;font-size:24px;font-weight:900;color:#1F2833;margin-bottom:2px}
+ol.vcap li em{font-style:normal;color:var(--orange);font-weight:700}
+ol.vcap.o li:before{background:var(--orange)} ol.vcap.g li:before{background:var(--green)} ol.vcap li.o:before{background:var(--orange)}
+ol.vcap.line li:not(:last-child):after{content:"";position:absolute;left:19px;top:44px;bottom:-16px;width:2px;background:#D5DCE5}

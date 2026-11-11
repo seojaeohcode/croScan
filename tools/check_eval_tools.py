@@ -25,7 +25,7 @@ def check(name, cond):
 
 
 def main():
-    fields = E._permits()["0735"]
+    fields = E._permits()["8175"]
     open_ = augment.questions(fields, [])[0]
     t1 = next(q for q in open_ if q["item"] == "T1")
     src = {"qid": t1["qid"], "choice": "partial", "value": "13시부터 15시까지 해요. 러그는 가스절단으로 6개 떼요.", "q": t1}

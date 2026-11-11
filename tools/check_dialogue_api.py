@@ -6,7 +6,7 @@ Facts carry polarity·modality·phase·version; a confirmation is checked agains
 digest) and the revision it was shown at, and recorded with who and what; a restart leaves cut-off jobs
 「interrupted」 and gives their model calls back; answer changes, what they expired and changes after the close are
 events; the dialogue API (GET dialogue, events, confirm, jobs, stage); a proposal's destination (전→후).
-Runs on a throwaway database; part B needs the demo day (samples/시연_하루) for the permit 0731.
+Runs on a throwaway database; part B needs the demo day (samples/시연_하루) for the permit 6733.
 """
 import asyncio
 import copy
@@ -170,7 +170,7 @@ def app_part():
     from make_demo_day import DIR, load, permit_name
     from server import extract
     c = TestClient(webapp.app)
-    d = next(x for x in load("permits.json")["permits"] if x["permit_no"].endswith("0731"))
+    d = next(x for x in load("permits.json")["permits"] if x["permit_no"].endswith("6733"))
     doc = extract.build(DIR / "허가서" / permit_name(d), d["kind"])
     Fx = copy.deepcopy(doc["fields"])
     for x in Fx.values():
@@ -244,8 +244,8 @@ def material_part():
     from server.permit_kinds import KINDS
     from foreman_permits import FOREMAN
     c = TestClient(webapp.app)
-    d = next(x for x in FOREMAN if x["permit_no"].endswith("0702"))
-    doc = extract.build(ROOT / "samples/반장_테스트" / f"{KINDS[d['kind']]['label'].replace('·', '')}_{d['case']}_0702.pdf", d["kind"])
+    d = next(x for x in FOREMAN if x["permit_no"].endswith("4403"))
+    doc = extract.build(ROOT / "samples/반장_테스트" / f"{KINDS[d['kind']]['label'].replace('·', '')}_{d['case']}_4403.pdf", d["kind"])
     sid = c.post("/api/dialogues").json()["session_id"]
     r = c.post("/api/augment", json={"fields": doc["fields"], "answers": [], "session_id": sid, "expected_revision": store.revision(sid)}).json()
     items = [q["item"] for q in r["questions"]]
@@ -261,8 +261,8 @@ def material_part():
     # the store's ask budget through the review request: the asks issued in the order given (rule questions that the
     # rules need first), every answer 「모름」, never more than 12
     from server import need_catalog as N
-    d3 = next(x for x in FOREMAN if x["permit_no"].endswith("0703"))
-    doc3 = extract.build(ROOT / "samples/반장_테스트" / f"{KINDS[d3['kind']]['label'].replace('·', '')}_{d3['case']}_0703.pdf", d3["kind"])
+    d3 = next(x for x in FOREMAN if x["permit_no"].endswith("4676"))
+    doc3 = extract.build(ROOT / "samples/반장_테스트" / f"{KINDS[d3['kind']]['label'].replace('·', '')}_{d3['case']}_4676.pdf", d3["kind"])
     sid3, answers, issued = c.post("/api/dialogues").json()["session_id"], [], []
     for _ in range(30):
         r3 = c.post("/api/augment", json={"fields": doc3["fields"], "answers": answers, "session_id": sid3,
@@ -277,7 +277,7 @@ def material_part():
         issued.append(q["item"])
         answers.append({"qid": q["qid"], "choice": "unknown", "value": "", "q": q})
     req = [N.row(i)["required"] for i in issued]
-    check(f"자료 보강: 0703 질문 발급 {len(issued)}회 ≤ 12, 규칙 필수 질문이 먼저 ({issued})",
+    check(f"자료 보강: 4676 질문 발급 {len(issued)}회 ≤ 12, 규칙 필수 질문이 먼저 ({issued})",
           0 < len(issued) <= 12 and req == sorted(req, reverse=True) and "CF3" in issued)
 
 

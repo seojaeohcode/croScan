@@ -1,0 +1,211 @@
+[
+  {
+    "script": "check_access.py",
+    "exit": 0,
+    "seconds": 31.89,
+    "fail_lines": []
+  },
+  {
+    "script": "check_analyze.py",
+    "exit": 0,
+    "seconds": 37.32,
+    "fail_lines": []
+  },
+  {
+    "script": "check_cases.py",
+    "exit": 0,
+    "seconds": 21.98,
+    "fail_lines": []
+  },
+  {
+    "script": "check_checkai.py",
+    "exit": 0,
+    "seconds": 37.58,
+    "fail_lines": []
+  },
+  {
+    "script": "check_checklist.py",
+    "exit": 0,
+    "seconds": 222.91,
+    "fail_lines": [],
+    "retry": true
+  },
+  {
+    "script": "check_checklist_material.py",
+    "exit": 0,
+    "seconds": 95.4,
+    "fail_lines": []
+  },
+  {
+    "script": "check_ckmerge.py",
+    "exit": 0,
+    "seconds": 15.82,
+    "fail_lines": []
+  },
+  {
+    "script": "check_coordnote.py",
+    "exit": 0,
+    "seconds": 17.63,
+    "fail_lines": []
+  },
+  {
+    "script": "check_critique_link.py",
+    "exit": 0,
+    "seconds": 40.85,
+    "fail_lines": []
+  },
+  {
+    "script": "check_delta_api.py",
+    "exit": 0,
+    "seconds": 25.4,
+    "fail_lines": []
+  },
+  {
+    "script": "check_dialogue_api.py",
+    "exit": 0,
+    "seconds": 55.91,
+    "fail_lines": []
+  },
+  {
+    "script": "check_docs_ai.py",
+    "exit": 0,
+    "seconds": 15.44,
+    "fail_lines": []
+  },
+  {
+    "script": "check_eval_tools.py",
+    "exit": 0,
+    "seconds": 134.63,
+    "fail_lines": []
+  },
+  {
+    "script": "check_explain.py",
+    "exit": 0,
+    "seconds": 25.43,
+    "fail_lines": []
+  },
+  {
+    "script": "check_hybrid.py",
+    "exit": 0,
+    "seconds": 15.01,
+    "fail_lines": []
+  },
+  {
+    "script": "check_pairreview.py",
+    "exit": 0,
+    "seconds": 21.62,
+    "fail_lines": []
+  },
+  {
+    "script": "check_pairs.py",
+    "exit": 0,
+    "seconds": 12.27,
+    "fail_lines": []
+  },
+  {
+    "script": "check_pairs_cases.py",
+    "exit": 0,
+    "seconds": 8.15,
+    "fail_lines": []
+  },
+  {
+    "script": "check_pairs_final.py",
+    "exit": 0,
+    "seconds": 13.83,
+    "fail_lines": []
+  },
+  {
+    "script": "check_pairs_material.py",
+    "exit": 0,
+    "seconds": 16.72,
+    "fail_lines": []
+  },
+  {
+    "script": "check_proxy_headers.py",
+    "exit": 0,
+    "seconds": 0.85,
+    "fail_lines": [],
+    "arguments": [
+      "--conf",
+      "deploy/oidc-proxy/nginx.conf"
+    ]
+  },
+  {
+    "script": "check_qa_board.py",
+    "exit": 0,
+    "seconds": 16.08,
+    "fail_lines": []
+  },
+  {
+    "script": "check_questions.py",
+    "exit": 0,
+    "seconds": 169.57,
+    "fail_lines": []
+  },
+  {
+    "script": "check_questions_material.py",
+    "exit": 0,
+    "seconds": 113.74,
+    "fail_lines": []
+  },
+  {
+    "script": "check_reflect.py",
+    "exit": 0,
+    "seconds": 200.47,
+    "fail_lines": [],
+    "retry": true
+  },
+  {
+    "script": "check_render.py",
+    "exit": 0,
+    "seconds": 113.34,
+    "fail_lines": [],
+    "retry": true
+  },
+  {
+    "script": "check_retrieval.py",
+    "exit": 0,
+    "seconds": 2.86,
+    "fail_lines": []
+  },
+  {
+    "script": "check_store.py",
+    "exit": 0,
+    "seconds": 4.62,
+    "fail_lines": []
+  },
+  {
+    "script": "check_submissions.py",
+    "exit": 0,
+    "seconds": 15.0,
+    "fail_lines": []
+  },
+  {
+    "script": "check_submit_link.py",
+    "exit": 0,
+    "seconds": 14.85,
+    "fail_lines": []
+  },
+  {
+    "script": "check_ui_state.py",
+    "exit": 0,
+    "seconds": 37.13,
+    "fail_lines": []
+  },
+  {
+    "script": "check_understand.py",
+    "exit": 0,
+    "seconds": 11.68,
+    "fail_lines": []
+  },
+  {
+    "script": "eval_retrieval.py",
+    "exit": 0,
+    "seconds": 0.92,
+    "fail_lines": []
+  },
+  {
+    "script": "check_demo_submissions.py",
+    "exit": 0
+  }
+]

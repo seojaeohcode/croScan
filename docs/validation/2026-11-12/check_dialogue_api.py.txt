@@ -1,0 +1,50 @@
+PASS #1 직접 답은 진술 사실(stated, 양태 asserted, 시점 미지정)
+PASS #1 읽기 사실: 긍정·예정(planned)·판1·확인 전, 근거는 원래 답과 구절
+PASS #1 「없음」 보기는 부정(negative)
+PASS #1 뺀 읽기는 대체됨(superseded)·끝난 시각, 같은 질문의 새 읽기는 판2
+PASS #1 대기 중 제안에도 양태·시점·판이 붙음
+PASS #2 카드에 보인 내용과 다르면 거절(stale_display)
+PASS #2 거절에 지금 내용이 붙음
+PASS #2 보인 그대로·읽기 저장만 있었으면 확인됨
+PASS #2 확인 기록: 동작 번호·역할·보인 해시·대상과 판
+PASS #2 카드를 보인 뒤 답이 바뀌면 거절(stale_revision)
+PASS #2 거절에 바뀐 내용이 붙음(변경 차이)
+PASS #17 답이 바뀌면 만료 기록 하나: 바뀐 것(전→후)과 영향(확인했던 읽기)
+PASS #17 새 답을 더하기만 하면 만료 없음
+PASS #5 마무리 뒤 답 변경은 수정 이벤트로 남음(전→후)
+PASS #5 마무리 뒤 기록도 수정 이벤트로
+PASS #4 정정 기록이 남음
+PASS #4 같은 동작 번호는 한 번만
+PASS #4 같은 번호·다른 내용은 충돌
+PASS #4 서버만 쓰는 종류(after_close)는 받지 않음
+PASS #3 분석 작업 시작
+PASS #3 작업별로 모델 호출을 셈
+PASS #3 재시작: 돌던 작업은 미완료(interrupted), 그 호출은 돌려줌, 끝난 작업은 그대로
+PASS #3 미완료 분석은 다시 시작할 수 있음
+PASS #4 작업 목록에 id(세션~종류)
+PASS #2 브라우저 해시 = 서버 해시(한글 포함)
+PASS #13 위치 읽기의 들어갈 곳: 반영본 칸 이름·전(빈칸)→후
+PASS #13 모든 제안에 들어갈 곳 목록이 붙음
+PASS #4 GET 대화: 답·제안·사실·예산·작업·이벤트·확인 기록
+PASS #2 /confirm: 보인 해시·개정 없으면 422
+PASS #2 /confirm: 다른 내용이면 409 stale_display
+PASS #2 /confirm: 보인 그대로면 확인
+PASS #4 POST 이벤트
+PASS #4 이벤트 종류 검사(422)
+PASS #4 GET 작업
+PASS #4 없는 작업은 404
+PASS #16 단계: 도는 읽기가 없으면 「끝」
+PASS #16 읽는 동안 단계가 기록됨(대기 중)
+PASS #3 읽기는 그 작업(turn:…)으로 모델 호출을 셈
+PASS #3 #16 끝나면 작업은 done, 단계는 지움
+PASS #17 답을 바꾼 요청의 응답에 만료 묶음(expired)
+PASS #5 이벤트에 답 변경이 남음
+PASS 자료 보강: 규칙 core(H2) 먼저, extra(T4·L6)는 끝 (['H2', 'T4', 'L6'])
+PASS 자료 보강: 새 질문에도 「왜 묻나요?」
+PASS 자료 보강: T4 16:30 → windows는 매칭용으로 16:30까지, windows_work는 작업 시간 그대로
+PASS 자료 보강: T4는 다시 묻지 않음
+PASS 자료 보강: 4676 질문 발급 6회 ≤ 12, 규칙 필수 질문이 먼저 (['T1', 'L1', 'CF1', 'CF2', 'B3', 'CF3'])
+
+46/46
+[validation workspace]\croscan-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa

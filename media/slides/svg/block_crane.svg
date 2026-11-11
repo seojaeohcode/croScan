@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M33 225 V33 H367 V225" fill="none" stroke="#E6EBF1"/>
+  <line x1="24" y1="227" x2="377" y2="227" stroke="#E6EBF1"/>
+  <rect x="45" y="44" width="10" height="180" rx="2" fill="#F2F5F9" stroke="#E6EBF1"/>
+  <path d="M45 69 l10 14 m-10 30 l10 14 m-10 30 l10 14 m-10 30 l10 14" fill="none" stroke="#E6EBF1"/>
+  <rect x="355" y="44" width="10" height="180" rx="2" fill="#F2F5F9" stroke="#E6EBF1"/>
+  <path d="M355 69 l10 14 m-10 30 l10 14 m-10 30 l10 14 m-10 30 l10 14" fill="none" stroke="#E6EBF1"/>
+  <rect x="36" y="29" width="328" height="19" rx="4" fill="#F2F5F9"/>
+  <rect x="55" y="51" width="290" height="24" rx="4" fill="#1F9A8E"/>
+  <rect x="69" y="45" width="18" height="35" rx="4" fill="#1B365D"/>
+  <rect x="316" y="45" width="18" height="35" rx="4" fill="#1B365D"/>
+  <rect x="190" y="74" width="43" height="22" rx="5" fill="#E6EBF1"/>
+  <circle cx="200" cy="98" r="4" fill="#1B365D"/>
+  <circle cx="224" cy="98" r="4" fill="#1B365D"/>
+  <line x1="212" y1="103" x2="212" y2="119"/>
+  <path d="M212 119 v8 c0 14 19 15 19 2" fill="none"/>
+  <line x1="219" y1="140" x2="164" y2="158" stroke="#E6EBF1"/>
+  <line x1="219" y1="140" x2="284" y2="158" stroke="#E6EBF1"/>
+  <polygon points="82,164 122,144 318,144 283,164" fill="#F2F5F9"/>
+  <rect x="82" y="164" width="201" height="62" rx="2" fill="#E6EBF1"/>
+  <polygon points="283,164 318,144 318,207 283,226" fill="#F2F5F9"/>
+  <path d="M100 166 v58 m-5-52 h10 m-10 45 h10" fill="none"/>
+  <path d="M143 166 v58 m-5-52 h10 m-10 45 h10" fill="none"/>
+  <path d="M186 166 v58 m-5-52 h10 m-10 45 h10" fill="none"/>
+  <path d="M229 166 v58 m-5-52 h10 m-10 45 h10" fill="none"/>
+  <path d="M270 166 v58 m-5-52 h10 m-10 45 h10" fill="none"/>
+  <line x1="132" y1="146" x2="102" y2="162" stroke="#E6EBF1"/>
+  <line x1="174" y1="146" x2="144" y2="162" stroke="#E6EBF1"/>
+  <line x1="216" y1="146" x2="186" y2="162" stroke="#E6EBF1"/>
+  <line x1="258" y1="146" x2="228" y2="162" stroke="#E6EBF1"/>
+  <line x1="298" y1="146" x2="268" y2="162" stroke="#E6EBF1"/>
+  <line x1="83" y1="198" x2="282" y2="198" stroke="#1B365D"/>
+  <path d="M293 169 v42 l16-9 v-42" fill="none" stroke="#1B365D"/>
+</svg>

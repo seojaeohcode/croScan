@@ -77,7 +77,7 @@ def submitted_cases(D, base, keys, best):
     """Codex A6: the latest submission's confirmed place and times go in through the same path (floor keeps the
     documents' alarms); a submission whose number is not in the day's list is listed apart, never dropped"""
     day = D["date"]
-    p32 = next(p for p in D["permits"] if p["id"] == "0732")
+    p32 = next(p for p in D["permits"] if p["id"] == "6988")
     no = p32["permit_no"]
     ans = [{"qid": f"L1:{no}", "choice": "place", "value": "3BAY 08-10 칼럼 E42P 블록 상부"},
            {"qid": f"T2:{no}", "choice": "partial", "value": "13:00~14:00"}]
@@ -86,25 +86,25 @@ def submitted_cases(D, base, keys, best):
     check("정정이 없으면 아무것도 넣지 않음(서류 기준)", safety.submitted_values({"fields": p32["_fields"], "answers": []}, day, no) == {})
     check("「모름」 위치 답은 정정이 아님", safety.submitted_values({"fields": p32["_fields"], "answers": [
         {"qid": f"L1:{no}", "choice": "unknown", "value": "모름"}]}, day, no) == {})
-    raw = pairs.detect(submitted={"0732": vals})
+    raw = pairs.detect(submitted={"6988": vals})
     fl = pairs.floor(base, raw)
-    p = next((x for x in fl["pairs"] if x["key"] == "0732|WP-1029-01"), None)
-    check("제출본 위치·시간으로 새 경보가 생김(0732 × 같은 블록 도장)", p and any(r["rule"] == "FIRE" for r in p["reasons"]))
-    ev = [e for e in (p or {"reasons": [{"evidence": []}]})["reasons"][0]["evidence"] if e["doc"] == "0732"]
+    p = next((x for x in fl["pairs"] if x["key"] == "6988|WP-1029-01"), None)
+    check("제출본 위치·시간으로 새 경보가 생김(6988 × 같은 블록 도장)", p and any(r["rule"] == "FIRE" for r in p["reasons"]))
+    ev = [e for e in (p or {"reasons": [{"evidence": []}]})["reasons"][0]["evidence"] if e["doc"] == "6988"]
     check("근거에 「위치(제출본 반영)」「시간(제출본 반영)」 표시", {e["field"] for e in ev if e.get("submitted")} == {"위치(제출본 반영)", "시간(제출본 반영)"})
     check("제출본 반영 뒤에도 서류 기준 경보는 모두 남음(floor)", keys(fl) >= keys(base) and all(best(fl)[k] <= v for k, v in best(base).items()))
-    away = pairs.detect(submitted={"0731": {"place": "1BAY 01-02 칼럼 B10S 블록", "windows": [{"start": "06:00", "end": "07:00"}]}})
+    away = pairs.detect(submitted={"6733": {"place": "1BAY 01-02 칼럼 B10S 블록", "windows": [{"start": "06:00", "end": "07:00"}]}})
     fl2 = pairs.floor(base, away)
-    c01 = next((x for x in fl2["pairs"] if x["key"] == "0731|WP-1029-01"), None)
-    # 2026-10-31: 0731의 작업명에 블록 E42P가 그대로 있어, 위치만 옮긴 제출본에서도 같은 블록 관계(잔류 3순위)가 남을 수 있음
+    c01 = next((x for x in fl2["pairs"] if x["key"] == "6733|WP-1029-01"), None)
+    # 2026-10-31: 6733의 작업명에 블록 E42P가 그대로 있어, 위치만 옮긴 제출본에서도 같은 블록 관계(잔류 3순위)가 남을 수 있음
     # (자료 p398~399: 명시적 연결이 거친 주소보다 우선). 확인하는 것은 floor의 계약: 문서 기준 경보가 모두 남고 낮아지지 않음
-    b01 = next(p for p in base["pairs"] if p["key"] == "0731|WP-1029-01")
+    b01 = next(p for p in base["pairs"] if p["key"] == "6733|WP-1029-01")
     now = {(r["rule"], r["cause"], r["exposed"]): (r["priority"], -r["score"]) for r in (c01 or {"reasons": []})["reasons"]}
     check("제출본이 작업을 옮겨도 서류의 경보는 문서 기준으로 남음", c01 and all(
         now.get((r["rule"], r["cause"], r["exposed"]), (9, 0)) <= (r["priority"], -r["score"]) for r in b01["reasons"]))
     check("읽을 수 없는 시간은 넣지 않음", pairs._submitted(p32, {"windows": [{"start": "25:00", "end": "x"}]}) is p32 or "_sub" not in pairs._submitted(p32, {"windows": [{"start": "25:00", "end": "x"}]}))
     # the submissions of the day, as the manager's view gets them (a fake store: id -> (payload, files, summary))
-    pno_out = no[:-4] + "0701"
+    pno_out = no[:-4] + "4012"
     store_ = {"s1": ({"fields": p32["_fields"], "answers": ans}, {}, {}), "s2": ({"answers": []}, {}, {}),
               "s3": ({"answers": [], "plan_values": [{"doc_no": "WP-1029-02", "place": "3BAY 08-10 칼럼 E42P 블록", "start": f"{day}T13:00",
                                                       "end": f"{day}T14:00", "changed": ["location", "start"]}]}, {}, {})}
@@ -112,18 +112,18 @@ def submitted_cases(D, base, keys, best):
     s = lambda i, pn, dates, t: {"id": i, "permit_no": pn, "dates": dates, "created": t, "files": ["permit", "checklist"]}  # noqa: E731
     latest_day = {no: s("s1", no, [day], 2), pno_out: s("s2", pno_out, [day], 3)}
     conf, sub, ver = safety.hybrid_inputs(D, latest_day, get)
-    check("작업 목록 안의 제출본: 위치·시간이 판정 입력으로", sub.get("0732") == vals and ver["0732"]["version"] == safety.VERSION_SUB
-          and ver["0732"]["used"][:2] == ["위치", "시간"])
-    check("작업 목록 밖 번호(0701)는 판정 입력에 넣지 않음", not any(k.endswith("0701") for k in list(conf) + list(sub)))
-    p33 = next(p for p in D["permits"] if p["id"] == "0733")
+    check("작업 목록 안의 제출본: 위치·시간이 판정 입력으로", sub.get("6988") == vals and ver["6988"]["version"] == safety.VERSION_SUB
+          and ver["6988"]["used"][:2] == ["위치", "시간"])
+    check("작업 목록 밖 번호(4012)는 판정 입력에 넣지 않음", not any(k.endswith("4012") for k in list(conf) + list(sub)))
+    p33 = next(p for p in D["permits"] if p["id"] == "7618")
     _, sub3, ver3 = safety.hybrid_inputs(D, {p33["permit_no"]: s("s3", p33["permit_no"], [day], 4)}, get)
     check("제출본에서 고친 작업계획서의 위치·시간도 그 계획서의 판정 입력으로", sub3.get("WP-1029-02", {}).get("place") == "3BAY 08-10 칼럼 E42P 블록"
-          and sub3["WP-1029-02"]["windows"] == [{"start": "13:00", "end": "14:00"}] and ver3["WP-1029-02"]["by"] == "0733")
-    check("제출본에 반영할 값이 없으면 「서류 기준」", ver3["0733"]["version"] == safety.VERSION_DOC)
+          and sub3["WP-1029-02"]["windows"] == [{"start": "13:00", "end": "14:00"}] and ver3["WP-1029-02"]["by"] == "7618")
+    check("제출본에 반영할 값이 없으면 「서류 기준」", ver3["7618"]["version"] == safety.VERSION_DOC)
     other = s("s9", no, ["2026-11-02"], 9)
     view = safety.submission_view(D, latest_day, {**latest_day, no: other}, get)
     out = {x["permit_no"]: x for x in view["_outside"]}
-    check("0701 제출은 「이 날 작업 목록에 없는 제출」로 문서와 함께 따로 표시", out.get(pno_out, {}).get("why") == safety.OUTSIDE
+    check("4012 제출은 「이 날 작업 목록에 없는 제출」로 문서와 함께 따로 표시", out.get(pno_out, {}).get("why") == safety.OUTSIDE
           and out[pno_out]["files"] == ["permit", "checklist"] and pno_out not in view)
     check("같은 번호의 다른 작업일 제출도 버리지 않고 따로 표시", out.get(no, {}).get("id") == "s9" and out[no]["why"] == safety.OTHER_DAY
           and view[no]["id"] == "s1" and view[no]["used"]["version"] == safety.VERSION_SUB)

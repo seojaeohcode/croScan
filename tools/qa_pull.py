@@ -2,8 +2,10 @@
 
   python tools/qa_pull.py                    reports not handled yet (handled = false) -> qa_inbox/<id>/report.md, context.json, files
   python tools/qa_pull.py --all              every report, handled ones too
-  python tools/qa_pull.py --handled 3 "고침"  set handled = true for #3 (with a note)
+  python tools/qa_pull.py --handled 3 부분수용 "무엇을 어떻게"   handled, with how (수용 · 부분수용 · 거절 · 보류) and a note
   python tools/qa_pull.py --unhandled 3      set it back to false
+  python tools/qa_pull.py --run-start        the waiting 「QA 시작하기」 request → 수행 중 (prints its id)
+  python tools/qa_pull.py --run-done 7 "메모" --ids 103 104   that run → 완료, with the reports it handled (--run-fail: 실패)
 
 Server address and token come from the environment or the .env at the repository root:
   CROSCAN_URL=http://<server address>   QA_TOKEN=...   (the token is never printed)
@@ -71,12 +73,33 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--handled", nargs="+", metavar=("ID", "NOTE"))
     ap.add_argument("--unhandled", nargs="+", metavar=("ID", "NOTE"))
+    ap.add_argument("--run-start", action="store_true")
+    ap.add_argument("--run-done", nargs="+", metavar=("RUN", "NOTE"))
+    ap.add_argument("--run-fail", nargs="+", metavar=("RUN", "NOTE"))
+    ap.add_argument("--ids", nargs="*", type=int, default=None)
     a = ap.parse_args()
     base, token = env()
+    if a.run_start:                              # the waiting request is taken by this session
+        board = json.loads(call(base, token, "/api/qa/board"))
+        run = next((r for r in board["runs"] if r["status"] == "requested"), None)
+        if not run:
+            raise SystemExit("기다리는 「QA 시작하기」 요청이 없습니다")
+        call(base, token, f"/api/qa/run/{run['id']}", {"status": "running"})
+        print(f"run {run['id']} → running (요청 {run['requested']} · {run['by'] or '-'} · 그때 미처리 {run['open_at_request']}건)")
+        return
+    for status, arg in (("done", a.run_done), ("failed", a.run_fail)):
+        if arg:
+            call(base, token, f"/api/qa/run/{int(arg[0])}", {"status": status, "note": " ".join(arg[1:]) or None, "done": a.ids})
+            print(f"run {arg[0]} → {status}")
+            return
     for value, arg in ((True, a.handled), (False, a.unhandled)):
         if arg:
-            call(base, token, f"/api/qa/{int(arg[0])}/handled", {"handled": value, "note": " ".join(arg[1:]) or None})
-            print(f"QA #{arg[0]} → handled = {str(value).lower()}")
+            rest = arg[1:]
+            how = {"수용": "수용", "전부수용": "수용", "부분수용": "부분 수용", "부분": "부분 수용", "거절": "거절", "거부": "거절", "보류": "보류"}.get(rest[0].replace(" ", "")) if rest else None
+            if how:
+                rest = rest[1:]
+            call(base, token, f"/api/qa/{int(arg[0])}/handled", {"handled": value, "note": " ".join(rest) or None, "decision": how if value else None})
+            print(f"QA #{arg[0]} → handled = {str(value).lower()}" + (f" · {how}" if how else ""))
             return
     reports = json.loads(call(base, token, "/api/qa" + ("" if a.all else "?handled=false")))
     for q in reports:

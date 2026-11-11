@@ -117,7 +117,7 @@ def hm(x):
 
 
 def permit_day(p):
-    """The work day a permit's number carries (AC00-IH-YYYYMMDD-NNNN), else its first date row: the default day of T0."""
+    """The work day a permit's number carries (BS22-IV-YYYYMMDD-NNNN), else its first date row: the default day of T0."""
     m = re.search(r"-(20\d{2})(\d{2})(\d{2})-\d{3,4}\b", _v(p, "permit_no"))
     if m:
         return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
@@ -1949,7 +1949,7 @@ def _foreman(P, ans, qs, assumed, deferred):
                 "수리하는 동안 같은 주행로(레일)에서 다른 크레인 운행이나 이 크레인을 쓰려는 작업이 있다고 들었나요? 복구 전에 확인할 다른 팀 작업이 있나요?",
                 [C("none", "들은 것 없음", "확인됨"), C("text", "있음(크레인·팀·시각)", "보강", "예: OH-21-02 같은 레일 운행, 도장팀 거더 하부 14시까지"), UNKNOWN], (7, 1))
     _wait_state(P, ans, add)
-    # ---- several blocks over several days (실물 0400: 블록 9개·4일): which block on which day (L4, so far the 안전관리자
+    # ---- several blocks over several days (실물 1305: 블록 9개·4일): which block on which day (L4, so far the 안전관리자
     # view's only); and, for work that throws sparks, drops or lifts, the range kept closed while working (L6, interview
     # p41 「오늘 여기서 여기까지」) — L6 extra, after the core questions
     many_ids = blocks_in(_v(p, "job") + " " + _v(p, "job_detail"))

@@ -459,17 +459,17 @@ h3 = on_day([permit(117, "hot", "E41P 블록 배관 절단", "3BAY 12-14 칼럼 
             lambda: holdq.build(pairs.detect()))
 check("holdq.build: 탱크 안인지 모르는 CONF_GAS E2 → 「실제 작업 위치」 질문", any(q["fact"] == "position" for x in h3["docs"] for q in x["questions"]),
       [(q["doc"], q["fact"]) for x in h3["docs"] for q in x["questions"]])
-# floor keeps the label with the numbers (Codex 9): the 0731 submission that moves the work
+# floor keeps the label with the numbers (Codex 9): the 6733 submission that moves the work
 base = pairs.detect()
-away = pairs.detect(submitted={"0731": {"place": "1BAY 01-02 칼럼 B10S 블록", "windows": [{"start": "06:00", "end": "07:00"}]}})
+away = pairs.detect(submitted={"6733": {"place": "1BAY 01-02 칼럼 B10S 블록", "windows": [{"start": "06:00", "end": "07:00"}]}})
 fl = pairs.floor(base, away)
-b0 = next(p for p in base["pairs"] if p["key"] == "0731|WP-1029-01")
-f0 = next(p for p in fl["pairs"] if p["key"] == "0731|WP-1029-01")
+b0 = next(p for p in base["pairs"] if p["key"] == "6733|WP-1029-01")
+f0 = next(p for p in fl["pairs"] if p["key"] == "6733|WP-1029-01")
 check("floor: 문서 기준 1순위·E3 경보는 판정 표기도 「확인위험」으로 유지", f0["judgement"] == b0["judgement"] == "확인위험"
       and all(pairs._label(r) == "확인위험" for r in f0["reasons"] if r["rule"] == "FIRE"), (f0["judgement"], [pairs._label(r) for r in f0["reasons"]]))
 # dates through the submission (Codex P1-4): safety.hybrid_inputs → pairs.detect(submitted)
 D = safety.data()
-p33 = next(p for p in D["permits"] if p["id"] == "0733")
+p33 = next(p for p in D["permits"] if p["id"] == "7618")
 store_ = {"s4": ({"answers": [], "plan_values": [{"doc_no": "WP-1029-02", "place": "", "start": f"{D['date']}T10:00", "end": f"{D['date'][:8]}{int(D['date'][8:]) + 2:02d}T02:00",
                                                   "changed": ["end"]}]}, {}, {})}
 _, sub4, _ = safety.hybrid_inputs(D, {p33["permit_no"]: {"id": "s4", "permit_no": p33["permit_no"], "dates": [D["date"]], "created": 1}}, store_.get)
@@ -481,14 +481,14 @@ check("적용 단계(pairs._submitted → profile)도 이틀 뒤까지 창 유�
 d1 = {"start": "08:00", "end": "10:00"}
 check("08:00→10:00과 08:00→다음 날 10:00은 다른 창(정정이 버려지지 않음)",
       pairs._submitted({**wp2, "windows": [d1]}, {"windows": [{**d1, "next_day": True}]}).get("_sub"))
-p32 = next(p for p in D["permits"] if p["id"] == "0732")
+p32 = next(p for p in D["permits"] if p["id"] == "6988")
 ans = [{"qid": f"T4:{p32['permit_no']}", "choice": "time", "value": "16:30"}]
 vals = safety.submitted_values({"fields": p32["_fields"], "answers": ans}, D["date"], p32["permit_no"])
 check("T4 잔불 확인 끝 16:30 → submitted_values에 잔류 전용 값(residual_end)", vals.get("residual_end") == "16:30", vals)
-raw = pairs.detect(submitted={"0732": vals})
-notes = [w for p in raw["pairs"] for r in p["reasons"] if r["cause"] == "0732" and r["when"]["kind"] == "sequence" for w in r["why_E"]]
-check("감시 종료는 표시만, 해제 근거 아님: 0732 잔류 사유에 「감시 종료는 잔류 해제 확인이 아님」", any("감시 종료는 잔류 해제 확인이 아님" in w for w in notes)
-      and all(r["E"] == 1 for p in raw["pairs"] for r in p["reasons"] if r["cause"] == "0732" and r["when"]["kind"] == "sequence"), notes[:2])
+raw = pairs.detect(submitted={"6988": vals})
+notes = [w for p in raw["pairs"] for r in p["reasons"] if r["cause"] == "6988" and r["when"]["kind"] == "sequence" for w in r["why_E"]]
+check("감시 종료는 표시만, 해제 근거 아님: 6988 잔류 사유에 「감시 종료는 잔류 해제 확인이 아님」", any("감시 종료는 잔류 해제 확인이 아님" in w for w in notes)
+      and all(r["E"] == 1 for p in raw["pairs"] for r in p["reasons"] if r["cause"] == "6988" and r["when"]["kind"] == "sequence"), notes[:2])
 # routes, tags, negation, wording (Codex 5·6·10·11)
 P = pairs.profile(plan(120, "소형 자재 순회 공급(수동 대차)", "3BAY 04→12→09→04축", ["09:00~10:00"]))
 check("여러 지점 경로 04→12→09→04 → 04~12 전체", any(s["c0"] == 4 and s["c1"] == 12 for s in P["spans"]), P["spans"])
@@ -562,14 +562,14 @@ check("계획서×계획서는 설계상 후보 아님(설계 §8): 계획서만
 
 # ---- 13. multiturn 최종 계약(impl/multiturn.md): 시간 필드·facts·live_answers·eff_choice — 공개 경로
 D = safety.data()
-p32 = next(p for p in D["permits"] if p["id"] == "0732")
+p32 = next(p for p in D["permits"] if p["id"] == "6988")
 no = p32["permit_no"]
 t4 = {"qid": f"T4:{no}", "choice": "time", "value": "16:30"}
 vals = safety.submitted_values({"fields": p32["_fields"], "answers": [t4]}, D["date"], no)
 check("계약: 작업 창은 windows_work(잔불 끝으로 늘리지 않음), 잔불 끝은 residual_end로만", "windows" not in vals and vals.get("residual_end") == "16:30", vals)
 vals_c6 = safety.submitted_values({"fields": p32["_fields"], "answers": [t4, {"qid": f"C6.T4:{no}", "choice": "doc", "value": ""}]}, D["date"], no)
 check("C6 「서류가 맞음」으로 철회한 T4는 쓰지 않음(live_answers)", "residual_end" not in vals_c6, vals_c6)
-raw = pairs.detect(submitted={"0732": vals})
+raw = pairs.detect(submitted={"6988": vals})
 base = pairs.detect()
 fl = pairs.floor(base, raw)
 rk = lambda D: {(p["key"], r["rule"], r["cause"], r["exposed"]): (r["priority"], -r["score"]) for p in D["pairs"] for r in p["reasons"]}  # noqa: E731

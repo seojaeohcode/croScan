@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="33" y1="229" x2="368" y2="229" stroke="#E6EBF1"/>
+  <path d="M243 100 C229 85 242 66 259 68 C265 48 292 48 303 63 C323 59 341 73 336 92 C355 105 344 127 328 130 C320 150 293 151 283 135 C261 144 238 128 243 110 Z" fill="#E6EBF1" stroke="none"/>
+  <path d="M277 78 q13-7 23 2 m9 36 q13 3 19-7" fill="none" stroke="#FFFFFF"/>
+  <path d="M209 98 l20-10 m-14 23 h20 m-26 14 21 9" fill="none" stroke="#1F9A8E" stroke-dasharray="3 8"/>
+  <path d="M154 94 h30 l17 11 v18 h-53 l-10-13 Z" fill="#1F9A8E"/>
+  <rect x="197" y="103" width="13" height="14" rx="2" fill="#1B365D"/>
+  <path d="M155 120 l21 2-12 42-20-5 Z" fill="#1B365D"/>
+  <path d="M178 125 v13 q0 7-8 7" fill="none"/>
+  <rect x="146" y="47" width="36" height="34" rx="5" fill="#FFFFFF"/>
+  <path d="M142 48 h44 m-25 34 v11 m13-11 v11" fill="none"/>
+  <path d="M151 161 C134 186 222 215 250 206 C272 198 248 179 226 189" fill="none" stroke="#1B365D"/>
+  <path d="M63 160 Q101 145 139 160 V216 Q102 233 63 216 Z" fill="#F2F5F9"/>
+  <path d="M63 160 C63 176 139 176 139 160 C139 144 63 144 63 160 Z" fill="#FFFFFF"/>
+  <path d="M68 176 C68 193 135 193 135 176 V212 Q102 225 68 212 Z" fill="#1F9A8E" stroke="none"/>
+  <path d="M69 162 V143 C69 112 133 112 133 143 V162" fill="none"/>
+  <rect x="88" y="116" width="27" height="9" rx="4" fill="#E6EBF1"/>
+  <path d="M88 192 q8-13 14-19 11 12 11 20 a11 11 0 0 1-22 0 Z" fill="#FFFFFF" stroke="none"/>
+</svg>

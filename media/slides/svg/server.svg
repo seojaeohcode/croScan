@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="49" y="35" width="139" height="192" rx="9" fill="#F2F5F9"/>
+  <rect x="60" y="48" width="117" height="158" rx="5" fill="#14284A"/>
+  <rect x="69" y="59" width="99" height="34" rx="4" fill="#FFFFFF"/>
+  <circle cx="81" cy="76" r="3" fill="#1F9A8E" stroke="none"/>
+  <line x1="97" y1="71" x2="97" y2="81" stroke="#E6EBF1"/>
+  <line x1="107" y1="71" x2="107" y2="81" stroke="#E6EBF1"/>
+  <line x1="117" y1="71" x2="117" y2="81" stroke="#E6EBF1"/>
+  <rect x="137" y="74" width="17" height="4" rx="2.0" fill="#1B365D" stroke="none"/>
+  <rect x="69" y="103" width="99" height="34" rx="4" fill="#FFFFFF"/>
+  <circle cx="81" cy="120" r="3" fill="#1F9A8E" stroke="none"/>
+  <line x1="97" y1="115" x2="97" y2="125" stroke="#E6EBF1"/>
+  <line x1="107" y1="115" x2="107" y2="125" stroke="#E6EBF1"/>
+  <line x1="117" y1="115" x2="117" y2="125" stroke="#E6EBF1"/>
+  <rect x="137" y="118" width="17" height="4" rx="2.0" fill="#1B365D" stroke="none"/>
+  <rect x="69" y="147" width="99" height="34" rx="4" fill="#FFFFFF"/>
+  <circle cx="81" cy="164" r="3" fill="#1F9A8E" stroke="none"/>
+  <line x1="97" y1="159" x2="97" y2="169" stroke="#E6EBF1"/>
+  <line x1="107" y1="159" x2="107" y2="169" stroke="#E6EBF1"/>
+  <line x1="117" y1="159" x2="117" y2="169" stroke="#E6EBF1"/>
+  <rect x="137" y="162" width="17" height="4" rx="2.0" fill="#1B365D" stroke="none"/>
+  <rect x="64" y="226" width="23" height="8" rx="2" fill="#1B365D"/>
+  <rect x="151" y="226" width="23" height="8" rx="2" fill="#1B365D"/>
+  <path d="M146 192 v-13 a22 22 0 0 1 44 0 v13" fill="none" stroke="#1B365D"/>
+  <rect x="136" y="190" width="64" height="49" rx="8" fill="#1E6B47"/>
+  <circle cx="168" cy="211" r="5" fill="#FFFFFF" stroke="none"/>
+  <line x1="168" y1="214" x2="168" y2="222" stroke="#FFFFFF"/>
+  <path d="M271 76 C264 57 277 41 295 44 C304 21 335 23 343 47 C367 46 379 65 371 82 C389 103 373 125 353 125 H275 C250 124 248 88 271 84 Z" fill="#F2F5F9"/>
+  <path d="M196 115 H220 M248 115 h23" fill="none" stroke="#1B365D" stroke-dasharray="5 7"/>
+  <line x1="228" y1="104" x2="239" y2="126" stroke="#D4561F"/>
+  <line x1="238" y1="104" x2="227" y2="126" stroke="#D4561F"/>
+  <path d="M301 71 h34 m-44 16 h54 m-41 16 h28" fill="none" stroke="#E6EBF1"/>
+</svg>

@@ -74,14 +74,14 @@ def extra():
     good = analyze.changed(h1, h2) == ["p1.job"] and analyze.changed(h1, h1) == []
     ok += good
     print(f"{'PASS' if good else 'FAIL'} 바뀐 칸만 찾음")
-    # delta on a demo permit (0735 고소): only changed fields are given and may be pointed at
+    # delta on a demo permit (8175 고소): only changed fields are given and may be pointed at
     real = llm.call_json
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from server import extract
     from make_demo_day import DIR, load, permit_name
     ps = load("permits.json")
     ps = ps if isinstance(ps, list) else ps.get("permits", [])
-    d = next(x for x in ps if permit_name(x).startswith("0735"))
+    d = next(x for x in ps if permit_name(x).startswith("8175"))
     F = extract.build(DIR / "허가서" / permit_name(d), d["kind"])["fields"]
     rows_now, _, Pn = analyze.inputs(F, [])
     before = analyze.rowhash(rows_now)

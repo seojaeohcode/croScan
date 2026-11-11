@@ -1161,7 +1161,7 @@ _BATCHIM_DIGIT = set("013678")
 
 
 def _josa(word, pair):
-    """은/는-style particle after a name: '0737 중량물인양이', 'WP-02가', 'OH-21-03을', 'MCC-4를'."""
+    """은/는-style particle after a name: '8741 중량물인양이', 'WP-02가', 'OH-21-03을', 'MCC-4를'."""
     c = word.rstrip()[-1:]
     if "가" <= c <= "힣":
         has = (ord(c) - 0xAC00) % 28 != 0

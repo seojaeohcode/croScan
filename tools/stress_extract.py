@@ -59,7 +59,7 @@ def permit(kind):
     ndays = rnd.choice([0, 1, 1, 2, 3, 7])
     d = {
         "kind": kind,
-        "permit_no": f"AC00-IH-202610{day0:02d}-{rnd.randint(1, 9999):04d}",
+        "permit_no": f"BS22-IV-202610{day0:02d}-{rnd.randint(1, 9999):04d}",
         "permit_type": rnd.choice(["[전산허가]", "[안전현장허가]"]),
         "hull_no": rnd.choice(["", f"{rnd.randint(3500, 3699)}-{fmt['blk']}", f"{rnd.randint(3500, 3699)}-157K-COT"]),
         "jsp_no": rnd.choice([f"HHIS-CW-A000{rnd.randint(1000, 9999)}-0{rnd.randint(10, 99)}-00{rnd.randint(1, 9)}",

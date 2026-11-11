@@ -32,10 +32,10 @@ FONTS = Path("C:/Windows/Fonts")
 REG = pymupdf.Font(fontfile=str(FONTS / "malgun.ttf"))
 BOLD = pymupdf.Font(fontfile=str(FONTS / "malgunbd.ttf"))
 SYM = pymupdf.Font(fontfile=str(FONTS / "seguisym.ttf"))
-LOGO = pymupdf.Font(fontfile=str(FONTS / "GOTHICB.TTF"))     # Century Gothic Bold: wide, round D/U like the printed logo
+LOGO = ROOT / "web" / "croscan_logo.png"
 
 BLACK, WHITE = (0, 0, 0), (1, 1, 1)
-LOGO_BLUE, GREEN_LIGHT, GREEN_DARK, BLUE = (0.10, 0.35, 0.65), (0.55, 0.76, 0.22), (0.20, 0.55, 0.22), (0.13, 0.36, 0.71)
+BLUE = (0.13, 0.36, 0.71)
 HEAD = (0.88, 0.89, 0.90)          # shaded header rows
 LABEL = (0.94, 0.94, 0.95)         # shaded label cells of the sign-off block
 
@@ -125,18 +125,8 @@ def borders(page):
 
 
 def logo(page, w):
-    """HD HYUNDAI mark as printed: a two-tone green chevron (lighter upper half) and the
-    wordmark, measured from the photographed printout (cap height 20.4 pt, width 163 pt)."""
-    x0, y0, aw, ah = 33.0, 31.6, 26.4, 28.8          # chevron box
-    notch, tip = aw * 0.45, aw * 0.55                  # left notch depth, where the slant starts
-    mid = y0 + ah / 2
-    page.draw_polyline([(x0, y0), (x0 + tip, y0), (x0 + aw, mid), (x0 + notch, mid)], color=None, fill=GREEN_LIGHT, closePath=True)
-    page.draw_polyline([(x0 + notch, mid), (x0 + aw, mid), (x0 + tip, y0 + ah), (x0, y0 + ah)], color=None, fill=GREEN_DARK, closePath=True)
-    size, track, base, x = 27.9, -0.7, 58.0, x0 + aw + 7
-    for word, gap in (("HD", 0.18), ("HYUNDAI", 0)):
-        for ch in word:
-            x = w.put(x, base, ch, size, color=LOGO_BLUE, font=LOGO) + track
-        x += gap * size
+    """croScan logo where the printout has its company mark: same top-left corner and height (28.8 pt)."""
+    page.insert_image(pymupdf.Rect(33.0, 31.6, 33.0 + 28.8 * 538 / 128, 60.4), filename=str(LOGO))
 
 
 def checkbox(v):
@@ -330,7 +320,7 @@ def draw_page(doc, d, copy, images, kind=None):
 
 # values as printed on the two permits (names / phone numbers / staff numbers masked)
 P1 = {
-    "permit_no": "AC00-IH-20261012-0453", "permit_type": "[안전현장허가]", "hull_no": "", "jsp_no": "HHIS-CN-C6B0-014",
+    "permit_no": "BS22-IV-20261012-1317", "permit_type": "[안전현장허가]", "hull_no": "", "jsp_no": "HHIS-CN-C6B0-014",
     "location": "UNIT2공장  유니트4팀", "location_detail": "유니트4팀",
     "job": "배관 내 사람이 들어가는 작업", "job_detail": "파이프 내부 진입",
     "department": "UNIT생산부-생산2과-UNIT4팀", "supervisor": "최XX", "supervisor_phone": "010-XXXX-XXXX",
@@ -342,7 +332,7 @@ P1 = {
     "checks": {"day": "set", "confined_space": "set", "argon": "set"},
 }
 P2 = {
-    "permit_no": "AC00-IH-20261014-0400", "permit_type": "[전산허가]", "hull_no": "3595-157K-COT",
+    "permit_no": "BS22-IV-20261014-1305", "permit_type": "[전산허가]", "hull_no": "3595-157K-COT",
     "jsp_no": "HHIS-CW-A0000948-044-009",
     "location": "대조립21공장 3595 157K-COT 대조립 21공장 2BAY 28-32 칼럼", "location_detail": "대조립 21공장 2BAY 28-32 칼럼",
     "job": "(준)밀폐공간 내부 작업(B11, F31, E11, E18, E21, E22, E27, E33, E52 블록)",

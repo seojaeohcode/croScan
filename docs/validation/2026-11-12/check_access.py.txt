@@ -1,0 +1,20 @@
+PASS 시연 모드: health가 demo를 알림
+PASS 시연 모드: 근거 지도 열림
+PASS 게이트웨이: 로그인 없으면 근거 지도 401
+PASS 게이트웨이: 반장 역할은 관리자 화면 403
+PASS 게이트웨이: 안전관리자는 열림
+PASS 게이트웨이: 사용자 정보 없는 반장은 401
+PASS 게이트웨이: 남의 제출 문서는 없음(404)
+PASS 게이트웨이: QA 현황은 로그인 없으면 401
+PASS 게이트웨이: 팀 PC 도구는 QA 토큰으로 통과(현황)
+PASS 게이트웨이: 틀린 QA 토큰은 통과 못 함
+PASS 게이트웨이: QA 토큰은 QA 경로에만
+PASS 게이트웨이: 근거 지도는 반장에게 403
+PASS 게이트웨이: 쌍 설명(explanations/query kind=pair)은 반장에게 403
+PASS 게이트웨이: 반장 검토 API는 로그인 필요
+PASS 게이트웨이: health는 열림
+PASS 게이트웨이: 화면 파일은 열림(로그인은 게이트웨이가)
+
+16/16
+[validation workspace]\croscan-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa

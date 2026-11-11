@@ -5,7 +5,7 @@
 Why this day (sources: 조사자료 추가본, 멘토링):
   - 안전팀 한 팀에 하루 40~50건이 몰리면 바쁜 날이다(멘토). 그래서 50건: 비일상(허가서) 10건 = 5종 × 2건,
     일상(작업계획서) 40건 = 6개 업체.
-  - 허가서마다 A(실물 0453·0400처럼 대충: 하루 내내 시간, 팀 이름 장소, 병행여부·호선 빈칸)와 B(꼼꼼)를 하나씩 둔다.
+  - 허가서마다 A(실물 1317·1305처럼 대충: 하루 내내 시간, 팀 이름 장소, 병행여부·호선 빈칸)와 B(꼼꼼)를 하나씩 둔다.
     작업반장 시점에서 croScan이 무엇을 묻는지, 묻지 않는지를 같이 보여 주기 위해서다.
   - 공장: 조사자료 F01 모델(3BAY·01~21축·50t)을 4BAY·01~20칼럼으로 늘린 시연용 변형판(BAY 폭 36m, 칼럼 간격 12m),
     BAY마다 천장크레인 1대(OH-21-01~04). 블록 하나는 한 곳에만 있다(블록 번호 = 위치).
@@ -23,7 +23,7 @@ DAY, REQ = "2026-10-29", "2026-10-28"
 
 def permit(no, first=DAY, **kw):
     # the number carries the first work day; a 7-day permit (같은 작업장 연속 작업, 인터뷰 2026-10-29) began earlier
-    d = {"permit_no": f"AC00-IH-{first.replace('-', '')}-{no}", "supervisor": "김XX", "supervisor_phone": "010-XXXX-XXXX",
+    d = {"permit_no": f"BS22-IV-{first.replace('-', '')}-{no}", "supervisor": "김XX", "supervisor_phone": "010-XXXX-XXXX",
          "manager": "박XX", "manager_phone": "010-XXXX-XXXX", "req_name": "김XX", "req_date": REQ, "req_sign": "김XX",
          "double_check": "N"}
     d.update(kw)
@@ -46,7 +46,7 @@ def week(a, b):
 # ---------------------------------------------------------------- 허가서 10건 (비일상)
 PERMITS = [
     # 화기 A: 팀 이름 장소, 하루 내내, 호선·병행 빈칸. 실제로는 오후 3BAY 08-10 칼럼 E42P 상부 → 도장 터치업(WP01)과 겹침(C01)
-    permit("0731", double_check="Y", kind="hot", case="A", permit_type="[안전현장허가]", hull_no="", jsp_no="HHIS-CW-A0001190-012-001",
+    permit("6733", double_check="Y", kind="hot", case="A", permit_type="[안전현장허가]", hull_no="", jsp_no="HHIS-CW-A0001190-012-001",
            location="대조립3부 용접2팀", location_detail="", job="론지 균열부 가우징·재용접 (E42P)", job_detail="",
            department="대조립3부-용접2팀", workers="3", hazards="용접흄, 소음", concurrent="", days=shift(),
            checks={"day": "set", "weld_cut": "set", "gouging": "set"},
@@ -55,7 +55,7 @@ PERMITS = [
                           "H1": {"choice": "local", "value": ""}, "H2": {"choice": "text", "value": "CO2 용접, 아크 가우징"},
                           "B3": {"choice": "no", "value": ""}, "L3": {"choice": "text", "value": "블록 상부 갑판, 높이 3m"}}),
     # 화기 B: 꼼꼼. 1BAY 14-16 B21S 외판 오전 → 같은 곳 오후 족장 해체(WP04)와 시간이 떨어져 겹치지 않음(N01)
-    permit("0732", first="2026-10-27", req_date="2026-10-26", app_name="이XX", app_date="2026-10-26", app_sign="이XX", double_check="Y", kind="hot", case="B", permit_type="[안전현장허가]", hull_no="3612-B21S", jsp_no="HHIS-CW-A0001190-015-002",
+    permit("6988", first="2026-10-27", req_date="2026-10-26", app_name="이XX", app_date="2026-10-26", app_sign="이XX", double_check="Y", kind="hot", case="B", permit_type="[안전현장허가]", hull_no="3612-B21S", jsp_no="HHIS-CW-A0001190-015-002",
            location="대조립21공장 1BAY 14-16 칼럼", location_detail="B21S 블록 외판 하부", job="B21S 블록 외판 취부 불량부 절단·재용접",
            job_detail="지상 작업, 화재감시자 1명", department="대조립1부-구조보수1팀", workers="3",
            hazards="불티 비산(화재), 용접흄, 절단물 낙하 / 하부 가연물 제거", concurrent="Y", days=week("09:00", "11:30"),
@@ -63,8 +63,8 @@ PERMITS = [
            answers_truth={"T1": {"choice": "yes", "value": ""},
                           "B3": {"choice": "yes", "value": "같은 칼럼 오후 13:00부터 족장 해체 예정, 시간 분리"},
                           "H1": {"choice": "local", "value": ""}, "H2": {"choice": "text", "value": "가스절단, CO2 용접"}}),
-    # 밀폐 A: 팀 이름, 하루 내내, 병행 빈칸. 실제 09:00~11:30 3BAY 12-14 E41P 이중저 → 같은 블록 의장품 인양(WP02, C02)·인양 경로(0737, C03)
-    permit("0733", double_check="Y", kind="confined", case="A", permit_type="[안전현장허가]", hull_no="", jsp_no="HHIS-CN-C6B0-031",
+    # 밀폐 A: 팀 이름, 하루 내내, 병행 빈칸. 실제 09:00~11:30 3BAY 12-14 E41P 이중저 → 같은 블록 의장품 인양(WP02, C02)·인양 경로(8741, C03)
+    permit("7618", double_check="Y", kind="confined", case="A", permit_type="[안전현장허가]", hull_no="", jsp_no="HHIS-CN-C6B0-031",
            location="대조립3부 취부1팀", location_detail="", job="이중저 탱크 내부 검사·잔재 정리", job_detail="",
            department="대조립3부-취부1팀", workers="3", hazards="질식, 소음", concurrent="", days=shift(),
            checks={"day": "set", "confined_space": "set"},
@@ -74,14 +74,14 @@ PERMITS = [
                           "B3": {"choice": "no", "value": ""}}),
     # 밀폐 B: 아르곤 퍼지 배관 진입, 2BAY 05-06 B22S, 13:00~15:00. WP03은 초음파탐상(UT)이다: 구본의 방사선투과(RT)
     #   통제구역·작업쌍(C04)은 QA #55·#56에서 없앴고 정답표에 다시 넣지 않는다(현장 정정 D33, 2026-10-31)
-    permit("0734", first="2026-10-27", req_date="2026-10-26", app_name="이XX", app_date="2026-10-26", app_sign="이XX", double_check="Y", kind="confined", case="B", permit_type="[안전현장허가]", hull_no="3612-B22S", jsp_no="HHIS-CN-C6B0-032",
+    permit("7835", first="2026-10-27", req_date="2026-10-26", app_name="이XX", app_date="2026-10-26", app_sign="이XX", double_check="Y", kind="confined", case="B", permit_type="[안전현장허가]", hull_no="3612-B22S", jsp_no="HHIS-CN-C6B0-032",
            location="대조립21공장 2BAY 05-06 칼럼", location_detail="B22S 블록 내부 배관 P-12 퍼지 구간",
            job="아르곤 퍼지 배관 내부 진입 (용접부 비드 확인)", job_detail="진입 2명, 맨홀 외부 감시 1명",
            department="대조립2부-배관1팀", workers="3", hazards="아르곤 질식, 좁은 통로 대피 곤란 / 진입 전 산소 측정",
            concurrent="N", days=week("13:00", "15:00"), checks={"day": "set", "confined_space": "set", "argon": "set"},
            answers_truth={"T1": {"choice": "yes", "value": ""}, "CF1": {"choice": "inspect", "value": ""}, "CF2": {"choice": "text", "value": "P-12 아르곤 공급 밸브 잠금, 퍼지 후 측정"}}),
     # 고소 A: 공장만, 하루 내내, 높이 빈칸. 실제 14:00~16:00 1BAY 14-16 B21S 상부 러그 → 아래 족장 해체(WP04)와 상하 겹침(C05)
-    permit("0735", double_check="N", kind="height", case="A", permit_type="[전산허가]", hull_no="3612-B21S", jsp_no="HHIS-CW-A0001190-034-001",
+    permit("8175", double_check="N", kind="height", case="A", permit_type="[전산허가]", hull_no="3612-B21S", jsp_no="HHIS-CW-A0001190-034-001",
            location="대조립21공장", location_detail="", job="블록 상부 임시 러그 절단·제거", job_detail="",
            department="대조립1부-취부2팀", workers="3", hazards="안전대 착용", concurrent="", days=shift(),
            checks={"day": "set"},
@@ -91,7 +91,7 @@ PERMITS = [
                           "HT2": {"choice": "text", "value": "로프로 하부 적치함에 내림, 하부 통행 통제"},
                           "B3": {"choice": "yes", "value": "하부에서 족장 해체 13:00~15:30 (삼녹)"}}),
     # 고소 B: 고소작업대, 4BAY 03-05 D31C 측판, 09:00~11:00 → 지게차 통로(WP05, C06). 같은 곳 오후 마킹(WP12)은 겹치지 않음(N03)
-    permit("0736", double_check="N", kind="height", case="B", permit_type="[전산허가]", hull_no="3615-D31C", jsp_no="HHIS-CW-A0001190-036-002",
+    permit("8602", double_check="N", kind="height", case="B", permit_type="[전산허가]", hull_no="3615-D31C", jsp_no="HHIS-CW-A0001190-036-002",
            location="대조립21공장 4BAY 03-05 칼럼", location_detail="D31C 블록 동측 측판, 고소작업대 MEWP-04",
            job="D31C 블록 측판 상부 보강재 취부", job_detail="고소작업대 1대, 작업자 2명 탑승",
            department="대조립4부-취부1팀", workers="3", hazards="추락(6.0m), 작업대 전도, 공구 낙하 / 하부 출입 통제",
@@ -99,8 +99,8 @@ PERMITS = [
            answers_truth={"HT1": {"choice": "text", "value": "러그 없음, 보강재 취부만"},
                           "HT2": {"choice": "text", "value": "해당 없음"}}),
     # 중량물 A: 공장만, 하루 내내, 정격하중 빈칸. 실제 10:30~11:30 OH-21-03 E45P 3BAY 06→16 칼럼
-    #   → 경로 아래 밀폐 진입 E41P(0733, C03), 같은 크레인 정전 수리(0739, C07)
-    permit("0737", double_check="Y", kind="lifting", case="A", permit_type="[안전현장허가]", hull_no="3611-E45P", jsp_no="HHIS-CW-A0001190-008-001",
+    #   → 경로 아래 밀폐 진입 E41P(7618, C03), 같은 크레인 정전 수리(9488, C07)
+    permit("8741", double_check="Y", kind="lifting", case="A", permit_type="[안전현장허가]", hull_no="3611-E45P", jsp_no="HHIS-CW-A0001190-008-001",
            location="대조립21공장 3BAY", location_detail="", job="E45P 블록 반전 후 이동", job_detail="천장크레인 사용",
            department="대조립3부-운반1팀", workers="5", hazards="신호수 배치", concurrent="", days=shift(),
            load_weight="42", lift_height="4", checks={"day": "set", "overhead_crane": "set"},
@@ -109,15 +109,15 @@ PERMITS = [
                           "L5": {"choice": "text", "value": "3BAY 06칼럼에서 16칼럼 정반까지 중앙 통로 위"},
                           "LI2": {"choice": "none", "value": ""}, "B3": {"choice": "no", "value": ""}}),
     # 중량물 B: 꼼꼼. 2BAY B22S 반출 15:30~16:30 OH-21-02, 경로 2BAY 05→20 → 경로 아래 취부 용접(WP06, C08)
-    permit("0738", double_check="Y", kind="lifting", case="B", permit_type="[안전현장허가]", hull_no="3612-B22S", jsp_no="HHIS-CW-A0001190-008-002",
+    permit("9258", double_check="Y", kind="lifting", case="B", permit_type="[안전현장허가]", hull_no="3612-B22S", jsp_no="HHIS-CW-A0001190-008-002",
            location="대조립21공장 2BAY 05-06 칼럼 → 2BAY 20칼럼 반출장", location_detail="2BAY 중앙 통로 경유",
            job="B22S 블록 반출 인양·이동·안착 (천장크레인 OH-21-02)", job_detail="정반 안착 후 줄걸이 해제",
            department="대조립2부-운반1팀", workers="5", hazards="인양물 낙하·협착, 크레인 충돌 / 블록 내부 인원 확인",
            concurrent="N", days=shift("15:30", "16:30"), load_weight="28", crane_swl="40", lift_height="3",
            checks={"day": "set", "overhead_crane": "set"},
            answers_truth={"LI2": {"choice": "none", "value": ""}, "T6": {"choice": "stage", "value": "15:40~16:10 실제 이동"}}),
-    # 정전 A: 팀 이름, 하루 내내, 크레인 번호 없음, 병행 N(잘못). 실제 10:00~12:00 OH-21-03 제어반 → 같은 크레인 인양(0737, C07)
-    permit("0739", double_check="N", kind="loto", case="A", permit_type="[전산허가]", hull_no="", jsp_no="HHIS-CE-B0000420-007-001",
+    # 정전 A: 팀 이름, 하루 내내, 크레인 번호 없음, 병행 N(잘못). 실제 10:00~12:00 OH-21-03 제어반 → 같은 크레인 인양(8741, C07)
+    permit("9488", double_check="N", kind="loto", case="A", permit_type="[전산허가]", hull_no="", jsp_no="HHIS-CE-B0000420-007-001",
            location="설비보전부 전기2팀", location_detail="", job="천장크레인 제어반 고장 수리", job_detail="",
            department="설비보전부-전기2팀", workers="2", hazards="감전", concurrent="N", days=shift(),
            checks={"day": "set", "low_voltage": "set"},
@@ -126,7 +126,7 @@ PERMITS = [
                           "LO1": {"choice": "diag", "value": ""}, "LO3": {"choice": "text", "value": "10:00 차단, 11:50 복구 후 시험운전"},
                           "LO4": {"choice": "text", "value": "거더 위 주행부까지 올라감"}}),
     # 정전 B: 꼼꼼. 4BAY 배전반 MCC-4 정전 13:00~15:00 → 같은 배전반에서 전원을 받는 용접(WP07, C10). 4BAY 17-19 사상(WP13)은 다른 배전반(N04)
-    permit("0740", double_check="N", kind="loto", case="B", permit_type="[전산허가]", hull_no="", jsp_no="HHIS-CE-B0000420-005-002",
+    permit("9715", double_check="N", kind="loto", case="B", permit_type="[전산허가]", hull_no="", jsp_no="HHIS-CE-B0000420-005-002",
            location="대조립21공장 4BAY 배전반 MCC-4", location_detail="4BAY 10칼럼 벽면 배전반", job="MCC-4 용접기 전원 분기 증설",
            job_detail="정전·잠금 후 작업, 복구 전 절연 측정", department="설비보전부-전기1팀", workers="3",
            hazards="감전·아크, 오통전 / 4BAY 용접기 전원 차단 영향", concurrent="Y", days=shift("13:00", "15:00"),
@@ -376,38 +376,38 @@ def plan(i, p):
 WORKPLANS = [plan(i, p) for i, p in enumerate(PLANS)]
 P = {x["permit_no"][-4:]: x["permit_no"] for x in PERMITS}
 CLASHES = [
-    dict(id="C01", a=P["0731"], b="WP01", type="화기 × 도장(유기용제)", priority=1,
+    dict(id="C01", a=P["6733"], b="WP01", type="화기 × 도장(유기용제)", priority=1,
          why="3BAY 08-10 칼럼 E42P 상부, 13:30-15:00 겹침. 반장은 장소·시간을 대충 적었고(팀 이름, 하루 내내) 확인 질문에서 실제 시간·위치가 드러남"),
 
     # QA #56: WP02 is no longer hot work (C02 used to be 밀폐 내부 × 상부 화기); the crane still brings the 의장품 onto E41P
-    dict(id="C02", a=P["0733"], b="WP02", type="밀폐 내부 인원 × 같은 블록 인양", priority=1,
+    dict(id="C02", a=P["7618"], b="WP02", type="밀폐 내부 인원 × 같은 블록 인양", priority=1,
          why="E41P 이중저 내부 진입 09:00-11:30 중 10:30에 OH-21-03로 같은 블록 갑판에 의장품 인양(WP02). 내부 인원 위로 인양물이 지남"),
-    dict(id="C03", a=P["0737"], b=P["0733"], type="인양 경로 × 밀폐 진입", priority=1,
+    dict(id="C03", a=P["8741"], b=P["7618"], type="인양 경로 × 밀폐 진입", priority=1,
          why="OH-21-03 E45P 이동 10:30-11:30, 경로 3BAY 06→16칼럼이 E41P(12-14칼럼) 위를 지남. 이중저 안에 2명, 맨홀 밖 감시 1명"),
 
-    dict(id="C05", a=P["0735"], b="WP04", type="고소 러그 절단 × 하부 족장 해체", priority=1,
+    dict(id="C05", a=P["8175"], b="WP04", type="고소 러그 절단 × 하부 족장 해체", priority=1,
          why="1BAY 14-16 칼럼 B21S, 14:00-15:30 상부 러그 절단(불티·낙하) 아래에서 족장 해체. 반장은 알고 있다고 답함"),
-    dict(id="C06", a=P["0736"], b="WP05", type="고소작업대 × 지게차 통로", priority=2,
+    dict(id="C06", a=P["8602"], b="WP05", type="고소작업대 × 지게차 통로", priority=2,
          why="4BAY 03-05 칼럼 MEWP 09:00-11:00, 지게차가 4BAY 01-08칼럼 통로로 09:30-10:30 운반"),
-    dict(id="C07", a=P["0737"], b=P["0739"], type="같은 크레인 정비 × 사용", priority=1,
+    dict(id="C07", a=P["8741"], b=P["9488"], type="같은 크레인 정비 × 사용", priority=1,
          why="OH-21-03 제어반 정전 수리 10:00-12:00 중 같은 크레인으로 10:30 인양 계획. 정전 허가서는 병행 N"),
-    dict(id="C08", a=P["0738"], b="WP06", type="인양 경로 × 하부 작업자", priority=2,
+    dict(id="C08", a=P["9258"], b="WP06", type="인양 경로 × 하부 작업자", priority=2,
          why="OH-21-02 B22S 반출(허가 15:30-16:30, 실제 이동 15:40-16:10), 경로 2BAY 05→20칼럼 아래 09-11칼럼에서 의장품 볼트 체결 15:30-17:00"),
-    dict(id="C09", a=P["0739"], b="WP02", type="크레인 정전 × 크레인 필요 작업", priority=2,
+    dict(id="C09", a=P["9488"], b="WP02", type="크레인 정전 × 크레인 필요 작업", priority=2,
          why="WP02는 10:30에 OH-21-03로 의장품을 올리는 계획인데 그 크레인이 10:00-12:00 정전 수리 중"),
-    dict(id="C10", a=P["0740"], b="WP07", type="공유 전원 정전 × 전원 사용 작업", priority=2,
+    dict(id="C10", a=P["9715"], b="WP07", type="공유 전원 정전 × 전원 사용 작업", priority=2,
          why="MCC-4 정전 13:00-15:00, 전동공구·작업등 전원을 MCC-4 분기에서 받는 4BAY 11-13칼럼 볼트 체결 13:00-16:00. 정전 허가서는 협의 필요라고 적음"),
-    dict(id="C13", a=P["0737"], b="WP02", type="인양 경로 × 상부 작업자", priority=1,
+    dict(id="C13", a=P["8741"], b="WP02", type="인양 경로 × 상부 작업자", priority=1,
          why="E45P 인양 경로 3BAY 06→16칼럼이 10:30-11:30에 E41P 갑판(12-14칼럼) 위를 지남. 갑판에서 10:00-12:00 의장품 거치·볼트 체결 4명"),
     dict(id="C12", a="WP10", b="WP11", type="지게차 × 바닥 마킹 작업자", priority=3,
          why="1BAY 01-05 칼럼, 지게차 반입 08:30-09:30과 마킹 08:00-10:00 겹침 (통행 관리로 조정 가능)"),
 ]
 NEAR = [
-    dict(id="N01", a=P["0732"], b="WP04", why="같은 1BAY 14-16 칼럼이지만 용접 09:00-11:30, 족장 해체 13:00 시작: 시간이 떨어짐"),
-    dict(id="N02", a=P["0734"], b="WP06", why="같은 2BAY지만 05-06 칼럼 13:00-15:00과 09-11 칼럼 15:30-: 칼럼 3칸 이상, 시간도 떨어짐"),
-    dict(id="N03", a=P["0736"], b="WP12", why="같은 4BAY 03-05 칼럼이지만 고소작업대 09:00-11:00, 마킹 13:00-14:00"),
-    dict(id="N05", a=P["0731"], b="WP30", why="같은 3BAY 13:00-14:00이지만 화기 08-10칼럼과 세정(유기용제) 17-20칼럼: 칼럼 7칸(84m) 떨어짐"),
-    dict(id="N04", a=P["0740"], b="WP13", why="같은 4BAY 13:00-15:00이지만 환기팬·작업등은 MCC-5 전원 사용: MCC-4 정전과 무관"),
+    dict(id="N01", a=P["6988"], b="WP04", why="같은 1BAY 14-16 칼럼이지만 용접 09:00-11:30, 족장 해체 13:00 시작: 시간이 떨어짐"),
+    dict(id="N02", a=P["7835"], b="WP06", why="같은 2BAY지만 05-06 칼럼 13:00-15:00과 09-11 칼럼 15:30-: 칼럼 3칸 이상, 시간도 떨어짐"),
+    dict(id="N03", a=P["8602"], b="WP12", why="같은 4BAY 03-05 칼럼이지만 고소작업대 09:00-11:00, 마킹 13:00-14:00"),
+    dict(id="N05", a=P["6733"], b="WP30", why="같은 3BAY 13:00-14:00이지만 화기 08-10칼럼과 세정(유기용제) 17-20칼럼: 칼럼 7칸(84m) 떨어짐"),
+    dict(id="N04", a=P["9715"], b="WP13", why="같은 4BAY 13:00-15:00이지만 환기팬·작업등은 MCC-5 전원 사용: MCC-4 정전과 무관"),
 ]
 
 

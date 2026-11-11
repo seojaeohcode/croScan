@@ -1,0 +1,647 @@
+<style>
+/* PART 03 (제작 B) 전용 — .pb- 접두어 · 본문 24px 이상 */
+.pb-a{position:absolute}
+.pb-svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+.pb-lane{position:absolute;background:var(--bg1);border:1.5px solid var(--line);border-radius:12px}
+.pb-lane.g{background:var(--gbg);border-color:#CFE3D7}
+.pb-ll{position:absolute;left:-1.5px;top:-1.5px;bottom:-1.5px;width:140px;border-radius:12px 0 0 12px;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+.pb-ll b{font-size:27px;font-weight:900;letter-spacing:-.03em;line-height:1.15}
+.pb-ll span{font-size:24px;color:#C9D3E1;font-weight:700;line-height:1.25;letter-spacing:-.03em}
+.pb-ll.g{background:var(--green)} .pb-ll.g span{color:#CFE7DA}
+.pb-ll.gy{background:#5C6776}
+.pb-st{position:absolute;background:#fff;border:1.5px solid #D5DCE5;border-radius:10px;padding:14px 14px;box-shadow:0 3px 8px rgba(20,40,74,.05)}
+.pb-st .t{font-size:26px;font-weight:900;color:var(--navy);line-height:1.22;letter-spacing:-.04em;margin-top:10px;white-space:nowrap}
+.pb-st .s{font-size:24px;color:#4A5563;line-height:1.32;margin-top:6px;letter-spacing:-.04em}
+.pb-st.g .t{color:var(--green)}
+.pb-st .nc{width:36px;height:36px;font-size:21px}
+.pb-out{position:absolute;background:#fff;border:1.5px solid #D5DCE5;border-left:7px solid var(--navy);border-radius:5px 10px 10px 5px;padding:8px 16px;display:flex;flex-direction:column;justify-content:center}
+.pb-out.g{border-left-color:var(--green)}
+.pb-out b{font-size:25px;font-weight:900;color:#1F2833;letter-spacing:-.03em;line-height:1.2}
+.pb-out span{font-size:24px;color:#4A5563;line-height:1.3;letter-spacing:-.04em;white-space:nowrap}
+.pb-h{position:absolute;font-size:24px;font-weight:900;color:var(--gray);letter-spacing:.01em}
+.pb-doc{position:absolute;background:#fff;border:1.5px solid #D5DCE5;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.pb-doc b{font-size:26px;font-weight:900;color:var(--navy);margin-top:10px;letter-spacing:-.03em}
+.pb-doc span{font-size:24px;color:#4A5563;line-height:1.35;margin-top:6px;letter-spacing:-.03em}
+/* 흐름 비교 */
+.pb-grp{position:absolute;border:2px dashed #9AA6B5;border-radius:12px;background:rgba(255,255,255,.55)}
+.pb-grp>span{position:absolute;left:12px;top:8px;font-size:22px;font-weight:900;color:#5C6776;letter-spacing:-.03em;white-space:nowrap}
+.pb-s2{position:absolute;background:#fff;border:1.5px solid #C9D2DD;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 3px 8px rgba(20,40,74,.05)}
+.pb-s2 b{font-size:25px;font-weight:900;color:var(--navy);line-height:1.22;letter-spacing:-.04em}
+.pb-s2 span{font-size:24px;color:#4A5563;line-height:1.28;margin-top:4px;letter-spacing:-.04em}
+.pb-s2.g{border:2.5px solid var(--green);background:#F1F8F4}
+.pb-s2.g b{color:var(--green)}
+.pb-gc{position:absolute;z-index:4;background:var(--obg);border:2px solid var(--orange);border-radius:9px;padding:6px 12px;display:flex;align-items:center;font-size:24px;font-weight:700;color:#A63F12;line-height:1.28;letter-spacing:-.04em}
+.pb-leg{position:absolute;display:flex;gap:40px;align-items:center;font-size:24px;font-weight:700;color:#4A5563;letter-spacing:-.03em}
+.pb-leg i{display:inline-block;width:34px;height:22px;border-radius:5px;margin-right:10px;vertical-align:-3px}
+/* 표 */
+.pb-tbl{position:absolute;left:0;top:0;width:100%;border-collapse:separate;border-spacing:0}
+.pb-tbl th{background:var(--navy);color:#fff;font-weight:900;text-align:left;padding:14px 20px;font-size:25px;letter-spacing:-.02em}
+.pb-tbl th.g{background:var(--green)} .pb-tbl th.gy{background:#6F7B8A}
+.pb-tbl th:first-child{border-radius:8px 0 0 0} .pb-tbl th:last-child{border-radius:0 8px 0 0}
+.pb-tbl td{padding:14px 20px;border-bottom:1px solid #E3E8EE;line-height:1.38;vertical-align:middle;letter-spacing:-.03em}
+.pb-tbl tr:nth-child(even) td{background:#F6F8FB}
+.pb-tbl td:first-child{font-weight:900;color:var(--navy)}
+.pb-tbl td:first-child small{display:block;font-size:24px;font-weight:700;color:var(--gray);margin-top:4px}
+.pb-tbl td.cs{color:#14402B;font-weight:700;background:#F1F8F4}
+.pb-tbl tr:nth-child(even) td.cs{background:#E7F2EC}
+.pb-tbl tr:last-child td{border-bottom:2px solid var(--navy)}
+.pb-tbl .pg{display:inline-block;font-size:21px;font-weight:900;color:var(--navy);background:#E6EBF1;border-radius:4px;padding:0 8px;margin-left:8px;white-space:nowrap}
+.pb-tbl .pc{display:inline-block;font-size:21px;font-weight:900;color:#8892A0;margin-left:6px;letter-spacing:0;white-space:nowrap}
+.pb-tbl td.cs .pc{color:#4E8A68}
+.pb-tbl b.pk{color:var(--orange);font-weight:900}
+.pb-tbl tr.pb-hl td:first-child{box-shadow:inset 7px 0 0 var(--orange)}
+.pb-t28{font-size:28px} .pb-t28 td{height:150px}
+.pb-t28b{font-size:28px} .pb-t28b td{height:124px}
+.pb-t26{font-size:26px} .pb-t26 td{height:150px}
+.pb-five td:first-child{position:relative;padding-left:86px;line-height:1.25}
+.pb-lt{position:absolute;left:18px;top:50%;margin-top:-27px;width:54px;height:54px;border-radius:10px;background:var(--navy);color:#fff;font-size:30px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.pb-five tr.pb-hl .pb-lt{background:var(--orange)}
+/* 줄 카드 */
+.pb-rows{position:absolute;left:0;right:0;top:0;display:flex;flex-direction:column;gap:12px}
+.pb-r{display:flex;align-items:center;gap:22px;background:#fff;border:1.5px solid #E1E7EE;border-radius:10px;padding:0 24px;height:80px}
+.pb-r .pt{flex:none;width:150px;text-align:center;font-size:21px;font-weight:900;color:#fff;background:var(--navy);border-radius:6px;padding:5px 0}
+.pb-r .pt.pl{background:#fff;color:#5C6776;box-shadow:inset 0 0 0 1.5px #AEB7C3}
+.pb-r .nc{width:44px;height:44px;font-size:24px}
+.pb-r b{flex:none;width:520px;font-size:27px;font-weight:900;color:#1F2833;letter-spacing:-.04em;white-space:nowrap}
+.pb-r span.d{font-size:25px;color:#4A5563;letter-spacing:-.04em;white-space:nowrap}
+.pb-r.g{border-color:#CFE3D7;background:#F7FBF8}
+.pb-r.g b{color:#14402B}
+/* 설명 카드 */
+.pb-ex{position:absolute;background:#fff;border:1.5px solid #CFE3D7;border-radius:10px;overflow:hidden}
+.pb-ex .hdr{font-size:28px}
+.pb-ex .bd{padding:20px 24px}
+.pb-ex .ln{font-size:25px;color:#2F3A48;line-height:1.42;letter-spacing:-.04em;padding:10px 0;border-bottom:1.5px dashed #DCE5DF}
+.pb-ex .ln:last-child{border-bottom:0}
+.pb-ex .ln b{display:block;font-size:22px;color:var(--gray);font-weight:900;margin-bottom:2px}
+.pb-ex .ln.o b{color:var(--orange)}
+/* 가치 기능 */
+.pb-q{position:absolute;background:var(--bg1);border:1.5px solid var(--line);border-left:6px solid var(--navy);border-radius:4px 10px 10px 4px;padding:14px 18px;display:flex;flex-direction:column}
+.pb-q.g{border-left-color:var(--green)}
+.pb-q .qn{font-size:21px;font-weight:900;color:var(--gray)}
+.pb-q .qtt{font-size:27px;font-weight:900;color:#1F2833;line-height:1.22;letter-spacing:-.04em;margin-top:2px}
+.pb-q .qv{font-size:24px;color:#4A5563;line-height:1.35;margin-top:10px;letter-spacing:-.04em}
+.pb-q .qb{margin-top:auto;font-size:44px;font-weight:900;color:var(--navy);letter-spacing:-.03em;line-height:1}
+.pb-q.g .qb{color:var(--green)}
+.pb-q .qc{font-size:24px;font-weight:700;color:var(--gray);line-height:1.3;margin-top:6px;letter-spacing:-.04em}
+/* 영상 */
+.vid .vlab.t{background:var(--teal)}
+ol.vcap.pb-t li:before{background:var(--teal)}
+ol.vcap.pb-24 li{font-size:24px}
+ol.vcap.pb-24 li b{font-size:26px}
+.pb-bub{position:absolute;border-radius:14px;padding:14px 20px}
+.pb-bub.q{background:var(--navy);color:#fff;border-radius:14px 14px 14px 4px}
+.pb-bub.a{background:#fff;border:2px solid var(--navy);border-radius:14px 14px 4px 14px}
+.pb-bub .h{font-size:22px;font-weight:900}
+.pb-bub.q .h{color:var(--gold)} .pb-bub.a .h{color:var(--navy)}
+.pb-bub p{font-size:24px;line-height:1.4;margin-top:6px;letter-spacing:-.04em}
+.pb-bub.q p{color:#fff} .pb-bub.a p{color:#1F2833}
+.pb-bub em{font-style:normal;color:#F3A06B;font-weight:900}
+.pb-bub.a em{color:var(--navy);font-weight:900}
+.pb-chg{position:absolute;display:flex;flex-direction:column;justify-content:center}
+.pb-chg small{font-size:22px;font-weight:900;color:var(--gray);letter-spacing:-.02em}
+.pb-chg b{font-size:28px;font-weight:900;color:#1F2833;line-height:1.3;letter-spacing:-.04em;margin-top:6px}
+.pb-chg b em{font-style:normal;color:#1747C8}
+.pb-fn{position:absolute;font-size:24px;color:var(--gray);font-weight:700;letter-spacing:-.03em;line-height:1.35}
+.pb-lb{position:absolute;font-size:24px;font-weight:700;color:#3A4655;line-height:1.35;letter-spacing:-.03em}
+.pb-lb b{color:var(--navy);font-weight:900;margin-right:8px}
+.pb-box{position:absolute;background:#fff;border:1.5px solid #D5DCE5;border-radius:10px;overflow:hidden}
+.pb-box .hd2{background:var(--navy);color:#fff;font-size:28px;font-weight:900;padding:14px 22px;letter-spacing:-.02em}
+.pb-box .hd2.g{background:var(--green)} .pb-box .hd2.gy{background:#6F7B8A}
+.pb-box .bd{padding:12px 22px}
+.pb-box .ln{font-size:25px;line-height:1.4;color:#2F3A48;letter-spacing:-.04em;padding:9px 0;border-bottom:1px dashed #E1E7EE}
+.pb-box .ln:last-child{border-bottom:0}
+.pb-box .ln b{color:var(--navy);font-weight:900}
+.pb-box .ln .bl{color:#1747C8;font-weight:700}
+.pb-box .ln s{color:#8892A0}
+.pb-strip{position:absolute;display:flex;align-items:center;gap:12px}
+.pb-chip{flex:1;height:62px;border-radius:31px;border:2px solid #C9D0DA;background:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:24px;font-weight:900;color:#3A4655;letter-spacing:-.04em;white-space:nowrap}
+.pb-chip small{font-size:20px;font-weight:700;color:var(--gray)}
+.pb-chip.on{background:var(--navy);border-color:var(--navy);color:#fff} .pb-chip.on small{color:#C9D3E1}
+.pb-chip.ln{border-color:var(--navy);color:var(--navy)}
+.pb-lim{position:absolute;display:flex;align-items:center;gap:18px;background:#F2F4F7;border:1.5px solid #D5DCE5;border-radius:10px;padding:0 22px}
+.pb-lim .tag{font-size:20px}
+.pb-lim span{font-size:24px;color:#4A5563;font-weight:700;letter-spacing:-.04em}
+.pb-tl{position:absolute;display:flex;flex-direction:column;gap:18px}
+.pb-tl div{display:flex;gap:16px;align-items:flex-start}
+.pb-tl i{flex:none;font-style:normal;font-size:22px;font-weight:900;color:#fff;background:var(--navy);border-radius:6px;padding:4px 12px;margin-top:3px;white-space:nowrap}
+.pb-tl p{font-size:24px;color:#3A4655;line-height:1.38;letter-spacing:-.03em}
+.pb-tl p b{display:block;font-size:26px;color:#1F2833;font-weight:900}
+.pb-fb{position:absolute;border-radius:12px;display:flex;align-items:center;gap:24px;padding:0 28px}
+.pb-fb .num{font-size:66px;font-weight:900;letter-spacing:-.03em;line-height:1;flex:none}
+.pb-fb .lb{font-size:28px;font-weight:900;line-height:1.25;letter-spacing:-.03em}
+.pb-fb .lb small{display:block;font-size:24px;font-weight:700;opacity:.88;margin-top:6px}
+.pb-panel{position:absolute;background:var(--bg1);border:1.5px solid var(--line);border-radius:12px;padding:18px 22px}
+.pb-panel .h{font-size:26px;font-weight:900;color:var(--navy);letter-spacing:-.02em}
+.pb-ring{width:110px;height:110px;border-radius:50%;background:#fff;border:4px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:var(--green);box-shadow:0 6px 18px rgba(30,107,71,.15)}
+</style>
+
+<!-- ═════════════ S15 PART 03 구분장 ═════════════ -->
+<section class="slide part">
+  <div class="left"><img src="img/part3.png" alt=""><div class="shade"></div></div>
+  <div class="kicker">PART</div>
+  <div class="pnum">03</div>
+  <div class="pt">croScan 솔루션</div>
+  <div class="pd">서류를 읽고, 부족한 조건을 묻고, 작업 사이 위험까지 — 작업반장과 안전관리자의 두 흐름</div>
+  <div class="toc">
+    <div class="it"><div class="k">01</div><div><div class="tt">croScan 한 장 요약</div><div class="dd">입력 2종 → 두 사용자 흐름 → 출력 5종</div></div><div class="pp">{{P:croScan 한 장 요약}}쪽</div></div>
+    <div class="it"><div class="k">02</div><div><div class="tt">지금 현장 vs croScan 프로세스</div><div class="dd">절차는 그대로, 단계 사이 3곳에 붙는 사전검토</div></div><div class="pp">{{P:지금 현장 vs croScan~단계별로 무엇이 달라지나 ②}}쪽</div></div>
+    <div class="it"><div class="k">03</div><div><div class="tt">HiSEs와 무엇이 다른가</div><div class="dd">이미 하는 일 · 더하는 것 · 연동 · 5개 영역</div></div><div class="pp">{{P:HiSEs가 이미 하는 일~기존 전산 대비 무엇이 달라지나 ②}}쪽</div></div>
+    <div class="it"><div class="k">04</div><div><div class="tt">가치 기능 4가지</div><div class="dd">내용 보충 · 체크리스트 · 겹치는 작업 · 현장 전달</div></div><div class="pp">{{P:가치 기능 4가지}}쪽</div></div>
+    <div class="it"><div class="k">05</div><div><div class="tt">작업반장 흐름 시연</div><div class="dd">되묻기 → 체크리스트 → 반영본·추가검토서</div></div><div class="pp">{{P:작업반장 흐름 ①~제출되는 서류 3가지}}쪽</div></div>
+    <div class="it"><div class="k">06</div><div><div class="tt">안전관리자 흐름 시연</div><div class="dd">하루 445쌍 검토 → 근거 → 재확인 → 게시 별지</div></div><div class="pp">{{P:안전관리자 흐름 ①~안전관리자 흐름 ④}}쪽</div></div>
+  </div>
+  <div class="brand">croScan · 2026 K-조선 해커톤 본선</div>
+  {{FT}}
+  <aside class="notes">PART 03에서는 croScan이 실제로 무엇을 하는지 보여 드립니다. 먼저 한 장 요약과 현장 프로세스 비교, HiSEs와의 차이를 설명합니다. 이어서 가치 기능 4가지를 소개하고, 작업반장과 안전관리자 두 흐름을 시연 영상으로 보여 드립니다. 팀원이 이해하기 쉽도록 한 장에 주장 하나만 두어 장수를 나눴습니다. 근거: BLUEPRINT 4절 PART 03.</aside>
+</section>
+
+<!-- ═════════════ S16 한 장 요약 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>croScan 한 장 요약</h1><div class="sp"></div><span class="chip">솔루션 개요</span><span class="badge"><b>평가항목</b><i></i>창의성</span></div>
+  <div class="key">서류 읽기 → <span class="o">부족한 조건 묻기</span> → <span class="o">작업 안·사이 검토</span> → 담당자에게 전달</div>
+  <div class="body">
+    <svg class="pb-svg" style="z-index:3" width="1748" height="565" viewBox="0 0 1748 565">
+      <defs><marker id="pa16" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8A94A3"/></marker>
+      <marker id="pt16" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1F9A8E"/></marker></defs>
+      <g fill="none" stroke="#8A94A3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M250 162H275M250 422H275M275 120V435"/>
+        <path d="M275 120H296" marker-end="url(#pa16)"/><path d="M275 435H296" marker-end="url(#pa16)"/>
+        <path d="M650 120H684" marker-end="url(#pa16)"/><path d="M878 120H912" marker-end="url(#pa16)"/><path d="M1106 120H1140" marker-end="url(#pa16)"/>
+        <path d="M650 435H684" marker-end="url(#pa16)"/><path d="M878 435H912" marker-end="url(#pa16)"/><path d="M1106 435H1140" marker-end="url(#pa16)"/>
+        <path d="M1350 120H1375M1375 85V295M1350 435H1375M1375 400V505"/>
+        <path d="M1375 85H1396" marker-end="url(#pa16)"/><path d="M1375 190H1396" marker-end="url(#pa16)"/><path d="M1375 295H1396" marker-end="url(#pa16)"/>
+        <path d="M1375 400H1396" marker-end="url(#pa16)"/><path d="M1375 505H1396" marker-end="url(#pa16)"/>
+      </g>
+      <path d="M1239 222V277H555V333" fill="none" stroke="#1F9A8E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 9" marker-end="url(#pt16)"/>
+    </svg>
+    <div class="pb-h" style="left:0;top:0">입력</div>
+    <div class="pb-doc" style="left:0;top:40px;width:250px;height:245px">
+      <svg width="74" height="90" viewBox="0 0 74 90" fill="none" stroke="#1B365D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4H50L68 22V84Q68 86 66 86H8Q6 86 6 84V6Q6 4 8 4Z" fill="#fff"/><path d="M50 4V22H68" fill="#E6EBF1"/><rect x="15" y="30" width="44" height="12" rx="2" fill="#D4561F" stroke="none" opacity=".9"/><path d="M15 54H59M15 64H59M15 74H44" stroke="#A5AEBB"/></svg>
+      <b>위험작업허가서</b><span>PDF · 허가 5종</span>
+    </div>
+    <div class="pb-doc" style="left:0;top:300px;width:250px;height:245px">
+      <svg width="74" height="90" viewBox="0 0 74 90" fill="none" stroke="#1E6B47" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4H50L68 22V84Q68 86 66 86H8Q6 86 6 84V6Q6 4 8 4Z" fill="#fff"/><path d="M50 4V22H68" fill="#EAF3EE"/><path d="M15 32H59M15 44H59M15 56H59M15 68H59" stroke="#A5AEBB"/><path d="M28 28V74" stroke="#A5AEBB"/></svg>
+      <b>작업계획서</b><span>PDF · 일상작업</span>
+    </div>
+    <div class="pb-lane" style="left:300px;top:0;width:1050px;height:240px"><div class="pb-ll"><b>작업<br>반장</b><span>허가서<br>1건씩</span></div></div>
+    <div class="pb-st" style="left:460px;top:20px;width:190px;height:200px"><span class="nc">1</span><div class="t">서류 읽기</div><div class="s">계획서·허가서 판독</div></div>
+    <div class="pb-st" style="left:688px;top:20px;width:190px;height:200px"><span class="nc">2</span><div class="t">되묻기</div><div class="s">응답 요청 최대 12회</div></div>
+    <div class="pb-st" style="left:916px;top:20px;width:190px;height:200px"><span class="nc">3</span><div class="t">체크리스트</div><div class="s">기본 19~28항목 제안</div></div>
+    <div class="pb-st" style="left:1144px;top:20px;width:190px;height:200px"><span class="nc">4</span><div class="t">안전팀 제출</div><div class="s">원본 보존 · 반영본</div></div>
+    <div class="pb-a" style="left:600px;top:240px;width:640px;text-align:center;font-size:24px;font-weight:900;color:var(--teal);letter-spacing:-.03em">반장 확인 값이 안전관리자 검토로</div>
+    <div class="pb-lane g" style="left:300px;top:315px;width:1050px;height:240px"><div class="pb-ll g"><b>안전<br>관리자</b><span>하루<br>전체</span></div></div>
+    <div class="pb-st g" style="left:460px;top:335px;width:190px;height:200px"><span class="nc g">1</span><div class="t">하루 검토</div><div class="s">445쌍 → 위험 쌍 26</div></div>
+    <div class="pb-st g" style="left:688px;top:335px;width:190px;height:200px"><span class="nc g">2</span><div class="t">근거 확인</div><div class="s">「왜 1순위?」 질문</div></div>
+    <div class="pb-st g" style="left:916px;top:335px;width:190px;height:200px"><span class="nc g">3</span><div class="t">재확인·협조</div><div class="s">질문·문자 복사</div></div>
+    <div class="pb-st g" style="left:1144px;top:335px;width:190px;height:200px"><span class="nc g">4</span><div class="t">별지 발행</div><div class="s">할 일·착수·중지조건</div></div>
+    <div class="pb-h" style="left:1400px;top:0">출력 5종</div>
+    <div class="pb-out" style="left:1400px;top:40px;width:348px;height:90px"><b>허가서 반영본</b><span>파란 글씨 · 원본 보존</span></div>
+    <div class="pb-out" style="left:1400px;top:145px;width:348px;height:90px"><b>추가검토서(별지)</b><span>칸 밖 보충</span></div>
+    <div class="pb-out" style="left:1400px;top:250px;width:348px;height:90px"><b>위험 체크리스트</b><span>해당 · 안전팀 확인</span></div>
+    <div class="pb-out g" style="left:1400px;top:355px;width:348px;height:90px"><b>현장 게시 별지</b><span>할 일 · 착수 · 중지</span></div>
+    <div class="pb-out g" style="left:1400px;top:460px;width:348px;height:90px"><b>협조 문자</b><span>복사 후 기존 수단</span></div>
+  </div>
+  <div class="bar" style="top:860px"><div class="l">원칙</div><div class="r">판정은&nbsp;<span class="o">규칙</span>, 제안은&nbsp;<span class="t">AI</span>, 확정·승인은&nbsp;<span class="o">사람</span>&nbsp;— 전산승인·대면허가는 기존 절차</div></div>
+  <div class="note" style="right:480px"><b>근거</b> 인수인계 노트 01(핵심 수치)·03(질문 46종·응답 요청 최대 12회)·05(쌍 규칙 36개)·07(카탈로그 86, 기본 19~28) · manifest V01~V19</div>
+  <div class="need">필요: 통합 시연영상 30초 발췌 검토</div>
+  {{FT}}
+  <aside class="notes">croScan은 작업반장과 안전관리자 두 사람이 씁니다. 작업반장은 허가서와 작업계획서를 올리고, croScan이 비어 있거나 넓게 적힌 칸을 되묻습니다(응답 요청 최대 12회). 답을 확인하면 허가 종류별 기본 19~28항목 체크리스트를 거쳐 반영본과 추가검토서로 안전팀에 제출합니다. 안전관리자는 그날 작업 전체에서 함께 하면 위험한 작업 쌍을 보고, 근거를 확인한 뒤 협조 문자와 게시 별지로 현장에 전달합니다. 판정은 규칙이, 제안은 AI가, 확정과 승인은 사람이 합니다. 근거: 인수인계 노트 01·03·05·07, 시연 manifest.</aside>
+</section>
+
+<!-- ═════════════ S17-1a As-Is vs To-Be 흐름 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>지금 현장 vs croScan<span class="sep">|</span><small>프로세스 비교</small></h1><div class="sp"></div><span class="chip">현장 프로세스</span><span class="badge"><b>평가항목</b><i></i>창의성 · 실현 가능성</span></div>
+  <div class="key">절차는 그대로 — croScan은 <span class="o">단계 사이 3곳</span>에 붙는 사전검토</div>
+  <div class="body">
+    <svg class="pb-svg" style="z-index:0" width="1748" height="460" viewBox="0 0 1748 460">
+      <g fill="none" stroke="#8A94A3" stroke-width="3" stroke-linecap="round"><path d="M300 120H676M1036 120H1232M1592 120H1602"/><path d="M300 360H1602"/></g>
+      <g fill="#8A94A3"><path d="M674 112L684 120L674 128Z"/><path d="M1230 112L1240 120L1230 128Z"/><path d="M1600 112L1610 120L1600 128Z"/>
+        <path d="M304 352L314 360L304 368Z"/><path d="M487 352L497 360L487 368Z"/><path d="M670 352L680 360L670 368Z"/><path d="M1040 352L1050 360L1040 368Z"/><path d="M1226 352L1236 360L1226 368Z"/><path d="M1596 352L1606 360L1596 368Z"/></g>
+    </svg>
+    <div class="pb-ll gy" style="left:0;top:0;width:120px;height:210px;border-radius:12px"><b>지금</b><span>As-Is</span></div>
+    <div class="pb-s2" style="left:140px;top:46px;width:160px;height:150px"><b>허가서<br>작성·제출</b><span>작업반장</span></div>
+    <div class="pb-gc" style="left:318px;top:46px;width:348px;height:70px">① 종일 시간 · 팀 이름 장소</div>
+    <div class="pb-gc" style="left:318px;top:126px;width:348px;height:70px">② 다른 팀 작업 일정 파악이 어려움</div>
+    <div class="pb-grp" style="left:684px;top:0;width:352px;height:210px"><span>전산처리 · 선후 미확인</span></div>
+    <div class="pb-s2" style="left:694px;top:46px;width:160px;height:154px"><b>전산승인</b><span>생산부서 승인권한자</span></div>
+    <div class="pb-s2" style="left:866px;top:46px;width:160px;height:154px"><b>PTW 스캔</b><span>2중점검 Y/N</span></div>
+    <div class="pb-gc" style="left:1054px;top:46px;width:168px;height:150px">③ 검토 내용과 현장 전달이 따로</div>
+    <div class="pb-grp" style="left:1240px;top:0;width:352px;height:210px"><span>착수 준비 · 세부 선후 미확인</span></div>
+    <div class="pb-s2" style="left:1250px;top:46px;width:160px;height:154px"><b>교육 · TBM</b><span>작업자 서명</span></div>
+    <div class="pb-s2" style="left:1422px;top:46px;width:160px;height:154px"><b>대면허가</b><span>Y 대상 · 작업일 아침</span></div>
+    <div class="pb-s2" style="left:1610px;top:46px;width:138px;height:150px"><b>착수</b><span>조건 충족 후</span></div>
+
+    <div class="pb-ll g" style="left:0;top:250px;width:120px;height:210px;border-radius:12px"><b style="font-size:24px">croScan<br>연동</b><span>To-Be</span></div>
+    <div class="pb-s2" style="left:140px;top:286px;width:160px;height:150px"><b>허가서<br>작성·제출</b><span>작업반장</span></div>
+    <div class="pb-s2 g" style="left:318px;top:286px;width:168px;height:150px"><b>ⓐ 사전검토</b><span>작성 단계</span></div>
+    <div class="pb-s2 g" style="left:498px;top:286px;width:168px;height:150px"><b>ⓑ 하루 검토</b><span>작업 전날</span></div>
+    <div class="pb-grp" style="left:684px;top:250px;width:352px;height:210px"><span>전산처리 · 선후 미확인</span></div>
+    <div class="pb-s2" style="left:694px;top:296px;width:160px;height:154px"><b>전산승인</b><span>생산부서 승인권한자</span></div>
+    <div class="pb-s2" style="left:866px;top:296px;width:160px;height:154px"><b>PTW 스캔</b><span>2중점검 Y/N</span></div>
+    <div class="pb-s2 g" style="left:1054px;top:286px;width:168px;height:150px"><b>ⓒ 게시 별지</b><span>협의·승인 뒤</span></div>
+    <div class="pb-grp" style="left:1240px;top:250px;width:352px;height:210px"><span>착수 준비 · 세부 선후 미확인</span></div>
+    <div class="pb-s2" style="left:1250px;top:296px;width:160px;height:154px"><b>교육 · TBM</b><span>작업자 서명</span></div>
+    <div class="pb-s2" style="left:1422px;top:296px;width:160px;height:154px"><b>대면허가</b><span>Y 대상 · 작업일 아침</span></div>
+    <div class="pb-s2" style="left:1610px;top:286px;width:138px;height:150px"><b>착수</b><span>조건 충족 후</span></div>
+    <div class="pb-leg" style="left:0;top:500px"><span><i style="border:2px dashed #9AA6B5"></i>선후 미확인 묶음</span><span><i style="background:var(--obg);border:2px solid var(--orange)"></i>지금의 빈틈 ①②③</span><span><i style="background:#F1F8F4;border:2.5px solid var(--green)"></i>croScan이 붙는 곳 ⓐⓑⓒ</span></div>
+  </div>
+  <div class="bar" style="top:860px"><div class="l" style="background:#6F7B8A">그대로</div><div class="r">양식 · HiSEs 신청 · 전산승인 · 2중점검 · 대면허가 · 현장 확인은&nbsp;<span class="o">바꾸지 않음</span></div></div>
+  <div class="note" style="right:430px"><b>근거</b> 인터뷰 통합본 p.4(전산승인·스캔, 교육·TBM·대면허가 세부 선후 미확인)·p.5 · 실물 0453 · compare_1102 B01·A03·D07 · outC §1·§3</div>
+  <div class="need">필요: 현장 흐름도 원본 대조</div>
+  {{FT}}
+  <aside class="notes">위쪽은 지금 대조립 현장의 허가 흐름입니다. 반장이 HiSEs로 7일 단위 허가서를 작성·제출하면, 전산처리로 생산부서 승인권한자의 전산승인과 PTW 스캔 때 2중점검 Y/N 결정이 있고, 작업일에는 교육·TBM·서명과 Y 대상 아침 대면허가를 거쳐 착수합니다. 전산승인과 스캔의 선후, 착수 준비의 세부 선후는 아직 확인 중이라 점선으로 묶었습니다. 빈틈은 세 곳입니다. 실물 허가서처럼 시간이 종일로, 장소가 팀 이름으로 적힐 수 있고, 인터뷰에서는 다른 공정 일정을 충분히 파악하기 어렵다는 어려움이 확인됐으며, 검토한 내용과 현장에 전달되는 내용이 따로 갈 수 있습니다. 기존 시스템의 문서 대조 범위와 대조립 현장 사용 범위는 추가 확인이 필요합니다. 아래 croScan 흐름은 같은 단계를 그대로 두고 초록색 세 곳에만 붙습니다. 근거: 인터뷰 통합본 p.4·5, 실물 0453, compare_1102, outC §1·§3.</aside>
+</section>
+
+<!-- ═════════════ S17-1b croScan이 붙는 3곳 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>croScan이 붙는 3곳<span class="sep">|</span><small>무엇을 하고 무엇을 남기나</small></h1><div class="sp"></div><span class="chip">현장 프로세스</span><span class="badge"><b>평가항목</b><i></i>창의성 · 실현 가능성</span></div>
+  <div class="key">작성 단계 · 작업 전날 · 협의 뒤 — <span class="o">빈틈 ①②③을 하나씩</span> 보완</div>
+  <div class="body">
+    <div class="pb-ex" style="left:0;top:0;width:560px;height:560px"><div class="hdr g">ⓐ 작성 단계<small>작업반장</small></div><div class="bd">
+      <div class="ln"><b>하는 일</b>빈칸·넓은 값을 되묻고, 체크리스트 기본 19~28항목을 근거와 함께 제안</div>
+      <div class="ln"><b>남기는 것</b>반영본 · 추가검토서 · 체크리스트</div>
+      <div class="ln o"><b>보완하는 빈틈</b>① 종일 시간 · 팀 이름 장소</div></div></div>
+    <div class="pb-ex" style="left:594px;top:0;width:560px;height:560px"><div class="hdr g">ⓑ 작업 전날<small>안전관리자</small></div><div class="bd">
+      <div class="ln"><b>하는 일</b>계획서 40 × 허가서 10을 규칙 36개로 보고 위험 쌍과 근거 표시</div>
+      <div class="ln"><b>남기는 것</b>담당 반장 확인 질문 · 협조 문자 초안</div>
+      <div class="ln o"><b>보완하는 빈틈</b>② 다른 팀 작업 파악</div></div></div>
+    <div class="pb-ex" style="left:1188px;top:0;width:560px;height:560px"><div class="hdr g">ⓒ 협의·승인 뒤<small>안전관리자</small></div><div class="bd">
+      <div class="ln"><b>하는 일</b>할 일 · 착수조건 · 중지조건을 게시 별지로 정리</div>
+      <div class="ln"><b>남기는 것</b>TBM · 현장 확인 참고자료</div>
+      <div class="ln o"><b>보완하는 빈틈</b>③ 검토 내용과 현장 전달 연결</div></div></div>
+  </div>
+  <div class="bar g" style="top:860px"><div class="l">핵심</div><div class="r">새 절차가 아니라, 기존 단계 사이의&nbsp;<span class="o">사전검토와 전달 자료</span></div></div>
+  <div class="note" style="right:430px"><b>근거</b> manifest V01~V19 · 노트 01·05·07 · compare_1102 B01·A03·D07(기대효과는 미실측 가설) · 반장 간 협의·전산승인은 앱 밖</div>
+  <div class="need">필요: 시연 시점 표기 확인</div>
+  {{FT}}
+  <aside class="notes">croScan이 붙는 세 곳을 하나씩 보겠습니다. ⓐ 작성 단계에서는 반장에게 빈칸과 넓은 값을 되묻고, 허가 종류별 기본 19~28항목 체크리스트를 근거와 함께 제안해 반영본과 추가검토서를 남깁니다. ⓑ 작업 전날에는 안전관리자가 계획서와 허가서를 규칙 36개로 함께 보고, 위험 쌍과 근거를 담당 반장 확인 질문과 협조 문자 초안으로 이어 줍니다. ⓒ 반장 간 협의와 전산승인을 마친 뒤에는 할 일, 착수조건, 중지조건을 게시 별지로 정리해 TBM과 현장 확인의 참고자료로 씁니다. 협의와 전산승인 자체는 앱 밖의 기존 절차입니다. 근거: 시연 manifest, 인수인계 노트, compare_1102.</aside>
+</section>
+
+<!-- ═════════════ S17-2a 단계별 ① 작성·승인 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>단계별로 무엇이 달라지나 ①<span class="sep">|</span><small>작성 · 승인</small></h1><div class="sp"></div><span class="chip">현장 프로세스</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">승인 전에 <span class="o">부족한 정보와 근거</span>를 먼저 채운다</div>
+  <div class="body">
+    <table class="pb-tbl pb-t28">
+      <colgroup><col style="width:300px"><col style="width:660px"><col></colgroup>
+      <tr><th>단계 · 누가</th><th class="gy">지금 (As-Is)</th><th class="g">croScan을 붙이면</th></tr>
+      <tr><td>허가서 작성<small>작업반장</small></td><td>종일 시간 · 팀 이름 장소<span class="pg">0453</span><br>불명확한 정보로 검토 <span class="pc">B01</span></td><td class="cs">위치 · 시간 · 작업방법을 되물어 보완 <span class="pc">B01·B02</span><br>→ 반영본 · 추가검토서</td></tr>
+      <tr class="pb-hl"><td>정보가 없을 때<small>반장 → 안전관리자</small></td><td>모름 · 미정이<br>「위험 없음」으로 읽힐 수 있음 <span class="pc">B11</span></td><td class="cs"><b class="pk">모름 · 미정 · 판정보류를 그대로 남겨</b><br>다음 담당자에게 전달 <span class="pc">B11</span></td></tr>
+      <tr><td>전산승인<small>생산부서 승인권한자</small></td><td>작성자 관점만으로 누락 확인 <span class="pc">A01</span><br>무엇을 근거로 봤는지 불분명 <span class="pc">A06</span></td><td class="cs">원문 · 답변 · 적용 규칙 · 미확인 사항을<br>승인 전 검토자료로 연결 <span class="pc">A02·A06</span></td></tr>
+    </table>
+  </div>
+  <div class="bar" style="top:860px"><div class="l" style="background:#6F7B8A">그대로</div><div class="r">전산승인 권한 · HiSEs 신청 · 양식 · 원본 PDF는&nbsp;<span class="o">바꾸지 않음</span></div></div>
+  <div class="note" style="right:470px"><b>근거</b> 팀 비교자료 compare_1102 A01·A02·A06·B01·B02·B11(기대효과는 미실측 가설) · 실물 0453 · 노트 01·03</div>
+  <div class="need">필요: 나머지 항목 → 부록 A19(58항목)</div>
+  {{FT}}
+  <aside class="notes">팀이 기존 전산 프로세스와 croScan을 58항목으로 비교한 자료에서 작성·승인 단계의 변화를 세 줄로 추렸습니다. 허가서 작성에서는 종일 시간이나 팀 이름 장소를 되물어 반영본으로 보완합니다. 정보가 없을 때 모름이나 미정을 「위험 없음」으로 읽지 않고 판정보류로 남겨 다음 담당자에게 넘기는 것이 중요한 차이입니다. 전산승인 단계에서는 원문, 답변, 적용 규칙, 미확인 사항이 검토자료로 함께 갑니다. 승인 권한과 HiSEs 신청은 그대로입니다. 기대효과는 미실측 가설입니다. 근거: compare_1102 A·B, 실물 0453.</aside>
+</section>
+
+<!-- ═════════════ S17-2b 단계별 ② 작업 사이·전달 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>단계별로 무엇이 달라지나 ②<span class="sep">|</span><small>작업 사이 · 전달</small></h1><div class="sp"></div><span class="chip">현장 프로세스</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">대면허가 대상이 아닌 <span class="o">N 작업까지</span> 사전 검토에 넣는다</div>
+  <div class="body">
+    <table class="pb-tbl pb-t28">
+      <colgroup><col style="width:300px"><col style="width:660px"><col></colgroup>
+      <tr><th>단계 · 누가</th><th class="gy">지금 (As-Is)</th><th class="g">croScan을 붙이면</th></tr>
+      <tr class="pb-hl"><td>작업 사이 검토<small>안전관리자 · 전날</small></td><td>2중점검 N 작업은 대면확인 단계 없음 <span class="pc">A05</span><br>다른 팀 작업 파악 어려움 <span class="pc">A03</span></td><td class="cs"><b class="pk">N 작업도 사전 보강 · 쌍 검토에 포함</b> <span class="pc">A05</span><br>계획서 40 + 허가서 10 → 위험 쌍 26</td></tr>
+      <tr><td>협조 · 전달<small>안전관리자 → 반장</small></td><td>경보 · 위험명만으로는<br>무엇을 조정할지 불명확 <span class="pc">B15</span></td><td class="cs">원인 · 노출 경로 · 사고 결과 · 표준 조치 <span class="pc">B15</span><br>→ 협조 문자 · 게시 별지</td></tr>
+      <tr><td>대면허가 · 착수<small>안전 측 · 작업자</small></td><td>Y면 작업일 아침 대면허가<br>예정 조치와 실제 이행 혼동 <span class="pc">B12</span></td><td class="cs">조치 계획 · 실제 이행 · 승인 상태 구분 <span class="pc">B12</span><br>게시 별지는 TBM · 현장 확인 참고</td></tr>
+    </table>
+  </div>
+  <div class="bar" style="top:860px"><div class="l" style="background:#6F7B8A">그대로</div><div class="r">2중점검 · 대면허가 · 현장 확인 · 서명 · 일정 결정은&nbsp;<span class="o">기존 담당자</span></div></div>
+  <div class="note" style="right:470px"><b>근거</b> 팀 비교자료 compare_1102 A03·A05·B12·B15(기대효과는 미실측 가설) · 노트 01·05(445·26, 시연 자료) · 인터뷰 통합본 p.5</div>
+  <div class="need">필요: 나머지 항목 → 부록 A19(58항목)</div>
+  {{FT}}
+  <aside class="notes">작업 사이와 전달 단계의 변화입니다. 2중점검 N 작업은 아침 대면확인 단계가 없지만, croScan의 사전 보강과 작업쌍 검토에는 포함됩니다. 대면허가 대상 여부와 별개로 사전 안전검토 기회가 생기는 것이 핵심입니다. 협조 단계에서는 위험명만이 아니라 원인, 노출 경로, 사고 결과, 표준 조치를 함께 보여 협조 문자와 게시 별지로 잇습니다. 착수 전에는 조치 계획과 실제 이행, 승인 상태를 구분해 예정된 조치를 완료로 오인하지 않게 합니다. 대면허가와 현장 확인, 일정 결정은 기존 담당자가 합니다. 근거: compare_1102, 인수인계 노트 01·05.</aside>
+</section>
+
+<!-- ═════════════ S18-1a HiSEs가 이미 하는 일 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>HiSEs가 이미 하는 일<span class="sep">|</span><small>HD현대중공업 2026 보고서</small></h1><div class="sp"></div><span class="badge"><b>평가항목</b><i></i>창의성</span></div>
+  <div class="key">HiSEs·Hi-SIGHT는 이미 <span class="o">관리 · 예측 · 필터</span>를 운영한다</div>
+  <div class="body">
+    <div class="pb-rows">
+      <div class="pb-r"><span class="pt">운영 p.11</span><b>PTW 신청 편의</b><span class="d">과거 허가서 불러오기 · 작업기간 자동입력</span></div>
+      <div class="pb-r"><span class="pt">운영 p.9</span><b>위험성평가–PTW 연계</b><span class="d">수시 위험성평가 결과를 작업허가에 반영·검증</span></div>
+      <div class="pb-r"><span class="pt">운영 p.53</span><b>작업내용별 맞춤형 체크리스트</b><span class="d">Hi-Standard 작업표준 기반</span></div>
+      <div class="pb-r"><span class="pt">운영 p.56</span><b>선내 도장·화기 병행 필터</b><span class="d">블록–공간 포함 판단 → 알람 메일 · 일정 협의</span></div>
+      <div class="pb-r"><span class="pt">운영 p.27</span><b>Hi-SIGHT AI 예측</b><span class="d">2025.1~7 사고 362건 중 31건 사전 경고</span></div>
+      <div class="pb-r"><span class="pt pl">계획 p.84·90</span><b>AI 고도화 계획</b><span class="d">AI Assist 작업지시서 품질 평가 · 위험성평가 AI</span></div>
+    </div>
+  </div>
+  <div class="bar" style="top:860px"><div class="l">인정</div><div class="r">보고서에 적힌 기능은 그대로 인정 — 적히지 않은 기능을&nbsp;<span class="o">「없다」고 하지 않음</span></div></div>
+  <div class="note" style="right:440px"><b>근거</b> HD현대중공업 2026 안전보건경영보고서 p.9·11·27·53·56·84·90 · outC §2 · 운영/계획은 보고서 기재 그대로</div>
+  <div class="need">필요: 대조립 HiSEs 사용 범위 확인</div>
+  {{FT}}
+  <aside class="notes">HD현대중공업 2026 안전보건경영보고서를 보면 HiSEs와 Hi-SIGHT는 이미 많은 일을 합니다. 과거 허가서 불러오기와 작업기간 자동입력, 수시 위험성평가 결과의 작업허가 반영, 작업표준 기반 맞춤 체크리스트, 선내 도장·화기 병행 필터와 알람 메일이 운영 중입니다. Hi-SIGHT는 허가서와 작업지시서를 텍스트마이닝해 2025년 1~7월 사고 362건 중 31건에 사전 경고를 냈습니다. AI Assist 품질 평가와 위험성평가 AI는 계획으로 적혀 있습니다. 저희는 이 기능들을 그대로 인정하고 출발합니다. 근거: 보고서 p.9·11·27·53·56·84·90, outC §2.</aside>
+</section>
+
+<!-- ═════════════ S18-1b croScan이 더하는 것 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>croScan이 더하는 것<span class="sep">|</span><small>보완 · 시연 기준</small></h1><div class="sp"></div><span class="badge"><b>평가항목</b><i></i>창의성</span></div>
+  <div class="key">그 앞단에서 <span class="o">서류 한 장의 정보와 작업 사이</span>를 보완한다</div>
+  <div class="body">
+    <div class="pb-rows">
+      <div class="pb-r g"><span class="nc g">1</span><b>종일 시간 · 팀 이름 장소 되묻기</b><span class="d">답을 확인해 반영본 · 추가검토서로</span></div>
+      <div class="pb-r g"><span class="nc g">2</span><b>일상 계획서 × 비일상 허가서 대조</b><span class="d">계획서 40 + 허가서 10 → 445쌍(시연)</span></div>
+      <div class="pb-r g"><span class="nc g">3</span><b>원인 → 노출 → 사고 규칙 36개</b><span class="d">화기 · 낙하 · 인양 · 공유 설비 · 잔류</span></div>
+      <div class="pb-r g"><span class="nc g">4</span><b>판정마다 근거 · 원문 · 미확인</b><span class="d">「왜 1순위인가요?」 직접 질문</span></div>
+      <div class="pb-r g"><span class="nc g">5</span><b>검토 결과를 현장 문서로</b><span class="d">반영본 · 추가검토서 · 게시 별지 · 협조 문자</span></div>
+      <div class="pb-r g"><span class="nc g">6</span><b>사내 배치 가능한 소형 모델 구성</b><span class="d">현재 시연 Ncloud CPU · 사내 배포 전제</span></div>
+    </div>
+  </div>
+  <div class="bar g" style="top:860px"><div class="l">위치</div><div class="r">대체가 아닌&nbsp;<span class="o">연동</span>&nbsp;— HiSEs 신청 앞단의 사전검토 모듈(제안)</div></div>
+  <div class="note" style="right:440px"><b>근거</b> 노트 01·05·07 · outC §4·§5 · 사내 처리는 사내 배포와 내부 모델 주소 설정 전제(outB) · HiSEs 실연동은 미검증</div>
+  <div class="need">필요: 사내 배치 조건 확인</div>
+  {{FT}}
+  <aside class="notes">croScan은 그 기능들을 대신하지 않고 앞단을 보완합니다. 허가서 한 장의 종일 시간과 팀 이름 장소를 반장에게 되묻고, 일상 계획서와 비일상 허가서를 함께 놓고 원인에서 노출, 사고로 이어지는 규칙 36개로 봅니다. 판정마다 근거와 원문, 아직 확인하지 못한 것을 보여 주고, 결과를 반영본, 추가검토서, 게시 별지, 협조 문자로 돌려줍니다. 현재 시연은 Ncloud CPU 서버이며, 사내 배포와 내부 모델 주소 설정을 전제로 사내에 둘 수 있는 구성입니다. 그래서 위치는 HiSEs 신청 앞단의 사전검토 모듈이고, 실제 연동은 제안 단계입니다. 근거: 인수인계 노트, outC §4·§5.</aside>
+</section>
+
+<!-- ═════════════ S18-2a 축별 비교 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>같은 목표, 다른 단계<span class="sep">|</span><small>축별 비교</small></h1><div class="sp"></div><span class="badge"><b>평가항목</b><i></i>창의성 · 실현 가능성</span></div>
+  <div class="key">HiSEs는 신청 뒤 관리, croScan은 <span class="o">신청 전 서류 검토</span></div>
+  <div class="body">
+    <table class="pb-tbl pb-t28b">
+      <colgroup><col style="width:250px"><col style="width:700px"><col></colgroup>
+      <tr><th>비교 축</th><th>HiSEs <span style="font-weight:700;font-size:22px;opacity:.85">보고서에 적힌 범위</span></th><th class="g">croScan <span style="font-weight:700;font-size:22px;opacity:.85">시연 기준</span></th></tr>
+      <tr><td>정보 보완</td><td>과거 허가서 재사용 · 기간 자동입력<span class="pg">p.11</span></td><td class="cs">빈칸 · 모호한 칸만 질문 → 반장 확인</td></tr>
+      <tr><td>체크리스트</td><td>Hi-Standard 작업표준 기반 맞춤형<span class="pg">p.53</span></td><td class="cs">기본 19~28항목 제안 + 근거 · 반장 확정</td></tr>
+      <tr><td>작업 사이</td><td>선내 도장·화기 블록–공간 필터 · 알림<span class="pg">p.56</span></td><td class="cs">허가서 × 일상 계획서 · 규칙 36개</td></tr>
+      <tr><td>결과물</td><td>알람 메일 · 일정 조정 · 점검 기록<span class="pg">p.11·56</span></td><td class="cs">반영본 · 추가검토서 · 게시 별지 · 문자</td></tr>
+    </table>
+  </div>
+  <div class="bar g" style="top:860px"><div class="l">범위</div><div class="r">우열이 아니라 단계별 역할 분담 —&nbsp;<span class="o">동일 조건 비교검증 전</span></div></div>
+  <div class="note" style="right:440px"><b>근거</b> HD 2026 보고서 p.11·53·56 · outC §4 · 노트 05(규칙 36개)·07(기본 19~28항목) · 일상×일상·작업표준 원문 대조는 하지 않음</div>
+  <div class="need">필요: 비교 축 문구 팀 확정</div>
+  {{FT}}
+  <aside class="notes">네 축으로 나란히 보면 두 시스템은 같은 목표를 다른 단계에서 다룹니다. 정보 보완에서 HiSEs는 과거 허가서 재사용과 기간 자동입력을, croScan은 빈칸과 모호한 칸만 묻고 반장이 확인하게 합니다. 체크리스트는 HiSEs가 작업표준 기반 맞춤형을, croScan은 허가 종류별 기본 19~28항목 제안과 근거를 냅니다. 작업 사이에서는 HiSEs가 선내 도장·화기 필터와 알림을, croScan은 허가서와 일상 계획서를 규칙 36개로 봅니다. HiSEs 칸은 보고서에 적힌 범위만 썼고, 우열이 아니라 역할 분담이며 동일 조건 비교는 아직 하지 않았습니다. 근거: 보고서 p.11·53·56, outC §4.</aside>
+</section>
+
+<!-- ═════════════ S18-2b 연동 지점 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>HiSEs와 잇는 지점<span class="sep">|</span><small>연동 후보 · 제안</small></h1><div class="sp"></div><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">신청 <span class="o">전</span>에 호출하고, 결과는 HiSEs의 기존 흐름으로 돌려준다</div>
+  <div class="body">
+    <svg class="pb-svg" width="1748" height="565" viewBox="0 0 1748 565">
+      <defs><marker id="pa18c" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8A94A3"/></marker></defs>
+      <g fill="none" stroke="#8A94A3" stroke-width="3.5" stroke-linecap="round" marker-end="url(#pa18c)"><path d="M330 280H392"/><path d="M790 280H812V95H850"/><path d="M812 280H850"/><path d="M812 280V465H850"/><path d="M1270 95H1310"/><path d="M1270 280H1310"/><path d="M1270 465H1310"/></g>
+      <rect x="0" y="210" width="330" height="140" rx="12" fill="#1B365D"/>
+      <text x="165" y="270" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">HiSEs PTW 신청</text><text x="165" y="310" text-anchor="middle" font-size="24" font-weight="700" fill="#C9D3E1">작업반장 · 7일 단위</text>
+      <rect x="400" y="190" width="390" height="180" rx="12" fill="#1E6B47"/>
+      <text x="595" y="258" text-anchor="middle" font-size="30" font-weight="900" fill="#fff">croScan 사전검토</text><text x="595" y="298" text-anchor="middle" font-size="24" font-weight="700" fill="#CFE7DA">현재 시연 Ncloud CPU</text><text x="595" y="332" text-anchor="middle" font-size="24" font-weight="700" fill="#CFE7DA">사내 배치 가능한 구성</text>
+      <g font-weight="900" fill="#1F2833">
+        <rect x="856" y="40" width="414" height="110" rx="12" fill="#fff" stroke="#CFE3D7" stroke-width="2"/><text x="880" y="88" font-size="27">반영본 · 추가검토서</text><text x="880" y="126" font-size="24" font-weight="700" fill="#4A5563">답 반영 · 칸 밖 보충</text>
+        <rect x="856" y="225" width="414" height="110" rx="12" fill="#fff" stroke="#CFE3D7" stroke-width="2"/><text x="880" y="273" font-size="27">체크리스트 보충 항목</text><text x="880" y="311" font-size="24" font-weight="700" fill="#4A5563">근거 · 반장 확정</text>
+        <rect x="856" y="410" width="414" height="110" rx="12" fill="#fff" stroke="#CFE3D7" stroke-width="2"/><text x="880" y="458" font-size="27">위험 쌍 · 근거</text><text x="880" y="496" font-size="24" font-weight="700" fill="#4A5563">원인 → 노출 → 사고</text>
+        <rect x="1316" y="40" width="432" height="110" rx="12" fill="#EEF2F7" stroke="#C9D2DD" stroke-width="2"/><text x="1340" y="88" font-size="27" fill="#1B365D">허가서 검토자료 첨부</text><text x="1340" y="126" font-size="24" font-weight="700" fill="#4A5563">HiSEs 신청 화면 p.11</text>
+        <rect x="1316" y="225" width="432" height="110" rx="12" fill="#EEF2F7" stroke="#C9D2DD" stroke-width="2"/><text x="1340" y="273" font-size="27" fill="#1B365D">맞춤형 체크리스트 옆</text><text x="1340" y="311" font-size="24" font-weight="700" fill="#4A5563">Hi-Standard p.53</text>
+        <rect x="1316" y="410" width="432" height="110" rx="12" fill="#EEF2F7" stroke="#C9D2DD" stroke-width="2"/><text x="1340" y="458" font-size="27" fill="#1B365D">병행 알림 · 점검 참고</text><text x="1340" y="496" font-size="24" font-weight="700" fill="#4A5563">필터 · 알람 메일 p.56</text>
+      </g>
+      <text x="400" y="420" font-size="24" font-weight="700" fill="#5E6977">신청 전 호출(제안 · 미검증)</text>
+    </svg>
+  </div>
+  <div class="bar" style="top:860px"><div class="l">확인</div><div class="r">연동 전 확인: 조회·반환 경로 · 권한·SSO · 중복 경보 · 실제 접수</div></div>
+  <div class="note" style="right:440px"><b>근거</b> outC §6(연동 지점·연동 전 확인) · HD 2026 보고서 p.11·53·56 · outB(사내 배포·내부 모델 주소 전제) · 회사 SSO 실연결 미실시</div>
+  <div class="need">필요: HiSEs API·접수 경로 확인</div>
+  {{FT}}
+  <aside class="notes">HiSEs와 잇는 지점은 세 곳을 제안합니다. 반장이 HiSEs에 신청하기 전에 croScan 사전검토를 호출하고, 반영본과 추가검토서는 허가서 검토자료로 첨부하며, 체크리스트 보충 항목은 Hi-Standard 맞춤형 체크리스트 옆에, 위험 쌍과 근거는 병행 알림과 점검의 참고로 돌려주는 안입니다. 현재 시연은 Ncloud CPU 서버이고, 사내 배포와 내부 모델 주소 설정을 전제로 사내에 둘 수 있습니다. 연동 전에는 조회·반환 경로, 권한과 SSO, 중복 경보, 실제 접수를 확인해야 하며 아직 검증하지 않았습니다. 근거: outC §6, 보고서 p.11·53·56.</aside>
+</section>
+
+<!-- ═════════════ S18-3a 기존 전산 대비 ① A·B·C ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>기존 전산 대비 무엇이 달라지나 ①<span class="sep">|</span><small>A · B · C</small></h1><div class="sp"></div><span class="badge"><b>평가항목</b><i></i>창의성 · 창출효과</span></div>
+  <div class="key">승인 단계를 빼지 않고, 승인 <span class="o">전</span>에 검토 근거를 더한다</div>
+  <div class="body">
+    <table class="pb-tbl pb-t26 pb-five">
+      <colgroup><col style="width:360px"><col style="width:430px"><col style="width:520px"><col></colgroup>
+      <tr><th>영역 · 항목 수</th><th class="gy">남을 수 있는 한계</th><th class="g">croScan의 차이</th><th>예상 기대효과</th></tr>
+      <tr class="pb-hl"><td><span class="pb-lt">A</span>승인 전 안전 관점<small>6항목 · 대표 A05</small></td><td>2중점검 N 작업은<br>대면확인 단계 없음</td><td class="cs">N 작업도 사전 보강 ·<br>작업쌍 검토에 포함</td><td>대면허가와 별개로<br>사전 검토 기회</td></tr>
+      <tr class="pb-hl"><td><span class="pb-lt">B</span>위험 발견 · 조치<small>15항목 · 대표 B11</small></td><td>모름 · 미정이<br>「위험 없음」으로 해석</td><td class="cs">모름 · 미정 · 판정보류를<br>남겨 다음 담당자에게</td><td>정보 없이 안전하다고<br>보는 오류 감소</td></tr>
+      <tr><td><span class="pb-lt">C</span>반복업무 · 보완 왕복<small>16항목 · 대표 C16</small></td><td>누락 때문에 반려 ·<br>보완 · 재제출 반복</td><td class="cs">제출 전 핵심정보 ·<br>미완료 항목 확인</td><td>첫 제출 완성도 향상<br>· 보완 왕복 감소</td></tr>
+    </table>
+  </div>
+  <div class="bar" style="top:860px"><div class="l">단서</div><div class="r">줄이는 것은 승인 단계가 아니라&nbsp;<span class="o">뒤늦은 재문의·재입력·재제출</span></div></div>
+  <div class="note" style="right:400px"><b>근거</b> 팀 비교자료 compare_1102 P1~P8 · 기존 한계는 남을 수 있는 문제이고, HiSEs에 기능이 전혀 없다는 뜻은 아님 · 미실측 가설</div>
+  <div class="need">필요: 전체 58항목 → 부록 A19</div>
+  {{FT}}
+  <aside class="notes">팀이 기존 전산 프로세스와 croScan을 58항목으로 비교한 결과를 다섯 영역으로 묶었고, 이 장은 앞의 세 영역입니다. A는 생산부서 전산승인 전에 안전 관점을 보강하는 것으로, 2중점검 N 작업도 사전 보강과 작업쌍 검토에 포함됩니다. B는 위험 발견으로, 모름이나 미정을 「위험 없음」으로 읽지 않고 판정보류로 남겨 다음 담당자에게 넘깁니다. C는 반복업무로, 제출 전에 핵심정보와 미완료 항목을 확인해 반려와 재제출 왕복을 줄이는 것입니다. 질문과 확인 단계가 더해지므로 화면 단계 수가 줄어드는 것은 아니며, 기대효과는 미실측 가설입니다. 근거: compare_1102 P1~P8.</aside>
+</section>
+
+<!-- ═════════════ S18-3b 기존 전산 대비 ② D·E ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>기존 전산 대비 무엇이 달라지나 ②<span class="sep">|</span><small>D · E</small></h1><div class="sp"></div><span class="badge"><b>평가항목</b><i></i>창출효과</span></div>
+  <div class="key">검토한 위험이 <span class="o">현장 전달과 실제 조정</span>까지 이어질 때</div>
+  <div class="body">
+    <table class="pb-tbl pb-t26 pb-five">
+      <colgroup><col style="width:360px"><col style="width:430px"><col style="width:520px"><col></colgroup>
+      <tr><th>영역 · 항목 수</th><th class="gy">남을 수 있는 한계</th><th class="g">croScan의 차이</th><th>예상 기대효과</th></tr>
+      <tr><td><span class="pb-lt">D</span>협의 · 전달 · 기록<small>12항목 · 대표 D07</small></td><td>전산 검토자와 작업자가<br>다른 내용을 전달받음</td><td class="cs">검토한 위험 · 조치를<br>출력 · 게시자료로 연결</td><td>검토자와 작업자 사이<br>내용 차이 감소</td></tr>
+      <tr><td><span class="pb-lt">E</span>생산 운영 · 경제<small>9항목 · 대표 E01·E03</small></td><td>당일 충돌을 늦게 발견<br>→ 중단 · 장비 대기</td><td class="cs">전날 위험 관계를 확인해 협의<br>(실제 조정이 이루어질 때)</td><td>당일 돌발 중단 ·<br>장비 재예약 감소 기대</td></tr>
+    </table>
+  </div>
+  <div class="bar" style="top:860px"><div class="l">강점</div><div class="r">부족한 입력 보강 → 작업 간 관계 검토 → 위험 이유 설명 → 담당자 확인·조치 자료의&nbsp;<span class="o">연결성</span></div></div>
+  <div class="note" style="right:400px"><b>근거</b> 팀 비교자료 compare_1102 P9~P12·P15 · 기존 한계는 남을 수 있는 문제이고, HiSEs에 기능이 전혀 없다는 뜻은 아님 · 미실측 가설</div>
+  <div class="need">필요: 전체 58항목 → 부록 A19</div>
+  {{FT}}
+  <aside class="notes">나머지 두 영역입니다. D는 부서 간 협의와 전달로, 검토한 위험과 조치를 출력물과 게시자료로 이어 전산 검토자와 현장 작업자가 받는 내용의 차이를 줄입니다. E는 생산 운영으로, 충돌을 전날 발견해 실제로 협의하고 조정했을 때 당일 돌발 중단과 크레인·장비 재예약이 줄어들 수 있습니다. 정보 보강과 위험 발견만으로 생산 효과가 생기지는 않습니다. croScan의 강점은 부족한 입력 보강, 작업 간 관계 검토, 위험 이유 설명, 담당자 확인·조치 자료로 이어지는 연결성입니다. 기대효과는 미실측 가설이며 전체 58항목은 부록 A19에 있습니다. 근거: compare_1102 P9~P15.</aside>
+</section>
+
+<!-- ═════════════ S19 가치 기능 4가지 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>가치 기능 4가지</h1><div class="sp"></div><span class="chip">핵심 기능</span><span class="badge"><b>평가항목</b><i></i>창출효과</span></div>
+  <div class="key">반장은 <span class="o">빠진 정보만 답하고</span>, 안전관리자는 <span class="o">먼저 볼 것부터</span></div>
+  <div class="body">
+    <div class="vid" data-v="V03" style="position:absolute;left:0;top:-14px;width:600px;height:338px"><img src="../croScan_demo_videos/final19/croScan_V03_시간_위치_공법을_한번에_답변_대표화면.png" alt=""><span class="play"></span><span class="vlab">01 · V03 · 19초</span></div>
+    <div class="pb-q" style="left:616px;top:-14px;width:250px;height:338px"><span class="qn">01</span><span class="qtt">허가서 내용 보충</span><span class="qv">빠진 칸만 되묻고 반영본으로</span><span class="qb">12회</span><span class="qc">응답 요청 최대</span></div>
+    <div class="vid" data-v="V07" style="position:absolute;left:882px;top:-14px;width:600px;height:338px"><img src="../croScan_demo_videos/final19/croScan_V07_대표_위험과_준비_조치_대표화면.png" alt=""><span class="play"></span><span class="vlab">02 · V07 · 17초</span></div>
+    <div class="pb-q" style="left:1498px;top:-14px;width:250px;height:338px"><span class="qn">02</span><span class="qtt">체크리스트 자동완성</span><span class="qv">제안 + 근거 · 반장 확정</span><span class="qb">28항목</span><span class="qc">화기 기본 (19~28)</span></div>
+    <div class="vid" data-v="V12" style="position:absolute;left:0;top:336px;width:600px;height:338px"><img src="../croScan_demo_videos/final19/croScan_V12_같은_구역의_화기와_도장_대표화면.png" alt=""><span class="play"></span><span class="vlab g">03 · V12 · 35초</span></div>
+    <div class="pb-q g" style="left:616px;top:336px;width:250px;height:338px"><span class="qn">03</span><span class="qtt">겹치는 작업 사전 발견</span><span class="qv">하루 작업 쌍을 규칙 36개로</span><span class="qb">445→26</span><span class="qc">쌍 · 1순위 8</span></div>
+    <div class="vid" data-v="V18" style="position:absolute;left:882px;top:336px;width:600px;height:338px"><img src="../croScan_demo_videos/final19/croScan_V18_AI_게시_문안_제안과_별지_반영_대표화면.png" alt=""><span class="play"></span><span class="vlab g">04 · V18 · 24초</span></div>
+    <div class="pb-q g" style="left:1498px;top:336px;width:250px;height:338px"><span class="qn">04</span><span class="qtt">현장 전달 자료</span><span class="qv">게시 별지 · 협조 문자 등</span><span class="qb">5종</span><span class="qc">발송·승인은 사람</span></div>
+  </div>
+  <div class="note" style="right:430px"><b>근거</b> 노트 01·03(46종·12회)·05(445·26·36개)·07(카탈로그 86, 허가 종류별 기본 19~28) · manifest V03·V07·V12·V18 · 시연 수치는 합성 자료 기준</div>
+  <div class="need">필요: 카드별 3~5초 클립 구간 확정</div>
+  {{FT}}
+  <aside class="notes">가치 기능은 네 가지입니다. 첫째, 허가서의 빈칸과 넓은 값을 질문 46종 안에서 응답 요청 최대 12회까지 되물어 채웁니다. 둘째, 카탈로그 86항목 중 허가 종류별 기본 19~28항목(화기 28항목)에서 해당과 해당 없음을 근거와 함께 제안하고 반장이 확정합니다. 셋째, 시연 하루 계획서 40건과 허가서 10건에서 445쌍을 규칙 36개로 보아 위험 쌍 26쌍, 그중 1순위 8쌍을 먼저 보여 줍니다. 넷째, 결과를 반영본, 추가검토서, 체크리스트, 게시 별지, 협조 문자로 만들며 발송과 승인은 사람이 합니다. 네 영상을 각각 3~5초씩 재생합니다(V03 14.7초, V07 4.5초, V12 21.9초, V18 19.8초 부근). 근거: 인수인계 노트 01·03·05·07, manifest.</aside>
+</section>
+
+<!-- ═════════════ S20 반장 ① 묻기 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>작업반장 흐름 ①<span class="sep">|</span><small>서류를 올리면 부족한 것을 묻는다</small></h1><div class="sp"></div><span class="chip">시연 · 작업반장</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">「하루 신청 시간 · 팀 이름 장소」를 되물어 <span class="o">실제 시간·위치</span>로</div>
+  <div class="body">
+    <div class="vid" data-v="V03" style="position:absolute;left:0;top:0;width:900px;height:506px"><img src="../croScan_demo_videos/final19/croScan_V03_시간_위치_공법을_한번에_답변_대표화면.png" alt=""><span class="play"></span><span class="vlab">시연 V03 · 19초</span></div>
+    <div class="pb-bub q" style="left:0;top:522px;width:444px;height:158px"><div class="h">croScan 질문</div><p>작업일시 <em>08:00~16:59</em>는 하루 신청 시간인가요, 실제 작업 시간인가요?</p></div>
+    <div class="pb-bub a" style="left:456px;top:522px;width:444px;height:158px"><div class="h">작업반장 답 · 직접 입력</div><p><em>오후 1시~3시</em>, <em>3BAY 08~10칼럼 E42P 상부</em>, CO2 용접</p></div>
+    <div class="vid" data-v="V04" style="position:absolute;left:930px;top:0;width:420px;height:236px"><img src="../croScan_demo_videos/final19/croScan_V04_오타를_넣어_비교_대표화면.png" alt=""><span class="play"></span><span class="vlab">V04 · 21초</span></div>
+    <div class="pb-chg" style="left:1372px;top:0;width:376px;height:236px"><small>오타 입력</small><b>자겁 · 상부구요 ·<br>예정임니다<br>→ 같은 <em>13:00~15:00</em></b></div>
+    <div class="vid" data-v="V05" style="position:absolute;left:930px;top:252px;width:420px;height:236px"><img src="../croScan_demo_videos/final19/croScan_V05_읽은_값_확인과_반영_대표화면.png" alt=""><span class="play"></span><span class="vlab">V05 · 21초</span></div>
+    <div class="pb-chg" style="left:1372px;top:252px;width:376px;height:236px"><small>읽은 값 확인·반영</small><b>장소 끝 「구」는<br>반장이 직접 고침<br>→ 원본은 보존</b></div>
+    <ol class="vcap pb-24" style="position:absolute;left:930px;top:508px;width:818px;gap:12px">
+      <li><b>0.9초 · 시간·장소·공법을 한 번에</b>한 문장 입력 · AI 응답 약 32초</li>
+      <li><b>14.7초 · 읽은 값과 원문 대조</b>13:00~15:00 · E42P 상부 · CO2</li>
+    </ol>
+  </div>
+  <div class="note" style="right:440px"><b>근거</b> manifest V02(첫 질문)·V03(테이크 A 입력·결과)·V04(오타 입력)·V05(항목 고치기) · 노트 03(질문 46종·응답 요청 최대 12회)</div>
+  <div class="need">필요: V03 입력 장면 재현 표시 유지</div>
+  {{FT}}
+  <aside class="notes">반장이 0731 화기 허가서를 올리면 croScan은 작업일시가 08:00~16:59 하루 전체로 적혀 있다는 것을 보고 실제 절단·용접 시간을 묻습니다. 영상 V03을 재생합니다. 0.9초에 반장이 시간, 장소, 공법을 한 문장으로 답하고, 14.7초에 croScan이 읽은 값 13:00~15:00, 3BAY 08~10칼럼 E42P 블록 상부, CO2를 원문 구절과 나란히 보여 줍니다. 오른쪽 V04처럼 오타 세 곳을 넣어도 같은 작업시간을 읽었고, V05에서 장소 끝에 남은 「구」는 반장이 직접 고쳤습니다. 입력 장면은 연속 녹화가 아니라 입력 직후와 결과 화면을 이은 것이며, 처리 속도나 오타 일반 성능은 주장하지 않습니다. 근거: manifest V02~V05.</aside>
+</section>
+
+<!-- ═════════════ S21 반장 ② 체크리스트 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>작업반장 흐름 ②<span class="sep">|</span><small>체크리스트 자동완성과 AI 보완</small></h1><div class="sp"></div><span class="chip">시연 · 작업반장</span><span class="badge"><b>평가항목</b><i></i>창의성</span></div>
+  <div class="key">규칙이 <span class="o">근거와 함께 제안</span>, AI는 보완 줄을 달고, 반장이 확정</div>
+  <div class="body">
+    <div class="vid" data-v="V07" style="position:absolute;left:0;top:0;width:900px;height:506px"><img src="../croScan_demo_videos/final19/croScan_V07_대표_위험과_준비_조치_대표화면.png" alt=""><span class="play"></span><span class="vlab">시연 V07 · 17초 · 규칙 제안</span></div>
+    <ol class="vcap pb-24" style="position:absolute;left:0;top:520px;width:900px;gap:12px">
+      <li><b>4.5초 · 01 불티 → 규칙 제안 「해당」</b>근거: 허가서 「용접·용단」 칸 체크(서류)</li>
+      <li><b>10.2초 · 준비할 안전조치 확인</b>불티 차단덮개 · 화재감시자 배치 예정</li>
+    </ol>
+    <div class="vid" data-v="V08" style="position:absolute;left:930px;top:0;width:818px;height:460px"><img src="../croScan_demo_videos/final19/croScan_V08_AI의_보완_제안_대표화면.png" alt=""><span class="play"></span><span class="vlab t">시연 V08 · 17초 · AI 보완</span></div>
+    <ol class="vcap pb-t pb-24" style="position:absolute;left:930px;top:476px;width:818px;gap:12px">
+      <li><b>5.4초 · AI 제안 줄 3건 중 10번</b>근거: 반장 답 「잔불 확인·정리까지 포함」</li>
+      <li><b>11.4초 · 반영 여부는 반장이 선택</b>AI 제안은 항목 상태를 바꾸지 않음</li>
+    </ol>
+  </div>
+  <div class="note" style="right:470px"><b>근거</b> manifest V07~V11(화기 기본 28항목: 해당 12 · 안전팀 확인 16, AI 제안 줄 3건) · 노트 07(카탈로그 86·판정식) · 이유·사례는 V09·V10</div>
+  <div class="need">필요: V09·V10 부록 배치</div>
+  {{FT}}
+  <aside class="notes">다음은 위험 체크리스트입니다. 화기 허가서에는 카탈로그 86항목 중 기본 28항목이 열립니다. V07을 재생합니다. 4.5초에 01번 「불티가 아래·틈새로 번져 화상·화재」 항목에 croScan 규칙이 「해당」을 제안하고, 근거로 허가서의 용접·용단 칸을 보여 줍니다. 이어서 V08의 5.4초에는 AI가 반장 답 「잔불 확인·정리까지 포함」을 근거로 10번 잔불 항목에 보완 줄을 답니다. AI 제안은 항목 상태를 바꾸지 않고, 반영 여부는 반장이 고릅니다. 시간이 있으면 V09·V10에서 위험한 이유, 사례집 참고 사례, KOSHA 원문(검색 후보·검수 전)을 보여 줍니다. 이 허가서는 해당 12, 안전팀 확인 16으로 제출되었습니다. 근거: manifest V07~V11, 노트 07.</aside>
+</section>
+
+<!-- ═════════════ S22a 반장 ③ 제출 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>작업반장 흐름 ③<span class="sep">|</span><small>제출</small></h1><div class="sp"></div><span class="chip">시연 · 작업반장</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">확인을 마치면 <span class="o">안전팀 검토자료</span>로 제출 — 같은 작업에 연결</div>
+  <div class="body">
+    <div class="vid" data-v="V11" style="position:absolute;left:0;top:0;width:1000px;height:562px"><img src="../croScan_demo_videos/final19/croScan_V11_제출과_반영본_추가검토서_대표화면.png" alt=""><span class="play"></span><span class="vlab">시연 V11 · 37초</span></div>
+    <ol class="vcap pb-24" style="position:absolute;left:1040px;top:0;width:708px;gap:22px">
+      <li><b>11.7초 · 안전관리자 검토에 연결</b>같은 작업 목록에 제출본 연결</li>
+      <li><b>17.7초 · 반영본</b>양식 칸에 맞는 답만 파란 글씨 ①②</li>
+      <li><b>23.7초 · 추가검토서(별지)</b>칸 밖 보충 · 안전팀 확인</li>
+      <li><b>제출 요약(실제 결과)</b>답 6건 · 모름 2건 · AI 미완료 1</li>
+    </ol>
+  </div>
+  <div class="bar" style="top:860px"><div class="l">제출</div><div class="r">안전팀 검토자료 제출(시연) — 전산·결재로 보내지 않음, 승인은 생산부서 승인권한자</div></div>
+  <div class="note" style="right:430px"><b>근거</b> manifest V11(제출본 1QCMfy, 앱 문구 「시연: 전산·결재로 보내지 않음」, 답 6 · 모름 2 · AI 미완료 1)</div>
+  <div class="need">필요: 영상 23.7초 구간 확대</div>
+  {{FT}}
+  <aside class="notes">확인을 마치면 반장은 안전팀에 제출합니다. V11을 재생합니다. 11.7초에 제출본이 같은 작업의 안전관리자 화면에 연결되고, 17.7초에 반영본이, 23.7초에 추가검토서가 보입니다. 이번 제출은 답 6건, 모름 2건, AI 분석 미완료 1건이라는 실제 결과를 그대로 담았습니다. 이 제출은 검토자료 제출이며 전산이나 결재로 보내지 않고, 전산승인은 기존대로 생산부서 승인권한자가 합니다. 근거: manifest V11.</aside>
+</section>
+
+<!-- ═════════════ S22b 반영본·추가검토서·체크리스트 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>제출되는 서류 3가지<span class="sep">|</span><small>원본은 그대로</small></h1><div class="sp"></div><span class="chip">시연 · 작업반장</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">칸에 맞는 답은 <span class="o">반영본</span>, 칸 밖 내용은 <span class="o">추가검토서</span></div>
+  <div class="body">
+    <div class="pb-box" style="left:0;top:0;width:560px;height:560px"><div class="hd2">반영본 1쪽</div><div class="bd">
+      <div class="ln"><b>① 작업장소</b><br><s>대조립3부 용접2팀</s><br>→ <span class="bl">3BAY 08~10칼럼 E42P 블록 상부</span></div>
+      <div class="ln"><b>② 작업내용(상세)</b><br><s>(빈칸)</s><br>→ <span class="bl">실제 작업 예정 13:00~15:00, CO2</span></div>
+      <div class="ln">원본 PDF는 바꾸지 않음</div></div></div>
+    <div class="pb-box" style="left:594px;top:0;width:560px;height:560px"><div class="hd2 g">추가검토서 2쪽</div><div class="bd">
+      <div class="ln">1. 변경 내역 · 근거</div><div class="ln">2. 양식 밖: 잔불 확인·정리</div><div class="ln">3. 확인된 작업 범위</div><div class="ln">4. 안전팀 확인: 병행여부 등 2건</div><div class="ln">5. 추가조치 초안</div></div></div>
+    <div class="pb-box" style="left:1188px;top:0;width:560px;height:560px"><div class="hd2 gy">위험 체크리스트</div><div class="bd">
+      <div class="ln"><b style="color:var(--orange)">해당 12</b></div><div class="ln"><b style="color:#A26C00">안전팀 확인 16</b></div><div class="ln"><b style="color:var(--gray)">해당 없음 0</b></div><div class="ln">28/28 확인 완료 ≠<br>안전팀 확인 16건 해결</div></div></div>
+  </div>
+  <div class="bar" style="top:860px"><div class="l">원칙</div><div class="r">원본은 증거 — 바뀐 곳은 파란 글씨와 번호, 당일·서명·승인 칸은&nbsp;<span class="o">쓰지 않음</span></div></div>
+  <div class="note" style="right:430px"><b>근거</b> manifest V11(반영본 1쪽·추가검토서 2쪽 PDF 문구) · 노트 07 C(반영본·별지 규칙: 원본 바이트 보존, 당일 칸 미기입)</div>
+  <div class="need">필요: 반영본 PDF 1·2쪽 고해상도</div>
+  {{FT}}
+  <aside class="notes">제출되는 서류는 세 가지입니다. 반영본에는 양식 칸에 맞는 답만 원본 사본 위에 파란 글씨 ①②로 적습니다. 작업장소는 팀 이름에서 실제 위치로, 비어 있던 작업내용(상세)은 실제 작업시간과 CO2로 채워졌습니다. 칸에 넣을 수 없는 잔불 확인 같은 내용과 안전팀이 확인할 병행여부·통제 범위는 추가검토서에 들어갑니다. 체크리스트는 28항목을 모두 확인했지만, 그것이 안전팀 확인 16건이 해결됐다는 뜻은 아닙니다. 원본은 증거이므로 바꾸지 않고, 당일·서명·승인 칸에는 쓰지 않습니다. 근거: manifest V11, 노트 07.</aside>
+</section>
+
+<!-- ═════════════ S23a 안전관리자 ① 하루 전체 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>안전관리자 흐름 ①<span class="sep">|</span><small>하루 전체를 한 번에</small></h1><div class="sp"></div><span class="chip g">시연 · 안전관리자</span><span class="badge"><b>평가항목</b><i></i>창의성</span></div>
+  <div class="key">하루 50건, 445쌍을 규칙으로 보고 <span class="o">먼저 볼 위험 쌍 26</span></div>
+  <div class="body">
+    <svg class="pb-svg" style="z-index:0" width="1748" height="680" viewBox="0 0 1748 680">
+      <defs><marker id="pa23" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8A94A3"/></marker>
+      <marker id="po23" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#D4561F"/></marker></defs>
+      <g fill="none" stroke="#8A94A3" stroke-width="3.5" stroke-linecap="round" marker-end="url(#pa23)"><path d="M280 190V236"/><path d="M280 380V426"/><path d="M560 120H1010V236"/></g>
+      <g fill="none" stroke="#D4561F" stroke-width="4" stroke-linecap="round" marker-end="url(#po23)"><path d="M560 500H694"/><path d="M1010 380V426"/></g>
+    </svg>
+    <div class="pb-a" style="left:0;top:0;font-size:26px;font-weight:900;color:#1F2833;letter-spacing:-.02em">50건 = 허가서 10 + 작업계획서 40 <span style="color:var(--gray);font-weight:700">(시연 · 합성)</span></div>
+    <div class="pb-fb" style="left:0;top:50px;width:560px;height:140px;background:#1B365D;color:#fff"><span class="num">445</span><span class="lb">후보 쌍<small>허가서끼리 45 + 허가서×계획서 400</small></span></div>
+    <div class="pb-fb" style="left:0;top:240px;width:560px;height:140px;background:#2A4A75;color:#fff"><span class="num">151</span><span class="lb">작업시간 겹침</span></div>
+    <div class="pb-fb" style="left:0;top:430px;width:560px;height:140px;background:#3E6190;color:#fff"><span class="num">37</span><span class="lb">같은 BAY · 위치 확인<small>같은 BAY 32 + 위치 확인 필요 5</small></span></div>
+    <div class="pb-fb" style="left:700px;top:240px;width:620px;height:140px;background:#fff;border:3px dashed #8A94A3;color:#2F3A48"><span class="lb">공유 설비 · 잔류위험 경로<small style="color:#4A5563;opacity:1">위치가 떨어져도, 시간이 안 겹쳐도</small></span></div>
+    <div class="pb-fb" style="left:700px;top:430px;width:620px;height:230px;background:#D4561F;color:#fff;flex-direction:column;align-items:flex-start;justify-content:center;gap:10px"><span class="lb" style="display:flex;align-items:baseline;gap:16px"><span class="num">26</span>위험 쌍</span><span class="lb" style="font-size:26px;font-weight:700">1순위 즉시 조정 8 · 2순위 조건부 병행 2<br>3순위 확인 필요 16</span></div>
+    <div class="pb-panel" style="left:1360px;top:240px;width:388px;height:420px;background:var(--obg);border-color:#F1D6C7">
+      <div class="h" style="color:#A63F12;font-size:28px">26은 37의 하위집합이 아님</div>
+      <div style="font-size:24px;color:#3A4655;line-height:1.45;margin-top:14px;letter-spacing:-.04em">같은 BAY에서 위험이 전달되는 쌍에 더해, 공유 설비 · 잔류위험 쌍이 따로 들어옴</div>
+      <div style="font-size:24px;color:#3A4655;line-height:1.45;margin-top:18px;letter-spacing:-.04em;border-top:1.5px dashed #E8B9A0;padding-top:14px">정보가 모자란 쌍은 판정보류 · 질문 55개</div>
+    </div>
+  </div>
+  <div class="note" style="right:430px"><b>근거</b> 노트 01·06(stats 445·151·32+5·26, 2026-11-01) · README:191 · 26은 37의 하위집합 아님(공유 설비·잔류위험 포함) · 합성 시연 자료</div>
+  <div class="need">필요: 분기 숫자 앱 화면 재확인</div>
+  {{FT}}
+  <aside class="notes">안전관리자는 그날 작업 전체를 한 번에 봅니다. 시연 하루는 허가서 10건과 작업계획서 40건으로, 후보 쌍은 445쌍입니다. 후보 445쌍 중 시간 겹침은 151쌍이며, 그중 같은 BAY이거나 위치 확인이 필요한 쌍은 37쌍입니다. 위험 쌍 26쌍은 공유 설비·잔류위험도 포함하므로 37쌍의 하위집합이 아닙니다. 그래서 오른쪽 점선 갈래로, 위치가 떨어져 있거나 시간이 겹치지 않아도 같은 설비나 남은 위험으로 이어지는 경로를 따로 그렸습니다. 26쌍은 1순위 즉시 조정 8, 2순위 조건부 병행 2, 3순위 확인 필요 16이고, 정보가 모자란 쌍에는 판정보류 질문 55개가 붙습니다. 숫자는 합성 시연 자료 기준이며 현장 탐지율이 아닙니다. 근거: 인수인계 노트 01·06, README.</aside>
+</section>
+
+<!-- ═════════════ S23b 1순위 P02 영상 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>안전관리자 흐름 ②<span class="sep">|</span><small>1순위 쌍 보기</small></h1><div class="sp"></div><span class="chip g">시연 · 안전관리자</span><span class="badge"><b>평가항목</b><i></i>창의성</span></div>
+  <div class="key">같은 블록 <span class="o">화기 × 도장</span>, 90분 겹침 — 언제·어디서·왜</div>
+  <div class="body">
+    <div class="vid" data-v="V12" style="position:absolute;left:0;top:0;width:1060px;height:596px"><img src="../croScan_demo_videos/final19/croScan_V12_같은_구역의_화기와_도장_대표화면.png" alt=""><span class="play"></span><span class="vlab g">시연 V12 · 35초</span></div>
+    <ol class="vcap g pb-24" style="position:absolute;left:1100px;top:0;width:648px;gap:22px">
+      <li><b>5.1초 · 반장 확인 값으로 검토</b>0731 화기: 13:00~15:00 · E42P 상부</li>
+      <li><b>21.9초 · 언제 · 어디서</b>WP-01 도장과 13:30~15:00 · 90분 겹침</li>
+      <li class="o"><b>29.1초 · 왜 위험한가</b>불티·열 → 유기용제 증기 → 화재·폭발</li>
+      <li><b>판정</b>강도 3 × 노출 3 = 9점 · 1순위</li>
+    </ol>
+  </div>
+  <div class="note" style="right:430px"><b>근거</b> manifest V12(자막 30~33, P02 0731 × WP-01 · 1순위 9점 · 입력 보강 전후 같은 9점) · 노트 05(P02 예시)</div>
+  <div class="need">필요: 21.9초 화면 확대 구간</div>
+  {{FT}}
+  <aside class="notes">1순위 쌍 하나를 영상으로 봅니다. V12를 재생합니다. 5.1초에 반장이 확인한 0731 화기 작업의 시간과 위치로 다른 예정 작업과 함께 검토하고, 21.9초에 WP-01 도장 터치업과 같은 E42P 블록에서 13:30~15:00 90분 겹치는 것을 보여 줍니다. 29.1초에는 불티와 열이 도장 구역의 유기용제 증기로 번져 화재·폭발로 이어질 수 있다는 이유를 짚습니다. 판정은 강도 3, 노출 3, 9점으로 1순위이며, 반장 답을 반영하기 전후 모두 같은 9점입니다. 근거: manifest V12, 노트 05.</aside>
+</section>
+
+<!-- ═════════════ S24a 근거→재확인 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>안전관리자 흐름 ③<span class="sep">|</span><small>근거 → 재확인</small></h1><div class="sp"></div><span class="chip g">시연 · 안전관리자</span><span class="badge"><b>평가항목</b><i></i>실현 가능성</span></div>
+  <div class="key">정보가 모자라면 <span class="o">담당 반장에게</span> 묻고, 다시 낸 값으로 재검토</div>
+  <div class="body">
+    <div class="pb-strip" style="left:0;top:0;width:1748px">
+      <div class="pb-chip">① 근거·원문 <small>V13</small></div><i class="chv"></i>
+      <div class="pb-chip">② 왜 1순위? <small>V14</small></div><i class="chv"></i>
+      <div class="pb-chip on">③ 반장 재확인 <small>V14B</small></div><i class="chv"></i>
+      <div class="pb-chip">④ 협조 문자 <small>V17</small></div><i class="chv"></i>
+      <div class="pb-chip">⑤ 게시 문안 <small>V18</small></div><i class="chv"></i>
+      <div class="pb-chip">⑥ 별지 발행 <small>V19</small></div>
+    </div>
+    <div class="vid" data-v="V14B" style="position:absolute;left:0;top:90px;width:1000px;height:562px"><img src="../croScan_demo_videos/final19/croScan_V14B_담당_반장에게_확인하고_재제출_대표화면.png" alt=""><span class="play"></span><span class="vlab">③ V14B · 43초</span></div>
+    <div class="pb-tl" style="left:1040px;top:90px;width:708px">
+      <div><i>③ 7.5초</i><p><b>담당 반장에게 확인 요청</b>0735 반장 질문 「작업 위치·시간과 인원 배치」</p></div>
+      <div><i>③ 13.5초</i><p><b>질문 복사</b>기존 연락 수단으로 전달 · 보내기 기능 없음</p></div>
+      <div><i>③ 31.2초</i><p><b>재제출 → 재검토</b>위치·시간 반영, 순위는 3순위 그대로</p></div>
+    </div>
+  </div>
+  <div class="note" style="right:430px"><b>근거</b> manifest V13·V14·V14B · 노트 05(floor: 반장 답으로 서류 경보를 내리지 않음)</div>
+  <div class="need">필요: V13·V14 부록 배치</div>
+  {{FT}}
+  <aside class="notes">위험 쌍을 고른 뒤 안전관리자는 여섯 단계로 처리합니다. ① 판정에 쓴 서류 원문을 보고(V13), ② 「왜 1순위인가요?」라고 직접 물어 사용한 사실과 적용 규칙을 확인합니다(V14). ③ 정보가 부족하면 V14B처럼 담당 반장에게 확인합니다. 7.5초에 0735 반장 질문을 고르고, 13.5초에 질문을 복사해 기존 연락 수단으로 보내며, 31.2초에 반장이 보완해 다시 제출한 값으로 재검토합니다. 순위는 3순위 그대로이며, 반장 답으로 서류 경보를 내리지 않습니다. 근거: manifest V13~V14B, 노트 05.</aside>
+</section>
+
+<!-- ═════════════ S24b 협조→게시 ═════════════ -->
+<section class="slide">
+  <div class="hd"><h1>안전관리자 흐름 ④<span class="sep">|</span><small>협조 → 게시</small></h1><div class="sp"></div><span class="chip g">시연 · 안전관리자</span><span class="badge"><b>평가항목</b><i></i>실현 가능성 · 창출효과</span></div>
+  <div class="key">협조 문자는 <span class="o">복사까지</span>, 게시 별지는 <span class="o">할 일 · 착수 · 중지조건</span></div>
+  <div class="body">
+    <div class="vid" data-v="V17" style="position:absolute;left:0;top:0;width:860px;height:484px"><img src="../croScan_demo_videos/final19/croScan_V17_협조_문자_작성과_복사_대표화면.png" alt=""><span class="play"></span><span class="vlab">④ V17 · 28초</span></div>
+    <div class="vid" data-v="V19" style="position:absolute;left:888px;top:0;width:860px;height:484px"><img src="../croScan_demo_videos/final19/croScan_V19_할_일_착수조건_중지조건_확인_대표화면.png" alt=""><span class="play"></span><span class="vlab g">⑥ V19 · 28초</span></div>
+    <div class="pb-lb" style="left:0;top:500px;width:860px"><b>④ V17 · 23.4초</b>협조 문자 복사 — croScan은 보내지 않음</div>
+    <div class="pb-lb" style="left:888px;top:500px;width:860px"><b>⑥ V19 · 9.9초</b>별지 S-0731/R1 · 할 일 · 착수 · 중지조건</div>
+    <div class="pb-lim" style="left:0;top:590px;width:1748px;height:70px"><span class="tag gy">한계</span><span>⑤ V18 게시 문안은 발행 전 검토 · 발행은 승인 아님 · 반장 간 협의·전산승인은 앱 밖(V17B 가정)</span></div>
+  </div>
+  <div class="note" style="right:430px"><b>근거</b> manifest V17·V17B·V18·V19(「croScan은 문자를 보내지 않습니다」, 「발행은 서류 발행」)</div>
+  <div class="need">필요: V18 화면 배치 결정</div>
+  {{FT}}
+  <aside class="notes">④ 협조 문자 단계입니다. V17의 23.4초에 작성한 문자를 복사해 기존 연락 수단으로 보낼 수 있으며, croScan은 문자를 보내지 않습니다. 이후 반장 간 일정 협의와 생산부서 전산승인은 앱 밖에서 이루어지는 것으로 가정했습니다(V17B). ⑤ AI가 제안한 게시 문안은 발행 전에 검토해 별지에 반영하고(V18), ⑥ V19의 9.9초부터 할 일, 착수조건, 중지조건이 담긴 게시 별지 S-0731/R1을 보여 줍니다. 발행은 서류 발행이지 승인이 아니며, 작업 당일 현장 확인과 대면허가는 기존 절차대로 합니다. 근거: manifest V17~V19.</aside>
+</section>

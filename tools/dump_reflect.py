@@ -53,7 +53,7 @@ n = 0
 for d in load("permits.json")["permits"]:
     doc = extract.build(DIR / "허가서" / permit_name(d), d["kind"])
     for vname, keys in VARIANTS:
-        if vname != "원본" and d["permit_no"][-4:] not in ("0731", "0735", "0737", "0739"):
+        if vname != "원본" and d["permit_no"][-4:] not in ("6733", "8175", "8741", "9488"):
             continue                                  # the emptied copies on one permit of each kind group
         fields = blank(doc["fields"], set(keys))
         qs = augment.summary(fields, [])["questions"]

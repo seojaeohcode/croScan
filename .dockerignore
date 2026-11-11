@@ -5,10 +5,17 @@
 *.log
 bench_models.py
 tools
-# test PDFs are uploaded through the web page, never baked into the image
-samples
+# Only the synthetic manager demo is baked into the image; upload other test PDFs through the page.
+samples/*
+!samples/시연_하루/
 data
 qa_inbox
 models
 llm
 qa_backup
+
+.git
+media
+docs
+.venv
+node_modules

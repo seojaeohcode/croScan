@@ -1,10 +1,10 @@
 {
  "permits": [
   {
-   "permit_no": "AC00-IH-20261029-0731",
+   "permit_no": "BS22-IV-20261029-6733",
    "kind": "hot",
    "case": "A",
-   "file": "0731_화기_A.pdf",
+   "file": "6733_화기_A.pdf",
    "read_errors": 0,
    "answers": 3,
    "open": 0,
@@ -15,10 +15,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261027-0732",
+   "permit_no": "BS22-IV-20261027-6988",
    "kind": "hot",
    "case": "B",
-   "file": "0732_화기_B.pdf",
+   "file": "6988_화기_B.pdf",
    "read_errors": 0,
    "answers": 3,
    "open": 0,
@@ -29,10 +29,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261029-0733",
+   "permit_no": "BS22-IV-20261029-7618",
    "kind": "confined",
    "case": "A",
-   "file": "0733_밀폐_A.pdf",
+   "file": "7618_밀폐_A.pdf",
    "read_errors": 0,
    "answers": 3,
    "open": 0,
@@ -43,10 +43,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261027-0734",
+   "permit_no": "BS22-IV-20261027-7835",
    "kind": "confined",
    "case": "B",
-   "file": "0734_밀폐_B.pdf",
+   "file": "7835_밀폐_B.pdf",
    "read_errors": 0,
    "answers": 2,
    "open": 0,
@@ -57,10 +57,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261029-0735",
+   "permit_no": "BS22-IV-20261029-8175",
    "kind": "height",
    "case": "A",
-   "file": "0735_고소_A.pdf",
+   "file": "8175_고소_A.pdf",
    "read_errors": 0,
    "answers": 7,
    "open": 0,
@@ -71,10 +71,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261029-0736",
+   "permit_no": "BS22-IV-20261029-8602",
    "kind": "height",
    "case": "B",
-   "file": "0736_고소_B.pdf",
+   "file": "8602_고소_B.pdf",
    "read_errors": 0,
    "answers": 1,
    "open": 0,
@@ -85,10 +85,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261029-0737",
+   "permit_no": "BS22-IV-20261029-8741",
    "kind": "lifting",
    "case": "A",
-   "file": "0737_중량물인양_A.pdf",
+   "file": "8741_중량물인양_A.pdf",
    "read_errors": 0,
    "answers": 5,
    "open": 0,
@@ -99,10 +99,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261029-0738",
+   "permit_no": "BS22-IV-20261029-9258",
    "kind": "lifting",
    "case": "B",
-   "file": "0738_중량물인양_B.pdf",
+   "file": "9258_중량물인양_B.pdf",
    "read_errors": 0,
    "answers": 1,
    "open": 0,
@@ -113,10 +113,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261029-0739",
+   "permit_no": "BS22-IV-20261029-9488",
    "kind": "loto",
    "case": "A",
-   "file": "0739_정전LOTO_A.pdf",
+   "file": "9488_정전LOTO_A.pdf",
    "read_errors": 0,
    "answers": 4,
    "open": 0,
@@ -127,10 +127,10 @@
    }
   },
   {
-   "permit_no": "AC00-IH-20261029-0740",
+   "permit_no": "BS22-IV-20261029-9715",
    "kind": "loto",
    "case": "B",
-   "file": "0740_정전LOTO_B.pdf",
+   "file": "9715_정전LOTO_B.pdf",
    "read_errors": 0,
    "answers": 2,
    "open": 0,

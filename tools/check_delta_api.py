@@ -1,4 +1,4 @@
-"""변경 구역 재분석 API (design §1.4 DISCOVER_DELTA, gap_audit #10): /api/analyze/delta on a demo permit (0735 고소).
+"""변경 구역 재분석 API (design §1.4 DISCOVER_DELTA, gap_audit #10): /api/analyze/delta on a demo permit (8175 고소).
 
   python tools/check_delta_api.py
 
@@ -31,7 +31,7 @@ def check(name, cond):
 def main():
     ps = load("permits.json")
     ps = ps if isinstance(ps, list) else ps.get("permits", [])
-    d = next(x for x in ps if permit_name(x).startswith("0735"))
+    d = next(x for x in ps if permit_name(x).startswith("8175"))
     F = extract.build(DIR / "허가서" / permit_name(d), d["kind"])["fields"]
     F2 = {**F, "p1.job": {**F["p1.job"], "value": "그 크레인으로 블록 반출, 제어반 정비 및 정전"}}
     seen, real = [], llm.call_json

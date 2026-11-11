@@ -1,0 +1,22 @@
+1. 명세(checklist_spec.json)가 실제 칸·질문만 쓰는지
+2. 반장 시험 허가서 10건의 초안
+  화기_A_4012.pdf: 해당 12 · 확인 필요 16 · 해당 없음 0 / 28
+  화기_B_4403.pdf: 해당 14 · 확인 필요 14 · 해당 없음 0 / 28
+  밀폐_A_4676.pdf: 해당 11 · 확인 필요 12 · 해당 없음 0 / 23
+  밀폐_B_5067.pdf: 해당 9 · 확인 필요 14 · 해당 없음 0 / 23
+  고소_A_5151.pdf: 해당 9 · 확인 필요 14 · 해당 없음 0 / 23
+  고소_B_5325.pdf: 해당 10 · 확인 필요 13 · 해당 없음 0 / 23
+  중량물인양_A_5388.pdf: 해당 9 · 확인 필요 10 · 해당 없음 0 / 19
+  중량물인양_B_5435.pdf: 해당 9 · 확인 필요 10 · 해당 없음 0 / 19
+  정전LOTO_A_5488.pdf: 해당 7 · 확인 필요 14 · 해당 없음 0 / 21
+  정전LOTO_B_6623.pdf: 해당 13 · 확인 필요 8 · 해당 없음 0 / 21
+3. 규칙 하나가 실제로 항목을 움직이는지 (칸 체크·답·높이)
+  규칙 134개 중 134개가 항목을 해당으로 바꿈
+3-2. 불확실한 말은 '해당 없음'을 만들지 않음
+3-3. 허가서만으로 만듦: 작업계획서를 보내도 결과가 같고, 명세에 계획서 규칙이 없음
+4. PDF
+5. 제출은 시연용: 서버에 저장하지 않고, 서류 PDF는 그때그때 만듦
+[validation workspace]\croscan-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+
+통과 2794 / 2794

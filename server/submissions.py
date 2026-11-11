@@ -11,12 +11,19 @@ latest snapshot per permit number. Demo: nothing is sent to 전산·결재; this
 """
 import hashlib
 import json
+import os
 import secrets
 import time
 
 from . import checklist, qa, store
 
 PDFS = qa.DATA / "submitted"
+# 시연판 (2026-11-03 사용자 결정): 제출은 DB·디스크에 남기지 않는다. 반장 화면은 제출된 것처럼 이어지고(그 문서는 이
+# 프로세스 메모리에 최근 몇 건만), 안전관리자 화면은 미리 만든 시연 자료만으로 계산한다(latest가 비어 있다).
+# CROSCAN_KEEP_SUBMISSIONS=1 이면 예전처럼 저장하고 관리자 화면에 합친다(시험용).
+KEEP = os.environ.get("CROSCAN_KEEP_SUBMISSIONS") == "1"
+HELD_MAX = 6
+_HELD = {}          # id -> (payload, {name: PDF bytes}, summary, (session_id, revision, key)), oldest first
 _SCHEMA = """CREATE TABLE IF NOT EXISTS submissions (id TEXT PRIMARY KEY, session_id TEXT, revision INTEGER, permit_no TEXT,
     created REAL, pdf_hash TEXT, digest TEXT, summary TEXT, payload TEXT);
 CREATE INDEX IF NOT EXISTS submissions_permit ON submissions (permit_no, created);"""
@@ -88,6 +95,11 @@ def key_of(session_id, revision, inputs):
 
 
 def find(session_id, revision, key):
+    if not KEEP:
+        for sid, (_, _, summ, k) in _HELD.items():
+            if k == (session_id, revision, key):
+                return {"id": sid, "created": summ["created"], "digest": key, "again": True, "summary": summ}
+        return None
     with store._db() as c:
         c.executescript(_SCHEMA)
         r = c.execute("SELECT id, created, summary FROM submissions WHERE session_id=? AND revision=? AND digest=?", (session_id, revision, key)).fetchone()
@@ -107,6 +119,16 @@ def _put(data):
 def create(session_id, revision, key, files, payload, summary, created):
     """-> {id, created, digest, again}: the submission made once — files {name: PDF bytes} drawn at 제출 (the original
     permit, the 추가검토서, the checklist, the plans) kept as they are; a second request with the same key is the first"""
+    if not KEEP:                                    # 시연판: held in memory for the foreman's downloads only
+        again = find(session_id, revision, key)
+        if again:
+            return {k: again[k] for k in ("id", "created", "digest", "again")}
+        sid = secrets.token_urlsafe(12)
+        kept = {k: v for k, v in files.items() if v}
+        _HELD[sid] = (payload, kept, {**summary, "created": created, "files": sorted(kept)}, (session_id, revision, key))
+        while len(_HELD) > HELD_MAX:
+            _HELD.pop(next(iter(_HELD)))
+        return {"id": sid, "created": created, "digest": key, "again": False}
     PDFS.mkdir(parents=True, exist_ok=True)
     hashes = {k: _put(v) for k, v in files.items() if v}
     with store._LOCK, store._db() as c:
@@ -138,6 +160,8 @@ def create(session_id, revision, key, files, payload, summary, created):
 
 def get(sub_id):
     """-> (payload, {name: hash}, summary) or None"""
+    if sub_id in _HELD:
+        return _HELD[sub_id][:3]
     with store._db() as c:
         c.executescript(_SCHEMA)
         r = c.execute("SELECT * FROM submissions WHERE id=?", (sub_id,)).fetchone()
@@ -149,6 +173,8 @@ def get(sub_id):
 def file(hashes, name):
     """a document of a submission as it was made at 제출, or None (gone after the keeping time)"""
     h = (hashes or {}).get(name)
+    if isinstance(h, bytes):                        # 시연판: the bytes held in memory
+        return h
     f = PDFS / f"{h}.pdf" if h else None
     return f.read_bytes() if f and f.exists() else None
 
@@ -156,6 +182,8 @@ def file(hashes, name):
 def latest(day=None):
     """the latest submission of each permit number: {permit_no: summary with id}; with a day, only those whose work
     is on that day (a permit number's submission for another day says nothing of this one)"""
+    if not KEEP:                                    # 시연판: the manager's view is the prepared demo data alone
+        return {}
     with store._db() as c:
         c.executescript(_SCHEMA)
         rows = c.execute("SELECT id, permit_no, summary FROM submissions ORDER BY created").fetchall()
